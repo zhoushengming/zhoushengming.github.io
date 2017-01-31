@@ -1,0 +1,702 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="adb 模拟按键事件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="adb 模拟按键事件">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2016/05/25/adb-模拟按键事件/index.html">
+<meta property="og:site_name" content="码字猴">
+<meta property="og:description" content="adb 模拟按键事件">
+<meta property="og:updated_time" content="2017-01-14T07:09:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="adb 模拟按键事件">
+<meta name="twitter:description" content="adb 模拟按键事件">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> adb 模拟按键事件 | 码字猴 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">码字猴</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">写给自己看</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-codes">
+          <a href="/codes" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            codes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                adb 模拟按键事件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-25T17:13:01+08:00" content="2016-05-25">
+              2016-05-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/25/adb-模拟按键事件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/25/adb-模拟按键事件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>adb 模拟按键事件<br><a id="more"></a></p>
+<p>例子：</p>
+<p>//这条命令相当于按了设备的Backkey键<br>adb shell input keyevent 4   </p>
+<p> //可以解锁屏幕</p>
+<p>adb shell input keyevent  82 </p>
+<p>//在屏幕上做划屏操作，前四个数为坐标点，后面是滑动的时间（单位毫秒）</p>
+<p>adb shell input swipe 50 250 250 250 500 </p>
+<p>//在屏幕上点击坐标点x=50  y=250的位置。</p>
+<p>adb shell input tap 50 250 </p>
+<p>//输入字符abc</p>
+<p>adb shell input text abc</p>
+<p>每个数字与keycode对应表如下：<br>0 –&gt;  “KEYCODE_UNKNOWN”<br>1 –&gt;  “KEYCODE_MENU”<br>2 –&gt;  “KEYCODE_SOFT_RIGHT”<br>3 –&gt;  “KEYCODE_HOME”<br>4 –&gt;  “KEYCODE_BACK”<br>5 –&gt;  “KEYCODE_CALL”<br>6 –&gt;  “KEYCODE_ENDCALL”<br>7 –&gt;  “KEYCODE_0”<br>8 –&gt;  “KEYCODE_1”<br>9 –&gt;  “KEYCODE_2”<br>10 –&gt;  “KEYCODE_3”<br>11 –&gt;  “KEYCODE_4”<br>12 –&gt;  “KEYCODE_5”<br>13 –&gt;  “KEYCODE_6”<br>14 –&gt;  “KEYCODE_7”<br>15 –&gt;  “KEYCODE_8”<br>16 –&gt;  “KEYCODE_9”<br>17 –&gt;  “KEYCODE_STAR”<br>18 –&gt;  “KEYCODE_POUND”<br>19 –&gt;  “KEYCODE_DPAD_UP”<br>20 –&gt;  “KEYCODE_DPAD_DOWN”<br>21 –&gt;  “KEYCODE_DPAD_LEFT”<br>22 –&gt;  “KEYCODE_DPAD_RIGHT”<br>23 –&gt;  “KEYCODE_DPAD_CENTER”<br>24 –&gt;  “KEYCODE_VOLUME_UP”<br>25 –&gt;  “KEYCODE_VOLUME_DOWN”<br>26 –&gt;  “KEYCODE_POWER”<br>27 –&gt;  “KEYCODE_CAMERA”<br>28 –&gt;  “KEYCODE_CLEAR”<br>29 –&gt;  “KEYCODE_A”<br>30 –&gt;  “KEYCODE_B”<br>31 –&gt;  “KEYCODE_C”<br>32 –&gt;  “KEYCODE_D”<br>33 –&gt;  “KEYCODE_E”<br>34 –&gt;  “KEYCODE_F”<br>35 –&gt;  “KEYCODE_G”<br>36 –&gt;  “KEYCODE_H”<br>37 –&gt;  “KEYCODE_I”<br>38 –&gt;  “KEYCODE_J”<br>39 –&gt;  “KEYCODE_K”<br>40 –&gt;  “KEYCODE_L”<br>41 –&gt;  “KEYCODE_M”<br>42 –&gt;  “KEYCODE_N”<br>43 –&gt;  “KEYCODE_O”<br>44 –&gt;  “KEYCODE_P”<br>45 –&gt;  “KEYCODE_Q”<br>46 –&gt;  “KEYCODE_R”<br>47 –&gt;  “KEYCODE_S”<br>48 –&gt;  “KEYCODE_T”<br>49 –&gt;  “KEYCODE_U”<br>50 –&gt;  “KEYCODE_V”<br>51 –&gt;  “KEYCODE_W”<br>52 –&gt;  “KEYCODE_X”<br>53 –&gt;  “KEYCODE_Y”<br>54 –&gt;  “KEYCODE_Z”<br>55 –&gt;  “KEYCODE_COMMA”<br>56 –&gt;  “KEYCODE_PERIOD”<br>57 –&gt;  “KEYCODE_ALT_LEFT”<br>58 –&gt;  “KEYCODE_ALT_RIGHT”<br>59 –&gt;  “KEYCODE_SHIFT_LEFT”<br>60 –&gt;  “KEYCODE_SHIFT_RIGHT”<br>61 –&gt;  “KEYCODE_TAB”<br>62 –&gt;  “KEYCODE_SPACE”<br>63 –&gt;  “KEYCODE_SYM”<br>64 –&gt;  “KEYCODE_EXPLORER”<br>65 –&gt;  “KEYCODE_ENVELOPE”<br>66 –&gt;  “KEYCODE_ENTER”<br>67 –&gt;  “KEYCODE_DEL”<br>68 –&gt;  “KEYCODE_GRAVE”<br>69 –&gt;  “KEYCODE_MINUS”<br>70 –&gt;  “KEYCODE_EQUALS”<br>71 –&gt;  “KEYCODE_LEFT_BRACKET”<br>72 –&gt;  “KEYCODE_RIGHT_BRACKET”<br>73 –&gt;  “KEYCODE_BACKSLASH”<br>74 –&gt;  “KEYCODE_SEMICOLON”<br>75 –&gt;  “KEYCODE_APOSTROPHE”<br>76 –&gt;  “KEYCODE_SLASH”<br>77 –&gt;  “KEYCODE_AT”<br>78 –&gt;  “KEYCODE_NUM”<br>79 –&gt;  “KEYCODE_HEADSETHOOK”<br>80 –&gt;  “KEYCODE_FOCUS”<br>81 –&gt;  “KEYCODE_PLUS”<br>82 –&gt;  “KEYCODE_MENU”<br>83 –&gt;  “KEYCODE_NOTIFICATION”<br>84 –&gt;  “KEYCODE_SEARCH”<br>85 –&gt;  “TAG_LAST_KEYCODE”</p>
+<p>KEYCODE列表<br>电话键</p>
+<p>KEYCODE_CALL    拨号键    5<br>KEYCODE_ENDCALL    挂机键    6<br>KEYCODE_HOME    按键Home    3<br>KEYCODE_MENU    菜单键    82<br>KEYCODE_BACK    返回键    4<br>KEYCODE_SEARCH    搜索键    84<br>KEYCODE_CAMERA    拍照键    27<br>KEYCODE_FOCUS    拍照对焦键    80<br>KEYCODE_POWER    电源键    26<br>KEYCODE_NOTIFICATION    通知键    83<br>KEYCODE_MUTE    话筒静音键    91<br>KEYCODE_VOLUME_MUTE    扬声器静音键    164<br>KEYCODE_VOLUME_UP    音量增加键    24<br>KEYCODE_VOLUME_DOWN    音量减小键    25</p>
+<p>控制键</p>
+<p>KEYCODE_ENTER    回车键    66<br>KEYCODE_ESCAPE    ESC键    111<br>KEYCODE_DPAD_CENTER    导航键 确定键    23<br>KEYCODE_DPAD_UP    导航键 向上    19<br>KEYCODE_DPAD_DOWN    导航键 向下    20<br>KEYCODE_DPAD_LEFT    导航键 向左    21<br>KEYCODE_DPAD_RIGHT    导航键 向右    22<br>KEYCODE_MOVE_HOME    光标移动到开始键    122<br>KEYCODE_MOVE_END    光标移动到末尾键    123<br>KEYCODE_PAGE_UP    向上翻页键    92<br>KEYCODE_PAGE_DOWN    向下翻页键    93<br>KEYCODE_DEL    退格键    67<br>KEYCODE_FORWARD_DEL    删除键    112<br>KEYCODE_INSERT    插入键    124<br>KEYCODE_TAB    Tab键    61<br>KEYCODE_NUM_LOCK    小键盘锁    143<br>KEYCODE_CAPS_LOCK    大写锁定键    115<br>KEYCODE_BREAK    Break/Pause键    121<br>KEYCODE_SCROLL_LOCK    滚动锁定键    116<br>KEYCODE_ZOOM_IN    放大键    168<br>KEYCODE_ZOOM_OUT    缩小键    169</p>
+<p>组合键</p>
+<p>KEYCODE_ALT_LEFT    Alt+Left<br>KEYCODE_ALT_RIGHT    Alt+Right<br>KEYCODE_CTRL_LEFT    Control+Left<br>KEYCODE_CTRL_RIGHT    Control+Right<br>KEYCODE_SHIFT_LEFT    Shift+Left<br>KEYCODE_SHIFT_RIGHT    Shift+Right</p>
+<p>基本</p>
+<p>KEYCODE_0    按键’0’    7<br>KEYCODE_1    按键’1’    8<br>KEYCODE_2    按键’2’    9<br>KEYCODE_3    按键’3’    10<br>KEYCODE_4    按键’4’    11<br>KEYCODE_5    按键’5’    12<br>KEYCODE_6    按键’6’    13<br>KEYCODE_7    按键’7’    14<br>KEYCODE_8    按键’8’    15<br>KEYCODE_9    按键’9’    16<br>KEYCODE_A    按键’A’    29<br>KEYCODE_B    按键’B’    30<br>KEYCODE_C    按键’C’    31<br>KEYCODE_D    按键’D’    32<br>KEYCODE_E    按键’E’    33<br>KEYCODE_F    按键’F’    34<br>KEYCODE_G    按键’G’    35<br>KEYCODE_H    按键’H’    36<br>KEYCODE_I    按键’I’    37<br>KEYCODE_J    按键’J’    38<br>KEYCODE_K    按键’K’    39<br>KEYCODE_L    按键’L’    40<br>KEYCODE_M    按键’M’    41<br>KEYCODE_N    按键’N’    42<br>KEYCODE_O    按键’O’    43<br>KEYCODE_P    按键’P’    44<br>KEYCODE_Q    按键’Q’    45<br>KEYCODE_R    按键’R’    46<br>KEYCODE_S    按键’S’    47<br>KEYCODE_T    按键’T’    48<br>KEYCODE_U    按键’U’    49<br>KEYCODE_V    按键’V’    50<br>KEYCODE_W    按键’W’    51<br>KEYCODE_X    按键’X’    52<br>KEYCODE_Y    按键’Y’    53<br>KEYCODE_Z    按键’Z’    54</p>
+<p>符号</p>
+<p>KEYCODE_PLUS    按键’+’<br>KEYCODE_MINUS    按键’-‘<br>KEYCODE_STAR    按键’*’<br>KEYCODE_SLASH    按键’/‘<br>KEYCODE_EQUALS    按键’=’<br>KEYCODE_AT    按键’@’<br>KEYCODE_POUND    按键’#’<br>KEYCODE_APOSTROPHE    按键’’’ (单引号)<br>KEYCODE_BACKSLASH    按键’\’<br>KEYCODE_COMMA    按键’,’<br>KEYCODE_PERIOD    按键’.’<br>KEYCODE_LEFT_BRACKET    按键’[‘<br>KEYCODE_RIGHT_BRACKET    按键’]’<br>KEYCODE_SEMICOLON    按键’;’<br>KEYCODE_GRAVE    按键’`’<br>KEYCODE_SPACE    空格键</p>
+<p>小键盘</p>
+<p>KEYCODE_NUMPAD_0    小键盘按键’0’<br>KEYCODE_NUMPAD_1    小键盘按键’1’<br>KEYCODE_NUMPAD_2    小键盘按键’2’<br>KEYCODE_NUMPAD_3    小键盘按键’3’<br>KEYCODE_NUMPAD_4    小键盘按键’4’<br>KEYCODE_NUMPAD_5    小键盘按键’5’<br>KEYCODE_NUMPAD_6    小键盘按键’6’<br>KEYCODE_NUMPAD_7    小键盘按键’7’<br>KEYCODE_NUMPAD_8    小键盘按键’8’<br>KEYCODE_NUMPAD_9    小键盘按键’9’<br>KEYCODE_NUMPAD_ADD    小键盘按键’+’<br>KEYCODE_NUMPAD_SUBTRACT    小键盘按键’-‘<br>KEYCODE_NUMPAD_MULTIPLY    小键盘按键’*’<br>KEYCODE_NUMPAD_DIVIDE    小键盘按键’/‘<br>KEYCODE_NUMPAD_EQUALS    小键盘按键’=’<br>KEYCODE_NUMPAD_COMMA    小键盘按键’,’<br>KEYCODE_NUMPAD_DOT    小键盘按键’.’<br>KEYCODE_NUMPAD_LEFT_PAREN    小键盘按键’(‘<br>KEYCODE_NUMPAD_RIGHT_PAREN    小键盘按键’)’<br>KEYCODE_NUMPAD_ENTER    小键盘按键回车</p>
+<p>功能键</p>
+<p>KEYCODE_F1    按键F1<br>KEYCODE_F2    按键F2<br>KEYCODE_F3    按键F3<br>KEYCODE_F4    按键F4<br>KEYCODE_F5    按键F5<br>KEYCODE_F6    按键F6<br>KEYCODE_F7    按键F7<br>KEYCODE_F8    按键F8<br>KEYCODE_F9    按键F9<br>KEYCODE_F10    按键F10<br>KEYCODE_F11    按键F11<br>KEYCODE_F12    按键F12</p>
+<p>多媒体键</p>
+<p>KEYCODE_MEDIA_PLAY    多媒体键 播放<br>KEYCODE_MEDIA_STOP    多媒体键 停止<br>KEYCODE_MEDIA_PAUSE    多媒体键 暂停<br>KEYCODE_MEDIA_PLAY_PAUSE    多媒体键 播放/暂停<br>KEYCODE_MEDIA_FAST_FORWARD    多媒体键 快进<br>KEYCODE_MEDIA_REWIND    多媒体键 快退<br>KEYCODE_MEDIA_NEXT    多媒体键 下一首<br>KEYCODE_MEDIA_PREVIOUS    多媒体键 上一首<br>KEYCODE_MEDIA_CLOSE    多媒体键 关闭<br>KEYCODE_MEDIA_EJECT    多媒体键 弹出<br>KEYCODE_MEDIA_RECORD    多媒体键 录音</p>
+<p>手柄按键</p>
+<p>KEYCODE_BUTTON_1    通用游戏手柄按钮#1<br>KEYCODE_BUTTON_2    通用游戏手柄按钮 #2<br>KEYCODE_BUTTON_3    通用游戏手柄按钮 #3<br>KEYCODE_BUTTON_4    通用游戏手柄按钮 #4<br>KEYCODE_BUTTON_5    通用游戏手柄按钮 #5<br>KEYCODE_BUTTON_6    通用游戏手柄按钮 #6<br>KEYCODE_BUTTON_7    通用游戏手柄按钮 #7<br>KEYCODE_BUTTON_8    通用游戏手柄按钮 #8<br>KEYCODE_BUTTON_9    通用游戏手柄按钮 #9<br>KEYCODE_BUTTON_10    通用游戏手柄按钮 #10<br>KEYCODE_BUTTON_11    通用游戏手柄按钮 #11<br>KEYCODE_BUTTON_12    通用游戏手柄按钮 #12<br>KEYCODE_BUTTON_13    通用游戏手柄按钮 #13<br>KEYCODE_BUTTON_14    通用游戏手柄按钮 #14<br>KEYCODE_BUTTON_15    通用游戏手柄按钮 #15<br>KEYCODE_BUTTON_16    通用游戏手柄按钮 #16<br>KEYCODE_BUTTON_A    游戏手柄按钮 A<br>KEYCODE_BUTTON_B    游戏手柄按钮 B<br>KEYCODE_BUTTON_C    游戏手柄按钮 C<br>KEYCODE_BUTTON_X    游戏手柄按钮 X<br>KEYCODE_BUTTON_Y    游戏手柄按钮 Y<br>KEYCODE_BUTTON_Z    游戏手柄按钮 Z<br>KEYCODE_BUTTON_L1    游戏手柄按钮 L1<br>KEYCODE_BUTTON_L2    游戏手柄按钮 L2<br>KEYCODE_BUTTON_R1    游戏手柄按钮 R1<br>KEYCODE_BUTTON_R2    游戏手柄按钮 R2<br>KEYCODE_BUTTON_MODE    游戏手柄按钮 Mode<br>KEYCODE_BUTTON_SELECT    游戏手柄按钮 Select<br>KEYCODE_BUTTON_START    游戏手柄按钮 Start<br>KEYCODE_BUTTON_THUMBL    Left Thumb Button<br>KEYCODE_BUTTON_THUMBR    Right Thumb Button</p>
+<p>待查</p>
+<p>KEYCODE_NUM</p>
+<p>按键Number modifier</p>
+<p>KEYCODE_INFO</p>
+<p>按键Info</p>
+<p>KEYCODE_APP_SWITCH</p>
+<p>按键App switch</p>
+<p>KEYCODE_BOOKMARK</p>
+<p>按键Bookmark</p>
+<p>KEYCODE_AVR_INPUT</p>
+<p>按键A/V Receiver input</p>
+<p>KEYCODE_AVR_POWER</p>
+<p>按键A/V Receiver power</p>
+<p>KEYCODE_CAPTIONS</p>
+<p>按键Toggle captions</p>
+<p>KEYCODE_CHANNEL_DOWN</p>
+<p>按键Channel down</p>
+<p>KEYCODE_CHANNEL_UP</p>
+<p>按键Channel up</p>
+<p>KEYCODE_CLEAR</p>
+<p>按键Clear</p>
+<p>KEYCODE_DVR</p>
+<p>按键DVR</p>
+<p>KEYCODE_ENVELOPE</p>
+<p>按键Envelope special function</p>
+<p>KEYCODE_EXPLORER</p>
+<p>按键Explorer special function</p>
+<p>KEYCODE_FORWARD</p>
+<p>按键Forward</p>
+<p>KEYCODE_FORWARD_DEL</p>
+<p>按键Forward Delete</p>
+<p>KEYCODE_FUNCTION</p>
+<p>按键Function modifier</p>
+<p>KEYCODE_GUIDE</p>
+<p>按键Guide</p>
+<p>KEYCODE_HEADSETHOOK</p>
+<p>按键Headset Hook</p>
+<p>KEYCODE_META_LEFT</p>
+<p>按键Left Meta modifier</p>
+<p>KEYCODE_META_RIGHT</p>
+<p>按键Right Meta modifier</p>
+<p>KEYCODE_PICTSYMBOLS</p>
+<p>按键Picture Symbols modifier</p>
+<p>KEYCODE_PROG_BLUE</p>
+<p>按键Blue “programmable”</p>
+<p>KEYCODE_PROG_GREEN</p>
+<p>按键Green “programmable”</p>
+<p>KEYCODE_PROG_RED</p>
+<p>按键Red “programmable”</p>
+<p>KEYCODE_PROG_YELLOW</p>
+<p>按键Yellow “programmable”</p>
+<p>KEYCODE_SETTINGS</p>
+<p>按键Settings</p>
+<p>KEYCODE_SOFT_LEFT</p>
+<p>按键Soft Left</p>
+<p>KEYCODE_SOFT_RIGHT</p>
+<p>按键Soft Right</p>
+<p>KEYCODE_STB_INPUT</p>
+<p>按键Set-top-box input</p>
+<p>KEYCODE_STB_POWER</p>
+<p>按键Set-top-box power</p>
+<p>KEYCODE_SWITCH_CHARSET</p>
+<p>按键Switch Charset modifier</p>
+<p>KEYCODE_SYM</p>
+<p>按键Symbol modifier</p>
+<p>KEYCODE_SYSRQ</p>
+<p>按键System Request / Print Screen</p>
+<p>KEYCODE_TV</p>
+<p>按键TV</p>
+<p>KEYCODE_TV_INPUT</p>
+<p>按键TV input</p>
+<p>KEYCODE_TV_POWER</p>
+<p>按键TV power</p>
+<p>KEYCODE_WINDOW</p>
+<p>按键Window</p>
+<p>KEYCODE_UNKNOWN</p>
+<p>未知按键</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/20/6月计划/" rel="next" title="6月计划">
+                <i class="fa fa-chevron-left"></i> 6月计划
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/20/Android博客收集/" rel="prev" title="Android博客收集">
+                Android博客收集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/25/adb-模拟按键事件/"
+           data-title="adb 模拟按键事件" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2016/05/25/adb-模拟按键事件/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/git_logo.png"
+               alt="xiaoming" />
+          <p class="site-author-name" itemprop="name">xiaoming</p>
+          <p class="site-description motion-element" itemprop="description">coding...</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoming</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhoushengming"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
