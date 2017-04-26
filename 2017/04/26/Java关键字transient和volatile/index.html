@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="周生明, ericcode" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -80,15 +80,16 @@
 
 
 
-<meta name="description" content="coding...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="码字猴">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/tags/生活/index.html">
+<meta name="description" content="transient和volatile两个关键字一个用于对象序列化，一个用于线程同步，都是Java中比较高阶的话题，简单总结一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java关键字transient和volatile">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/04/26/Java关键字transient和volatile/index.html">
 <meta property="og:site_name" content="码字猴">
-<meta property="og:description" content="coding...">
+<meta property="og:description" content="transient和volatile两个关键字一个用于对象序列化，一个用于线程同步，都是Java中比较高阶的话题，简单总结一下。">
+<meta property="og:updated_time" content="2017-04-26T09:34:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="码字猴">
-<meta name="twitter:description" content="coding...">
+<meta name="twitter:title" content="Java关键字transient和volatile">
+<meta name="twitter:description" content="transient和volatile两个关键字一个用于对象序列化，一个用于线程同步，都是Java中比较高阶的话题，简单总结一下。">
 
 
 
@@ -106,7 +107,7 @@
   };
 </script>
 
-  <title> 标签: 生活 | 码字猴 </title>
+  <title> Java关键字transient和volatile | 码字猴 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -127,7 +128,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -235,46 +236,145 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        生活
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java关键字transient和volatile
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-26T17:29:12+08:00" content="2017-04-26">
+              2017-04-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/26/Java关键字transient和volatile/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/26/Java关键字transient和volatile/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>transient和volatile两个关键字一个用于对象序列化，一个用于线程同步，都是Java中比较高阶的话题，简单总结一下。<br><a id="more"></a></p>
+<h2 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h2><p>transient是类型修饰符，只能用来修饰字段。在对象序列化的过程中，标记为transient的变量不会被序列化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">transient</span> <span class="keyword">int</span> a; <span class="comment">// 不会被持久化</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> b; <span class="comment">// 持久化</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当类Test的实例对象被序列化（比如将Test类的实例对象 t 写入硬盘的文本文件t.txt中），变量 a 的内容不会被保存，变量 b 的内容则会被保存。</p>
+<blockquote>
+<p>参考：把一个对象的表示转化为字节流的过程称为串行化（也称为序列化，serialization），从字节流中把对象重建出来称为反串行化（也称为为反序列化，deserialization）。transient 为不应被串行化的数据提供了一个语言级的标记数据方法。</p>
+</blockquote>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>volatile也是变量修饰符，只能用来修饰变量。volatile修饰的成员变量在每次被线程访问时，都强迫从共享内存中重读该成员变量的值。而且，当成员变量发生变化时，强迫线程将变化值回写到共享内存。这样在任何时刻，两个不同的线程总是看到某个成员变量的同一个值。</p>
+<p>在此解释一下Java的内存机制：</p>
+<blockquote>
+<p>Java使用一个主内存来保存变量当前值，而每个线程则有其独立的工作内存。线程访问变量的时候会将变量的值拷贝到自己的工作内存中，这样，当线程对自己工作内存中的变量进行操作之后，就造成了工作内存中的变量拷贝的值与主内存中的变量值不同。</p>
+<p>Java语言规范中指出：为了获得最佳速度，允许线程保存共享成员变量的私有拷贝，而且只当线程进入或者离开同步代码块时才与共享成员变量的原始值对比。</p>
+</blockquote>
+<p>这样当多个线程同时与某个对象交互时，就必须要注意到要让线程及时的得到共享成员变量的变化。</p>
+<p>而volatile关键字就是提示VM：对于这个成员变量不能保存它的私有拷贝，而应直接与共享成员变量交互。</p>
+<blockquote>
+<p>使用建议：在两个或者更多的线程访问的成员变量上使用volatile。当要访问的变量已在synchronized代码块中，或者为常量时，不必使用。</p>
+</blockquote>
+<p>由于使用volatile屏蔽掉了VM中必要的代码优化，所以在效率上比较低，因此一定在必要时才使用此关键字。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+    
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/04/26/新的开始/" itemprop="url">
-              
-                <span itemprop="name">新的开始</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-26T21:07:22+08:00"
-              content="2016-04-26" >
-          04-26
-        </time>
-      </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+        </div>
+      
 
-    </header>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/25/设计模式/" rel="next" title="设计模式">
+                <i class="fa fa-chevron-left"></i> 设计模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -282,6 +382,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/26/Java关键字transient和volatile/"
+           data-title="Java关键字transient和volatile" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2017/04/26/Java关键字transient和volatile/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -301,8 +409,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/git_logo.png"
@@ -356,6 +473,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#transient"><span class="nav-number">1.</span> <span class="nav-text">transient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile"><span class="nav-number">2.</span> <span class="nav-text">volatile</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -459,6 +587,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
