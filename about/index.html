@@ -104,7 +104,7 @@
 
 熟练使用Java，熟悉面向对象思想编程，MVC、MVP设计模式。
 熟练使用Android UI常用">
-<meta property="og:updated_time" content="2017-05-05T16:56:18.000Z">
+<meta property="og:updated_time" content="2017-05-06T10:14:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="about">
 <meta name="twitter:description" content="个人简历基本信息
@@ -298,7 +298,7 @@
 <h3 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h3><h4 id="北京金锐德路科技有限公司（2015-11至今）"><a href="#北京金锐德路科技有限公司（2015-11至今）" class="headerlink" title="北京金锐德路科技有限公司（2015-11至今）"></a>北京金锐德路科技有限公司（2015-11至今）</h4><blockquote>
 <p>部门：软件部<br>岗位：Android研发工程师<br>项目与职责：公司为硬件公司，主要是进行软件功能的更新迭代。</p>
 <ol>
-<li>项目：智能耳机主App（Launcher）、Vinci社交App、工厂硬件测试App。</li>
+<li>项目：智能耳机系统App、Vinci社交App、工厂硬件测试App。</li>
 <li>职责：项目的架构设计、技术调研、前后端沟通协调、代码编写、调试、优化、自测和bug修复。</li>
 </ol>
 </blockquote>
@@ -309,8 +309,8 @@
 <li>网络对象信息关联与痕迹挖掘工具。本项目通过对网络数据的采集，实现人物关系分析和事件预警功能。通过参与验收文档和测试报告的编写，学习到了软件测试的流程。</li>
 </ol>
 </blockquote>
-<h3 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验"></a>项目经验</h3><h4 id="智能耳机主App（2015-11-至今）"><a href="#智能耳机主App（2015-11-至今）" class="headerlink" title="智能耳机主App（2015.11 - 至今）"></a>智能耳机主App（2015.11 - 至今）</h4><blockquote>
-<p>项目职责：项目维护/功能迭代<br>项目描述：本App分为国内版和国际版，是我们硬件产品的主launcher程序。本App以语音交互为主，主要功能为音乐播放与推荐，记步、心率、聊天、数据同步等功能。我独立完成的模块有：接口安全性设计、数据同步、用户系统、用户行为打点等，同时也参与其他功能的更新迭代。接口安全性设计用了OkHttp的interceptor进行request/response拦截，加密是通过jni调用libcrypto的HMACMD5实现，使用jni有逆向编译和性能上的优势，本加密模块已打包成aar供多个项目使用。</p>
+<h3 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验"></a>项目经验</h3><h4 id="智能耳机系统App（2015-11-至今）"><a href="#智能耳机系统App（2015-11-至今）" class="headerlink" title="智能耳机系统App（2015.11 - 至今）"></a>智能耳机系统App（2015.11 - 至今）</h4><blockquote>
+<p>项目职责：项目维护/功能迭代<br>项目描述：本App分为国内版和国际版，是我们硬件产品的核心应用（Launcher程序）。本App以语音交互为主，主要功能为音乐播放与推荐，记步、心率、聊天、数据同步等功能。我独立完成的模块有：接口安全性设计、数据同步、用户系统、用户行为打点等，同时也参与其他功能的更新迭代。接口安全性设计用了OkHttp的interceptor进行request/response拦截，加密是通过jni调用libcrypto的HMACMD5实现，使用jni有逆向编译和性能上的优势，本加密模块已打包成aar供多个项目使用。</p>
 </blockquote>
 <h4 id="Vinci社交App（2016-11-至今）"><a href="#Vinci社交App（2016-11-至今）" class="headerlink" title="Vinci社交App（2016.11 - 至今）"></a>Vinci社交App（2016.11 - 至今）</h4><blockquote>
 <p>项目职责：负责人<br>项目描述：社交类APP。主要功能模块有:好友模块、数据同步模块、音乐播放/缓存/下载、Feed流的展示与数据缓存、Feed评论模块、论坛、用户行为打点等。数据同步设计成了增量同步，通过维护updateVersion字段判断数据是否需要同步，使用线程池维护了一个数据同步任务队列，以串行方式进行任务执行；音乐播放使用NanoHttpd进行代理，对数据进行拦截做持久化处理；feed流的缓存使用内存和文件做两级存储；论坛部分使用WebView，涉及js交互。使用的工具类库有okhttp、retrofit、rxjava、glide、acache、greenDao、butterKnife、NanoHttpd等</p>
