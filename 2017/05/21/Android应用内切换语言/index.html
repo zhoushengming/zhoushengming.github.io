@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="周生明, ericcode" />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -80,15 +80,19 @@
 
 
 
-<meta name="description" content="read the fucking source code">
-<meta property="og:type" content="website">
-<meta property="og:title" content="码字猴">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/tags/Tools/index.html">
+<meta name="description" content="现在我们开发了一个英文版的App，为了测试英文版，经常需要把手机系统语言设置为英文。为了避免这个麻烦，我想在应用内添加一个切换语言的功能，核心代码如下：
+12345678private void changeLanguage(Locale locale) &amp;#123;	Locale.setDefault(locale);	Resources resources = getResources();">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android应用内切换语言">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/05/21/Android应用内切换语言/index.html">
 <meta property="og:site_name" content="码字猴">
-<meta property="og:description" content="read the fucking source code">
+<meta property="og:description" content="现在我们开发了一个英文版的App，为了测试英文版，经常需要把手机系统语言设置为英文。为了避免这个麻烦，我想在应用内添加一个切换语言的功能，核心代码如下：
+12345678private void changeLanguage(Locale locale) &amp;#123;	Locale.setDefault(locale);	Resources resources = getResources();">
+<meta property="og:updated_time" content="2017-05-21T07:01:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="码字猴">
-<meta name="twitter:description" content="read the fucking source code">
+<meta name="twitter:title" content="Android应用内切换语言">
+<meta name="twitter:description" content="现在我们开发了一个英文版的App，为了测试英文版，经常需要把手机系统语言设置为英文。为了避免这个麻烦，我想在应用内添加一个切换语言的功能，核心代码如下：
+12345678private void changeLanguage(Locale locale) &amp;#123;	Locale.setDefault(locale);	Resources resources = getResources();">
 
 
 
@@ -106,7 +110,7 @@
   };
 </script>
 
-  <title> 标签: Tools | 码字猴 </title>
+  <title> Android应用内切换语言 | 码字猴 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -127,7 +131,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -235,46 +239,128 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Tools
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android应用内切换语言
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-21T11:24:03+08:00" content="2017-05-21">
+              2017-05-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/21/Android应用内切换语言/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/21/Android应用内切换语言/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>现在我们开发了一个英文版的App，为了测试英文版，经常需要把手机系统语言设置为英文。为了避免这个麻烦，我想在应用内添加一个切换语言的功能，核心代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changeLanguage</span><span class="params">(Locale locale)</span> </span>&#123;</span><br><span class="line">	Locale.setDefault(locale);</span><br><span class="line">	Resources resources = getResources();</span><br><span class="line">	android.content.res.Configuration config = resources.getConfiguration();</span><br><span class="line">	DisplayMetrics dm = resources.getDisplayMetrics();</span><br><span class="line">	config.locale = locale;</span><br><span class="line">	resources.updateConfiguration(config, dm);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <h1 class="post-title">
+      
+    </div>
+    
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/07/29/Chrome-Inspect/" itemprop="url">
-              
-                <span itemprop="name">Chrome Inspect</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-29T14:03:18+08:00"
-              content="2016-07-29" >
-          07-29
-        </time>
-      </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
 
-    </header>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/26/Java关键字transient和volatile/" rel="next" title="Java关键字transient和volatile">
+                <i class="fa fa-chevron-left"></i> Java关键字transient和volatile
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -282,6 +368,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/21/Android应用内切换语言/"
+           data-title="Android应用内切换语言" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2017/05/21/Android应用内切换语言/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -301,8 +395,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/git_logo.png"
@@ -356,6 +459,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -459,6 +573,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
