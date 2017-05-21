@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="码字猴">
 <meta property="og:description" content="现在我们开发了一个英文版的App，为了测试英文版，经常需要把手机系统语言设置为英文。为了避免这个麻烦，我想在应用内添加一个切换语言的功能，核心代码如下：
 12345678private void changeLanguage(Locale locale) &amp;#123;	Locale.setDefault(locale);	Resources resources = getResources();">
-<meta property="og:updated_time" content="2017-05-21T07:01:25.000Z">
+<meta property="og:updated_time" content="2017-05-21T07:12:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android应用内切换语言">
 <meta name="twitter:description" content="现在我们开发了一个英文版的App，为了测试英文版，经常需要把手机系统语言设置为英文。为了避免这个麻烦，我想在应用内添加一个切换语言的功能，核心代码如下：
@@ -309,7 +309,8 @@
       
         <p>现在我们开发了一个英文版的App，为了测试英文版，经常需要把手机系统语言设置为英文。为了避免这个麻烦，我想在应用内添加一个切换语言的功能，核心代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changeLanguage</span><span class="params">(Locale locale)</span> </span>&#123;</span><br><span class="line">	Locale.setDefault(locale);</span><br><span class="line">	Resources resources = getResources();</span><br><span class="line">	android.content.res.Configuration config = resources.getConfiguration();</span><br><span class="line">	DisplayMetrics dm = resources.getDisplayMetrics();</span><br><span class="line">	config.locale = locale;</span><br><span class="line">	resources.updateConfiguration(config, dm);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>以下代码是重新启动App</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">restartApp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    changeLanguage();</span><br><span class="line">    Intent i = getBaseContext().getPackageManager()</span><br><span class="line">            .getLaunchIntentForPackage(getBaseContext().getPackageName());</span><br><span class="line">    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);</span><br><span class="line">    startActivity(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
