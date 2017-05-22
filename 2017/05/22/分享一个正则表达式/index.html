@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="周生明, ericcode" />
+  <meta name="keywords" content="Android,正则," />
 
 
 
@@ -80,15 +80,40 @@
 
 
 
-<meta name="description" content="read the fucking source code">
-<meta property="og:type" content="website">
-<meta property="og:title" content="码字猴">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/page/3/index.html">
+<meta name="description" content="这几天搞国际版的App，怕自己对于strings的抽取完不完全，于是想搜索一下项目中(除了en/strings.xml外)有没有一些中文字符。
+主要有以下几点：
+
+Logger中的中文不用考虑
+匹配双引号中的中文
+中文可能在开头、中间、结尾，即包含中文的都要匹配
+
+以下是正则表达式
+1(^(?!.*Logger).*)(\&amp;quot;.*([\u4e00-\u9fa5]).*\&amp;quot;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分享一个正则表达式">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/05/22/分享一个正则表达式/index.html">
 <meta property="og:site_name" content="码字猴">
-<meta property="og:description" content="read the fucking source code">
+<meta property="og:description" content="这几天搞国际版的App，怕自己对于strings的抽取完不完全，于是想搜索一下项目中(除了en/strings.xml外)有没有一些中文字符。
+主要有以下几点：
+
+Logger中的中文不用考虑
+匹配双引号中的中文
+中文可能在开头、中间、结尾，即包含中文的都要匹配
+
+以下是正则表达式
+1(^(?!.*Logger).*)(\&amp;quot;.*([\u4e00-\u9fa5]).*\&amp;quot;)">
+<meta property="og:updated_time" content="2017-05-22T03:57:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="码字猴">
-<meta name="twitter:description" content="read the fucking source code">
+<meta name="twitter:title" content="分享一个正则表达式">
+<meta name="twitter:description" content="这几天搞国际版的App，怕自己对于strings的抽取完不完全，于是想搜索一下项目中(除了en/strings.xml外)有没有一些中文字符。
+主要有以下几点：
+
+Logger中的中文不用考虑
+匹配双引号中的中文
+中文可能在开头、中间、结尾，即包含中文的都要匹配
+
+以下是正则表达式
+1(^(?!.*Logger).*)(\&amp;quot;.*([\u4e00-\u9fa5]).*\&amp;quot;)">
 
 
 
@@ -106,7 +131,7 @@
   };
 </script>
 
-  <title> 码字猴 </title>
+  <title> 分享一个正则表达式 | 码字猴 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -127,9 +152,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,9 +259,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -258,10 +281,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/05/20/6月计划/" itemprop="url">
-                  6月计划
-                </a>
+                分享一个正则表达式
               
             
           </h1>
@@ -273,8 +293,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-20T14:26:17+08:00" content="2016-05-20">
-              2016-05-20
+            <time itemprop="dateCreated" datetime="2017-05-22T11:49:15+08:00" content="2017-05-22">
+              2017-05-22
             </time>
           </span>
 
@@ -284,8 +304,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/20/6月计划/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/20/6月计划/" itemprop="commentsCount"></span>
+                <a href="/2017/05/22/分享一个正则表达式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/22/分享一个正则表达式/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -308,349 +328,68 @@
       
 
       
-        
-          <p>just do IT</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/20/6月计划/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+        <p>这几天搞国际版的App，怕自己对于strings的抽取完不完全，于是想搜索一下项目中(除了en/strings.xml外)有没有一些中文字符。</p>
+<p>主要有以下几点：</p>
+<ol>
+<li>Logger中的中文不用考虑</li>
+<li>匹配双引号中的中文</li>
+<li>中文可能在开头、中间、结尾，即包含中文的都要匹配</li>
+</ol>
+<p>以下是正则表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(^(?!.*Logger).*)(\&quot;.*([\u4e00-\u9fa5]).*\&quot;)</span><br></pre></td></tr></table></figure>
       
     </div>
     
     <div>
       
+        
+      
     </div>
 
     <div>
+      
+        
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/12/那一年/" itemprop="url">
-                  那一年
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-12T10:28:48+08:00" content="2016-05-12">
-              2016-05-12
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/Android/" rel="tag">#Android</a>
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/12/那一年/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/12/那一年/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/正则/" rel="tag">#正则</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <blockquote>
-<p>好有感觉的一首歌</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/12/那一年/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/21/Android应用内切换语言/" rel="next" title="Android应用内切换语言">
+                <i class="fa fa-chevron-left"></i> Android应用内切换语言
+              </a>
+            
           </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/26/新的开始/" itemprop="url">
-                  新的开始
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-26T21:07:22+08:00" content="2016-04-26">
-              2016-04-26
-            </time>
-          </span>
-
-          
-
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <blockquote>
-<p>今天是我从学校回来的第二天
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/26/新的开始/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/11/第一次面试/" itemprop="url">
-                  第一次面试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-11T17:18:04+08:00" content="2015-11-11">
-              2015-11-11
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/11/第一次面试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/11/第一次面试/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>刚来北京的时候，第一个星期，收到的两次面试邀请，后来还去了其他的校招，最后加入了VINCI。不知道能在这里呆多久。面试是一个相互选择的过程，感觉面试时需要的交流能力要大于技术能力，当然两者也是相辅相成的。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/11/第一次面试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+    <div class="post-spread">
       
     </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
+  </div>
 
 
           </div>
@@ -658,6 +397,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/22/分享一个正则表达式/"
+           data-title="分享一个正则表达式" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2017/05/22/分享一个正则表达式/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -677,8 +424,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/git_logo.png"
@@ -732,6 +488,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -835,6 +602,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
