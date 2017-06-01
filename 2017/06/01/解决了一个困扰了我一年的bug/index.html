@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="周生明, ericcode" />
+  <meta name="keywords" content="Android,shell," />
 
 
 
@@ -80,15 +80,16 @@
 
 
 
-<meta name="description" content="read the fucking source code">
-<meta property="og:type" content="website">
-<meta property="og:title" content="码字猴">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/tags/ssh/index.html">
+<meta name="description" content="这件事情就说来话长了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决了一个困扰了我一年的bug">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/06/01/解决了一个困扰了我一年的bug/index.html">
 <meta property="og:site_name" content="码字猴">
-<meta property="og:description" content="read the fucking source code">
+<meta property="og:description" content="这件事情就说来话长了。">
+<meta property="og:updated_time" content="2017-06-01T08:09:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="码字猴">
-<meta name="twitter:description" content="read the fucking source code">
+<meta name="twitter:title" content="解决了一个困扰了我一年的bug">
+<meta name="twitter:description" content="这件事情就说来话长了。">
 
 
 
@@ -106,7 +107,7 @@
   };
 </script>
 
-  <title> 标签: ssh | 码字猴 </title>
+  <title> 解决了一个困扰了我一年的bug | 码字猴 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -127,7 +128,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -235,46 +236,136 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        ssh
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                解决了一个困扰了我一年的bug
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-01T14:44:50+08:00" content="2017-06-01">
+              2017-06-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/01/解决了一个困扰了我一年的bug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/01/解决了一个困扰了我一年的bug/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>这件事情就说来话长了。<br><a id="more"></a></p>
+<p>记得那是一年前，我被安排去做一个OpenGL相关的任务，就是做一个动画，但是这个动画比较重要，是主要交互界面的背景，我们一般称这个动画为”粒子系统“。</p>
+<p>动画被搞出来了，也优化了好久。但是一直有一个问题，就是用一段时间后就会卡死，整个界面都不能动了。包括我在内，大家都认为是粒子系统的问题。但是又苦于没有找到可以优化的点，这件事就一直被搁置。</p>
+<p>那时候就有一个奇怪的现象，就是我的这套”粒子系统“，用在另一个项目上就没有什么问题，我当时也很费解，感觉可能不是粒子系统导致的界面卡死，而是其他原因。但是有说不清楚这个”其他原因“是什么，所以还是我的问题。</p>
+<p>终于！哈哈，请允许我笑下。我发现”粒子系统崩溃“时有个奇怪的现象，就是整个app都无法进行数据库的操作，通过进一步的观察好像是整个app都无法进行文件读取操作，而且读文件时有个异常：EMFILE (Too many open files)。当时我就想:会不会是这个异常导致我的粒子系统崩溃，而不是我的粒子系统导致的这个异常。接着，我逐渐证实了我的想法。<br>接着我开始接触一系列的概念，”文件描述符“、”ulimit“、”lsof“，紧接着我看到了一篇博客<a href="http://blog.csdn.net/tencent_bugly/article/details/46276485" target="_blank">论File Descriptor泄漏如何导致Crash？</a>看完这个，我更加确信自己的想法。没错，这个困扰了我一年的bug，我终于逮到你了！！！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 查看进程ID</span><br><span class="line">ps | grep 包名</span><br><span class="line"></span><br><span class="line"># lsof（list open files）是一个列出当前系统打开文件的工具</span><br><span class="line"></span><br><span class="line"># 这个命令可以查看App打开的文件</span><br><span class="line">lsof | grep 包名 | grep 进程ID</span><br><span class="line"></span><br><span class="line"># 这个命令可以查看App打开的文件数，默认的最大文件数为1024， busybox是一个工具集</span><br><span class="line">lsof | grep 包名 | grep 进程ID | busybox wc -l</span><br></pre></td></tr></table></figure>
+<p>一般造成此类的原因是文件open后没有close，或者使用了FileDescriptor没有close。</p>
+<p>通过以上排查发现是我们用的Spotify player的问题，我们用的那个版本为1.0.0-beta12，通过lsof观察，只要spotify播放，打开的文件数就一直在增加。今天我通过升级sdk解决了这个问题。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+    
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/12/07/配置ssh服务器别名/" itemprop="url">
-              
-                <span itemprop="name">配置ssh服务器别名</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-07T16:38:22+08:00"
-              content="2016-12-07" >
-          12-07
-        </time>
-      </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/shell/" rel="tag">#shell</a>
+          
+        </div>
+      
 
-    </header>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/29/2017的下半年/" rel="next" title="2017的下半年">
+                <i class="fa fa-chevron-left"></i> 2017的下半年
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -282,6 +373,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/01/解决了一个困扰了我一年的bug/"
+           data-title="解决了一个困扰了我一年的bug" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2017/06/01/解决了一个困扰了我一年的bug/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -301,8 +400,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/git_logo.png"
@@ -356,6 +464,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -459,6 +578,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
