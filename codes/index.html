@@ -90,7 +90,7 @@
 <meta property="og:description" content="代码收集
 123Collection nuCon = new Vector(); nuCon.add(null); list.removeAll(nuCon);
 123456public static void assertUiThread() &amp;#123;       if (Thread.currentThread().getId() == Looper.getMainLooper().get">
-<meta property="og:updated_time" content="2017-05-02T06:48:04.000Z">
+<meta property="og:updated_time" content="2017-06-23T02:50:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codes">
 <meta name="twitter:description" content="代码收集
@@ -269,6 +269,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 对apk再次签名</span><br><span class="line">jarsigner -verbose -keystore xxxxx.keystore  -storepass xxxxx -signedjar  xxxxed.apk  xxxxxx.apk release</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 设置时间</span><br><span class="line">adb shell date -s &quot;yyyymmdd.[[[hh]mm]ss]&quot; </span><br><span class="line"># 如 adb shell date -s &quot;20120801.120503&quot;</span><br><span class="line"># 可以不加引号</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ping www.baidu.com -s 1024</span><br><span class="line">trace route</span><br><span class="line">mtr</span><br><span class="line">arping </span><br><span class="line">arp</span><br><span class="line">telnet</span><br><span class="line">host www.baidu.com</span><br><span class="line">nslookup www.baidu.com</span><br><span class="line">dig www.baidu.com</span><br><span class="line">ab -c 100 -n 100 http:/www.baidu.com/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 挂载服务器目录到本机</span><br><span class="line">sudo mount -t nfs -o resvport,rw server_address:/some_dir /some_dir</span><br></pre></td></tr></table></figure>
 
     
   </div>
