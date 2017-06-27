@@ -5,11 +5,17 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
 
 
 
@@ -27,7 +33,12 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -59,9 +70,11 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Android,blog," />
@@ -73,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
 
 
 
@@ -93,25 +106,37 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"hide"},
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> Android博客收集 | 码字猴 </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2016/06/20/Android博客收集/"/>
+
+
+
+
+
+  <title>Android博客收集 | 码字猴</title>
   
 
 
@@ -122,35 +147,47 @@
 
 
 
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">码字猴</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">码字猴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">coding..</p>
+      
   </div>
-  <p class="site-subtitle">coding..</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -163,7 +200,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -173,7 +210,7 @@
         <li class="menu-item menu-item-codes">
           <a href="/codes" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             codes
           </a>
@@ -183,7 +220,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -193,7 +230,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -203,7 +240,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -213,7 +250,7 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
-              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
             公益404
           </a>
@@ -226,6 +263,8 @@
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -240,38 +279,49 @@
     
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2016/06/20/Android博客收集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaoming">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码字猴">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Android博客收集
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">Android博客收集</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-20T10:48:37+08:00" content="2016-06-20">
-              2016-06-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-20T10:48:37+08:00">
+                2016-06-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
@@ -279,24 +329,29 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/2016/06/20/Android博客收集/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/20/Android博客收集/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/20/Android博客收集/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -650,16 +705,25 @@
 
       
     </div>
-    
+
     <div>
       
         
+
       
     </div>
 
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -667,11 +731,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/blog/" rel="tag">#blog</a>
+            <a href="/tags/blog/" rel="tag"># blog</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -683,6 +751,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -749,27 +819,34 @@
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/git_logo.png"
+               src="/images/avatar.gif"
                alt="xiaoming" />
           <p class="site-author-name" itemprop="name">xiaoming</p>
-          <p class="site-description motion-element" itemprop="description">read the fucking source code</p>
+           
+              <p class="site-description motion-element" itemprop="description">read the fucking source code</p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">27</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
           
 
           
+
+          
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -786,7 +863,7 @@
               <span class="links-of-author-item">
                 <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -801,19 +878,29 @@
         
         
 
+        
+
+
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#神一般的公司"><span class="nav-number">1.</span> <span class="nav-text">神一般的公司</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RxJava"><span class="nav-number">2.</span> <span class="nav-text">RxJava</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#入门教程"><span class="nav-number">2.1.</span> <span class="nav-text">入门教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战"><span class="nav-number">2.2.</span> <span class="nav-text">实战</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MediaPlayer"><span class="nav-number">3.</span> <span class="nav-text">MediaPlayer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#android-openslmediaplayer"><span class="nav-number">3.1.</span> <span class="nav-text">android-openslmediaplayer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控件"><span class="nav-number">4.</span> <span class="nav-text">控件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下拉刷新-加载更多"><span class="nav-number">4.1.</span> <span class="nav-text">下拉刷新 + 加载更多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Toggle-Button"><span class="nav-number">4.2.</span> <span class="nav-text">Toggle Button</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FloatActionButton"><span class="nav-number">4.3.</span> <span class="nav-text">FloatActionButton</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Material-Design"><span class="nav-number">4.4.</span> <span class="nav-text">Material Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可拖拽的gridView"><span class="nav-number">4.5.</span> <span class="nav-text">可拖拽的gridView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock-View"><span class="nav-number">4.6.</span> <span class="nav-text">Lock View</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RecyclerView-ListView"><span class="nav-number">4.7.</span> <span class="nav-text">RecyclerView/ListView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-View"><span class="nav-number">4.8.</span> <span class="nav-text">Loading View</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多主题框架"><span class="nav-number">4.9.</span> <span class="nav-text">多主题框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android版的代码高亮"><span class="nav-number">4.10.</span> <span class="nav-text">Android版的代码高亮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dialog"><span class="nav-number">4.11.</span> <span class="nav-text">Dialog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跑马灯"><span class="nav-number">4.12.</span> <span class="nav-text">跑马灯</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Log工具"><span class="nav-number">5.</span> <span class="nav-text">Log工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模糊工具（高斯模糊）"><span class="nav-number">6.</span> <span class="nav-text">模糊工具（高斯模糊）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线压缩图片"><span class="nav-number">7.</span> <span class="nav-text">在线压缩图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线编程"><span class="nav-number">8.</span> <span class="nav-text">在线编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试-amp-简历"><span class="nav-number">9.</span> <span class="nav-text">面试&简历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stormzhang原创"><span class="nav-number">9.1.</span> <span class="nav-text">stormzhang原创</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一部分-nbsp-nbsp-nbsp-nbsp-技术框架"><span class="nav-number">10.</span> <span class="nav-text">第一部分    技术框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图片加载"><span class="nav-number">10.1.</span> <span class="nav-text">图片加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络请求"><span class="nav-number">10.2.</span> <span class="nav-text">网络请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库ORM"><span class="nav-number">10.3.</span> <span class="nav-text">数据库ORM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Json解析"><span class="nav-number">10.4.</span> <span class="nav-text">Json解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入"><span class="nav-number">10.5.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速开发"><span class="nav-number">10.6.</span> <span class="nav-text">快速开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态加载"><span class="nav-number">10.7.</span> <span class="nav-text">动态加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#热修复"><span class="nav-number">10.8.</span> <span class="nav-text">热修复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件总线"><span class="nav-number">10.9.</span> <span class="nav-text">事件总线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二部分-nbsp-nbsp-nbsp-nbsp-博客社区"><span class="nav-number">11.</span> <span class="nav-text">第二部分    博客社区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#个人博客"><span class="nav-number">11.1.</span> <span class="nav-text">个人博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#团队博客"><span class="nav-number">11.2.</span> <span class="nav-text">团队博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技术社区"><span class="nav-number">11.3.</span> <span class="nav-text">技术社区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三部分-nbsp-nbsp-nbsp-nbsp-技术书籍"><span class="nav-number">12.</span> <span class="nav-text">第三部分    技术书籍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机基础"><span class="nav-number">12.1.</span> <span class="nav-text">计算机基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统"><span class="nav-number">12.2.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#体系结构"><span class="nav-number">12.3.</span> <span class="nav-text">体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机网络"><span class="nav-number">12.4.</span> <span class="nav-text">计算机网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">12.5.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译原理"><span class="nav-number">12.6.</span> <span class="nav-text">编译原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构-amp-算法"><span class="nav-number">12.7.</span> <span class="nav-text">数据结构&算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式"><span class="nav-number">12.8.</span> <span class="nav-text">设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件工程"><span class="nav-number">12.9.</span> <span class="nav-text">软件工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字图像处理"><span class="nav-number">12.10.</span> <span class="nav-text">数字图像处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机图形学"><span class="nav-number">12.11.</span> <span class="nav-text">计算机图形学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">12.12.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android"><span class="nav-number">12.13.</span> <span class="nav-text">Android</span></a></li></ol></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
@@ -836,8 +923,9 @@
   <span class="author" itemprop="copyrightHolder">xiaoming</span>
 </div>
 
+
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -847,15 +935,20 @@
   </a>
 </div>
 
+
         
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -878,54 +971,63 @@
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
 
 
 
   
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
 
 
 
@@ -950,6 +1052,26 @@
 
   
     
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 
@@ -957,7 +1079,11 @@
 
 
   
+
   
+
+  
+
   
 
   
