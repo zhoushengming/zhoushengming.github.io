@@ -286,6 +286,136 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/07/17/文件中的字符查找算法比较/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaoming">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/git_logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码字猴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/17/文件中的字符查找算法比较/" itemprop="url">文件中的字符查找算法比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T17:23:17+08:00">
+                2017-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/17/文件中的字符查找算法比较/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/17/文件中的字符查找算法比较/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近发现项目中的NanoHttpD对于文件上传的处理相当慢，于是我在排查一些耗时的操作。当然，对于文件的读写操作带来的耗时是无法避免的。<br>首先，文件上传的处理需要使用IHTTPSession#parseBody()进行request的解码，主要的耗时操作也是发生在这个操作里边。<br>通过阅读代码，我发现parseBody()会先把整个request缓存到文件中，然后查找boundary，然后进行request的分割，最好存储到文件里去。<br>这样就会产生大量的io操作，这个也是速度慢的主要原因。<br>经过我的排查，我发现查找boundary的代码有过更新，当我使用新的getBoundaryPositions()，发现速度竟然提升了10倍左右，不禁吓的我贴出源码，以待日后学习、比较。</p>
+<blockquote>
+<p>旧版代码</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">       * Find the byte positions where multipart boundaries start.</span><br><span class="line">       */</span></span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">int</span>[] getBoundaryPositions(ByteBuffer b, <span class="keyword">byte</span>[] boundary) &#123;</span><br><span class="line">          <span class="keyword">int</span> matchcount = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">int</span> matchbyte = -<span class="number">1</span>;</span><br><span class="line">          List&lt;Integer&gt; matchbytes = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; b.limit(); i++) &#123;</span><br><span class="line">              <span class="keyword">if</span> (b.get(i) == boundary[matchcount]) &#123;</span><br><span class="line">                  <span class="keyword">if</span> (matchcount == <span class="number">0</span>)</span><br><span class="line">                      matchbyte = i;</span><br><span class="line">                  matchcount++;</span><br><span class="line">                  <span class="keyword">if</span> (matchcount == boundary.length) &#123;</span><br><span class="line">                      matchbytes.add(matchbyte);</span><br><span class="line">                      matchcount = <span class="number">0</span>;</span><br><span class="line">                      matchbyte = -<span class="number">1</span>;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                  i -= matchcount;</span><br><span class="line">                  matchcount = <span class="number">0</span>;</span><br><span class="line">                  matchbyte = -<span class="number">1</span>;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">int</span>[] ret = <span class="keyword">new</span> <span class="keyword">int</span>[matchbytes.size()];</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ret.length; i++) &#123;</span><br><span class="line">              ret[i] = matchbytes.get(i);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> ret;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>新版代码</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">      * Find the byte positions where multipart boundaries start.</span><br><span class="line">      */</span></span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">int</span>[] getBoundaryPositions(ByteBuffer b, <span class="keyword">byte</span>[] boundary) &#123;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">         <span class="keyword">if</span> (b.remaining() &lt; boundary.length) &#123;</span><br><span class="line">             <span class="keyword">return</span> res;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">int</span> search_window_pos = <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">byte</span>[] search_window = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * <span class="number">1024</span> + boundary.length];</span><br><span class="line"></span><br><span class="line">         <span class="keyword">int</span> first_fill = (b.remaining() &lt; search_window.length) ? b.remaining() : search_window.length;</span><br><span class="line">         b.get(search_window, <span class="number">0</span>, first_fill);</span><br><span class="line">         <span class="keyword">int</span> new_bytes = first_fill - boundary.length;</span><br><span class="line"></span><br><span class="line">         do &#123;</span><br><span class="line">             <span class="comment">// Search the search_window</span></span><br><span class="line">             <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; new_bytes; j++) &#123;</span><br><span class="line">                 <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; boundary.length; i++) &#123;</span><br><span class="line">                     <span class="keyword">if</span> (search_window[j + i] != boundary[i])</span><br><span class="line">                         <span class="keyword">break</span>;</span><br><span class="line">                     <span class="keyword">if</span> (i == boundary.length - <span class="number">1</span>) &#123;</span><br><span class="line">                         <span class="comment">// Match found, add it to results</span></span><br><span class="line">                         <span class="keyword">int</span>[] new_res = <span class="keyword">new</span> <span class="keyword">int</span>[res.length + <span class="number">1</span>];</span><br><span class="line">                         System.arraycopy(res, <span class="number">0</span>, new_res, <span class="number">0</span>, res.length);</span><br><span class="line">                         new_res[res.length] = search_window_pos + j;</span><br><span class="line">                         res = new_res;</span><br><span class="line">                     &#125;</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">             search_window_pos += new_bytes;</span><br><span class="line"></span><br><span class="line">             <span class="comment">// Copy the end of the buffer to the start</span></span><br><span class="line">             System.arraycopy(search_window, search_window.length - boundary.length, search_window, <span class="number">0</span>, boundary.length);</span><br><span class="line"></span><br><span class="line">             <span class="comment">// Refill search_window</span></span><br><span class="line">             new_bytes = search_window.length - boundary.length;</span><br><span class="line">             new_bytes = (b.remaining() &lt; new_bytes) ? b.remaining() : new_bytes;</span><br><span class="line">             b.get(search_window, boundary.length, new_bytes);</span><br><span class="line">         &#125; <span class="keyword">while</span> (new_bytes &gt; <span class="number">0</span>);</span><br><span class="line">         <span class="keyword">return</span> res;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/07/08/一个牛B的网站-toptal-com/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2652,128 +2782,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2016/07/29/Chrome-Inspect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xiaoming">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/git_logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="码字猴">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/29/Chrome-Inspect/" itemprop="url">Chrome Inspect</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-29T14:03:18+08:00">
-                2016-07-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/29/Chrome-Inspect/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/29/Chrome-Inspect/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://developers.google.com/web/tools/chrome-devtools/debug/remote-debugging/remote-debugging" target="_blank" rel="external">Remote debug live content on an Android device from your Windows, Mac, or Linux computer.</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2823,7 +2831,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
