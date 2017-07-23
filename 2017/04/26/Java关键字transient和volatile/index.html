@@ -94,12 +94,13 @@
 
 
 <meta name="description" content="transient和volatile两个关键字一个用于对象序列化，一个用于线程同步，都是Java中比较高阶的话题，简单总结一下。">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java关键字transient和volatile">
 <meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/04/26/Java关键字transient和volatile/index.html">
 <meta property="og:site_name" content="码字猴">
 <meta property="og:description" content="transient和volatile两个关键字一个用于对象序列化，一个用于线程同步，都是Java中比较高阶的话题，简单总结一下。">
-<meta property="og:updated_time" content="2017-04-26T09:34:47.000Z">
+<meta property="og:updated_time" content="2017-06-28T17:37:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java关键字transient和volatile">
 <meta name="twitter:description" content="transient和volatile两个关键字一个用于对象序列化，一个用于线程同步，都是Java中比较高阶的话题，简单总结一下。">
@@ -361,7 +362,7 @@
       
         <p>transient和volatile两个关键字一个用于对象序列化，一个用于线程同步，都是Java中比较高阶的话题，简单总结一下。<br><a id="more"></a></p>
 <h2 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h2><p>transient是类型修饰符，只能用来修饰字段。在对象序列化的过程中，标记为transient的变量不会被序列化。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">transient</span> <span class="keyword">int</span> a; <span class="comment">// 不会被持久化</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> b; <span class="comment">// 持久化</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">transient</span> <span class="keyword">int</span> a; <span class="comment">// 不会被持久化</span></div><div class="line"></div><div class="line">	<span class="keyword">int</span> b; <span class="comment">// 持久化</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当类Test的实例对象被序列化（比如将Test类的实例对象 t 写入硬盘的文本文件t.txt中），变量 a 的内容不会被保存，变量 b 的内容则会被保存。</p>
 <blockquote>
 <p>参考：把一个对象的表示转化为字节流的过程称为串行化（也称为序列化，serialization），从字节流中把对象重建出来称为反串行化（也称为为反序列化，deserialization）。transient 为不应被串行化的数据提供了一个语言级的标记数据方法。</p>
@@ -540,6 +541,15 @@
                     <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3192882571" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
                 </a>
               </span>
             

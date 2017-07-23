@@ -94,12 +94,13 @@
 
 
 <meta name="description" content="获取某块代码的调用者信息，打印到控制台中">
+<meta name="keywords" content="java,工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="获取java的调用者信息栈">
 <meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/04/17/获取java的调用者信息栈/index.html">
 <meta property="og:site_name" content="码字猴">
 <meta property="og:description" content="获取某块代码的调用者信息，打印到控制台中">
-<meta property="og:updated_time" content="2017-04-17T03:41:33.000Z">
+<meta property="og:updated_time" content="2017-06-28T17:37:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="获取java的调用者信息栈">
 <meta name="twitter:description" content="获取某块代码的调用者信息，打印到控制台中">
@@ -360,7 +361,7 @@
 
       
         <p>获取某块代码的调用者信息，打印到控制台中<a id="more"></a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCaller</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        StackTraceElement[] trace = <span class="keyword">new</span> Throwable().fillInStackTrace().getStackTrace();</span><br><span class="line">        String caller = <span class="string">""</span>;</span><br><span class="line">        String callingClass = <span class="string">""</span>;</span><br><span class="line">        String callFile = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">int</span> lineNumber = <span class="number">0</span>;</span><br><span class="line">        System.out.println(<span class="string">"==========BEGIN OF CALLER INFO============"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; trace.length; i++) &#123;</span><br><span class="line">            callingClass = trace[i].getClassName();</span><br><span class="line">            callingClass = callingClass.substring(callingClass</span><br><span class="line">                    .lastIndexOf(<span class="string">'.'</span>) + <span class="number">1</span>);</span><br><span class="line">            caller = trace[i].getMethodName();</span><br><span class="line">            callFile = trace[i].getFileName();</span><br><span class="line">            lineNumber = trace[i].getLineNumber();</span><br><span class="line">            String method = String.format(Locale.US, <span class="string">"[%03d] %s.%s(%s:%d)"</span></span><br><span class="line">                    , Thread.currentThread().getId(), callingClass, caller, callFile, lineNumber);</span><br><span class="line">            System.out.println(method);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"==========END OF CALLER INFO============"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCaller</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        StackTraceElement[] trace = <span class="keyword">new</span> Throwable().fillInStackTrace().getStackTrace();</div><div class="line">        String caller = <span class="string">""</span>;</div><div class="line">        String callingClass = <span class="string">""</span>;</div><div class="line">        String callFile = <span class="string">""</span>;</div><div class="line">        <span class="keyword">int</span> lineNumber = <span class="number">0</span>;</div><div class="line">        System.out.println(<span class="string">"==========BEGIN OF CALLER INFO============"</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; trace.length; i++) &#123;</div><div class="line">            callingClass = trace[i].getClassName();</div><div class="line">            callingClass = callingClass.substring(callingClass</div><div class="line">                    .lastIndexOf(<span class="string">'.'</span>) + <span class="number">1</span>);</div><div class="line">            caller = trace[i].getMethodName();</div><div class="line">            callFile = trace[i].getFileName();</div><div class="line">            lineNumber = trace[i].getLineNumber();</div><div class="line">            String method = String.format(Locale.US, <span class="string">"[%03d] %s.%s(%s:%d)"</span></div><div class="line">                    , Thread.currentThread().getId(), callingClass, caller, callFile, lineNumber);</div><div class="line">            System.out.println(method);</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"==========END OF CALLER INFO============"</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -515,6 +516,15 @@
                     <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3192882571" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
                 </a>
               </span>
             

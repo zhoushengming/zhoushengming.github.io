@@ -286,7 +286,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/07/17/文件中的字符查找算法比较/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/07/23/蒲公英/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiaoming">
@@ -305,7 +305,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/17/文件中的字符查找算法比较/" itemprop="url">文件中的字符查找算法比较</a></h1>
+                <a class="post-title-link" href="/2017/07/23/蒲公英/" itemprop="url">蒲公英</a></h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T17:23:17+08:00">
-                2017-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T22:21:33+08:00">
+                2017-07-23
               </time>
             
 
@@ -336,8 +336,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/17/文件中的字符查找算法比较/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/17/文件中的字符查找算法比较/" itemprop="commentCount"></span>
+                <a href="/2017/07/23/蒲公英/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/23/蒲公英/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,10 +363,13 @@
 
       
         
-          <p>最近发现项目中的NanoHttpD对于文件上传的处理相当慢，于是我在排查一些耗时的操作。当然，对于文件的读写操作带来的耗时是无法避免的。</p>
+          <blockquote>
+<p>作者：往昔</p>
+</blockquote>
+<p>(请你注意一下你家门前的那颗蒲公英，它可能是你前世  前世……的爱人，它想你默默地倾诉着对你的爱）                     </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/17/文件中的字符查找算法比较/#more" rel="contents">
+            <a class="btn" href="/2017/07/23/蒲公英/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1120,7 +1123,7 @@
 <li>中文可能在开头、中间、结尾，即包含中文的都要匹配</li>
 </ol>
 <p>以下是正则表达式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(^(?!.*Logger).*)(\&quot;.*([\u4e00-\u9fa5]).*\&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(^(?!.*Logger).*)(\&quot;.*([\u4e00-\u9fa5]).*\&quot;)</div></pre></td></tr></table></figure>
           
         
       
@@ -1242,9 +1245,9 @@
         
           
             <p>现在我们开发了一个英文版的App，为了测试英文版，经常需要把手机系统语言设置为英文。为了避免这个麻烦，我想在应用内添加一个切换语言的功能，核心代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changeLanguage</span><span class="params">(Locale locale)</span> </span>&#123;</span><br><span class="line">	Locale.setDefault(locale);</span><br><span class="line">	Resources resources = getResources();</span><br><span class="line">	android.content.res.Configuration config = resources.getConfiguration();</span><br><span class="line">	DisplayMetrics dm = resources.getDisplayMetrics();</span><br><span class="line">	config.locale = locale;</span><br><span class="line">	resources.updateConfiguration(config, dm);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changeLanguage</span><span class="params">(Locale locale)</span> </span>&#123;</div><div class="line">	Locale.setDefault(locale);</div><div class="line">	Resources resources = getResources();</div><div class="line">	android.content.res.Configuration config = resources.getConfiguration();</div><div class="line">	DisplayMetrics dm = resources.getDisplayMetrics();</div><div class="line">	config.locale = locale;</div><div class="line">	resources.updateConfiguration(config, dm);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以下代码是重新启动App</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">restartApp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    changeLanguage();</span><br><span class="line">    Intent i = getBaseContext().getPackageManager()</span><br><span class="line">            .getLaunchIntentForPackage(getBaseContext().getPackageName());</span><br><span class="line">    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);</span><br><span class="line">    startActivity(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">restartApp</span><span class="params">()</span> </span>&#123;</div><div class="line">    changeLanguage();</div><div class="line">    Intent i = getBaseContext().getPackageManager()</div><div class="line">            .getLaunchIntentForPackage(getBaseContext().getPackageName());</div><div class="line">    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);</div><div class="line">    startActivity(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           
         
       
@@ -1490,7 +1493,7 @@
 
       
         
-          <p>转载自：<a href="http://blog.csdn.net/zhangerqing">http://blog.csdn.net/zhangerqing</a></p>
+          <p>转载自：<a href="http://blog.csdn.net/zhangerqing" target="_blank" rel="external">http://blog.csdn.net/zhangerqing</a></p>
 <blockquote>
 <p>可复用面向对象软件的基础</p>
 </blockquote>
@@ -2127,7 +2130,7 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">vim config</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Host baal</span><br><span class="line">   HostName xxx.xxx.xxx.xxx</span><br><span class="line">   User xxxx</span><br><span class="line">   IdentityFile  ~/.ssh/id_rsa.pub</span><br><span class="line">   IdentitiesOnly yes</span><br><span class="line"></span><br><span class="line">ssh baal</span><br></pre></td></tr></table></figure>
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cd ~/.ssh</div><div class="line">vim config</div><div class="line"></div><div class="line"></div><div class="line">Host baal</div><div class="line">   HostName xxx.xxx.xxx.xxx</div><div class="line">   User xxxx</div><div class="line">   IdentityFile  ~/.ssh/id_rsa.pub</div><div class="line">   IdentitiesOnly yes</div><div class="line"></div><div class="line">ssh baal</div></pre></td></tr></table></figure>
 
           
         
@@ -2250,7 +2253,7 @@
         
           
             <p>每次操作都需要输入用户名和密码感觉很繁琐，解决方法，在本地的工程文件夹的.git下打开config文件<br>添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[credential]</span><br><span class="line">     helper = store</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[credential]</div><div class="line">     helper = store</div></pre></td></tr></table></figure>
 <p>再输入一次用户名密码后就可以保存住了。</p>
 
           
@@ -2859,6 +2862,15 @@
                     <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3192882571" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
                 </a>
               </span>
             
