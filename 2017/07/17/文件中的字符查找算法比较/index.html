@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="shell," />
+  <meta name="keywords" content="java," />
 
 
 
@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="svc命令    这个脚本在/system/bin目录下，这个命令可以用来控制电源管理，wifi开关，数据开关(就是上网流量)">
-<meta name="keywords" content="shell">
+<meta name="description" content="最近发现项目中的NanoHttpD对于文件上传的处理相当慢，于是我在排查一些耗时的操作。当然，对于文件的读写操作带来的耗时是无法避免的。">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【android测试】adb shell svc命令">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/02/11/【android测试】adb-shell-svc命令/index.html">
+<meta property="og:title" content="文件中的字符查找算法比较">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/07/17/文件中的字符查找算法比较/index.html">
 <meta property="og:site_name" content="码字猴">
-<meta property="og:description" content="svc命令    这个脚本在/system/bin目录下，这个命令可以用来控制电源管理，wifi开关，数据开关(就是上网流量)">
-<meta property="og:updated_time" content="2017-06-28T17:37:27.000Z">
+<meta property="og:description" content="最近发现项目中的NanoHttpD对于文件上传的处理相当慢，于是我在排查一些耗时的操作。当然，对于文件的读写操作带来的耗时是无法避免的。">
+<meta property="og:updated_time" content="2017-11-14T11:26:12.465Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【android测试】adb shell svc命令">
-<meta name="twitter:description" content="svc命令    这个脚本在/system/bin目录下，这个命令可以用来控制电源管理，wifi开关，数据开关(就是上网流量)">
+<meta name="twitter:title" content="文件中的字符查找算法比较">
+<meta name="twitter:description" content="最近发现项目中的NanoHttpD对于文件上传的处理相当慢，于是我在排查一些耗时的操作。当然，对于文件的读写操作带来的耗时是无法避免的。">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/02/11/【android测试】adb-shell-svc命令/"/>
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/07/17/文件中的字符查找算法比较/"/>
 
 
 
 
 
-  <title>【android测试】adb shell svc命令 | 码字猴</title>
+  <title>文件中的字符查找算法比较 | 码字猴</title>
   
 
 
@@ -286,7 +286,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/02/11/【android测试】adb-shell-svc命令/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/07/17/文件中的字符查找算法比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiaoming">
@@ -303,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【android测试】adb shell svc命令</h1>
+          <h1 class="post-title" itemprop="name headline">文件中的字符查找算法比较</h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-11T10:04:02+08:00">
-                2017-02-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T17:23:17+08:00">
+                2017-07-17
               </time>
             
 
@@ -334,8 +334,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/11/【android测试】adb-shell-svc命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/11/【android测试】adb-shell-svc命令/" itemprop="commentCount"></span>
+                <a href="/2017/07/17/文件中的字符查找算法比较/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/17/文件中的字符查找算法比较/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -360,40 +360,17 @@
       
 
       
-        <p>svc命令<br>    这个脚本在/system/bin目录下，这个命令可以用来控制电源管理，wifi开关，数据开关(就是上网流量)</p>
+        <p>最近发现项目中的NanoHttpD对于文件上传的处理相当慢，于是我在排查一些耗时的操作。当然，对于文件的读写操作带来的耗时是无法避免的。</p>
 <a id="more"></a>
+<p>首先，文件上传的处理需要使用IHTTPSession#parseBody()进行request的解码，主要的耗时操作也是发生在这个操作里边。<br>通过阅读代码，我发现parseBody()会先把整个request缓存到文件中，然后查找boundary，然后进行request的分割，最好存储到文件里去。<br>这样就会产生大量的io操作，这个也是速度慢的主要原因。<br>经过我的排查，我发现查找boundary的代码有过更新，当我使用新的getBoundaryPositions()，发现速度竟然提升了10倍左右，不禁吓的我贴出源码，以待日后学习、比较。</p>
 <blockquote>
-<p>svc power stayon [true|false|usb|ac]  </p>
+<p>旧版代码</p>
 </blockquote>
-<p>设置屏幕的常亮，true保持常亮，false不保持，usb当插入usb时常亮，ac当插入电源时常亮      </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Find the byte positions where multipart boundaries start.</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] getBoundaryPositions(ByteBuffer b, <span class="keyword">byte</span>[] boundary) &#123;</div><div class="line">    <span class="keyword">int</span> matchcount = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> matchbyte = -<span class="number">1</span>;</div><div class="line">    List&lt;Integer&gt; matchbytes = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; b.limit(); i++) &#123;</div><div class="line">        <span class="keyword">if</span> (b.get(i) == boundary[matchcount]) &#123;</div><div class="line">            <span class="keyword">if</span> (matchcount == <span class="number">0</span>)</div><div class="line">                matchbyte = i;</div><div class="line">            matchcount++;</div><div class="line">            <span class="keyword">if</span> (matchcount == boundary.length) &#123;</div><div class="line">                matchbytes.add(matchbyte);</div><div class="line">                matchcount = <span class="number">0</span>;</div><div class="line">                matchbyte = -<span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            i -= matchcount;</div><div class="line">            matchcount = <span class="number">0</span>;</div><div class="line">            matchbyte = -<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span>[] ret = <span class="keyword">new</span> <span class="keyword">int</span>[matchbytes.size()];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ret.length; i++) &#123;</div><div class="line">        ret[i] = matchbytes.get(i);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
-<p>svc data disable</p>
+<p>新版代码</p>
 </blockquote>
-<p>这个命令可以关闭数据连接，就是上网流量，大家都知道控制上网的开关很多， 但是大都是通过在apn上的接入点加后缀来实现的，但是这个命令不会更改apn的任何设置，直接在底层关闭数据连接。 应该是最彻底的，而且又不影响apn的设置。这个跟apndroid有什么区别，apndroid是在关闭上网数据的时候，已经在下载的连接可能不会被强 制关闭(这个在apndroid自己的说明中也有提到)。比如你在下载一个10M的电影，下载了1M，不响下载了。用apndroid关闭连接，可能这个 下载还会继续，不会马上停掉。但是用这个命令，绝对毫不留情的咔嚓掉。</p>
-<blockquote>
-<p>svc data enable </p>
-</blockquote>
-<p>这个是打开上网数据连接，跟上一个命令是相反的。</p>
-<blockquote>
-<p>svc data prefer</p>
-</blockquote>
-<p>这个命令是控制3g数据连接比wifi优先。我们都知道，正常情况下，有wifi的时候，不会用到3g连接。但是这个命令是相反，有3g的话先用3g流量，没有3g的时候采用wifi.我想大家不会这么傻吧，所以这个命令没什么用。</p>
-<blockquote>
-<p>svc wifi disable </p>
-</blockquote>
-<p>关闭wifi 连接</p>
-<blockquote>
-<p>svc wifi enable </p>
-</blockquote>
-<p>开启wifi连接</p>
-<blockquote>
-<p>svc wifi prefer </p>
-</blockquote>
-<p>设置wifi优先，跟5是相反的。</p>
-<blockquote>
-<p>.watchprosp 动态监视android系统属性的变化，有变化就会输出:</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">C:\Users\beijing_zbs&gt;adb shell</div><div class="line">$ watchprops persist.sys.autolanguage</div><div class="line">watchprops persist.sys.autolanguage</div><div class="line">1418093713 sys.settings_secure_version = &apos;213&apos;</div><div class="line">1418093719 persist.sys.localevar = &apos;&apos;</div><div class="line">1418093719 persist.sys.language = &apos;en&apos;</div><div class="line">1418093719 persist.sys.country = &apos;US&apos;</div><div class="line">1418093733 persist.sys.language = &apos;zh&apos;</div><div class="line">1418093733 persist.sys.country = &apos;CN&apos;</div><div class="line">1418093733 persist.sys.localevar = &apos;&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Find the byte positions where multipart boundaries start.</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] getBoundaryPositions(ByteBuffer b, <span class="keyword">byte</span>[] boundary) &#123;</div><div class="line">    <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</div><div class="line">    <span class="keyword">if</span> (b.remaining() &lt; boundary.length) &#123;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> search_window_pos = <span class="number">0</span>;</div><div class="line">    <span class="keyword">byte</span>[] search_window = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * <span class="number">1024</span> + boundary.length];</div><div class="line">    <span class="keyword">int</span> first_fill = (b.remaining() &lt; search_window.length) ? b.remaining() : search_window.length;</div><div class="line">    b.get(search_window, <span class="number">0</span>, first_fill);</div><div class="line">    <span class="keyword">int</span> new_bytes = first_fill - boundary.length;</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="comment">// Search the search_window</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; new_bytes; j++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; boundary.length; i++) &#123;</div><div class="line">                <span class="keyword">if</span> (search_window[j + i] != boundary[i])</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">if</span> (i == boundary.length - <span class="number">1</span>) &#123;</div><div class="line">                    <span class="comment">// Match found, add it to results</span></div><div class="line">                    <span class="keyword">int</span>[] new_res = <span class="keyword">new</span> <span class="keyword">int</span>[res.length + <span class="number">1</span>];</div><div class="line">                    System.arraycopy(res, <span class="number">0</span>, new_res, <span class="number">0</span>, res.length);</div><div class="line">                    new_res[res.length] = search_window_pos + j;</div><div class="line">                    res = new_res;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        search_window_pos += new_bytes;</div><div class="line">        <span class="comment">// Copy the end of the buffer to the start</span></div><div class="line">        System.arraycopy(search_window, search_window.length - boundary.length, search_window, <span class="number">0</span>, boundary.length);</div><div class="line">        <span class="comment">// Refill search_window</span></div><div class="line">        new_bytes = search_window.length - boundary.length;</div><div class="line">        new_bytes = (b.remaining() &lt; new_bytes) ? b.remaining() : new_bytes;</div><div class="line">        b.get(search_window, boundary.length, new_bytes);</div><div class="line">    &#125; <span class="keyword">while</span> (new_bytes &gt; <span class="number">0</span>);</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -423,7 +400,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/shell/" rel="tag"># shell</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -436,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/01/我的2017/" rel="next" title="我的2017">
-                <i class="fa fa-chevron-left"></i> 我的2017
+              <a href="/2017/07/08/一个牛B的网站-toptal-com/" rel="next" title="一个牛B的网站:toptal.com">
+                <i class="fa fa-chevron-left"></i> 一个牛B的网站:toptal.com
               </a>
             
           </div>
@@ -446,8 +423,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/13/好用的Android开发工具类库/" rel="prev" title="好用的Android开发工具类库">
-                好用的Android开发工具类库 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/23/蒲公英/" rel="prev" title="蒲公英">
+                蒲公英 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -474,8 +451,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/11/【android测试】adb-shell-svc命令/"
-           data-title="【android测试】adb shell svc命令" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2017/02/11/【android测试】adb-shell-svc命令/">
+      <div class="ds-thread" data-thread-key="2017/07/17/文件中的字符查找算法比较/"
+           data-title="文件中的字符查找算法比较" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2017/07/17/文件中的字符查找算法比较/">
       </div>
     
   </div>
