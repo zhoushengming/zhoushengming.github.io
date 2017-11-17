@@ -1,0 +1,817 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="工具," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="两台电脑，Ubuntu、MacBook；Ubuntu性能强，用于编译Android源码；MacBook用户体验好，用于写代码；需求是：使用MacBook操纵Ubuntu；方案是：  使用SSH操作Ubuntu； 使用mount NFS挂载代码到MacBook，使用Android Studio修改代码；">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac SSH&amp;NFS Ubuntu">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/11/17/Mac-SSH-NFS-Ubuntu/index.html">
+<meta property="og:site_name" content="码字猴">
+<meta property="og:description" content="两台电脑，Ubuntu、MacBook；Ubuntu性能强，用于编译Android源码；MacBook用户体验好，用于写代码；需求是：使用MacBook操纵Ubuntu；方案是：  使用SSH操作Ubuntu； 使用mount NFS挂载代码到MacBook，使用Android Studio修改代码；">
+<meta property="og:updated_time" content="2017-11-17T06:20:33.246Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac SSH&amp;NFS Ubuntu">
+<meta name="twitter:description" content="两台电脑，Ubuntu、MacBook；Ubuntu性能强，用于编译Android源码；MacBook用户体验好，用于写代码；需求是：使用MacBook操纵Ubuntu；方案是：  使用SSH操作Ubuntu； 使用mount NFS挂载代码到MacBook，使用Android Studio修改代码；">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/11/17/Mac-SSH-NFS-Ubuntu/"/>
+
+
+
+
+
+  <title>Mac SSH&NFS Ubuntu | 码字猴</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">码字猴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">coding..</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-codes">
+          <a href="/codes" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            codes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/11/17/Mac-SSH-NFS-Ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaoming">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/git_logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码字猴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mac SSH&NFS Ubuntu</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-17T11:29:33+08:00">
+                2017-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/17/Mac-SSH-NFS-Ubuntu/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/17/Mac-SSH-NFS-Ubuntu/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>两台电脑，Ubuntu、MacBook；<br>Ubuntu性能强，用于编译Android源码；<br>MacBook用户体验好，用于写代码；<br>需求是：使用MacBook操纵Ubuntu；<br>方案是：</p>
+<ol>
+<li>使用SSH操作Ubuntu；</li>
+<li>使用mount NFS挂载代码到MacBook，使用Android Studio修改代码；<a id="more"></a>
+</li>
+</ol>
+<h1 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h1><p>首先搞定SSH， 以下是服务端和客户端配置。</p>
+<h2 id="服务端（Ubuntu）"><a href="#服务端（Ubuntu）" class="headerlink" title="服务端（Ubuntu）"></a>服务端（Ubuntu）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo  apt-get install openssh-server</div></pre></td></tr></table></figure>
+<p>如果安装失败，缺少依赖库，可以通过添加apt软件源的方式解决。如果还是无法安装，就需要一个一个依赖库的下载。<br>常用库下载地址：</p>
+<p><a href="http://launchpadlibrarian.net/130237887/libtasn1-3-dbg_2.14-2_i386.deb" target="_blank" rel="external">http://launchpadlibrarian.net/130237887/libtasn1-3-dbg_2.14-2_i386.deb</a><br><a href="http://launchpadlibrarian.net/130237888/libtasn1-3_2.14-2_i386.deb" target="_blank" rel="external">http://launchpadlibrarian.net/130237888/libtasn1-3_2.14-2_i386.deb</a><br><a href="http://launchpadlibrarian.net/130237883/libtasn1-3_2.14-2_amd64.deb" target="_blank" rel="external">http://launchpadlibrarian.net/130237883/libtasn1-3_2.14-2_amd64.deb</a><br><a href="http://launchpadlibrarian.net/130237889/libtasn1-3-bin_2.14-2_i386.deb" target="_blank" rel="external">http://launchpadlibrarian.net/130237889/libtasn1-3-bin_2.14-2_i386.deb</a><br><a href="http://security.ubuntu.com/ubuntu/pool/main/g/gnutls26/libgnutls26_2.12.23-12ubuntu2.8_amd64.deb" target="_blank" rel="external">http://security.ubuntu.com/ubuntu/pool/main/g/gnutls26/libgnutls26_2.12.23-12ubuntu2.8_amd64.deb</a><br><a href="https://launchpadlibrarian.net/85099924/libtasn1-3_2.10-1ubuntu1_amd64.deb" target="_blank" rel="external">https://launchpadlibrarian.net/85099924/libtasn1-3_2.10-1ubuntu1_amd64.deb</a><br><a href="https://launchpadlibrarian.net/85099923/libtasn1-3-dbg_2.10-1ubuntu1_amd64.deb" target="_blank" rel="external">https://launchpadlibrarian.net/85099923/libtasn1-3-dbg_2.10-1ubuntu1_amd64.deb</a><br><a href="http://launchpadlibrarian.net/154418135/libplist1_1.10-1_amd64.deb" target="_blank" rel="external">http://launchpadlibrarian.net/154418135/libplist1_1.10-1_amd64.deb</a><br><a href="http://launchpadlibrarian.net/154432952/libusbmuxd2_1.0.8-2ubuntu1_amd64.deb" target="_blank" rel="external">http://launchpadlibrarian.net/154432952/libusbmuxd2_1.0.8-2ubuntu1_amd64.deb</a><br><a href="https://launchpadlibrarian.net/264961543/libusbmuxd-tools_1.0.10-3_amd64.deb" target="_blank" rel="external">https://launchpadlibrarian.net/264961543/libusbmuxd-tools_1.0.10-3_amd64.deb</a><br><a href="https://launchpadlibrarian.net/160013007/libgcrypt11_1.5.3-2ubuntu4_amd64.deb" target="_blank" rel="external">https://launchpadlibrarian.net/160013007/libgcrypt11_1.5.3-2ubuntu4_amd64.deb</a><br><a href="https://launchpadlibrarian.net/160012809/libgcrypt11_1.5.3-2ubuntu4.debian.tar.gz" target="_blank" rel="external">https://launchpadlibrarian.net/160012809/libgcrypt11_1.5.3-2ubuntu4.debian.tar.gz</a></p>
+<p>启动ssh server<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/ssh start </div><div class="line"># 或者 </div><div class="line">service ssh start</div></pre></td></tr></table></figure></p>
+<h2 id="客户端（MacBook）"><a href="#客户端（MacBook）" class="headerlink" title="客户端（MacBook）"></a>客户端（MacBook）</h2><p>应该都已经安装了SSH，没有安装的话可以用homebrew安装。</p>
+<p>安装后，使用以下命令访问服务器就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh username@ipAddress</div></pre></td></tr></table></figure>
+<h2 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h2><p>将客户端~/.ssh/id_rsa.pub  的内容添加到服务端的~/.ssh/authorized_keys文件中（没有该文件就创建一个）。</p>
+<h2 id="服务器别名设置"><a href="#服务器别名设置" class="headerlink" title="服务器别名设置"></a>服务器别名设置</h2><p>使用cd ~/.ssh/ 进入ssh目录，会看到有config、known_hosts两个文件，一般的没有设置的话，只会有known_hosts，可以使用touch config命令创建config文件。</p>
+<p>使用vim编辑config文件，添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Host servername</div><div class="line">HostName 1xx.1xx.1xx.67</div><div class="line">User root</div><div class="line">IdentitiesOnly yes</div></pre></td></tr></table></figure>
+<p>其中： </p>
+<ol>
+<li>Host 后边的是名称，以后可以根据这个名称进行访问； </li>
+<li>HostName是你的主机IP地址； </li>
+<li>User为主机登录的用户名； </li>
+<li>IdentitiesOnly yes固有配置；</li>
+</ol>
+<p>这样就可以用以下命令访问服务器了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh servername</div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h1><p>NFS（Network File System）是挂载硬盘的一种方式，使用mount命令挂载。记得使用sudo。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mount -t nfs -o resvport,rw ipAddress:/home/xxx  ~/xxxx</div></pre></td></tr></table></figure></p>
+<h2 id="服务器端配置（Ubuntu）"><a href="#服务器端配置（Ubuntu）" class="headerlink" title="服务器端配置（Ubuntu）"></a>服务器端配置（Ubuntu）</h2><ol>
+<li>安装Ubuntu nfs服务器端：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install nfs-kernel-server</div></pre></td></tr></table></figure>
+<ol>
+<li>安装nfs的客户端：<br>(在安装nsf-kernel-server的时候，也会安装nfs-commom。如果没有安装这个软件包，则要执行1.2中的命令了)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install nfs-common​</div></pre></td></tr></table></figure>
+<ol>
+<li>设置共享的文件目录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mkdir /***/***</div></pre></td></tr></table></figure>
+<ol>
+<li>修改配置文件/etc/exports</li>
+</ol>
+<p>在最后一行添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/home/USER/nfs *(rw,sync,no_root_squash,no_subtree_check)</div></pre></td></tr></table></figure>
+<p>&gt;<br>前面那个目录是与nfs服务客户端共享的目录，*代表允许所有的网段访问（也可以使用具体的IP）<br>rw：挂接此目录的客户端对该共享目录具有读写权限<br>sync：资料同步写入内存和硬盘<br>no_root_squash：客户机用root访问该共享文件夹时，不映射root用户。（root_squash：客户机用root用户访问该共享文件夹时，将root用户映射成匿名用户）<br>no_subtree_check：不检查父目录的权限。</p>
+<ol>
+<li>nfs是一个RPC程序，使用它前，需要映射好端口，通过rpcbind 设定：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service rpcbind restart restart</div></pre></td></tr></table></figure>
+<ol>
+<li>重启nfs服务：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service restartnfs-kernel-server restart</div></pre></td></tr></table></figure>
+<p>&gt;<br>如果修改了/etc/exports，记得要重启服务，即5、6两步。</p>
+<h2 id="客户端配置（MacBook）"><a href="#客户端配置（MacBook）" class="headerlink" title="客户端配置（MacBook）"></a>客户端配置（MacBook）</h2><p>直接挂载即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mount -t nfs -o resvport,rw ipAddress:/home/xxx  ~/xxxx</div></pre></td></tr></table></figure>
+<h2 id="无写入权限问题"><a href="#无写入权限问题" class="headerlink" title="无写入权限问题"></a>无写入权限问题</h2><p>需要将服务器的共享目录更改权限，即添加本组和其他用户的读写权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chmod -R go+rw /xxx/xxx</div></pre></td></tr></table></figure>
+<h2 id="使用Android-Studio"><a href="#使用Android-Studio" class="headerlink" title="使用Android Studio"></a>使用Android Studio</h2><p>挂载成功后，即可以像操作本地文件一样操作服务器了，用Android Studio打开相应的工程即可。</p>
+<hr>
+<p>The End.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/14/好久没写博客了，原因竟然是。。/" rel="next" title="好久没写博客了，原因竟然是。。">
+                <i class="fa fa-chevron-left"></i> 好久没写博客了，原因竟然是。。
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/11/17/Mac-SSH-NFS-Ubuntu/"
+           data-title="Mac SSH&NFS Ubuntu" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2017/11/17/Mac-SSH-NFS-Ubuntu/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/git_logo.png"
+               alt="xiaoming" />
+          <p class="site-author-name" itemprop="name">xiaoming</p>
+           
+              <p class="site-description motion-element" itemprop="description">read the fucking source code</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3192882571" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SSH"><span class="nav-number">1.</span> <span class="nav-text">SSH</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端（Ubuntu）"><span class="nav-number">1.1.</span> <span class="nav-text">服务端（Ubuntu）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端（MacBook）"><span class="nav-number">1.2.</span> <span class="nav-text">客户端（MacBook）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#免密登录"><span class="nav-number">1.3.</span> <span class="nav-text">免密登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器别名设置"><span class="nav-number">1.4.</span> <span class="nav-text">服务器别名设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS"><span class="nav-number">2.</span> <span class="nav-text">NFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器端配置（Ubuntu）"><span class="nav-number">2.1.</span> <span class="nav-text">服务器端配置（Ubuntu）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端配置（MacBook）"><span class="nav-number">2.2.</span> <span class="nav-text">客户端配置（MacBook）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无写入权限问题"><span class="nav-number">2.3.</span> <span class="nav-text">无写入权限问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Android-Studio"><span class="nav-number">2.4.</span> <span class="nav-text">使用Android Studio</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoming</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhoushengming"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
