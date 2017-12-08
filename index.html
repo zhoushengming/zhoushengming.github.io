@@ -363,24 +363,14 @@
 
       
         
-          
-            <p>非对称加密有一对公钥和私钥，成对出现，使用时，如果A想给你发消息，你把公钥给A，让A使用公钥对消息进行加密，加密后发给你，然后你用私钥解开，别人虽然能拿到公钥和密文，但是解不开，因为公钥可以加密明文成为密文，但是却无法使用公钥对密文进行解密，只有私钥能够解密公钥加密的东西，而私钥只有你自己有，这就保证了信息的安全性。</p>
-<h3 id="神奇的数学"><a href="#神奇的数学" class="headerlink" title="神奇的数学"></a>神奇的数学</h3><p>但是你可能有疑问了，为啥公钥加密了，用公钥却解不开，这么神奇？<br>对，就是这么神奇，这个要从一个牛B的数学现象说起。<br>当然，我说的是非对称加密算法的一种，也是比较常用的一种，这种算法叫RSA。</p>
-<p>这个数学现象就是：两个大素数相乘十分容易，但那时想要对其乘积进行因式分解却极其困难。</p>
-<h3 id="啥是素数"><a href="#啥是素数" class="headerlink" title="啥是素数"></a>啥是素数</h3><p>质数（prime number）又称素数，有无限个。<br>质数定义为在大于1的自然数中，除了1和它本身以外不再有其他因数。</p>
-<p>两个不同的质数一定是互质数。（这个很明显）</p>
-<p>实现RSA还是有些复杂的，需要理解以下公式：</p>
-<h3 id="RSA用到的公式和定理"><a href="#RSA用到的公式和定理" class="headerlink" title="RSA用到的公式和定理"></a>RSA用到的公式和定理</h3><p>一、数和互为素数<br>任何大于1的整数a能被因式分解为如下唯一形式：<br>a=p1p2…pl(p1,p2，…，pl为素数）</p>
-<p>二、模运算<br>①{[a(mod n)]×[b(mod n)]}modn≡（a×b)(mod n)<br>②如果（a×b）=（a×c）（mod n),a与n互素，则<br>b=c(mod n)</p>
-<p>三、费马定理<br>若p是素数，a与p互素，则<br>a^(p-1）≡1 （mod p）</p>
-<p>四、欧拉定理<br>欧拉函数φ（n）表示不大于n且与n互素的正整数的个数。<br>当n是素数，φ（n)=n-1。n=pq,p,q均为素数时，则φ（n)= φ（p）φ（q)=（p-1）（q-1）。<br>对于互素的a和n，有a^φ（n)≡1(mod n)</p>
-<h3 id="RSA实现方式"><a href="#RSA实现方式" class="headerlink" title="RSA实现方式"></a>RSA实现方式</h3><p>RSA的算法涉及三个参数，n、e1、e2。<br>其中，n是两个大质数p、q的积，n的二进制表示时所占用的位数，就是所谓的密钥长度。<br>e1和e2是一对相关的值，e1可以任意取，但要求e1与(p-1）<em>(q-1）互质；再选择e2，要求（e2</em>e1）mod((p-1）*(q-1））=1。<br>（n，e1）,(n，e2）就是密钥对。其中(n，e1）为公钥，(n，e2）为私钥。[1]<br>RSA加解密的算法完全相同，设A为明文，B为密文，则：A=B^e2 mod n；B=A^e1 mod n；（公钥加密体制中，一般用公钥加密，私钥解密）<br>e1和e2可以互换使用，即：<br>A=B^e1 mod n；B=A^e2 mod n;</p>
-<h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><p>RSA 1024位已经被认为不安全了，因为现在的计算机已经越来越快了，一直增加秘钥的位数也不是长久之计，也许RSA会逐渐被其他算法取代。</p>
-<blockquote>
-<p><a href="https://www.zhihu.com/question/23879943/answer/27383875" target="_blank" rel="external">https://www.zhihu.com/question/23879943/answer/27383875</a><br><a href="http://blog.sina.com.cn/s/blog_4a0fa5420101f2lj.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4a0fa5420101f2lj.html</a><br><a href="https://baike.baidu.com/item/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86/891345?fr=aladdin" target="_blank" rel="external">https://baike.baidu.com/item/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86/891345?fr=aladdin</a></p>
-</blockquote>
-
-          
+          <p>非对称加密有一对公钥和私钥，成对出现，使用时，如果A想给你发消息，你把公钥给A，让A使用公钥对消息进行加密，加密后发给你，然后你用私钥解开，别人虽然能拿到公钥和密文，但是解不开，因为公钥可以加密明文成为密文，但是却无法使用公钥对密文进行解密，只有私钥能够解密公钥加密的东西，而私钥只有你自己有，这就保证了信息的安全性。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/08/非对称加密/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
