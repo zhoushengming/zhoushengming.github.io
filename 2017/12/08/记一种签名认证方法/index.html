@@ -100,7 +100,7 @@
 <meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/12/08/记一种签名认证方法/index.html">
 <meta property="og:site_name" content="码字猴">
 <meta property="og:description" content="数字签名（又称公钥数字签名、电子签章）是一种类似写在纸上的普通的物理签名，但是使用了公钥加密领域的技术实现，用于鉴别数字信息的方法。一套数字签名通常定义两种互补的运算，一个用于签名，另一个用于验证。 数字签名，就是只有信息的发送者才能产生的别人无法伪造的一段数字串，这段数字串同时也是对信息的发送者发送信息真实性的一个有效证明。 数字签名是非对称密钥加密技术与数字摘要技术的应用。">
-<meta property="og:updated_time" content="2017-12-08T09:06:42.333Z">
+<meta property="og:updated_time" content="2017-12-08T09:08:41.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一种签名认证方法">
 <meta name="twitter:description" content="数字签名（又称公钥数字签名、电子签章）是一种类似写在纸上的普通的物理签名，但是使用了公钥加密领域的技术实现，用于鉴别数字信息的方法。一套数字签名通常定义两种互补的运算，一个用于签名，另一个用于验证。 数字签名，就是只有信息的发送者才能产生的别人无法伪造的一段数字串，这段数字串同时也是对信息的发送者发送信息真实性的一个有效证明。 数字签名是非对称密钥加密技术与数字摘要技术的应用。">
@@ -365,7 +365,7 @@
 <p>数字签名是非对称密钥加密技术与数字摘要技术的应用。</p>
 <a id="more"></a>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>数字签名的文件的完整性是很容易验证的（不需要骑缝章，骑缝签名，也不需要笔迹专家），而且数字签名具有不可抵赖性（不需要笔迹专家来验证）。</p>
-<p>简单地说,所谓数字签名就是附加在数据单元上的一些数据,或是对数据单元所作的密码变换。这种数据或变换允许数据单元的接收者用以确认数据单元的来源和数据单元的完整性并保护数据,防止被人(例如接收者)进行伪造。它是对电子形式的消息进行签名的一种方法,一个签名消息能在一个通信网络中传输。基于公钥密码体制和私钥密码体制都可以获得数字签名,主要是基于公钥密码体制的数字签名。包括普通数字签名和特殊数字签名。普通数字签名算法有RSA、ElGamal、Fiat-Shamir、Guillou- Quisquarter、Schnorr、Ong-Schnorr-Shamir数字签名算法、Des/DSA,椭圆曲线数字签名算法和有限自动机数字签名算法等。特殊数字签名有盲签名、代理签名、群签名、不可否认签名、公平盲签名、门限签名、具有消息恢复功能的签名等,它与具体应用环境密切相关。显然,数字签名的应用涉及到法律问题,美国联邦政府基于有限域上的离散对数问题制定了自己的数字签名标准(DSS)。</p>
+<p>简单地说,所谓数字签名就是附加在数据单元上的一些数据,或是对数据单元所作的密码变换。这种数据或变换允许数据单元的接收者用以确认数据单元的来源和数据单元的完整性并保护数据,防止被人(例如接收者)进行伪造。它是对电子形式的消息进行签名的一种方法,一个签名消息能在一个通信网络中传输。<br>基于公钥密码体制和私钥密码体制都可以获得数字签名,主要是基于公钥密码体制的数字签名。包括普通数字签名和特殊数字签名。<br>普通数字签名算法有RSA、ElGamal、Fiat-Shamir、Guillou- Quisquarter、Schnorr、Ong-Schnorr-Shamir数字签名算法、Des/DSA,椭圆曲线数字签名算法和有限自动机数字签名算法等。<br>特殊数字签名有盲签名、代理签名、群签名、不可否认签名、公平盲签名、门限签名、具有消息恢复功能的签名等,它与具体应用环境密切相关。显然,数字签名的应用涉及到法律问题,美国联邦政府基于有限域上的离散对数问题制定了自己的数字签名标准(DSS)。</p>
 <blockquote>
 <p><a href="https://baike.baidu.com/item/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/212550" target="_blank" rel="external">数字签名-百度百科</a></p>
 </blockquote>
@@ -375,7 +375,7 @@
 <p>token 服务端生成，每5分钟变一次，有15分钟的有效期<br>sign 签名，客户端生成<br>salt 盐，用于加盐<br>timestamp 时间戳</p>
 </blockquote>
 <p>首先，客户端Client(简称C)向服务端Server(简称S)请求token，token可以通过登录验证生成，并和C的SN绑定，C的所有请求都要携带SN和timestamp，token获取成功后，由C保存在本地。</p>
-<p>平常的请求，C端取得http requestbody，使用token+salt做秘钥，body+时间戳做明文进行加密，生成sign，进行请求，S端拿到request，<br>取得requestbody，使用服务器上缓存的token+salt对requestbody+时间戳进行加密（B、C端salt相同，或者定期同步），获得B_sign，通过对比sign和B_sign，确定请求的完整性和合法性。</p>
+<p>平常的请求，C端取得http requestbody，使用token+salt做秘钥，body+时间戳做明文进行加密，生成sign，进行请求，S端拿到request，取得requestbody，使用服务器上缓存的token+salt对requestbody+时间戳进行加密（B、C端salt相同，或者定期同步），获得B_sign，通过对比sign和B_sign，确定请求的完整性和合法性。</p>
 <p>通过登录获取token，还应该返回authToken，token每五分钟改变一次，客户端应当可以使用authToken去服务器获取新token。authToken的有效时间应该更长，如果无法使用authToken获取token，说明用户需要重新登陆。<br>salt十分重要，为防止反编译，最好使用jni写在so库。<br>服务端需要验证请求的时间，如果C端请求的timestamp与服务器相差超过5分钟，则视为非法请求。</p>
 
       
