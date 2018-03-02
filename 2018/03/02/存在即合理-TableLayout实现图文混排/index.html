@@ -1,0 +1,782 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="写android好久了，我都没怎么用过TableLayout，昨天小白问我一个布局问题，这个布局问题的描述为：线性布局防止右侧布局挤出去、图文混排效果、字少包裹内容 字多占满剩余、不知道怎么解释的效果。其实想实现的效果如下：当标题文字很长的时候，应该显示出这样的效果：我们想了好久都没找到合适的方法，不知道哪里来的灵感，我突然想起了被人们遗忘的TableLayout。">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="存在即合理--TableLayout实现布局约束">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2018/03/02/存在即合理-TableLayout实现图文混排/index.html">
+<meta property="og:site_name" content="码字猴">
+<meta property="og:description" content="写android好久了，我都没怎么用过TableLayout，昨天小白问我一个布局问题，这个布局问题的描述为：线性布局防止右侧布局挤出去、图文混排效果、字少包裹内容 字多占满剩余、不知道怎么解释的效果。其实想实现的效果如下：当标题文字很长的时候，应该显示出这样的效果：我们想了好久都没找到合适的方法，不知道哪里来的灵感，我突然想起了被人们遗忘的TableLayout。">
+<meta property="og:image" content="https://github.com/img/EAE885FA5952F0A84E0B924AC3126F6A.jpg">
+<meta property="og:image" content="https://github.com/img/5D9A84A5D02BCDC0D3860E75518A615D.jpg">
+<meta property="og:image" content="https://github.com/img/EAE885FA5952F0A84E0B924AC3126F6A.jpg">
+<meta property="og:image" content="https://github.com/img/5D9A84A5D02BCDC0D3860E75518A615D.jpg">
+<meta property="og:updated_time" content="2018-03-02T12:28:53.909Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="存在即合理--TableLayout实现布局约束">
+<meta name="twitter:description" content="写android好久了，我都没怎么用过TableLayout，昨天小白问我一个布局问题，这个布局问题的描述为：线性布局防止右侧布局挤出去、图文混排效果、字少包裹内容 字多占满剩余、不知道怎么解释的效果。其实想实现的效果如下：当标题文字很长的时候，应该显示出这样的效果：我们想了好久都没找到合适的方法，不知道哪里来的灵感，我突然想起了被人们遗忘的TableLayout。">
+<meta name="twitter:image" content="https://github.com/img/EAE885FA5952F0A84E0B924AC3126F6A.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/03/02/存在即合理-TableLayout实现图文混排/"/>
+
+
+
+
+
+  <title>存在即合理--TableLayout实现布局约束 | 码字猴</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">码字猴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">coding..</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-codes">
+          <a href="/codes" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            codes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/03/02/存在即合理-TableLayout实现图文混排/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaoming">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/git_logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码字猴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">存在即合理--TableLayout实现布局约束</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-02T16:38:49+08:00">
+                2018-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/02/存在即合理-TableLayout实现图文混排/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/02/存在即合理-TableLayout实现图文混排/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>写android好久了，我都没怎么用过TableLayout，昨天小白问我一个布局问题，这个布局问题的描述为：线性布局防止右侧布局挤出去、图文混排效果、字少包裹内容 字多占满剩余、不知道怎么解释的效果。其实想实现的效果如下：<br><img src="/img/EAE885FA5952F0A84E0B924AC3126F6A.jpg"><br>当标题文字很长的时候，应该显示出这样的效果：<br><img src="/img/5D9A84A5D02BCDC0D3860E75518A615D.jpg"><br>我们想了好久都没找到合适的方法，不知道哪里来的灵感，我突然想起了被人们遗忘的TableLayout。</p>
+<a id="more"></a>
+<h2 id="TableLayout介绍"><a href="#TableLayout介绍" class="headerlink" title="TableLayout介绍"></a>TableLayout介绍</h2><h3 id="Tablelayout简介"><a href="#Tablelayout简介" class="headerlink" title="Tablelayout简介"></a>Tablelayout简介</h3><p>Tablelayout类以行和列的形式对控件进行管理，每一行为一个TableRow对象，或一个View控件。<br>当为TableRow对象时，可在TableRow下添加子控件，默认情况下，每个子控件占据一列。<br>当为View时，该View将独占一行。</p>
+<h3 id="TableLayout行列数的确定"><a href="#TableLayout行列数的确定" class="headerlink" title="TableLayout行列数的确定"></a>TableLayout行列数的确定</h3><p>TableLayout的行数由开发人员直接指定，即有多少个TableRow对象（或View控件），就有多少行。<br>TableLayout的列数等于含有最多子控件的TableRow的列数。如第一TableRow含2个子控件，第二个TableRow含3个，第三个TableRow含4个，那么该TableLayout的列数为4.</p>
+<h3 id="TableLayout可设置的属性详解"><a href="#TableLayout可设置的属性详解" class="headerlink" title="TableLayout可设置的属性详解"></a>TableLayout可设置的属性详解</h3><p>TableLayout可设置的属性包括全局属性及单元格属性。</p>
+<h4 id="全局属性也即列属性，有以下3个参数："><a href="#全局属性也即列属性，有以下3个参数：" class="headerlink" title="全局属性也即列属性，有以下3个参数："></a>全局属性也即列属性，有以下3个参数：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">android:stretchColumns    // 设置可伸展的列。该列可以向行方向伸展，最多可占据一整行。</div><div class="line">android:shrinkColumns     // 设置可收缩的列。当该列子控件的内容太多，已经挤满所在行，那么该子控件的内容将往列方向显示。</div><div class="line">android:collapseColumns     // 设置要隐藏的列。</div></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">android:stretchColumns=&quot;0&quot;       // 第0列可伸展</div><div class="line">android:shrinkColumns=&quot;1,2&quot;      // 第1,2列皆可收缩</div><div class="line">android:collapseColumns=&quot;*&quot;      // 隐藏所有行</div></pre></td></tr></table></figure>
+<p>说明：列可以同时具备stretchColumns及shrinkColumns属性，若此，那么当该列的内容N多时，将“多行”显示其内容。（这里不是真正的多行，而是系统根据需要自动调节该行的layout_height）</p>
+<h4 id="单元格属性，有以下2个参数："><a href="#单元格属性，有以下2个参数：" class="headerlink" title="单元格属性，有以下2个参数："></a>单元格属性，有以下2个参数：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">android:layout_column    // 指定该单元格在第几列显示</div><div class="line">android:layout_span       // 指定该单元格占据的列数（未指定时，为1）</div></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">android:layout_column=&quot;1&quot;    // 该控件显示在第1列</div><div class="line">android:layout_span=&quot;2&quot;      // 该控件占据2列</div></pre></td></tr></table></figure>
+<p>说明：一个控件也可以同时具备这两个特性。</p>
+<blockquote>
+<p>以上介绍参考自：<a href="http://blog.csdn.net/justoneroad/article/details/6835915" target="_blank" rel="external">android:TableLayout表格布局详解</a></p>
+</blockquote>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>话说回到刚开始的场景，我们希望实现的效果是这样：<br><img src="/img/EAE885FA5952F0A84E0B924AC3126F6A.jpg"><br>当标题文字很长的时候，应该显示出这样的效果：<br><img src="/img/5D9A84A5D02BCDC0D3860E75518A615D.jpg"></p>
+<p>在使用RelativeLayout的布局方法时，当标题部分过长时，后面的icon会被挤出布局，导致icon显示不出来。<br>最后，我们使用了TableLayout的布局方式，其中使用shrinkColumns来指定第0列是可以收缩的。这样第1列就不会被挤掉。<br>具体布局代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;LinearLayout</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;</div><div class="line">    android:paddingLeft=&quot;20dp&quot;&gt;</div><div class="line"></div><div class="line">    &lt;LinearLayout</div><div class="line">        android:id=&quot;@+id/ll_item_bd&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;40dp&quot;</div><div class="line">        android:gravity=&quot;center_vertical&quot;&gt;</div><div class="line"></div><div class="line">        &lt;ImageView</div><div class="line">            android:id=&quot;@+id/iv_flag&quot;</div><div class="line">            android:layout_width=&quot;wrap_content&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:src=&quot;@drawable/ic_action_info&quot;/&gt;</div><div class="line"></div><div class="line">        &lt;TableLayout</div><div class="line">            android:layout_width=&quot;0dp&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:shrinkColumns=&quot;0&quot;</div><div class="line">            android:layout_marginLeft=&quot;8dp&quot;</div><div class="line">            android:layout_weight=&quot;1&quot;&gt;</div><div class="line">            &lt;TableRow&gt;</div><div class="line"></div><div class="line">                &lt;TextView</div><div class="line">                    android:id=&quot;@+id/tv_patient_content&quot;</div><div class="line">                    android:layout_width=&quot;wrap_content&quot;</div><div class="line">                    android:layout_height=&quot;wrap_content&quot;</div><div class="line">                    android:ellipsize=&quot;end&quot;</div><div class="line">                    android:singleLine=&quot;true&quot;</div><div class="line">                    android:text=&quot;这是一段很长很长很长很长很长很长的&quot;</div><div class="line">                    android:textSize=&quot;18sp&quot;/&gt;</div><div class="line"></div><div class="line">                &lt;ImageView</div><div class="line">                    android:id=&quot;@+id/iv_exception&quot;</div><div class="line">                    android:layout_width=&quot;16dp&quot;</div><div class="line">                    android:layout_height=&quot;16dp&quot;</div><div class="line">                    android:scaleType=&quot;fitXY&quot;</div><div class="line">                    android:src=&quot;@drawable/ic_action_info&quot;</div><div class="line">                    android:visibility=&quot;visible&quot;/&gt;</div><div class="line">            &lt;/TableRow&gt;</div><div class="line"></div><div class="line"></div><div class="line">        &lt;/TableLayout&gt;</div><div class="line"></div><div class="line">        &lt;TextView</div><div class="line">            android:id=&quot;@+id/tv_patient_complete&quot;</div><div class="line">            android:layout_width=&quot;wrap_content&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:layout_marginRight=&quot;20dp&quot;</div><div class="line">            android:text=&quot;未完成&quot;</div><div class="line">            android:textSize=&quot;16sp&quot;/&gt;</div><div class="line">    &lt;/LinearLayout&gt;</div><div class="line"></div><div class="line">    &lt;View</div><div class="line">        android:id=&quot;@+id/line&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;1px&quot;</div><div class="line">        android:background=&quot;#D8D8D8&quot;/&gt;</div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/24/2018的上半年/" rel="next" title="2018的上半年">
+                <i class="fa fa-chevron-left"></i> 2018的上半年
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/03/02/存在即合理-TableLayout实现图文混排/"
+           data-title="存在即合理--TableLayout实现布局约束" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2018/03/02/存在即合理-TableLayout实现图文混排/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/git_logo.png"
+               alt="xiaoming" />
+          <p class="site-author-name" itemprop="name">xiaoming</p>
+           
+              <p class="site-description motion-element" itemprop="description">read the fucking source code</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3192882571" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TableLayout介绍"><span class="nav-number">1.</span> <span class="nav-text">TableLayout介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tablelayout简介"><span class="nav-number">1.1.</span> <span class="nav-text">Tablelayout简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TableLayout行列数的确定"><span class="nav-number">1.2.</span> <span class="nav-text">TableLayout行列数的确定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TableLayout可设置的属性详解"><span class="nav-number">1.3.</span> <span class="nav-text">TableLayout可设置的属性详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局属性也即列属性，有以下3个参数："><span class="nav-number">1.3.1.</span> <span class="nav-text">全局属性也即列属性，有以下3个参数：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元格属性，有以下2个参数："><span class="nav-number">1.3.2.</span> <span class="nav-text">单元格属性，有以下2个参数：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">2.</span> <span class="nav-text">使用场景</span></a></li></ol></div>
+            
+            <!--by xiaoming-->
+            <div >
+              <img src="/img/333CDC0C0E16121D97E740B0D234CB20.jpg" alt="..." width="200">
+              <img src="/img/D201873535E8B182D738FEA8B9C30EF6.jpg" alt="..." width="200">
+            </div>
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoming</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhoushengming"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
