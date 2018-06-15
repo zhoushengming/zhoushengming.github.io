@@ -100,7 +100,7 @@
 <meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2018/06/15/WDYDT-2-编译ROM导入AS/index.html">
 <meta property="og:site_name" content="码字猴">
 <meta property="og:description" content="昨天编了个ROM，今天又失败了，结果是让执行make update-api, 然后就好了。今天还搞了个android.ipr,可以把Android的源代码导入到Android studio进行查看。">
-<meta property="og:updated_time" content="2018-06-15T14:58:22.016Z">
+<meta property="og:updated_time" content="2018-06-15T14:59:08.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WDYDT-2-编译ROM导入AS">
 <meta name="twitter:description" content="昨天编了个ROM，今天又失败了，结果是让执行make update-api, 然后就好了。今天还搞了个android.ipr,可以把Android的源代码导入到Android studio进行查看。">
@@ -377,6 +377,8 @@
 <p>节日快乐！！</p>
 <p>对了，今天还写了个脚本，用于生成WDYDT，代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">number_path=&quot;./number_wdydt&quot;</div><div class="line"></div><div class="line">if [ ! -f &quot;$number_path&quot; ]; then</div><div class="line">touch $number_path</div><div class="line">echo 1 &gt; $number_path</div><div class="line">fi</div><div class="line"></div><div class="line">number_wdydt=`cat $number_path`</div><div class="line"></div><div class="line">#echo $number_wdydt</div><div class="line">let number_wdydt+=1</div><div class="line">#echo $number_wdydt</div><div class="line">#echo $number_wdydt &gt; $number_path</div><div class="line"></div><div class="line">echo &quot;Gen this page:&quot;</div><div class="line">echo &quot;WDYDT-$number_wdydt-$*&quot;</div><div class="line"></div><div class="line">hexo new &quot;WDYDT-$number_wdydt-$*&quot;</div></pre></td></tr></table></figure>
+<p>本篇文章写了14分钟。</p>
+
       
     </div>
 
