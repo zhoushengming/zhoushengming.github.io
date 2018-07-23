@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,shell," />
+  <meta name="keywords" content="周生明, ericcode" />
 
 
 
@@ -93,17 +93,16 @@
 
 
 
-<meta name="description" content="这件事情就说来话长了。">
-<meta name="keywords" content="Android,shell">
+<meta name="description" content="最近看了看C++，然后又荒废了，基础部分还没看完，然后突然发现了几本Java的好书，打算看一下。不知道这样做好不好，不知道下次学C++是什么时候了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解决了一个困扰了我一年的bug">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/06/01/解决了一个困扰了我一年的bug/index.html">
+<meta property="og:title" content="WDYDT-7-先学什么的矛盾">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2018/07/23/WDYDT-7-先学什么的矛盾/index.html">
 <meta property="og:site_name" content="码字猴">
-<meta property="og:description" content="这件事情就说来话长了。">
-<meta property="og:updated_time" content="2018-05-16T12:45:27.144Z">
+<meta property="og:description" content="最近看了看C++，然后又荒废了，基础部分还没看完，然后突然发现了几本Java的好书，打算看一下。不知道这样做好不好，不知道下次学C++是什么时候了。">
+<meta property="og:updated_time" content="2018-07-23T02:00:46.383Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解决了一个困扰了我一年的bug">
-<meta name="twitter:description" content="这件事情就说来话长了。">
+<meta name="twitter:title" content="WDYDT-7-先学什么的矛盾">
+<meta name="twitter:description" content="最近看了看C++，然后又荒废了，基础部分还没看完，然后突然发现了几本Java的好书，打算看一下。不知道这样做好不好，不知道下次学C++是什么时候了。">
 
 
 
@@ -131,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/06/01/解决了一个困扰了我一年的bug/"/>
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/07/23/WDYDT-7-先学什么的矛盾/"/>
 
 
 
 
 
-  <title>解决了一个困扰了我一年的bug | 码字猴</title>
+  <title>WDYDT-7-先学什么的矛盾 | 码字猴</title>
   
 
 
@@ -286,7 +285,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/06/01/解决了一个困扰了我一年的bug/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/07/23/WDYDT-7-先学什么的矛盾/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiaoming">
@@ -303,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">解决了一个困扰了我一年的bug</h1>
+          <h1 class="post-title" itemprop="name headline">WDYDT-7-先学什么的矛盾</h1>
         
 
         <div class="post-meta">
@@ -315,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T14:44:50+08:00">
-                2017-06-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T09:45:36+08:00">
+                2018-07-23
               </time>
             
 
@@ -334,8 +333,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/01/解决了一个困扰了我一年的bug/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/01/解决了一个困扰了我一年的bug/" itemprop="commentCount"></span>
+                <a href="/2018/07/23/WDYDT-7-先学什么的矛盾/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/07/23/WDYDT-7-先学什么的矛盾/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -360,14 +359,22 @@
       
 
       
-        <p>这件事情就说来话长了。<br><a id="more"></a></p>
-<p>记得那是一年前，我被安排去做一个OpenGL相关的任务，就是做一个动画，但是这个动画比较重要，是主要交互界面的背景，我们一般称这个动画为”粒子系统“。</p>
-<p>动画被搞出来了，也优化了好久。但是一直有一个问题，就是用一段时间后就会卡死，整个界面都不能动了。包括我在内，大家都认为是粒子系统的问题。但是又苦于没有找到可以优化的点，这件事就一直被搁置。</p>
-<p>那时候就有一个奇怪的现象，就是我的这套”粒子系统“，用在另一个项目上就没有什么问题，我当时也很费解，感觉可能不是粒子系统导致的界面卡死，而是其他原因。但是有说不清楚这个”其他原因“是什么，所以还是我的问题。</p>
-<p>终于！哈哈，请允许我笑下。我发现”粒子系统崩溃“时有个奇怪的现象，就是整个app都无法进行数据库的操作，通过进一步的观察好像是整个app都无法进行文件读取操作，而且读文件时有个异常：EMFILE (Too many open files)。当时我就想:会不会是这个异常导致我的粒子系统崩溃，而不是我的粒子系统导致的这个异常。接着，我逐渐证实了我的想法。<br>接着我开始接触一系列的概念，”文件描述符“、”ulimit“、”lsof“，紧接着我看到了一篇博客<a href="http://blog.csdn.net/tencent_bugly/article/details/46276485" target="_blank">论File Descriptor泄漏如何导致Crash？</a>看完这个，我更加确信自己的想法。没错，这个困扰了我一年的bug，我终于逮到你了！！！</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 查看进程ID</div><div class="line">ps | grep 包名</div><div class="line"><span class="meta"></span></div><div class="line"># lsof（list open files）是一个列出当前系统打开文件的工具</div><div class="line"><span class="meta"></span></div><div class="line"># 这个命令可以查看App打开的文件</div><div class="line">lsof | grep 包名 | grep 进程ID</div><div class="line"><span class="meta"></span></div><div class="line"># 这个命令可以查看App打开的文件数，默认的最大文件数为1024， busybox是一个工具集</div><div class="line">lsof | grep 包名 | grep 进程ID | busybox wc -l</div></pre></td></tr></table></figure>
-<p>一般造成此类的原因是文件open后没有close，或者使用了FileDescriptor没有close。</p>
-<p>通过以上排查发现是我们用的Spotify player的问题，我们用的那个版本为1.0.0-beta12，通过lsof观察，只要spotify播放，打开的文件数就一直在增加。今天我通过升级sdk解决了这个问题。</p>
+        <!-- abstract area -->
+<p>最近看了看C++，然后又荒废了，基础部分还没看完，然后突然发现了几本Java的好书，打算看一下。不知道这样做好不好，不知道下次学C++是什么时候了。</p>
+<a id="more"></a>
+<p>最近发现的基本好书是这几本，如果是大佬的话，应该都看过。</p>
+<ul>
+<li>Effective Java</li>
+<li>Java并发编程实战.pdf</li>
+<li>Java性能优化权威指南.pdf</li>
+<li>ThinkinJava.pdf</li>
+<li>深入理解Java虚拟机 JVM高级特性与最佳实践.pdf</li>
+<li>鸟哥Linux.pdf</li>
+</ul>
+<p>从网上找了资源，都是PDF，由于是盗版就不分享了，有钱的话还是买正版的吧。</p>
+<p>学习顺序呢，我打算先从薄的开始看。</p>
+<p>大体上就是这样吧，还要考驾照，还有一个科目四没考。加油。</p>
+<p>C++我一定要学！！</p>
 
       
     </div>
@@ -395,14 +402,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-            <a href="/tags/shell/" rel="tag"># shell</a>
-          
-        </div>
-      
 
       
       
@@ -412,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/29/2017的下半年/" rel="next" title="2017的下半年">
-                <i class="fa fa-chevron-left"></i> 2017的下半年
+              <a href="/2018/07/13/WDYDT-6-五个关于C-的神话/" rel="next" title="WDYDT-6-五个关于C++的神话">
+                <i class="fa fa-chevron-left"></i> WDYDT-6-五个关于C++的神话
               </a>
             
           </div>
@@ -421,10 +420,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/03/分享几则Android面试题/" rel="prev" title="分享几则Android面试题">
-                分享几则Android面试题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -450,8 +445,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/06/01/解决了一个困扰了我一年的bug/"
-           data-title="解决了一个困扰了我一年的bug" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2017/06/01/解决了一个困扰了我一年的bug/">
+      <div class="ds-thread" data-thread-key="2018/07/23/WDYDT-7-先学什么的矛盾/"
+           data-title="WDYDT-7-先学什么的矛盾" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2018/07/23/WDYDT-7-先学什么的矛盾/">
       </div>
     
   </div>
