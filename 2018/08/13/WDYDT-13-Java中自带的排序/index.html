@@ -93,15 +93,16 @@
 
 
 
-<meta name="description" content="read the fucking source code">
-<meta property="og:type" content="website">
-<meta property="og:title" content="码字猴">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/archives/2016/04/index.html">
+<meta name="description" content="Java 中自带了一些排序的方法，现在来看看他们用了什么排序。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WDYDT-13-Java中自带的排序">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2018/08/13/WDYDT-13-Java中自带的排序/index.html">
 <meta property="og:site_name" content="码字猴">
-<meta property="og:description" content="read the fucking source code">
+<meta property="og:description" content="Java 中自带了一些排序的方法，现在来看看他们用了什么排序。">
+<meta property="og:updated_time" content="2018-08-13T01:37:13.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="码字猴">
-<meta name="twitter:description" content="read the fucking source code">
+<meta name="twitter:title" content="WDYDT-13-Java中自带的排序">
+<meta name="twitter:description" content="Java 中自带了一些排序的方法，现在来看看他们用了什么排序。">
 
 
 
@@ -129,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/archives/2016/04/"/>
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/08/13/WDYDT-13-Java中自带的排序/"/>
 
 
 
 
 
-  <title>归档 | 码字猴</title>
+  <title>WDYDT-13-Java中自带的排序 | 码字猴</title>
   
 
 
@@ -160,7 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -274,65 +275,162 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-       
-        
-      好! 目前共计 58 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/08/13/WDYDT-13-Java中自带的排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaoming">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/git_logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码字猴">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WDYDT-13-Java中自带的排序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T00:16:51+08:00">
+                2018-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/13/WDYDT-13-Java中自带的排序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/13/WDYDT-13-Java中自带的排序/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <!-- abstract area -->
+<p>Java 中自带了一些排序的方法，现在来看看他们用了什么排序。<br><a id="more"></a></p>
+<p>Collections.sort()和Arrays.sort()使用的排序方法是好像是一样的，对于基本数据类型，采用的是快速排序。对于引用类型，才用的是TimSort。</p>
+<p>TimSort是一种优化过的归并排序。</p>
+<p>Java中对于对象的排序使用的是归并排序，对于基本数据类型使用的是快速排序。<br>归并排序更加稳定。<br>而且大多数情况下，我们需要排序的数据都是部分有序的数据。</p>
+<p>以下是一个博客中的内容：</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/lian47810925/article/details/4689323" target="_blank" rel="external">https://blog.csdn.net/lian47810925/article/details/4689323</a></p>
+</blockquote>
+<p>java中Arrays.sort使用了两种排序方法，快速排序和优化的合并排序。</p>
+<p>快速排序主要是对哪些基本类型数据（int,short,long等）排序， 而合并排序用于对对象类型进行排序。<br>使用不同类型的排序算法主要是由于快速排序是不稳定的，而合并排序是稳定的。这里的稳定是指比较相等的数据在排序之后仍然按照排序之前的前后顺序排列。对于基本数据类型，稳定性没有意义，而对于对象类型，稳定性是比较重要的，因为对象相等的判断可能只是判断关键属性，最好保持相等对象的非关键属性的顺序与排序前一直；另外一个原因是由于合并排序相对而言比较次数比快速排序少，移动（对象引用的移动）次数比快速排序多，而对于对象来说，比较一般比移动耗时。<br>补充一点合并排序的时间复杂度是n<em>logn, 快速排序的平均时间复杂度也是n</em>logn，但是合并排序的需要额外的n个引用的空间</p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/09/WDYDT-12-Effective-Java简略简略笔记/" rel="next" title="WDYDT-12-Effective Java简略简略笔记">
+                <i class="fa fa-chevron-left"></i> WDYDT-12-Effective Java简略简略笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
         </div>
       
-      
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/26/新的开始/" itemprop="url">
-              
-                <span itemprop="name">新的开始</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-26T21:07:22+08:00"
-              content="2016-04-26" >
-          04-26
-        </time>
-      </div>
-
-    </header>
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -340,6 +438,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/08/13/WDYDT-13-Java中自带的排序/"
+           data-title="WDYDT-13-Java中自带的排序" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2018/08/13/WDYDT-13-Java中自带的排序/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -553,11 +659,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
