@@ -93,16 +93,16 @@
 
 
 
-<meta name="description" content="计划 折线图 - android轮子 log工具 - android轮子 swipe back - android轮子 下拉刷新 - android轮子  书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https://blog.csdn.n">
+<meta name="description" content="计划 折线图 - android轮子 log工具 - android轮子 swipe back - android轮子 下拉刷新 - android轮子 投屏软件开发 抖音助手  书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https:/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="codes">
 <meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/codes/index.html">
 <meta property="og:site_name" content="码字猴">
-<meta property="og:description" content="计划 折线图 - android轮子 log工具 - android轮子 swipe back - android轮子 下拉刷新 - android轮子  书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https://blog.csdn.n">
-<meta property="og:updated_time" content="2018-09-18T09:20:23.824Z">
+<meta property="og:description" content="计划 折线图 - android轮子 log工具 - android轮子 swipe back - android轮子 下拉刷新 - android轮子 投屏软件开发 抖音助手  书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https:/">
+<meta property="og:updated_time" content="2018-11-07T09:59:40.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codes">
-<meta name="twitter:description" content="计划 折线图 - android轮子 log工具 - android轮子 swipe back - android轮子 下拉刷新 - android轮子  书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https://blog.csdn.n">
+<meta name="twitter:description" content="计划 折线图 - android轮子 log工具 - android轮子 swipe back - android轮子 下拉刷新 - android轮子 投屏软件开发 抖音助手  书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https:/">
 
 
 
@@ -291,11 +291,14 @@
 <li>log工具 - android轮子</li>
 <li>swipe back - android轮子</li>
 <li>下拉刷新 - android轮子</li>
+<li>投屏软件开发</li>
+<li>抖音助手</li>
 </ul>
 <h2 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h2><p>Android.mk的深入介绍<br><a href="http://note.qidong.name/2017/08/android-mk/" target="_blank" rel="external">http://note.qidong.name/2017/08/android-mk/</a></p>
 <p>Android Broadcast 和 BroadcastReceiver的权限限制<br><a href="https://blog.csdn.net/javensun/article/details/7334230" target="_blank" rel="external">https://blog.csdn.net/javensun/article/details/7334230</a></p>
 <p>Android中的权限管理（基于Permission ProtectionLevel）<br><a href="https://blog.csdn.net/jltxgcy/article/details/48288467" target="_blank" rel="external">https://blog.csdn.net/jltxgcy/article/details/48288467</a></p>
 <h1 id="代码收集"><a href="#代码收集" class="headerlink" title="代码收集"></a><center>代码收集</center></h1><hr>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> adb 启动应用，带参数的，参考 http://gityuan.com/2016/02/27/am-command/</div><div class="line">adb shell am start -n com.xxx/.AppWeekActivity  -a xx_action --ei KEY_xx 5</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Collection nuCon = <span class="keyword">new</span> Vector(); </div><div class="line">nuCon.add(<span class="keyword">null</span>); </div><div class="line">list.removeAll(nuCon);</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">assertUiThread</span><span class="params">()</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (Thread.currentThread().getId() == Looper.getMainLooper().getThread().getId()) &#123;</div><div class="line">           android.util.Log.v(<span class="string">"assertUiThread"</span>, <span class="string">"assertUiThread"</span>);</div><div class="line">           <span class="keyword">new</span> Throwable().printStackTrace();</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Joiner.on(<span class="string">","</span>).skipNulls().join(tags)));</div></pre></td></tr></table></figure>
@@ -317,6 +320,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># git 放弃本地修改 强制更新</div><div class="line">git fetch --all</div><div class="line">git reset --hard origin/master</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 获取Android屏幕适配信息</div><div class="line">adb shell dumpsys window displays</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 查找大于100M的文件</div><div class="line">find . -type f -size +1000000k</div></pre></td></tr></table></figure>
+
     
   </div>
 
