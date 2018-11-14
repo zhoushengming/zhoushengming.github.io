@@ -99,7 +99,7 @@
 <meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/codes/index.html">
 <meta property="og:site_name" content="码字猴">
 <meta property="og:description" content="计划 折线图 - android轮子 log工具 - android轮子 swipe back - android轮子 下拉刷新 - android轮子 投屏软件开发 抖音助手  书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https:/">
-<meta property="og:updated_time" content="2018-11-08T02:17:53.608Z">
+<meta property="og:updated_time" content="2018-11-14T11:22:05.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codes">
 <meta name="twitter:description" content="计划 折线图 - android轮子 log工具 - android轮子 swipe back - android轮子 下拉刷新 - android轮子 投屏软件开发 抖音助手  书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https:/">
@@ -297,6 +297,7 @@
 <h2 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h2><p>Android.mk的深入介绍<br><a href="http://note.qidong.name/2017/08/android-mk/" target="_blank" rel="external">http://note.qidong.name/2017/08/android-mk/</a></p>
 <p>Android Broadcast 和 BroadcastReceiver的权限限制<br><a href="https://blog.csdn.net/javensun/article/details/7334230" target="_blank" rel="external">https://blog.csdn.net/javensun/article/details/7334230</a></p>
 <p>Android中的权限管理（基于Permission ProtectionLevel）<br><a href="https://blog.csdn.net/jltxgcy/article/details/48288467" target="_blank" rel="external">https://blog.csdn.net/jltxgcy/article/details/48288467</a></p>
+<h3 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h3><p><a href="https://github.com/crossoverJie/JCSprout">https://github.com/crossoverJie/JCSprout</a><br><a href="https://github.com/GcsSloop/AndroidNote">https://github.com/GcsSloop/AndroidNote</a><br><a href="https://github.com/Snailclimb/JavaGuide">https://github.com/Snailclimb/JavaGuide</a><br><a href="https://github.com/francistao/LearningNotes">https://github.com/francistao/LearningNotes</a><br><a href="http://www.jackywang.tech/AndroidInterview-Q-A/interview/" target="_blank" rel="external">http://www.jackywang.tech/AndroidInterview-Q-A/interview/</a><br><a href="https://juejin.im/post/5b8f15e26fb9a01a031b12d9" target="_blank" rel="external">https://juejin.im/post/5b8f15e26fb9a01a031b12d9</a></p>
 <h1 id="代码收集"><a href="#代码收集" class="headerlink" title="代码收集"></a><center>代码收集</center></h1><hr>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 透明状态栏和虚拟导航键</span></div><div class="line">Window window = getWindow();</div><div class="line"><span class="comment">// 状态栏</span></div><div class="line">window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);</div><div class="line"><span class="comment">// 虚拟导航键</span></div><div class="line">window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);</div></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> adb 启动应用，带参数的，参考 http://gityuan.com/2016/02/27/am-command/</div><div class="line">adb shell am start -n com.xxx/.AppWeekActivity  -a xx_action --ei KEY_xx 5</div></pre></td></tr></table></figure>
@@ -443,7 +444,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#计划"><span class="nav-number">1.</span> <span class="nav-text">计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#书签"><span class="nav-number">2.</span> <span class="nav-text">书签</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码收集"><span class="nav-number"></span> <span class="nav-text">代码收集</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#计划"><span class="nav-number">1.</span> <span class="nav-text">计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#书签"><span class="nav-number">2.</span> <span class="nav-text">书签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面试"><span class="nav-number">2.1.</span> <span class="nav-text">面试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码收集"><span class="nav-number"></span> <span class="nav-text">代码收集</span></a></div>
             
             <!--by xiaoming-->
             <div >
