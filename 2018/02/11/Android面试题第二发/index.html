@@ -1,0 +1,1755 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Android大厂面试题锦集附答案(BAT TMD JD 小米)  转载自: 2018-02-10 何时夕 安卓巴士Android开发者门户https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;amp;mid=2651942440&amp;amp;idx=1&amp;amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;amp;chksm=8">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android面试题第二发">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2018/02/11/Android面试题第二发/index.html">
+<meta property="og:site_name" content="码字猴">
+<meta property="og:description" content="Android大厂面试题锦集附答案(BAT TMD JD 小米)  转载自: 2018-02-10 何时夕 安卓巴士Android开发者门户https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;amp;mid=2651942440&amp;amp;idx=1&amp;amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;amp;chksm=8">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2911038-5349d6ebb32372da?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-05-16T12:45:27.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android面试题第二发">
+<meta name="twitter:description" content="Android大厂面试题锦集附答案(BAT TMD JD 小米)  转载自: 2018-02-10 何时夕 安卓巴士Android开发者门户https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;amp;mid=2651942440&amp;amp;idx=1&amp;amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;amp;chksm=8">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2911038-5349d6ebb32372da?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/02/11/Android面试题第二发/"/>
+
+
+
+
+
+  <title>Android面试题第二发 | 码字猴</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">码字猴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">coding..</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-codes">
+          <a href="/codes" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+            
+            Codes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-interview">
+          <a href="/interview" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-smile-o"></i> <br />
+            
+            面试题集
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-plan">
+          <a href="/plan" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
+            
+            计划
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/02/11/Android面试题第二发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaoming">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/git_logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码字猴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android面试题第二发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-11T17:31:23+08:00">
+                2018-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/11/Android面试题第二发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/11/Android面试题第二发/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Android大厂面试题锦集附答案(BAT TMD JD 小米)</p>
+<blockquote>
+<p>转载自: 2018-02-10 何时夕 安卓巴士Android开发者门户<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;mid=2651942440&amp;idx=1&amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;chksm=84fd7cccb38af5da737288d4b4ffe868d125e427a5caf7b4fdc005edf435c73eae68106f64f3&amp;mpshare=1&amp;scene=23&amp;srcid=0211LMUCPgy0HNWHurBeBLJV#rd" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;mid=2651942440&amp;idx=1&amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;chksm=84fd7cccb38af5da737288d4b4ffe868d125e427a5caf7b4fdc005edf435c73eae68106f64f3&amp;mpshare=1&amp;scene=23&amp;srcid=0211LMUCPgy0HNWHurBeBLJV#rd</a></p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>上次写这篇文章的时候也差不多是一年前了，这一年我兜兜转转从android到java又回到android，校招面了很多大厂，阿里、京东、小米、头条、知乎、腾讯、有赞，也收获了几个offer。感谢大家的关注，让我在简书上面也混到了一个<strong>简书程序员优秀作者</strong>的称号，所以为了回馈大家，一篇<strong>最完全的android面经</strong>诞生了。这是我集合了牛客网、百度、简书等网站的<strong>几十篇面经</strong>和我自己面试的经历的合集，希望大家喜欢。<strong>(ps:里面当然会有纰漏，如果有问题欢迎大家留言或者加我QQ讨论)</strong>(pps:有<strong>简书</strong>的同学可以关注一波:<a href="https://www.jianshu.com/u/45661204c0d6" target="_blank" rel="external">何时夕</a>)</p>
+</blockquote>
+<h2 id="android事件分发机制，请详细说下整个流程"><a href="#android事件分发机制，请详细说下整个流程" class="headerlink" title="android事件分发机制，请详细说下整个流程"></a>android事件分发机制，请详细说下整个流程</h2><p><img src="http://upload-images.jianshu.io/upload_images/2911038-5349d6ebb32372da?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="事件分发（面试）.png" title="事件分发（面试）.png"></p>
+<h2 id="android-view绘制机制和加载过程，请详细说下整个流程"><a href="#android-view绘制机制和加载过程，请详细说下整个流程" class="headerlink" title="android view绘制机制和加载过程，请详细说下整个流程"></a>android view绘制机制和加载过程，请详细说下整个流程</h2><ul>
+<li><p>1.ViewRootImpl会调用performTraversals(),其内部会调用performMeasure()、performLayout、performDraw()。</p>
+</li>
+<li><p>2.performMeasure()会调用最外层的ViewGroup的measure()–&gt;onMeasure(),ViewGroup的onMeasure()是抽象方法，但其提供了measureChildren()，这之中会遍历子View然后循环调用measureChild()这之中会用getChildMeasureSpec()+父View的MeasureSpec+子View的LayoutParam一起获取本View的MeasureSpec，然后调用子View的measure()到View的onMeasure()–&gt;setMeasureDimension(getDefaultSize(),getDefaultSize()),getDefaultSize()默认返回measureSpec的测量数值，所以继承View进行自定义的wrap_content需要重写。</p>
+</li>
+<li><p>3.performLayout()会调用最外层的ViewGroup的layout(l,t,r,b),本View在其中使用setFrame()设置本View的四个顶点位置。在onLayout(抽象方法)中确定子View的位置，如LinearLayout会遍历子View，循环调用setChildFrame()–&gt;子View.layout()。</p>
+</li>
+<li><p>4.performDraw()会调用最外层ViewGroup的draw():其中会先后调用background.draw()(绘制背景)、onDraw()(绘制自己)、dispatchDraw()(绘制子View)、onDrawScrollBars()(绘制装饰)。</p>
+</li>
+<li><p>5.MeasureSpec由2位SpecMode(UNSPECIFIED、EXACTLY(对应精确值和match_parent)、AT_MOST(对应warp_content))和30位SpecSize组成一个int,DecorView的MeasureSpec由窗口大小和其LayoutParams决定，其他View由父View的MeasureSpec和本View的LayoutParams决定。ViewGroup中有getChildMeasureSpec()来获取子View的MeasureSpec。</p>
+</li>
+<li><p>6.三种方式获取measure()后的宽高：</p>
+<ul>
+<li><p>1.Activity#onWindowFocusChange()中调用获取</p>
+<ul>
+<li><p>2.view.post(Runnable)将获取的代码投递到消息队列的尾部。</p>
+</li>
+<li><p>3.ViewTreeObservable.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="android四大组件的加载过程，请详细介绍下"><a href="#android四大组件的加载过程，请详细介绍下" class="headerlink" title="android四大组件的加载过程，请详细介绍下"></a>android四大组件的加载过程，请详细介绍下</h2><ul>
+<li>1.<a href="https://www.jianshu.com/p/f499afd8d0ab" target="_blank" rel="external">android四大组件的加载过程</a>:这是我总结的一篇博客</li>
+</ul>
+<h2 id="Activity的启动模式"><a href="#Activity的启动模式" class="headerlink" title="Activity的启动模式"></a>Activity的启动模式</h2><ul>
+<li><p>1.standard:默认标准模式，每启动一个都会创建一个实例，</p>
+</li>
+<li><p>2.singleTop：栈顶复用，如果在栈顶就调用onNewIntent复用，从onResume()开始</p>
+</li>
+<li><p>3.singleTask：栈内复用，本栈内只要用该类型Activity就会将其顶部的activity出栈</p>
+</li>
+<li><p>4.singleInstance：单例模式，除了3中特性，系统会单独给该Activity创建一个栈，</p>
+</li>
+</ul>
+<h2 id="A、B、C、D分别是四种Activity的启动模式，那么A-gt-B-gt-C-gt-D-gt-A-gt-B-gt-C-gt-D分别启动，最后的activity栈是怎么样的"><a href="#A、B、C、D分别是四种Activity的启动模式，那么A-gt-B-gt-C-gt-D-gt-A-gt-B-gt-C-gt-D分别启动，最后的activity栈是怎么样的" class="headerlink" title="A、B、C、D分别是四种Activity的启动模式，那么A-&gt;B-&gt;C-&gt;D-&gt;A-&gt;B-&gt;C-&gt;D分别启动，最后的activity栈是怎么样的"></a>A、B、C、D分别是四种Activity的启动模式，那么A-&gt;B-&gt;C-&gt;D-&gt;A-&gt;B-&gt;C-&gt;D分别启动，最后的activity栈是怎么样的</h2><ul>
+<li><p>1.这个题目需要深入了解activity的启动模式</p>
+</li>
+<li><p>2.最后的答案是：两个栈，前台栈是只有D，后台栈从底至上是A、B、C</p>
+</li>
+</ul>
+<h2 id="Activity缓存方法"><a href="#Activity缓存方法" class="headerlink" title="Activity缓存方法"></a>Activity缓存方法</h2><ul>
+<li><p>1.配置改变导致Activity被杀死，横屏变竖屏：在onStop之前会调用onSaveInstanceState()保存数据在重建Activity之后，会在onStart()之后调用onRestoreInstanceState(),并把保存下来的Bundle传给onCreate()和它会默认重建Activity当前的视图，我们可以在onCreate()中，回复自己的数据。</p>
+</li>
+<li><p>2.内存不足杀掉Activity，优先级分别是：前台可见，可见非前台，后台。</p>
+</li>
+</ul>
+<h2 id="Service的生命周期，两种启动方法，有什么区别"><a href="#Service的生命周期，两种启动方法，有什么区别" class="headerlink" title="Service的生命周期，两种启动方法，有什么区别"></a>Service的生命周期，两种启动方法，有什么区别</h2><ul>
+<li><p>1.context.startService() -&gt;onCreate()- &gt;onStart()-&gt;Service running–&gt;(如果调用context.stopService() )-&gt;onDestroy() -&gt;Service shut down</p>
+<ul>
+<li><p>1.如果Service还没有运行，则调用onCreate()然后调用onStart()；</p>
+<ul>
+<li><p>2.如果Service已经运行，则只调用onStart()，所以一个Service的onStart方法可能会重复调用多次。</p>
+</li>
+<li><p>3.调用stopService的时候直接onDestroy，</p>
+</li>
+<li><p>4.如果是调用者自己直接退出而没有调用stopService的话，Service会一直在后台运行。该Service的调用者再启动起来后可以通过stopService关闭Service。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2.context.bindService()-&gt;onCreate()-&gt;onBind()-&gt;Service running–&gt;onUnbind() -&gt; onDestroy() -&gt;Service stop</p>
+<ul>
+<li><p>1.onBind将返回给客户端一个IBind接口实例，IBind允许客户端回调服务的方法，比如得到Service运行的状态或其他操作。</p>
+<ul>
+<li><p>2.这个时候会把调用者和Service绑定在一起，Context退出了,Service就会调用onUnbind-&gt;onDestroy相应退出。</p>
+</li>
+<li><p>3.所以调用bindService的生命周期为：onCreate –&gt; onBind(只一次，不可多次绑定) –&gt; onUnbind –&gt; onDestory。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="怎么保证service不被杀死"><a href="#怎么保证service不被杀死" class="headerlink" title="怎么保证service不被杀死"></a>怎么保证service不被杀死</h2><ul>
+<li><p>1.提升service优先级</p>
+</li>
+<li><p>2.提升service进程优先级</p>
+</li>
+<li><p>3.onDestroy方法里重启service</p>
+</li>
+</ul>
+<h2 id="静态的Broadcast-和动态的有什么区别"><a href="#静态的Broadcast-和动态的有什么区别" class="headerlink" title="静态的Broadcast 和动态的有什么区别"></a>静态的Broadcast 和动态的有什么区别</h2><ul>
+<li><p>1.动态的比静态的安全</p>
+</li>
+<li><p>2.静态在app启动的时候就初始化了 动态使用代码初始化</p>
+</li>
+<li><p>3.静态需要配置 动态不需要</p>
+</li>
+<li><p>4.生存期，静态广播的生存期可以比动态广播的长很多</p>
+</li>
+<li><p>5.优先级动态广播的优先级比静态广播高</p>
+</li>
+</ul>
+<h2 id="1Intent可以传递哪些数据类型"><a href="#1Intent可以传递哪些数据类型" class="headerlink" title="1Intent可以传递哪些数据类型"></a>1Intent可以传递哪些数据类型</h2><ul>
+<li><p>1.Serializable</p>
+</li>
+<li><p>2.charsequence: 主要用来传递String，char等</p>
+</li>
+<li><p>3.parcelable</p>
+</li>
+<li><p>4.Bundle</p>
+</li>
+</ul>
+<h2 id="1Json有什么优劣势、解析的原理"><a href="#1Json有什么优劣势、解析的原理" class="headerlink" title="1Json有什么优劣势、解析的原理"></a>1Json有什么优劣势、解析的原理</h2><ul>
+<li><p>1.JSON的速度要远远快于XML</p>
+</li>
+<li><p>2.JSON相对于XML来讲，数据的体积小</p>
+</li>
+<li><p>3.JSON对数据的描述性比XML较差</p>
+</li>
+<li><p>4.解析的基本原理是：词法分析</p>
+</li>
+</ul>
+<h2 id="1一个语言的编译过程"><a href="#1一个语言的编译过程" class="headerlink" title="1一个语言的编译过程"></a>1一个语言的编译过程</h2><ul>
+<li><p>1.词法分析：将一串文本按规则分割成最小的结构，关键字、标识符、运算符、界符和常量等。一般实现方法是自动机和正则表达式</p>
+</li>
+<li><p>2.语法分析：将一系列单词组合成语法树。一般实现方法有自顶向下和自底向上</p>
+</li>
+<li><p>3.语义分析：对结构上正确的源程序进行上下文有关性质的审查</p>
+</li>
+<li><p>4.目标代码生成</p>
+</li>
+<li><p>5.代码优化：优化生成的目标代码，</p>
+</li>
+</ul>
+<h2 id="1动画有哪几类，各有什么特点"><a href="#1动画有哪几类，各有什么特点" class="headerlink" title="1动画有哪几类，各有什么特点"></a>1动画有哪几类，各有什么特点</h2><ul>
+<li><p>1.动画的基本原理：其实就是利用插值器和估值器，来计算出各个时刻View的属性，然后通过改变View的属性来，实现View的动画效果。</p>
+</li>
+<li><p>2.View动画:只是影像变化，view的实际位置还在原来的地方。</p>
+</li>
+<li><p>3.帧动画是在xml中定义好一系列图片之后，使用AnimationDrawable来播放的动画。</p>
+</li>
+<li><p>4.View的属性动画：</p>
+<ul>
+<li><p>1.插值器：作用是根据时间的流逝的百分比来计算属性改变的百分比</p>
+<ul>
+<li>2.估值器：在1的基础上由这个东西来计算出属性到底变化了多少数值的类</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1Handler、Looper消息队列模型，各部分的作用"><a href="#1Handler、Looper消息队列模型，各部分的作用" class="headerlink" title="1Handler、Looper消息队列模型，各部分的作用"></a>1Handler、Looper消息队列模型，各部分的作用</h2><ul>
+<li><p>1.MessageQueue：读取会自动删除消息，单链表维护，在插入和删除上有优势。在其next()中会无限循环，不断判断是否有消息，有就返回这条消息并移除。</p>
+</li>
+<li><p>2.Looper：Looper创建的时候会创建一个MessageQueue，调用loop()方法的时候消息循环开始，loop()也是一个死循环，会不断调用messageQueue的next()，当有消息就处理，否则阻塞在messageQueue的next()中。当Looper的quit()被调用的时候会调用messageQueue的quit(),此时next()会返回null，然后loop()方法也跟着退出。</p>
+</li>
+<li><p>3.Handler：在主线程构造一个Handler，然后在其他线程调用sendMessage(),此时主线程的MessageQueue中会插入一条message，然后被Looper使用。</p>
+</li>
+<li><p>4.系统的主线程在ActivityThread的main()为入口开启主线程，其中定义了内部类Activity.H定义了一系列消息类型，包含四大组件的启动停止。</p>
+</li>
+<li><p>5.MessageQueue和Looper是一对一关系，Handler和Looper是多对一</p>
+</li>
+</ul>
+<h2 id="1怎样退出终止App"><a href="#1怎样退出终止App" class="headerlink" title="1怎样退出终止App"></a>1怎样退出终止App</h2><ul>
+<li>1.自己设置一个Activity的栈，然后一个个finish()</li>
+</ul>
+<h2 id="1Android-IPC-Binder原理"><a href="#1Android-IPC-Binder原理" class="headerlink" title="1Android IPC:Binder原理"></a>1Android IPC:Binder原理</h2><h3 id="1-在Activity和Service进行通讯的时候，用到了Binder。"><a href="#1-在Activity和Service进行通讯的时候，用到了Binder。" class="headerlink" title="1.在Activity和Service进行通讯的时候，用到了Binder。"></a>1.在Activity和Service进行通讯的时候，用到了Binder。</h3><ul>
+<li>1.当属于同个进程我们可以继承Binder然后在Activity中对Service进行操作</li>
+<li>2.当不属于同个进程，那么要用到AIDL让系统给我们创建一个Binder，然后在Activity中对远端的Service进行操作。</li>
+</ul>
+<h3 id="2-系统给我们生成的Binder："><a href="#2-系统给我们生成的Binder：" class="headerlink" title="2.系统给我们生成的Binder："></a>2.系统给我们生成的Binder：</h3><ul>
+<li>1.Stub类中有:接口方法的id，有该Binder的标识，有asInterface(IBinder)(让我们在Activity中获取实现了Binder的接口，接口的实现在Service里，同进程时候返回Stub否则返回Proxy)，有onTransact()这个方法是在不同进程的时候让Proxy在Activity进行远端调用实现Activity操作Service</li>
+<li>2.Proxy类是代理，在Activity端，其中有:IBinder mRemote(这就是远端的Binder)，两个接口的实现方法不过是代理最终还是要在远端的onTransact()中进行实际操作。</li>
+<li>3.哪一端的Binder是副本，该端就可以被另一端进行操作，因为Binder本体在定义的时候可以操作本端的东西。所以可以在Activity端传入本端的Binder，让Service端对其进行操作称为Listener，可以用RemoteCallbackList这个容器来装Listener，防止Listener因为经历过序列化而产生的问题。</li>
+<li>4.当Activity端向远端进行调用的时候，当前线程会挂起，当方法处理完毕才会唤醒。</li>
+<li>5.如果一个AIDL就用一个Service太奢侈，所以可以使用Binder池的方式，建立一个AIDL其中的方法是返回IBinder，然后根据方法中传入的参数返回具体的AIDL。</li>
+<li>6.IPC的方式有：Bundle（在Intent启动的时候传入，不过是一次性的），文件共享(对于SharedPreference是特例，因为其在内存中会有缓存)，使用Messenger(其底层用的也是AIDL，同理要操作哪端，就在哪端定义Messenger)，AIDL，ContentProvider(在本进程中继承实现一个ContentProvider，在增删改查方法中调用本进程的SQLite，在其他进程中查询)，Socket</li>
+</ul>
+<h2 id="1描述一次跨进程通讯"><a href="#1描述一次跨进程通讯" class="headerlink" title="1描述一次跨进程通讯"></a>1描述一次跨进程通讯</h2><ul>
+<li>1.client、proxy、serviceManager、BinderDriver、impl、service</li>
+<li>2.client发起一个请求service信息的Binder请求到BinderDriver中，serviceManager发现BinderDiriver中有自己的请求 然后将clinet请求的service的数据返回给client这样完成了一次Binder通讯</li>
+<li>3.clinet获取的service信息就是该service的proxy，此时调用proxy的方法，proxy将请求发送到BinderDriver中，此时service的 Binder线程池循环发现有自己的请求，然后用impl就处理这个请求最后返回，这样完成了第二次Binder通讯</li>
+<li>4.中间client可挂起，也可以不挂起，有一个关键字oneway可以解决这个</li>
+</ul>
+<h2 id="1android重要术语解释"><a href="#1android重要术语解释" class="headerlink" title="1android重要术语解释"></a>1android重要术语解释</h2><ul>
+<li><p>1.ActivityManagerServices，简称AMS，服务端对象，负责系统中所有Activity的生命周期</p>
+</li>
+<li><p>2.ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或者叫主线程。与ActivityManagerServices配合，一起完成Activity的管理工作</p>
+</li>
+<li><p>3.ApplicationThread，用来实现ActivityManagerService与ActivityThread之间的交互。在ActivityManagerService需要管理相关Application中的Activity的生命周期时，通过ApplicationThread的代理对象与ActivityThread通讯。</p>
+</li>
+<li><p>4.ApplicationThreadProxy，是ApplicationThread在服务器端的代理，负责和客户端的ApplicationThread通讯。AMS就是通过该代理与ActivityThread进行通信的。</p>
+</li>
+<li><p>5.Instrumentation，每一个应用程序只有一个Instrumentation对象，每个Activity内都有一个对该对象的引用。Instrumentation可以理解为应用进程的管家，ActivityThread要创建或暂停某个Activity时，都需要通过Instrumentation来进行具体的操作。</p>
+</li>
+<li><p>6.ActivityStack，Activity在AMS的栈管理，用来记录已经启动的Activity的先后关系，状态信息等。通过ActivityStack决定是否需要启动新的进程。</p>
+</li>
+<li><p>7.ActivityRecord，ActivityStack的管理对象，每个Activity在AMS对应一个ActivityRecord，来记录Activity的状态以及其他的管理信息。其实就是服务器端的Activity对象的映像。</p>
+</li>
+<li><p>8.TaskRecord，AMS抽象出来的一个“任务”的概念，是记录ActivityRecord的栈，一个“Task”包含若干个ActivityRecord。AMS用TaskRecord确保Activity启动和退出的顺序。如果你清楚Activity的4种launchMode，那么对这个概念应该不陌生。</p>
+</li>
+</ul>
+<h2 id="1理解Window和WindowManager"><a href="#1理解Window和WindowManager" class="headerlink" title="1理解Window和WindowManager"></a>1理解Window和WindowManager</h2><ul>
+<li><p>1.Window用于显示View和接收各种事件，Window有三种类型：应用Window(每个Activity对应一个Window)、子Window(不能单独存在，附属于特定Window)、系统window(Toast和状态栏)</p>
+</li>
+<li><p>2.Window分层级，应用Window在1-99、子Window在1000-1999、系统Window在2000-2999.WindowManager提供了增删改View三个功能。</p>
+</li>
+<li><p>3.Window是个抽象概念：每一个Window对应着一个View和ViewRootImpl，Window通过ViewRootImpl来和View建立联系，View是Window存在的实体，只能通过WindowManager来访问Window。</p>
+</li>
+<li><p>4.WindowManager的实现是WindowManagerImpl其再委托给WindowManagerGlobal来对Window进行操作，其中有四个List分别储存对应的View、ViewRootImpl、WindowManger.LayoutParams和正在被删除的View</p>
+</li>
+<li><p>5.Window的实体是存在于远端的WindowMangerService中，所以增删改Window在本端是修改上面的几个List然后通过ViewRootImpl重绘View，通过WindowSession(每个应用一个)在远端修改Window。</p>
+</li>
+<li><p>6.Activity创建Window：Activity会在attach()中创建Window并设置其回调(onAttachedToWindow()、dispatchTouchEvent()),Activity的Window是由Policy类创建PhoneWindow实现的。然后通过Activity#setContentView()调用PhoneWindow的setContentView。</p>
+</li>
+</ul>
+<h2 id="2Bitmap的处理"><a href="#2Bitmap的处理" class="headerlink" title="2Bitmap的处理"></a>2Bitmap的处理</h2><ul>
+<li><p>1.当使用ImageView的时候，可能图片的像素大于ImageView，此时就可以通过BitmapFactory.Option来对图片进行压缩，inSampleSize表示缩小2^(inSampleSize-1)倍。</p>
+</li>
+<li><p>2.BitMap的缓存：</p>
+<ul>
+<li><p>1.使用LruCache进行内存缓存。</p>
+<ul>
+<li><p>2.使用DiskLruCache进行硬盘缓存。</p>
+</li>
+<li><p>3.实现一个ImageLoader的流程：同步异步加载、图片压缩、内存硬盘缓存、网络拉取</p>
+<ul>
+<li><p>1.同步加载只创建一个线程然后按照顺序进行图片加载</p>
+<ul>
+<li><p>2.异步加载使用线程池，让存在的加载任务都处于不同线程</p>
+</li>
+<li><p>3.为了不开启过多的异步任务，只在列表静止的时候开启图片加载</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2如何实现一个网络框架-参考Volley"><a href="#2如何实现一个网络框架-参考Volley" class="headerlink" title="2如何实现一个网络框架(参考Volley)"></a>2如何实现一个网络框架(参考Volley)</h2><ul>
+<li><p>1.缓存队列,以url为key缓存内容可以参考Bitmap的处理方式，这里单独开启一个线程。</p>
+</li>
+<li><p>2.网络请求队列，使用线程池进行请求。</p>
+</li>
+<li><p>3.提供各种不同类型的返回值的解析如String，Json，图片等等。</p>
+</li>
+</ul>
+<h2 id="2ClassLoader的基础知识"><a href="#2ClassLoader的基础知识" class="headerlink" title="2ClassLoader的基础知识"></a>2ClassLoader的基础知识</h2><ul>
+<li><p>1.双亲委托：一个ClassLoader类负责加载这个类所涉及的所有类，在加载的时候会判断该类是否已经被加载过，然后会递归去他父ClassLoader中找。</p>
+</li>
+<li><p>2.可以动态加载Jar通过URLClassLoader</p>
+</li>
+<li><p>3.ClassLoader 隔离问题 JVM识别一个类是由：ClassLoader id+PackageName+ClassName。</p>
+</li>
+<li><p>4.加载不同Jar包中的公共类：</p>
+<ul>
+<li><p>1.让父ClassLoader加载公共的Jar，子ClassLoader加载包含公共Jar的Jar，此时子ClassLoader在加载公共Jar的时候会先去父ClassLoader中找。(只适用Java)</p>
+<ul>
+<li><p>2.重写加载包含公共Jar的Jar的ClassLoader，在loadClass中找到已经加载过公共Jar的ClassLoader，也就是把父ClassLoader替换掉。(只适用Java)</p>
+</li>
+<li><p>3.在生成包含公共Jar的Jar时候把公共Jar去掉。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2插件化框架描述：dynamicLoadApk为例子"><a href="#2插件化框架描述：dynamicLoadApk为例子" class="headerlink" title="2插件化框架描述：dynamicLoadApk为例子"></a>2插件化框架描述：dynamicLoadApk为例子</h2><ul>
+<li><p>1.可以通过DexClassLoader来对apk中的dex包进行加载访问</p>
+</li>
+<li><p>2.如何加载资源是个很大的问题，因为宿主程序中并没有apk中的资源，所以调用R资源会报错，所以这里使用了Activity中的实现ContextImpl的getAssets()和getResources()再加上反射来实现。</p>
+</li>
+<li><p>3.由于系统启动Activity有很多初始化动作要做，而我们手动反射很难完成，所以可以采用接口机制，将Activity的大部分生命周期提取成接口，然后通过代理Activity去调用插件Activity的生命周期。同时如果像增加一个新生命周期方法的时候，只需要在接口中和代理中声明一下就行。</p>
+</li>
+<li><p>4.缺点：</p>
+<ul>
+<li><p>1.慎用this，因为在apk中使用this并不代表宿主中的activity，当然如果this只是表示自己的接口还是可以的。除此之外可以使用that代替this。</p>
+<ul>
+<li><p>2.不支持Service和静态注册的Broadcast</p>
+</li>
+<li><p>3.不支持LaunchMode和Apk中Activity的隐式调用。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2热修复：Andfix为例子"><a href="#2热修复：Andfix为例子" class="headerlink" title="2热修复：Andfix为例子"></a>2热修复：Andfix为例子</h2><ul>
+<li><p>1.大致原理：apkpatch将两个apk做一次对比，然后找出不同的部分。可以看到生成的apatch了文件，后缀改成zip再解压开，里面有一个dex文件。通过jadx查看一下源码，里面就是被修复的代码所在的类文件,这些更改过的类都加上了一个_CF的后缀，并且变动的方法都被加上了一个叫@MethodReplace的annotation，通过clazz和method指定了需要替换的方法。然后客户端sdk得到补丁文件后就会根据annotation来寻找需要替换的方法。最后由JNI层完成方法的替换。</p>
+</li>
+<li><p>2.无法添加新类和新的字段、补丁文件很容易被反编译、加固平台可能会使热补丁功能失效</p>
+</li>
+</ul>
+<h2 id="2线程同步的问题，常用的线程同步"><a href="#2线程同步的问题，常用的线程同步" class="headerlink" title="2线程同步的问题，常用的线程同步"></a>2线程同步的问题，常用的线程同步</h2><ul>
+<li><p>1.sycn：保证了原子性、可见性、有序性</p>
+</li>
+<li><p>2.锁：保证了原子性、可见性、有序性</p>
+<ul>
+<li><p>1.自旋锁:可以使线程在没有取得锁的时候，不被挂起，而转去执行一个空循环。</p>
+<pre><code>*   1.优点:线程被挂起的几率减少，线程执行的连贯性加强。用于对于锁竞争不是很激烈，锁占用时间很短的并发线程。
+
+    *   2.缺点:过多浪费CPU时间，有一个线程连续两次试图获得自旋锁引起死锁
+</code></pre></li>
+<li><p>2.阻塞锁:没得到锁的线程等待或者挂起，Sycn、Lock</p>
+<ul>
+<li><p>3.可重入锁:一个线程可多次获取该锁，Sycn、Lock</p>
+</li>
+<li><p>4.悲观锁:每次去拿数据的时候都认为别人会修改，所以会阻塞全部其他线程 Sycn、Lock</p>
+</li>
+<li><p>5.乐观锁:每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。cas</p>
+</li>
+<li><p>6.显示锁和内置锁:显示锁用Lock来定义、内置锁用synchronized。</p>
+</li>
+<li><p>7.读-写锁:为了提高性能，Java提供了读</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.volatile</p>
+<ul>
+<li><p>1.只能保证可见性，不能保证原子性</p>
+<ul>
+<li>2.自增操作有三步，此时多线程写会出现问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>4.cas</p>
+<ul>
+<li><p>1.操作:内存值V、旧的预期值A、要修改的值B，当且仅当预期值A和内存值V相同时，将内存值修改为B并返回true，否则什么都不做并返回false。</p>
+<ul>
+<li><p>2.解释:本地副本为A，共享内存为V，线程A要把V修改成B。某个时刻线程A要把V修改成B，如果A和V不同那么就表示有其他线程在修改V，此时就表示修改失败，否则表示没有其他线程修改，那么把V改成B。</p>
+</li>
+<li><p>3.局限:如果V被修改成V1然后又被改成V，此时cas识别不出变化，还是认为没有其他线程在修改V，此时就会有问题</p>
+</li>
+<li><p>4.局限解决:将V带上版本。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>5.线程不安全到底是怎么回事：</p>
+<ul>
+<li><p>1.一个线程写，多个线程读的时候，会造成写了一半就去读</p>
+<ul>
+<li>2.多线程写，会造成脏数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2Asynctask和线程池，GC相关（怎么判断哪些内存该GC，GC算法）"><a href="#2Asynctask和线程池，GC相关（怎么判断哪些内存该GC，GC算法）" class="headerlink" title="2Asynctask和线程池，GC相关（怎么判断哪些内存该GC，GC算法）"></a>2Asynctask和线程池，GC相关（怎么判断哪些内存该GC，GC算法）</h2><ul>
+<li><p>1.Asynctask：异步任务类，单线程线程池+Handler</p>
+</li>
+<li><p>2.线程池：</p>
+<ul>
+<li><p>1.ThreadPoolExecutor：通过Executors可以构造单线程池、固定数目线程池、不固定数目线程池。</p>
+<ul>
+<li>2.ScheduledThreadPoolExecutor：可以延时调用线程或者延时重复调度线程。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.GC相关：重要</p>
+<ul>
+<li><p>1.搜索算法：</p>
+<pre><code>*   1.引用计数
+
+    *   2.图搜索，可达性分析
+</code></pre></li>
+<li><p>2.回收算法：</p>
+<pre><code>*   1.标记清除复制：用于青年代
+
+    *   2.标记整理：用于老年代
+</code></pre></li>
+<li><p>3.堆分区：</p>
+<pre><code>*   1.青年区eden 80%、survivor1 10%、survivor2 10%
+
+    *   2.老年区
+</code></pre></li>
+<li><p>4.虚拟机栈分区：</p>
+<pre><code>*   1.局部变量表
+
+    *   2.操作数栈
+
+    *   3.动态链接
+
+    *   4.方法返回地址
+</code></pre></li>
+<li><p>5.GC Roots:</p>
+<pre><code>*   1.虚拟机栈(栈桢中的本地变量表)中的引用的对象
+
+    *   2.方法区中的类静态属性引用的对象
+
+    *   3.方法区中的常量引用的对象
+
+    *   4.本地方法栈中JNI的引用的对象
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h2 id="2网络"><a href="#2网络" class="headerlink" title="2网络"></a>2网络</h2><ul>
+<li><p>1.ARP协议:在IP以太网中，当一个上层协议要发包时，有了该节点的IP地址，ARP就能提供该节点的MAC地址。</p>
+</li>
+<li><p>2.HTTP HTTPS的区别:</p>
+<ul>
+<li><p>1.HTTPS使用TLS(SSL)进行加密</p>
+<ul>
+<li><p>2.HTTPS缺省工作在TCP协议443端口</p>
+</li>
+<li><p>3.它的工作流程一般如以下方式:</p>
+<ul>
+<li><p>1.完成TCP三次同步握手</p>
+<ul>
+<li><p>2.客户端验证服务器数字证书，通过，进入步骤3</p>
+</li>
+<li><p>3.DH算法协商对称加密算法的密钥、hash算法的密钥</p>
+</li>
+<li><p>4.SSL安全加密隧道协商完成</p>
+</li>
+<li><p>5.网页以加密的方式传输，用协商的对称加密算法和密钥加密，保证数据机密性；用协商的hash算法进行数据完整性保护，保证数据不被篡改</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.http请求包结构，http返回码的分类，400和500的区别</p>
+<pre><code>*   1.包结构：
+
+        *   1.请求：请求行、头部、数据
+
+            *   2.返回：状态行、头部、数据
+</code></pre><ul>
+<li>2.http返回码分类：1到5分别是，消息、成功、重定向、客户端错误、服务端错误</li>
+</ul>
+</li>
+<li><p>4.Tcp</p>
+<pre><code>*   1.可靠连接，三次握手，四次挥手
+
+        *   1.三次握手：防止了服务器端的一直等待而浪费资源，例如只是两次握手，如果s确认之后c就掉线了，那么s就会浪费资源
+
+                *   1.syn-c = x，表示这消息是x序号
+
+                    *   2.ack-s = x + 1，表示syn-c这个消息接收成功。syn-s = y，表示这消息是y序号。
+
+                    *   3.ack-c = y + 1，表示syn-s这条消息接收成功
+</code></pre><ul>
+<li><p>2.四次挥手：TCP是全双工模式</p>
+<pre><code>*   1.fin-c = x , 表示现在需要关闭c到s了。ack-c = y,表示上一条s的消息已经接收完毕
+
+    *   2.ack-s = x + 1，表示需要关闭的fin-c消息已经接收到了，同意关闭
+
+    *   3.fin-s = y + 1，表示s已经准备好关闭了，就等c的最后一条命令
+
+    *   4.ack-c = y + 1，表示c已经关闭，让s也关闭
+</code></pre></li>
+<li><p>3.滑动窗口，停止等待、后退N、选择重传</p>
+<pre><code>*   4.拥塞控制，慢启动、拥塞避免、加速递减、快重传快恢复
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2数据库性能优化：索引和事务，需要找本专门的书大概了解一下"><a href="#2数据库性能优化：索引和事务，需要找本专门的书大概了解一下" class="headerlink" title="2数据库性能优化：索引和事务，需要找本专门的书大概了解一下"></a>2数据库性能优化：索引和事务，需要找本专门的书大概了解一下</h2><h2 id="213-APK打包流程和其内容"><a href="#213-APK打包流程和其内容" class="headerlink" title="213.APK打包流程和其内容"></a>213.APK打包流程和其内容</h2><ul>
+<li><p>1.流程</p>
+<ul>
+<li><p>1.aapt生成R文件</p>
+<pre><code>*   2.aidl生成java文件
+
+    *   3.将全部java文件编译成class文件
+
+    *   4.将全部class文件和第三方包合并成dex文件
+
+    *   5.将资源、so文件、dex文件整合成apk
+
+    *   6.apk签名
+
+    *   7.apk字节对齐
+</code></pre></li>
+</ul>
+</li>
+<li>2.内容：so、dex、asset、资源文件</li>
+</ul>
+<h2 id="3网络劫持的类型原理：可以百度一下了解一下具体概念"><a href="#3网络劫持的类型原理：可以百度一下了解一下具体概念" class="headerlink" title="3网络劫持的类型原理：可以百度一下了解一下具体概念"></a>3网络劫持的类型原理：可以百度一下了解一下具体概念</h2><ul>
+<li><p>1.DNS劫持、欺骗、污染</p>
+</li>
+<li><p>2.http劫持：重定向、注入js，http注入、报文扩展</p>
+</li>
+</ul>
+<h2 id="3java类加载过程："><a href="#3java类加载过程：" class="headerlink" title="3java类加载过程："></a>3java类加载过程：</h2><ul>
+<li><p>1.加载时机：创建实例、访问静态变量或方法、反射、加载子类之前</p>
+</li>
+<li><p>2.验证：验证文件格式、元数据、字节码、符号引用的正确性</p>
+</li>
+<li><p>3.加载：根据全类名获取文件字节流、将字节流转化为静态储存结构放入方法区、生成class对象</p>
+</li>
+<li><p>4.准备：在堆上为静态变量划分内存</p>
+</li>
+<li><p>5.解析：将常量池中的符号引用转换为直接引用</p>
+</li>
+<li><p>6.初始化：初始化静态变量</p>
+</li>
+<li><p>7.书籍推荐：<strong>深入理解java虚拟机</strong>，博客推荐：<a href="https://www.jianshu.com/p/bc6d1770d92c" target="_blank" rel="external">Java/Android阿里面试JVM部分理解</a></p>
+</li>
+</ul>
+<h2 id="3retrofit的了解"><a href="#3retrofit的了解" class="headerlink" title="3retrofit的了解"></a>3retrofit的了解</h2><ul>
+<li><p>1.动态代理创建一个接口的代理类</p>
+</li>
+<li><p>2.通过反射解析每个接口的注解、入参构造http请求</p>
+</li>
+<li><p>3.获取到返回的http请求，使用Adapter解析成需要的返回值。</p>
+</li>
+</ul>
+<h2 id="3bundle的数据结构，如何存储"><a href="#3bundle的数据结构，如何存储" class="headerlink" title="3bundle的数据结构，如何存储"></a>3bundle的数据结构，如何存储</h2><ul>
+<li><p>1.键值对储存</p>
+</li>
+<li><p>2.传递的数据可以是boolean、byte、int、long、float、double、string等基本类型或它们对应的数组，也可以是对象或对象数组。</p>
+</li>
+<li><p>3.当Bundle传递的是对象或对象数组时，必须实现Serializable 或Parcelable接口</p>
+</li>
+</ul>
+<h2 id="3listview内点击buttom并移动的事件流完整拦截过程："><a href="#3listview内点击buttom并移动的事件流完整拦截过程：" class="headerlink" title="3listview内点击buttom并移动的事件流完整拦截过程："></a>3listview内点击buttom并移动的事件流完整拦截过程：</h2><ul>
+<li><p>1.点下按钮的时候：</p>
+<ul>
+<li><p>1.产生了一个down事件，activity–&gt;phoneWindow–&gt;ViewGroup–&gt;ListView–&gt;botton,中间如果有重写了拦截方法，则事件被该view拦截可能消耗。</p>
+<ul>
+<li><p>2.没拦截，事件到达了button，这个过程中建立了一条事件传递的view链表</p>
+</li>
+<li><p>3.到button的dispatch方法–&gt;onTouch–&gt;view是否可用–&gt;Touch代理</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2.移动点击按钮的时候:</p>
+<ul>
+<li><p>1.产生move事件，listView中会对move事件做拦截</p>
+<ul>
+<li><p>2.此时listView会将该滑动事件消费掉</p>
+</li>
+<li><p>3.后续的滑动事件都会被listView消费掉</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3.手指抬起来时候：前面建立了一个view链表，listView的父view在获取事件的时候，会直接取链表中的listView让其进行事件消耗。</li>
+</ul>
+<h2 id="3service的意义：不需要界面，在后台执行的程序"><a href="#3service的意义：不需要界面，在后台执行的程序" class="headerlink" title="3service的意义：不需要界面，在后台执行的程序"></a>3service的意义：不需要界面，在后台执行的程序</h2><h2 id="3android的IPC通信方式，线程（进程间）通信机制有哪些"><a href="#3android的IPC通信方式，线程（进程间）通信机制有哪些" class="headerlink" title="3android的IPC通信方式，线程（进程间）通信机制有哪些"></a>3android的IPC通信方式，线程（进程间）通信机制有哪些</h2><ul>
+<li><p>1.ipc通信方式：binder、contentprovider、socket</p>
+</li>
+<li><p>2.操作系统进程通讯方式：共享内存、socket、管道</p>
+</li>
+</ul>
+<h2 id="3操作系统进程和线程的区别"><a href="#3操作系统进程和线程的区别" class="headerlink" title="3操作系统进程和线程的区别"></a>3操作系统进程和线程的区别</h2><ul>
+<li><p>1.简而言之,一个程序至少有一个进程,一个进程至少有一个线程.</p>
+</li>
+<li><p>2.线程的划分尺度小于进程，使得多线程程序的并发性高。</p>
+</li>
+<li><p>3.另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。</p>
+</li>
+<li><p>4.多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配</p>
+</li>
+</ul>
+<h2 id="3HashMap的实现过程：Capacity就是buckets的数目，Load-factor就是buckets填满程度的最大比例。如果对迭代性能要求很高的话不要把capacity设置过大，也不要把load-factor设置过小。"><a href="#3HashMap的实现过程：Capacity就是buckets的数目，Load-factor就是buckets填满程度的最大比例。如果对迭代性能要求很高的话不要把capacity设置过大，也不要把load-factor设置过小。" class="headerlink" title="3HashMap的实现过程：Capacity就是buckets的数目，Load factor就是buckets填满程度的最大比例。如果对迭代性能要求很高的话不要把capacity设置过大，也不要把load factor设置过小。"></a>3HashMap的实现过程：Capacity就是buckets的数目，Load factor就是buckets填满程度的最大比例。如果对迭代性能要求很高的话不要把capacity设置过大，也不要把load factor设置过小。</h2><ul>
+<li><p>1.简单来说HashMap就是一个会自动扩容的<strong>数组链表</strong></p>
+</li>
+<li><p>2.put过程</p>
+<ul>
+<li><p>1.对key的hashCode()做hash，然后再计算index;</p>
+<ul>
+<li><p>2.如果没碰撞直接放到bucket里；</p>
+</li>
+<li><p>3.如果碰撞了，以链表的形式存在buckets后；</p>
+</li>
+<li><p>4.如果碰撞导致链表过长(大于等于TREEIFY_THRESHOLD)，就把链表转换成红黑树；</p>
+</li>
+<li><p>5.如果节点已经存在就替换old value(保证key的唯一性)</p>
+</li>
+<li><p>6.如果bucket满了(超过load factor*current capacity)，就要resize。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.resize：当put时，如果发现目前的bucket占用程度已经超过了Load Factor所希望的比例，那么就会发生resize。在resize的过程，简单的说就是把bucket扩充为2倍，之后重新计算index，把节点再放到新的bucket中</p>
+</li>
+<li><p>4.get过程</p>
+<ul>
+<li><p>1.根据key的hash算出数组下表</p>
+<ul>
+<li>2.使用equals遍历链表进行比较</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3mvc、mvp、mvvm："><a href="#3mvc、mvp、mvvm：" class="headerlink" title="3mvc、mvp、mvvm："></a>3mvc、mvp、mvvm：</h2><ul>
+<li><p>1.mvc:数据、View、Activity，View将操作反馈给Activity，Activitiy去获取数据，数据通过观察者模式刷新给View。循环依赖</p>
+<ul>
+<li><p>1.Activity重，很难单元测试</p>
+<ul>
+<li>2.View和Model耦合严重</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2.mvp:数据、View、Presenter，View将操作给Presenter，Presenter去获取数据，数据获取好了返回给Presenter，Presenter去刷新View。PV，PM双向依赖</p>
+<ul>
+<li><p>1.接口爆炸</p>
+<ul>
+<li>2.Presenter很重</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.mvvm:数据、View、ViewModel，View将操作给ViewModel，ViewModel去获取数据，数据和界面绑定了，数据更新界面更新。</p>
+<ul>
+<li><p>1.viewModel的业务逻辑可以单独拿来测试</p>
+<ul>
+<li><p>2.一个view 对应一个 viewModel 业务逻辑可以分离，不会出现全能类</p>
+</li>
+<li><p>3.数据和界面绑定了，不用写垃圾代码，但是复用起来不舒服</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4java的线程如何实现"><a href="#4java的线程如何实现" class="headerlink" title="4java的线程如何实现"></a>4java的线程如何实现</h2><ul>
+<li><p>1.Thread继承</p>
+</li>
+<li><p>2.Runnale</p>
+</li>
+<li><p>3.Future</p>
+</li>
+<li><p>4.线程池</p>
+</li>
+</ul>
+<h2 id="4ArrayList-如何删除重复的元素或者指定的元素；"><a href="#4ArrayList-如何删除重复的元素或者指定的元素；" class="headerlink" title="4ArrayList 如何删除重复的元素或者指定的元素；"></a>4ArrayList 如何删除重复的元素或者指定的元素；</h2><ul>
+<li><p>1.删除重复：Set</p>
+</li>
+<li><p>2.删除指定：迭代器</p>
+</li>
+</ul>
+<h2 id="4如何设计在-UDP-上层保证-UDP-的可靠性传输；"><a href="#4如何设计在-UDP-上层保证-UDP-的可靠性传输；" class="headerlink" title="4如何设计在 UDP 上层保证 UDP 的可靠性传输；"></a>4如何设计在 UDP 上层保证 UDP 的可靠性传输；</h2><ul>
+<li><p>1.简单来讲，要使用UDP来构建可靠的面向连接的数据传输，就要实现类似于TCP协议的超时重传，有序接受，应答确认，滑动窗口流量控制等机制,等于说要在传输层的上一层（或者直接在应用层）实现TCP协议的可靠数据传输机制。</p>
+</li>
+<li><p>2.比如使用UDP数据包+序列号，UDP数据包+时间戳等方法，在服务器端进行应答确认机制，这样就会保证不可靠的UDP协议进行可靠的数据传输。</p>
+</li>
+<li><p>3.基于udp的可靠传输协议有：RUDP、RTP、UDT</p>
+</li>
+</ul>
+<h2 id="4Java-中内部类为什么可以访问外部类"><a href="#4Java-中内部类为什么可以访问外部类" class="headerlink" title="4Java 中内部类为什么可以访问外部类"></a>4Java 中内部类为什么可以访问外部类</h2><ul>
+<li>1.因为内部类创建的时候，需要外部类的对象，在内部类对象创建的时候会把外部类的引用传递进去</li>
+</ul>
+<h2 id="4设计移动端的联系人存储与查询的功能，要求快速搜索联系人，可以用到哪些数据结构？数据库索引，平衡二叉树-B树、红黑树"><a href="#4设计移动端的联系人存储与查询的功能，要求快速搜索联系人，可以用到哪些数据结构？数据库索引，平衡二叉树-B树、红黑树" class="headerlink" title="4设计移动端的联系人存储与查询的功能，要求快速搜索联系人，可以用到哪些数据结构？数据库索引，平衡二叉树(B树、红黑树)"></a>4设计移动端的联系人存储与查询的功能，要求快速搜索联系人，可以用到哪些数据结构？数据库索引，平衡二叉树(B树、红黑树)</h2><h2 id="4红黑树特点"><a href="#4红黑树特点" class="headerlink" title="4红黑树特点"></a>4红黑树特点</h2><ul>
+<li><p>1.root节点和叶子节点是黑色</p>
+</li>
+<li><p>2.红色节点后必须为黑色节点</p>
+</li>
+<li><p>3.从root到叶子每条路径的黑节点数量相同</p>
+</li>
+</ul>
+<h2 id="4linux异步和同步i-o"><a href="#4linux异步和同步i-o" class="headerlink" title="4linux异步和同步i/o:"></a>4linux异步和同步i/o:</h2><ul>
+<li><p>1.同步：对于client，client一直等待，但是client不挂起：主线程调用</p>
+</li>
+<li><p>2.异步：对于client，client发起请求，service好了再回调client：其他线程调用，调用完成之后进行回调</p>
+</li>
+<li><p>3.阻塞：对于service，在准备io的时候会将service端挂起，直至准备完成然后唤醒service：bio</p>
+</li>
+<li><p>3.非阻塞：对于service，在准备io的时候不会将service端挂起，而是service一直去轮询判断io是否准备完成，准备完成了就进行操作：nio、linux的select、poll、epoll</p>
+</li>
+<li><p>4.多路复用io：非阻塞io的一种优化，java nio，用一个线程去轮询多个 io端口是否可用，如果一个可用就通知对应的io请求，这使用一个线程轮询可以大大增强性能。</p>
+<ul>
+<li><p>1.我可以采用 多线程+ 阻塞IO 达到类似的效果，但是由于在多线程 + 阻塞IO 中，每个socket对应一个线程，这样会造成很大的资源占用。</p>
+<ul>
+<li>2.而在多路复用IO中，轮询每个socket状态是内核在进行的，这个效率要比用户线程要高的多。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>5.异步io：aio，用户线程完全不感知io的进行，所有操作都交给内核，io完成之后内核通知用户线程。</p>
+<ul>
+<li><p>1.这种io才是异步的，2、3、4都是同步io，因为内核进行数据拷贝的过程都会让用户线程阻塞。</p>
+<ul>
+<li>2.异步IO是需要操作系统的底层支持，也就是内核支持，Java 7中，提供了Asynchronous IO</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4ConcurrentHashMap内部实现，HashTable的实现被废弃的原因"><a href="#4ConcurrentHashMap内部实现，HashTable的实现被废弃的原因" class="headerlink" title="4ConcurrentHashMap内部实现，HashTable的实现被废弃的原因:"></a>4ConcurrentHashMap内部实现，HashTable的实现被废弃的原因:</h2><ul>
+<li><p>1.HashTable容器在竞争激烈的并发环境下表现出效率低下的原因，是因为所有访问HashTable的线程都必须竞争同一把锁，那假如容器里有多把锁，每一把锁用于锁容器其中一部分数据，那么当多线程访问容器里不同数据段的数据时，线程间就不会存在锁竞争，从而可以有效的提高并发访问效率，这就是ConcurrentHashMap所使用的锁分段技术，首先将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。</p>
+</li>
+<li><p>2.ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成。Segment是一种可重入锁ReentrantLock，在ConcurrentHashMap里扮演锁的角色，HashEntry则用于存储键值对数据。一个ConcurrentHashMap里包含一个Segment数组，Segment的结构和HashMap类似，是一种数组和链表结构， 一个Segment里包含一个HashEntry数组，每个HashEntry是一个链表结构的元素，每个Segment守护者一个HashEntry数组里的元素,当对HashEntry数组的数据进行修改时，必须首先获得它对应的Segment锁。</p>
+</li>
+</ul>
+<h2 id="4HandlerThread是什么"><a href="#4HandlerThread是什么" class="headerlink" title="4HandlerThread是什么"></a>4HandlerThread是什么</h2><ul>
+<li>1.MessageQueue + Looper + Handler</li>
+</ul>
+<h2 id="4IntentService是什么"><a href="#4IntentService是什么" class="headerlink" title="4IntentService是什么"></a>4IntentService是什么</h2><ul>
+<li>1.含有HandlerThread的Service，可以多次startService()来多次在子线程中进行 onHandlerIntent()的调用。</li>
+</ul>
+<h2 id="5class和dex"><a href="#5class和dex" class="headerlink" title="5class和dex"></a>5class和dex</h2><ul>
+<li><p>1.dvm执行的是dex格式文件，jvm执行的是class文件，android程序编译完之后生产class文件。然后dex工具会把class文件处理成dex文件，然后把资源文件和.dex文件等打包成apk文件。</p>
+</li>
+<li><p>2.dvm是基于寄存器的虚拟机，而jvm执行是基于虚拟栈的虚拟机。寄存器存取速度比栈快的多，dvm可以根据硬件实现最大的优化，比较适合移动设备。</p>
+</li>
+<li><p>3.class文件存在很多的冗余信息，dex工具会去除冗余信息，并把所有的class文件整合到dex文件中。减少了I/O操作，提高了类的查找速度</p>
+</li>
+</ul>
+<h2 id="5内存泄漏"><a href="#5内存泄漏" class="headerlink" title="5内存泄漏"></a>5内存泄漏</h2><ul>
+<li><p>1.其他线程持有一个Listener，Listener操作activity。那么在线程么有完毕的时候，activity关闭了，原本是要被回收的但是，不能被回收。</p>
+</li>
+<li><p>2.例如Handler导致的内存泄漏，Handler就相当于Listener。</p>
+</li>
+<li><p>3.在activity关闭的时候注意停止线程，或者将Listener的注册取消</p>
+</li>
+<li><p>3.使用弱引用，这样即使Listener持有了activity，在GC的时候还是会被回收</p>
+</li>
+<li><p>4.工具:LeakCanary</p>
+</li>
+</ul>
+<h2 id="5过度绘制、卡顿优化"><a href="#5过度绘制、卡顿优化" class="headerlink" title="5过度绘制、卡顿优化:"></a>5过度绘制、卡顿优化:</h2><ul>
+<li><p>1.过度绘制：</p>
+<ul>
+<li><p>1.移除Window默认的Background：getWidow.setBackgroundDrawable(null);</p>
+<ul>
+<li><p>2.移除XML布局文件中非必需的Background</p>
+</li>
+<li><p>3.减少布局嵌套(扁平化的一个体现，减少View数的深度，也就减少了View树的遍历时间，渲染的时候，前后期的工作，总是按View树结点来)</p>
+</li>
+<li><p>4.在引入布局文件里面，最外层可以用merge替代LinearLayout,RelativeLayout，这样把子UI元素直接衔接在include位置</p>
+</li>
+<li><p>5.工具：HierarchyViewer 查看视图层级</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.卡顿优化：16ms数据更新</li>
+</ul>
+<h2 id="5apk瘦身"><a href="#5apk瘦身" class="headerlink" title="5apk瘦身:"></a>5apk瘦身:</h2><ul>
+<li><p>1.classes.dex：通过代码混淆，删掉不必要的jar包和代码实现该文件的优化</p>
+</li>
+<li><p>2.资源文件：通过Lint工具扫描代码中没有使用到的静态资源</p>
+</li>
+<li><p>3.图片资源：使用tinypng和webP，下面详细介绍图片资源优化的方案,矢量图</p>
+</li>
+<li><p>4.SO文件将不用的去掉，目前主流app一般只放一个arm的so包</p>
+</li>
+</ul>
+<h2 id="5ANR的形成，各个组件上出现ARN的时间限制是多少"><a href="#5ANR的形成，各个组件上出现ARN的时间限制是多少" class="headerlink" title="5ANR的形成，各个组件上出现ARN的时间限制是多少"></a>5ANR的形成，各个组件上出现ARN的时间限制是多少</h2><ul>
+<li><p>1.只要是主线程耗时的操作就会ARN  如io</p>
+</li>
+<li><p>2.broadcast超时时间为10秒  按键无响应的超时时间为5秒 前台service无响应的超时时间为20秒，后台service为200秒</p>
+</li>
+</ul>
+<h2 id="5Serializable和Parcelable-的区别"><a href="#5Serializable和Parcelable-的区别" class="headerlink" title="5Serializable和Parcelable 的区别"></a>5Serializable和Parcelable 的区别</h2><ul>
+<li><p>1.P 消耗内存小</p>
+</li>
+<li><p>2.网络传输用S  程序内使用P</p>
+</li>
+<li><p>3.S将数据持久化方便</p>
+</li>
+<li><p>4.S使用了反射 容易触发垃圾回收 比较慢</p>
+</li>
+</ul>
+<h2 id="5Sharedpreferences源码简述"><a href="#5Sharedpreferences源码简述" class="headerlink" title="5Sharedpreferences源码简述"></a>5Sharedpreferences源码简述</h2><ul>
+<li><p>1.储存于硬盘上的xml键值对，数据多了会有性能问题</p>
+</li>
+<li><p>2.ContextImpl记录着SharedPreferences的重要数据，文件路径和实例的键值对</p>
+</li>
+<li><p>3.在xml文件全部内加载到内存中之前，读取操作是阻塞的，在xml文件全部内加载到内存中之后，是直接读取内存中的数据</p>
+</li>
+<li><p>4.apply因为是异步的没有返回值, commit是同步的有返回值能知道修改是否提交成功</p>
+</li>
+<li><p>5.多并发的提交commit时，需等待正在处理的commit数据更新到磁盘文件后才会继续往下执行，从而降低效率; 而apply只是原子更新到内存，后调用apply函数会直接覆盖前面内存数据，从一定程度上提高很多效率。 3.edit()每次都是创建新的EditorImpl对象.</p>
+</li>
+<li><p>6.博客推荐：<strong><a href="https://www.jianshu.com/p/102f25cf64e3" target="_blank" rel="external">全面剖析SharedPreferences</a></strong></p>
+</li>
+</ul>
+<h2 id="5操作系统如何管理内存的："><a href="#5操作系统如何管理内存的：" class="headerlink" title="5操作系统如何管理内存的："></a>5操作系统如何管理内存的：</h2><ul>
+<li><p>1.使用寄存器进行将进程地址和物理内存进行映射</p>
+</li>
+<li><p>2.虚拟内存进行内存映射到硬盘上增大内存</p>
+</li>
+<li><p>3.虚拟内存是进行内存分页管理</p>
+</li>
+<li><p>4.页表实现分页，就是 页+地址偏移。</p>
+</li>
+<li><p>5.如果程序的内存在硬盘上，那么就需要用页置换算法来将其调入内存中：先进先出、最近未使用最少等等</p>
+</li>
+<li><p>6.博客推荐：<strong><a href="https://www.jianshu.com/p/aecff59430fa" target="_blank" rel="external">现代操作系统部分章节笔记</a></strong></p>
+</li>
+</ul>
+<h2 id="5浏览器输入地址到返回结果发生了什么"><a href="#5浏览器输入地址到返回结果发生了什么" class="headerlink" title="5浏览器输入地址到返回结果发生了什么"></a>5浏览器输入地址到返回结果发生了什么</h2><ul>
+<li><p>1.DNS解析</p>
+</li>
+<li><p>2.TCP连接</p>
+</li>
+<li><p>3.发送HTTP请求</p>
+</li>
+<li><p>4.服务器处理请求并返回HTTP报文</p>
+</li>
+<li><p>5.浏览器解析渲染页面</p>
+</li>
+<li><p>6.连接结束</p>
+</li>
+</ul>
+<h2 id="5java泛型类型擦除发生在什么时候，通配符有什么需要注意的。"><a href="#5java泛型类型擦除发生在什么时候，通配符有什么需要注意的。" class="headerlink" title="5java泛型类型擦除发生在什么时候，通配符有什么需要注意的。"></a>5java泛型类型擦除发生在什么时候，通配符有什么需要注意的。</h2><ul>
+<li><p>1.发生在编译的时候</p>
+</li>
+<li><p>2.PECS，extends善于提供精确的对象 A是B的子集，Super善于插入精确的对象 A是B的超集</p>
+</li>
+<li><p>3.博客推荐：<strong><a href="https://www.jianshu.com/p/4e4751b5bbbb" target="_blank" rel="external">Effective Java笔记（不含反序列化、并发、注解和枚举）</a></strong>、<strong><a href="https://www.jianshu.com/p/6006a3284f55" target="_blank" rel="external">android阿里面试java基础锦集</a></strong></p>
+</li>
+</ul>
+<h2 id="6activity的生命周期"><a href="#6activity的生命周期" class="headerlink" title="6activity的生命周期"></a>6activity的生命周期</h2><ul>
+<li><p>1.a启动b，后退键再到a的生命周期流程：a.create–&gt;a.start–&gt;a.resume–&gt;a.pause–&gt;b.create–&gt;b.start–&gt;b.resume–&gt;b界面绘制–&gt;a.stop–&gt;b.pause–&gt;b.stop–&gt;b.destroy–&gt;a.restart–&gt;a.start–&gt;a.resume</p>
+</li>
+<li><p>2.意外销毁会调用saveInstance，重新恢复的时候回调用restoreInstance。储存数据的时候使用了委托机制，从activity–&gt;window–&gt;viewGroup–&gt;view 会递归调用save来保持本view的数据，restore则是递归恢复本view数据。我们可以在里面做一些自己需要的数据操作。</p>
+</li>
+</ul>
+<h2 id="6面试常考的算法"><a href="#6面试常考的算法" class="headerlink" title="6面试常考的算法"></a>6面试常考的算法</h2><ul>
+<li><p>1.快排、堆排序为首的各种排序算法</p>
+</li>
+<li><p>2.链表的各种操作：判断成环、判断相交、合并链表、倒数K个节点、寻找成环节点</p>
+</li>
+<li><p>3.二叉树、红黑树、B树定义以及时间复杂度计算方式</p>
+</li>
+<li><p>4.动态规划、贪心算法、简单的图论</p>
+</li>
+<li><p>5.推荐书籍：<strong>算法导论</strong>，将图论之前的例子写一遍</p>
+</li>
+</ul>
+<h2 id="6Launcher进程启动另外一个进程的过程：启动一个app"><a href="#6Launcher进程启动另外一个进程的过程：启动一个app" class="headerlink" title="6Launcher进程启动另外一个进程的过程：启动一个app"></a>6Launcher进程启动另外一个进程的过程：<a href="http://www.cnblogs.com/tiantianbyconan/p/5017056.html" target="_blank" rel="external">启动一个app</a></h2><h2 id="6开源框架源码"><a href="#6开源框架源码" class="headerlink" title="6开源框架源码"></a>6开源框架源码</h2><h3 id="1-Fresco"><a href="#1-Fresco" class="headerlink" title="1.Fresco"></a>1.Fresco</h3><h4 id="1-mvc框架："><a href="#1-mvc框架：" class="headerlink" title="1.mvc框架："></a>1.mvc框架：</h4><ul>
+<li><p>1.Controller控制数据显示在Hierarchy中的Drawable的显隐</p>
+</li>
+<li><p>2.ImagePipeline在Controller中负责进行数据获取，返回的数据是CloseableImage</p>
+</li>
+<li><p>3.Drawee把除了初始化之外的操作全部交给Holder去做，Holder持有Controller和Hierarchy</p>
+</li>
+</ul>
+<h4 id="2-Drawable层次以及绘制："><a href="#2-Drawable层次以及绘制：" class="headerlink" title="2.Drawable层次以及绘制："></a>2.Drawable层次以及绘制：</h4><ul>
+<li><p>1.如果要绘制一次Drawable就调用invalidateSelf()来触发onDraw()</p>
+</li>
+<li><p>2.Drawable分为：容器类(保存一些Drawable)、自我绘制类(进度条)、图形变换类(scale、rotate、矩阵变换)、动画类(内部不断刷新，进行webp和gif的帧绘制)</p>
+</li>
+<li><p>3.ImagePipeline返回的CloseableImage是由一个个DrawableFactory解析成Drawable的</p>
+</li>
+<li><p>4.webp和gif动画是由jni代码解析的，然后其他静态图片是根据不同的android平台使用BitmapFactory来解析的</p>
+</li>
+</ul>
+<h4 id="3-职责链模式"><a href="#3-职责链模式" class="headerlink" title="3.职责链模式"></a>3.职责链模式</h4><p>producer不做操作标n，表示只是提供一个consumer。获取图片–》解码图片缓存Producer–》后台线程Producer–》client图片处理producer(n)–》解码producer(n)–》旋转或剪裁producer(n)–》编码图片内存缓存producer–》读硬盘缓存producer–》写硬盘缓存producer(n)–》网络producer提供CloseableImage《–解码图片缓存consumer《–client图片处理consumer《–解码consumer《–旋转或剪裁consumer《–编码图片内存缓存consumer《–写硬盘缓存consumer《–图片数据</p>
+<h4 id="4-内存缓存"><a href="#4-内存缓存" class="headerlink" title="4.内存缓存"></a>4.内存缓存</h4><ul>
+<li><p>1.一个CountingLruMap保存已经没有被引用的缓存条目，一个CountingLruMap保存所有的条目包括没有引用的条目。每当缓存策略改变和一定时间缓存配置的更新的时候，就会将 待销毁条目Map中的条目一个个移除，直到缓存大小符合配置。</p>
+</li>
+<li><p>2.这里的引用计数是用Fresco组件实现的引用计数器。</p>
+</li>
+<li><p>3.缓存有一个代理类，用来追踪缓存的存取。</p>
+</li>
+<li><p>4.CountingLruMap是使用LinkedHashMap来储存数据的。</p>
+</li>
+</ul>
+<h4 id="5-硬盘缓存"><a href="#5-硬盘缓存" class="headerlink" title="5.硬盘缓存"></a>5.硬盘缓存</h4><ul>
+<li><p>1.DefaultDiskStorage使用Lru策略。</p>
+</li>
+<li><p>2.为了不让所有的文件集中在一个文件中，创建很多命名不同的文件夹，然后使用hash算法把缓存文件分散</p>
+</li>
+<li><p>3.DiskStorageCache封装了DefaultDiskStorage，不仅进行缓存存取追踪，并且其在内存里面维持着一个 &lt;key,value&gt; 的键值对，因为文件修改频繁，所有只是定时刷新，因此如果在内存中找不到，还要去硬盘中找一次。</p>
+</li>
+<li><p>4.删除硬盘的缓存只出现在硬盘数据大小超限的时候，此时同时也会删除缓存中的key，所以不会出现内存中有key，但是硬盘上没有的情况。</p>
+</li>
+<li><p>5.在插入硬盘数据的时候，采用的是插入器的形式。返回一个Inserter，在Inserter.writeData()中传入一个CallBack(里面封装了客户端插入数据的逻辑和文件引用)，让内部实现调用CallBack的逻辑来插入文件数据，前面写的文件后缀是.temp,只有调用commit()之后才会修改后缀，让文件对客户端可见。</p>
+</li>
+<li><p>6.使用了java提供的FileTreeVisitor来遍历文件</p>
+</li>
+</ul>
+<h4 id="6-对象池"><a href="#6-对象池" class="headerlink" title="6.对象池"></a>6.对象池</h4><ul>
+<li><p>1.使用数组来存储一个桶，桶内部是一个Queue。数组下标是数据申请内存的byte大小，桶内部的Queue存的是内存块的。所以数组使用的是稀疏数组</p>
+</li>
+<li><p>2.申请内存的方式有两种 1.java堆上开辟的内存 2.ashme 的本地内存中开辟的内存</p>
+</li>
+</ul>
+<h4 id="7-设计模式"><a href="#7-设计模式" class="headerlink" title="7.设计模式"></a>7.设计模式</h4><p>Builder、职责链、观察者、代理、组合、享元、适配器、装饰者、策略、生产者消费者、提供者</p>
+<h4 id="8-自定义计数引用：类似c-智能指针"><a href="#8-自定义计数引用：类似c-智能指针" class="headerlink" title="8.自定义计数引用：类似c++智能指针"></a>8.自定义计数引用：类似c++智能指针</h4><ul>
+<li><p>1.使用一个静态IdentityHashMap &lt;储存需要被计数引用的对象,其被引用的次数&gt;</p>
+</li>
+<li><p>2.用SharedReference分装需要被计数引用的对象，提供一个销毁资源的销毁器，提供一个静态工厂方法来复制自己，复制一个引用计数加一。提供一个方法销毁自己，表示自己需要变成无人引用的对象了，此时引用计数减一。</p>
+</li>
+<li><p>3.引用计数归零，销毁器将销毁资源，如bitmap的recycle或者是jni内存调用jni方法归还内存。</p>
+</li>
+</ul>
+<h4 id="9-博客推荐"><a href="#9-博客推荐" class="headerlink" title="9.博客推荐"></a>9.博客推荐</h4><p><strong><a href="https://www.jianshu.com/p/dbe01f9994d0" target="_blank" rel="external">Android Fresco源码文档翻译</a></strong><br><strong><a href="https://www.jianshu.com/p/ab2124764438" target="_blank" rel="external">从零开始撸一个Fresco之硬盘缓存</a></strong><br><strong><a href="https://www.jianshu.com/p/36663090b140" target="_blank" rel="external">从零开始撸一个Fresco之gif和Webp动画</a></strong><br><strong><a href="https://www.jianshu.com/p/ba0de15ce667" target="_blank" rel="external">从零开始撸一个Fresco之内存缓存</a></strong><br><strong><a href="https://www.jianshu.com/p/2dff47ae7666" target="_blank" rel="external">从零开始撸一个Fresco之总结</a></strong></p>
+<h3 id="2-oKhttp："><a href="#2-oKhttp：" class="headerlink" title="2.oKhttp："></a>2.oKhttp：</h3><h4 id="1-同步和异步："><a href="#1-同步和异步：" class="headerlink" title="1.同步和异步："></a>1.同步和异步：</h4><ul>
+<li><p>1.异步使用了Dispatcher来将存储在 Deque 中的请求分派给线程池中各个线程执行。</p>
+</li>
+<li><p>2.当任务执行完成后，无论是否有异常，finally代码段总会被执行，也就是会调用Dispatcher的finished函数，它将正在运行的任务Call从队列runningAsyncCalls中移除后，主动的把缓存队列向前走了一步。</p>
+</li>
+</ul>
+<h4 id="2-连接池："><a href="#2-连接池：" class="headerlink" title="2.连接池："></a>2.连接池：</h4><ul>
+<li><p>1.一个Connection封装了一个socket，ConnectionPool中储存s着所有的Connection，StreamAllocation是引用计数的一个单位</p>
+</li>
+<li><p>2.当一个请求获取一个Connection的时候要传入一个StreamAllocation，Connection中存着一个弱引用的StreamAllocation列表，每当上层应用引用一次Connection，StreamAllocation就会加一个。反之如果上层应用不使用了，就会删除一个。</p>
+</li>
+<li><p>3.ConnectionPool中会有一个后台任务定时清理StreamAllocation列表为空的Connection。5分钟时间，维持5个socket</p>
+</li>
+</ul>
+<h4 id="3-选择路线与建立连接"><a href="#3-选择路线与建立连接" class="headerlink" title="3.选择路线与建立连接"></a>3.选择路线与建立连接</h4><ul>
+<li><p>1.选择路线有两种方式：</p>
+<ol>
+<li>无代理，那么在本地使用DNS查找到ip，注意结果是数组，即一个域名有多个IP，这就是自动重连的来源</li>
+<li>有代理HTTP：设置socket的ip为代理地址的ip，设置socket的端口为代理地址的端口</li>
+<li>代理好处：HTTP代理会帮你在远程服务器进行DNS查询，可以减少DNS劫持。</li>
+</ol>
+</li>
+</ul>
+<h4 id="2-建立连接"><a href="#2-建立连接" class="headerlink" title="2.建立连接"></a>2.建立连接</h4><ul>
+<li>1.连接池中已经存在连接，就从中取出(get)RealConnection，如果没有命中就进入下一步</li>
+<li>2.根据选择的路线(Route)，调用Platform.get().connectSocket选择当前平台Runtime下最好的socket库进行握手</li>
+<li>3.将建立成功的RealConnection放入(put)连接池缓存</li>
+<li>4.如果存在TLS，就根据SSL版本与证书进行安全握手</li>
+<li>5.构造HttpStream并维护刚刚的socket连接，管道建立完成</li>
+</ul>
+<h4 id="4-职责链模式"><a href="#4-职责链模式" class="headerlink" title="4.职责链模式"></a>4.职责链模式</h4><p>缓存、重试、建立连接等功能存在于拦截器中网络请求相关，主要是网络请求优化。网络请求的时候遇到的问题</p>
+<h4 id="5-博客推荐"><a href="#5-博客推荐" class="headerlink" title="5.博客推荐"></a>5.博客推荐</h4><p><strong><a href="https://www.jianshu.com/p/60e5ebf0096a" target="_blank" rel="external">Android数据层架构的实现 上篇</a></strong><br><strong><a href="https://www.jianshu.com/p/5def7b42d223" target="_blank" rel="external">Android数据层架构的实现 下篇</a></strong></p>
+<h3 id="3-okio"><a href="#3-okio" class="headerlink" title="3.okio"></a>3.okio</h3><h4 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h4><ul>
+<li><p>1.sink：自己–》别人</p>
+</li>
+<li><p>2.source：别人–》自己</p>
+</li>
+<li><p>3.BufferSink：有缓存区域的sink</p>
+</li>
+<li><p>4.BufferSource：有缓存区域的source</p>
+</li>
+<li><p>5.Buffer：实现了3、4的缓存区域，内部有Segment的双向链表，在在转移数据的时候，只需要将指针转移指向就行</p>
+</li>
+</ul>
+<h4 id="2-比java-io的好处："><a href="#2-比java-io的好处：" class="headerlink" title="2.比java io的好处："></a>2.比java io的好处：</h4><ul>
+<li><p>1.减少内存申请和数据拷贝</p>
+</li>
+<li><p>2.类少，功能齐全，开发效率高</p>
+</li>
+</ul>
+<h4 id="3-内部实现："><a href="#3-内部实现：" class="headerlink" title="3.内部实现："></a>3.内部实现：</h4><ul>
+<li><p>1.Buffer的Segment双向链表，减少数据拷贝</p>
+</li>
+<li><p>2.Segment的内部byte数组的共享，减少数据拷贝</p>
+</li>
+<li><p>3.SegmentPool的共享和回收Segment</p>
+</li>
+<li><p>4.sink和source中被实际操作的其实是Buffer，Buffer可以充当sink和source</p>
+</li>
+<li><p>5.最终okio只是对java io的封装，所有操作都是基于java io 的&gt;</p>
+</li>
+</ul>
+<p>写在最后:能看到这里的人,我挺佩服你的.这篇文章是我在<strong>头条</strong>面试之前整理的,最后<strong>80%</strong>的题目都命中了,所以祝你好运.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/11/2018鸿洋博客总结/" rel="next" title="2018鸿洋博客总结">
+                <i class="fa fa-chevron-left"></i> 2018鸿洋博客总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/24/2018的上半年/" rel="prev" title="2018的上半年">
+                2018的上半年 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/02/11/Android面试题第二发/"
+           data-title="Android面试题第二发" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2018/02/11/Android面试题第二发/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/git_logo.png"
+               alt="xiaoming" />
+          <p class="site-author-name" itemprop="name">xiaoming</p>
+           
+              <p class="site-description motion-element" itemprop="description">read the fucking source code</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3192882571" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#android事件分发机制，请详细说下整个流程"><span class="nav-number">1.</span> <span class="nav-text">android事件分发机制，请详细说下整个流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android-view绘制机制和加载过程，请详细说下整个流程"><span class="nav-number">2.</span> <span class="nav-text">android view绘制机制和加载过程，请详细说下整个流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android四大组件的加载过程，请详细介绍下"><span class="nav-number">3.</span> <span class="nav-text">android四大组件的加载过程，请详细介绍下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity的启动模式"><span class="nav-number">4.</span> <span class="nav-text">Activity的启动模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A、B、C、D分别是四种Activity的启动模式，那么A-gt-B-gt-C-gt-D-gt-A-gt-B-gt-C-gt-D分别启动，最后的activity栈是怎么样的"><span class="nav-number">5.</span> <span class="nav-text">A、B、C、D分别是四种Activity的启动模式，那么A->B->C->D->A->B->C->D分别启动，最后的activity栈是怎么样的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity缓存方法"><span class="nav-number">6.</span> <span class="nav-text">Activity缓存方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service的生命周期，两种启动方法，有什么区别"><span class="nav-number">7.</span> <span class="nav-text">Service的生命周期，两种启动方法，有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么保证service不被杀死"><span class="nav-number">8.</span> <span class="nav-text">怎么保证service不被杀死</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态的Broadcast-和动态的有什么区别"><span class="nav-number">9.</span> <span class="nav-text">静态的Broadcast 和动态的有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1Intent可以传递哪些数据类型"><span class="nav-number">10.</span> <span class="nav-text">1Intent可以传递哪些数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1Json有什么优劣势、解析的原理"><span class="nav-number">11.</span> <span class="nav-text">1Json有什么优劣势、解析的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1一个语言的编译过程"><span class="nav-number">12.</span> <span class="nav-text">1一个语言的编译过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1动画有哪几类，各有什么特点"><span class="nav-number">13.</span> <span class="nav-text">1动画有哪几类，各有什么特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1Handler、Looper消息队列模型，各部分的作用"><span class="nav-number">14.</span> <span class="nav-text">1Handler、Looper消息队列模型，各部分的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1怎样退出终止App"><span class="nav-number">15.</span> <span class="nav-text">1怎样退出终止App</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1Android-IPC-Binder原理"><span class="nav-number">16.</span> <span class="nav-text">1Android IPC:Binder原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-在Activity和Service进行通讯的时候，用到了Binder。"><span class="nav-number">16.1.</span> <span class="nav-text">1.在Activity和Service进行通讯的时候，用到了Binder。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-系统给我们生成的Binder："><span class="nav-number">16.2.</span> <span class="nav-text">2.系统给我们生成的Binder：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1描述一次跨进程通讯"><span class="nav-number">17.</span> <span class="nav-text">1描述一次跨进程通讯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1android重要术语解释"><span class="nav-number">18.</span> <span class="nav-text">1android重要术语解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1理解Window和WindowManager"><span class="nav-number">19.</span> <span class="nav-text">1理解Window和WindowManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2Bitmap的处理"><span class="nav-number">20.</span> <span class="nav-text">2Bitmap的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2如何实现一个网络框架-参考Volley"><span class="nav-number">21.</span> <span class="nav-text">2如何实现一个网络框架(参考Volley)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2ClassLoader的基础知识"><span class="nav-number">22.</span> <span class="nav-text">2ClassLoader的基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2插件化框架描述：dynamicLoadApk为例子"><span class="nav-number">23.</span> <span class="nav-text">2插件化框架描述：dynamicLoadApk为例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2热修复：Andfix为例子"><span class="nav-number">24.</span> <span class="nav-text">2热修复：Andfix为例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2线程同步的问题，常用的线程同步"><span class="nav-number">25.</span> <span class="nav-text">2线程同步的问题，常用的线程同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2Asynctask和线程池，GC相关（怎么判断哪些内存该GC，GC算法）"><span class="nav-number">26.</span> <span class="nav-text">2Asynctask和线程池，GC相关（怎么判断哪些内存该GC，GC算法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2网络"><span class="nav-number">27.</span> <span class="nav-text">2网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2数据库性能优化：索引和事务，需要找本专门的书大概了解一下"><span class="nav-number">28.</span> <span class="nav-text">2数据库性能优化：索引和事务，需要找本专门的书大概了解一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#213-APK打包流程和其内容"><span class="nav-number">29.</span> <span class="nav-text">213.APK打包流程和其内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3网络劫持的类型原理：可以百度一下了解一下具体概念"><span class="nav-number">30.</span> <span class="nav-text">3网络劫持的类型原理：可以百度一下了解一下具体概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3java类加载过程："><span class="nav-number">31.</span> <span class="nav-text">3java类加载过程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3retrofit的了解"><span class="nav-number">32.</span> <span class="nav-text">3retrofit的了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3bundle的数据结构，如何存储"><span class="nav-number">33.</span> <span class="nav-text">3bundle的数据结构，如何存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3listview内点击buttom并移动的事件流完整拦截过程："><span class="nav-number">34.</span> <span class="nav-text">3listview内点击buttom并移动的事件流完整拦截过程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3service的意义：不需要界面，在后台执行的程序"><span class="nav-number">35.</span> <span class="nav-text">3service的意义：不需要界面，在后台执行的程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3android的IPC通信方式，线程（进程间）通信机制有哪些"><span class="nav-number">36.</span> <span class="nav-text">3android的IPC通信方式，线程（进程间）通信机制有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3操作系统进程和线程的区别"><span class="nav-number">37.</span> <span class="nav-text">3操作系统进程和线程的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3HashMap的实现过程：Capacity就是buckets的数目，Load-factor就是buckets填满程度的最大比例。如果对迭代性能要求很高的话不要把capacity设置过大，也不要把load-factor设置过小。"><span class="nav-number">38.</span> <span class="nav-text">3HashMap的实现过程：Capacity就是buckets的数目，Load factor就是buckets填满程度的最大比例。如果对迭代性能要求很高的话不要把capacity设置过大，也不要把load factor设置过小。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3mvc、mvp、mvvm："><span class="nav-number">39.</span> <span class="nav-text">3mvc、mvp、mvvm：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4java的线程如何实现"><span class="nav-number">40.</span> <span class="nav-text">4java的线程如何实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4ArrayList-如何删除重复的元素或者指定的元素；"><span class="nav-number">41.</span> <span class="nav-text">4ArrayList 如何删除重复的元素或者指定的元素；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4如何设计在-UDP-上层保证-UDP-的可靠性传输；"><span class="nav-number">42.</span> <span class="nav-text">4如何设计在 UDP 上层保证 UDP 的可靠性传输；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4Java-中内部类为什么可以访问外部类"><span class="nav-number">43.</span> <span class="nav-text">4Java 中内部类为什么可以访问外部类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4设计移动端的联系人存储与查询的功能，要求快速搜索联系人，可以用到哪些数据结构？数据库索引，平衡二叉树-B树、红黑树"><span class="nav-number">44.</span> <span class="nav-text">4设计移动端的联系人存储与查询的功能，要求快速搜索联系人，可以用到哪些数据结构？数据库索引，平衡二叉树(B树、红黑树)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4红黑树特点"><span class="nav-number">45.</span> <span class="nav-text">4红黑树特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4linux异步和同步i-o"><span class="nav-number">46.</span> <span class="nav-text">4linux异步和同步i/o:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4ConcurrentHashMap内部实现，HashTable的实现被废弃的原因"><span class="nav-number">47.</span> <span class="nav-text">4ConcurrentHashMap内部实现，HashTable的实现被废弃的原因:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4HandlerThread是什么"><span class="nav-number">48.</span> <span class="nav-text">4HandlerThread是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4IntentService是什么"><span class="nav-number">49.</span> <span class="nav-text">4IntentService是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5class和dex"><span class="nav-number">50.</span> <span class="nav-text">5class和dex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5内存泄漏"><span class="nav-number">51.</span> <span class="nav-text">5内存泄漏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5过度绘制、卡顿优化"><span class="nav-number">52.</span> <span class="nav-text">5过度绘制、卡顿优化:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5apk瘦身"><span class="nav-number">53.</span> <span class="nav-text">5apk瘦身:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5ANR的形成，各个组件上出现ARN的时间限制是多少"><span class="nav-number">54.</span> <span class="nav-text">5ANR的形成，各个组件上出现ARN的时间限制是多少</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5Serializable和Parcelable-的区别"><span class="nav-number">55.</span> <span class="nav-text">5Serializable和Parcelable 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5Sharedpreferences源码简述"><span class="nav-number">56.</span> <span class="nav-text">5Sharedpreferences源码简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5操作系统如何管理内存的："><span class="nav-number">57.</span> <span class="nav-text">5操作系统如何管理内存的：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5浏览器输入地址到返回结果发生了什么"><span class="nav-number">58.</span> <span class="nav-text">5浏览器输入地址到返回结果发生了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5java泛型类型擦除发生在什么时候，通配符有什么需要注意的。"><span class="nav-number">59.</span> <span class="nav-text">5java泛型类型擦除发生在什么时候，通配符有什么需要注意的。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6activity的生命周期"><span class="nav-number">60.</span> <span class="nav-text">6activity的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6面试常考的算法"><span class="nav-number">61.</span> <span class="nav-text">6面试常考的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6Launcher进程启动另外一个进程的过程：启动一个app"><span class="nav-number">62.</span> <span class="nav-text">6Launcher进程启动另外一个进程的过程：启动一个app</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6开源框架源码"><span class="nav-number">63.</span> <span class="nav-text">6开源框架源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Fresco"><span class="nav-number">63.1.</span> <span class="nav-text">1.Fresco</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-mvc框架："><span class="nav-number">63.1.1.</span> <span class="nav-text">1.mvc框架：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Drawable层次以及绘制："><span class="nav-number">63.1.2.</span> <span class="nav-text">2.Drawable层次以及绘制：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-职责链模式"><span class="nav-number">63.1.3.</span> <span class="nav-text">3.职责链模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-内存缓存"><span class="nav-number">63.1.4.</span> <span class="nav-text">4.内存缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-硬盘缓存"><span class="nav-number">63.1.5.</span> <span class="nav-text">5.硬盘缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-对象池"><span class="nav-number">63.1.6.</span> <span class="nav-text">6.对象池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-设计模式"><span class="nav-number">63.1.7.</span> <span class="nav-text">7.设计模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-自定义计数引用：类似c-智能指针"><span class="nav-number">63.1.8.</span> <span class="nav-text">8.自定义计数引用：类似c++智能指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-博客推荐"><span class="nav-number">63.1.9.</span> <span class="nav-text">9.博客推荐</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-oKhttp："><span class="nav-number">63.2.</span> <span class="nav-text">2.oKhttp：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-同步和异步："><span class="nav-number">63.2.1.</span> <span class="nav-text">1.同步和异步：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-连接池："><span class="nav-number">63.2.2.</span> <span class="nav-text">2.连接池：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-选择路线与建立连接"><span class="nav-number">63.2.3.</span> <span class="nav-text">3.选择路线与建立连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-建立连接"><span class="nav-number">63.2.4.</span> <span class="nav-text">2.建立连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-职责链模式"><span class="nav-number">63.2.5.</span> <span class="nav-text">4.职责链模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-博客推荐"><span class="nav-number">63.2.6.</span> <span class="nav-text">5.博客推荐</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-okio"><span class="nav-number">63.3.</span> <span class="nav-text">3.okio</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-简介"><span class="nav-number">63.3.1.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-比java-io的好处："><span class="nav-number">63.3.2.</span> <span class="nav-text">2.比java io的好处：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-内部实现："><span class="nav-number">63.3.3.</span> <span class="nav-text">3.内部实现：</span></a></li></ol></li></ol></li></ol></div>
+            
+            <!--by xiaoming-->
+            <div >
+              <img src="/img/333CDC0C0E16121D97E740B0D234CB20.jpg" alt="..." width="200">
+              <img src="/img/D201873535E8B182D738FEA8B9C30EF6.jpg" alt="..." width="200">
+            </div>
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoming</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhoushengming"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

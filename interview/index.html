@@ -1,0 +1,649 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="周生明, ericcode" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https://blog.csdn.net/javensun/article/details/7334230 Android中的权限管理（基于Permission ProtectionLevel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="面试题集">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/interview/index.html">
+<meta property="og:site_name" content="码字猴">
+<meta property="og:description" content="书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https://blog.csdn.net/javensun/article/details/7334230 Android中的权限管理（基于Permission ProtectionLevel">
+<meta property="og:updated_time" content="2019-01-10T11:53:51.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试题集">
+<meta name="twitter:description" content="书签Android.mk的深入介绍http://note.qidong.name/2017/08/android-mk/ Android Broadcast 和 BroadcastReceiver的权限限制https://blog.csdn.net/javensun/article/details/7334230 Android中的权限管理（基于Permission ProtectionLevel">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/interview/"/>
+
+
+
+
+
+  <title>面试题集 | 码字猴</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">码字猴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">coding..</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-codes">
+          <a href="/codes" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+            
+            Codes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-interview">
+          <a href="/interview" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-smile-o"></i> <br />
+            
+            面试题集
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-plan">
+          <a href="/plan" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
+            
+            计划
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+  <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">面试题集</h1>
+
+
+
+</header>
+
+    
+    
+      <h2 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h2><p>Android.mk的深入介绍<br><a href="http://note.qidong.name/2017/08/android-mk/" target="_blank" rel="external">http://note.qidong.name/2017/08/android-mk/</a></p>
+<p>Android Broadcast 和 BroadcastReceiver的权限限制<br><a href="https://blog.csdn.net/javensun/article/details/7334230" target="_blank" rel="external">https://blog.csdn.net/javensun/article/details/7334230</a></p>
+<p>Android中的权限管理（基于Permission ProtectionLevel）<br><a href="https://blog.csdn.net/jltxgcy/article/details/48288467" target="_blank" rel="external">https://blog.csdn.net/jltxgcy/article/details/48288467</a></p>
+<h2 id="面试题集"><a href="#面试题集" class="headerlink" title="面试题集"></a>面试题集</h2><p><a href="https://github.com/crossoverJie/JCSprout">https://github.com/crossoverJie/JCSprout</a><br><a href="https://github.com/GcsSloop/AndroidNote">https://github.com/GcsSloop/AndroidNote</a><br><a href="https://github.com/Snailclimb/JavaGuide">https://github.com/Snailclimb/JavaGuide</a><br><a href="https://github.com/francistao/LearningNotes">https://github.com/francistao/LearningNotes</a><br><a href="http://www.jackywang.tech/AndroidInterview-Q-A/interview/" target="_blank" rel="external">http://www.jackywang.tech/AndroidInterview-Q-A/interview/</a><br><a href="https://juejin.im/post/5b8f15e26fb9a01a031b12d9" target="_blank" rel="external">https://juejin.im/post/5b8f15e26fb9a01a031b12d9</a></p>
+<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><p>公司比较小，进他们公司就感觉到人很少，他们招做逆向的android工程师，我对逆向一点都不懂，但是他们可以培养，当时只是想去碰碰运气，看下他们的业务，下面是面试官的问题：</p>
+<p>1.自动化<br>2.逆向概念<br>3.脱壳<br>4.你为什么想做逆向<br>5.反编译apk</p>
+<p>阿里一面：</p>
+<p>1.自我介绍你的情况，以及你做的项目？<br>2.布局优化<br>3.内存泄露检测工具<br>4.anr情况 以及检测工具<br>5.gradle多渠道打包 关键字<br>5.为什么想要离职<br>6.自定义view 项目中用到的地方</p>
+<p>1.kotlin 怎么简化了你的项目<br>2.协程<br>3.插件化<br>4.协程 用过那些高阶函数<br>5.介绍下你的项目<br>6.apk打包过程<br>7.rxjava线程切换原理<br>8.apk启动过程 androidmanifest什么时候被解析<br>9.okhttp原理 拦截器链和android中的什么设计模式一样<br>10.rn语法<br>11.小程序音视频<br>12.对前端趋势认识<br>13.为什么想要离职<br>14.dagger原理<br>15.组件化<br>16.jekins<br>17.对我们的app觉得有什么要优化的<br>18.retrofit优缺点<br>19.协程和进程有什么区别<br>20.css布局中的几种方式<br>21.自己的职业规划</p>
+<p>1.http和https ssl怎么验证 https特点<br>2.304状态码 http缓存<br>3.做过的跨平台框架<br>4.为什么要用kotlin kotlin特性<br>5.rehash和hash hashmap hash算法的用处 头插 尾插<br>6.sp原理<br>7.Java线程通信<br>8.android里面替换hashmap的类<br>9.context的设计模式<br>10.http常见错误码<br>11.你在项目中担任的角色<br>12.你做了那些比较有技术含量的事<br>13.okhttp拦截器链 每个拦截器的作用 okhttp有哪些设计得比较好的地方<br>14.线程池几个参数的意义 5个核心线程 10个非核心线程 20个线程如何进行分配 队列的特点继承那个类<br>15.如何判断一个单链表是否有环<br>16.你为什么要离职 很重要每次都问到了<br>17.你用过哪些锁</p>
+<p>1.android中webview如果和js交互的<br>2.android中webview如何处理加载的页面图片过多的问题<br>3.android中如何处理图片过大问题，图片压缩，三级缓存<br>4.Glide如何和android生命周期绑定<br>5.Retrofit源码<br>6.Listview和Recyclerview区别<br>7.Listview的原理和复用机制<br>8.android的apk优化<br>9.离职原因<br>10.说下你了解的Framework</p>
+<p>1 . https<br>2 . gc什么时候回收，对什么东西回收，做了什么操作<br>3 . 事件分发<br>4 . 微信向app发信息，app如何拦截信息<br>5 . 具体业务分为哪些模块，大概哪些流程<br>6 . jni懂吗<br>7 . activity生命周期<br>8 . 线程同步</p>
+<p>1.tcp和udp<br>2.你有什么擅长的<br>3.三次握手<br>4.网络模块怎么搭建</p>
+<p>1.http怎么知道文件过大是否传输完毕的响应<br>2.handler流程 有时间的post是怎么执行的<br>3.activity启动流程<br>4.热修复<br>5.okhttp<br>6.retrofit<br>7.glide 缓存 lrucache linkhashmap 二叉树 扩容机制<br>8.jsbridge<br>9.kotlin如何简化项目？<br>10.你印象最深的事<br>11.前端react native jsx</p>
+<p>1 . 分享SDK<br>2 . 线程池<br>3 . activity启动模式<br>4 . rxjava的flatmap怎么实现的<br>5 .性能优化<br>6 .webview怎么封装<br>7 .hashmap java1.8之后的优化 红黑树和BL树的区别<br>8 .java内存模型<br>9 .java GC算法<br>10 . android 5.0, 6.0, 7.0, 8.0新特性<br>11 . rxjava dispose里面做了什么事情<br>12 . 项目中怎么性能优化的</p>
+<p>1.页面怎么做动态化<br>2.职业规划<br>3.平时怎么做输出<br>4.用过什么框架，说下原理<br>5.了解过有赞？<br>6.你是怎么看有赞的？<br>7.怎么看待是否可以接入一新的库<br>8.是否了解过跨平台开发框架是否了解过flutter</p>
+
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/git_logo.png"
+               alt="xiaoming" />
+          <p class="site-author-name" itemprop="name">xiaoming</p>
+           
+              <p class="site-description motion-element" itemprop="description">read the fucking source code</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3192882571" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书签"><span class="nav-number">1.</span> <span class="nav-text">书签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题集"><span class="nav-number">2.</span> <span class="nav-text">面试题集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题"><span class="nav-number">3.</span> <span class="nav-text">面试题</span></a></li></ol></div>
+            
+            <!--by xiaoming-->
+            <div >
+              <img src="/img/333CDC0C0E16121D97E740B0D234CB20.jpg" alt="..." width="200">
+              <img src="/img/D201873535E8B182D738FEA8B9C30EF6.jpg" alt="..." width="200">
+            </div>
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoming</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhoushengming"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

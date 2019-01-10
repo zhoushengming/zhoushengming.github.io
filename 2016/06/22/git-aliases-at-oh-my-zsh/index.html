@@ -1,0 +1,1380 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="git,shell,oh-my-zsh," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git The git Plugin">
+<meta name="keywords" content="git,shell,oh-my-zsh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git aliases at oh-my-zsh">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2016/06/22/git-aliases-at-oh-my-zsh/index.html">
+<meta property="og:site_name" content="码字猴">
+<meta property="og:description" content="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git The git Plugin">
+<meta property="og:updated_time" content="2017-06-28T17:37:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git aliases at oh-my-zsh">
+<meta name="twitter:description" content="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git The git Plugin">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2016/06/22/git-aliases-at-oh-my-zsh/"/>
+
+
+
+
+
+  <title>git aliases at oh-my-zsh | 码字猴</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">码字猴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">coding..</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-codes">
+          <a href="/codes" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+            
+            Codes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-interview">
+          <a href="/interview" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-smile-o"></i> <br />
+            
+            面试题集
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-plan">
+          <a href="/plan" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
+            
+            计划
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2016/06/22/git-aliases-at-oh-my-zsh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaoming">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/git_logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码字猴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">git aliases at oh-my-zsh</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-22T15:36:58+08:00">
+                2016-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/06/22/git-aliases-at-oh-my-zsh/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/22/git-aliases-at-oh-my-zsh/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git">https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git</a></p>
+<h2 id="The-git-Plugin"><a href="#The-git-Plugin" class="headerlink" title="The git Plugin"></a>The git Plugin</h2><a id="more"></a>
+<p>The <a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git">git</a> plugin provides many <a href="#aliases">aliases</a> and a few useful <a href="#functions">functions</a>.</p>
+<p>Enable it by adding <em>git</em> to the <a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/templates/zshrc.zsh-template#L48"><em>plugins array</em></a> before sourcing OMZ (see [[Plugins]]).</p>
+<h2 id="Aliases"><a href="#Aliases" class="headerlink" title="Aliases"></a>Aliases</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">Alias</th>
+<th style="text-align:left">Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">g</td>
+<td style="text-align:left">git</td>
+</tr>
+<tr>
+<td style="text-align:left">ga</td>
+<td style="text-align:left">git add</td>
+</tr>
+<tr>
+<td style="text-align:left">gaa</td>
+<td style="text-align:left">git add –all</td>
+</tr>
+<tr>
+<td style="text-align:left">gapa</td>
+<td style="text-align:left">git add –patch</td>
+</tr>
+<tr>
+<td style="text-align:left">gb</td>
+<td style="text-align:left">git branch</td>
+</tr>
+<tr>
+<td style="text-align:left">gba</td>
+<td style="text-align:left">git branch -a</td>
+</tr>
+<tr>
+<td style="text-align:left">gbda</td>
+<td style="text-align:left">git branch –merged \</td>
+<td>command grep -vE “^(*\</td>
+<td>\s<em>master\s</em>$)” \</td>
+<td>command xargs -n 1 git branch -d</td>
+</tr>
+<tr>
+<td style="text-align:left">gbl</td>
+<td style="text-align:left">git blame -b -w</td>
+</tr>
+<tr>
+<td style="text-align:left">gbnm</td>
+<td style="text-align:left">git branch –no-merged</td>
+</tr>
+<tr>
+<td style="text-align:left">gbr</td>
+<td style="text-align:left">git branch –remote</td>
+</tr>
+<tr>
+<td style="text-align:left">gbs</td>
+<td style="text-align:left">git bisect</td>
+</tr>
+<tr>
+<td style="text-align:left">gbsb</td>
+<td style="text-align:left">git bisect bad</td>
+</tr>
+<tr>
+<td style="text-align:left">gbsg</td>
+<td style="text-align:left">git bisect good</td>
+</tr>
+<tr>
+<td style="text-align:left">gbsr</td>
+<td style="text-align:left">git bisect reset</td>
+</tr>
+<tr>
+<td style="text-align:left">gbss</td>
+<td style="text-align:left">git bisect start</td>
+</tr>
+<tr>
+<td style="text-align:left">gc</td>
+<td style="text-align:left">git commit -v</td>
+</tr>
+<tr>
+<td style="text-align:left">gc!</td>
+<td style="text-align:left">git commit -v –amend</td>
+</tr>
+<tr>
+<td style="text-align:left">gca</td>
+<td style="text-align:left">git commit -v -a</td>
+</tr>
+<tr>
+<td style="text-align:left">gcam</td>
+<td style="text-align:left">git commit -a -m</td>
+</tr>
+<tr>
+<td style="text-align:left">gca!</td>
+<td style="text-align:left">git commit -v -a –amend</td>
+</tr>
+<tr>
+<td style="text-align:left">gcan!</td>
+<td style="text-align:left">git commit -v -a -s –no-edit –amend</td>
+</tr>
+<tr>
+<td style="text-align:left">gcb</td>
+<td style="text-align:left">git checkout -b</td>
+</tr>
+<tr>
+<td style="text-align:left">gcf</td>
+<td style="text-align:left">git config –list</td>
+</tr>
+<tr>
+<td style="text-align:left">gcl</td>
+<td style="text-align:left">git clone –recursive</td>
+</tr>
+<tr>
+<td style="text-align:left">gclean</td>
+<td style="text-align:left">git clean -df</td>
+</tr>
+<tr>
+<td style="text-align:left">gcm</td>
+<td style="text-align:left">git checkout master</td>
+</tr>
+<tr>
+<td style="text-align:left">gcmsg</td>
+<td style="text-align:left">git commit -m</td>
+</tr>
+<tr>
+<td style="text-align:left">gco</td>
+<td style="text-align:left">git checkout</td>
+</tr>
+<tr>
+<td style="text-align:left">gcount</td>
+<td style="text-align:left">git shortlog -sn</td>
+</tr>
+<tr>
+<td style="text-align:left">gcp</td>
+<td style="text-align:left">git cherry-pick</td>
+</tr>
+<tr>
+<td style="text-align:left">gcs</td>
+<td style="text-align:left">git commit -S</td>
+</tr>
+<tr>
+<td style="text-align:left">gd</td>
+<td style="text-align:left">git diff</td>
+</tr>
+<tr>
+<td style="text-align:left">gdca</td>
+<td style="text-align:left">git diff –cached</td>
+</tr>
+<tr>
+<td style="text-align:left">gdt</td>
+<td style="text-align:left">git diff-tree –no-commit-id –name-only -r</td>
+</tr>
+<tr>
+<td style="text-align:left">gdw</td>
+<td style="text-align:left">git diff –word-diff</td>
+</tr>
+<tr>
+<td style="text-align:left">gf</td>
+<td style="text-align:left">git fetch</td>
+</tr>
+<tr>
+<td style="text-align:left">gfa</td>
+<td style="text-align:left">git fetch –all –prune</td>
+</tr>
+<tr>
+<td style="text-align:left">gfo</td>
+<td style="text-align:left">git fetch origin</td>
+</tr>
+<tr>
+<td style="text-align:left">gg</td>
+<td style="text-align:left">git gui citool</td>
+</tr>
+<tr>
+<td style="text-align:left">gga</td>
+<td style="text-align:left">git gui citool –amend</td>
+</tr>
+<tr>
+<td style="text-align:left">ggpull</td>
+<td style="text-align:left">ggl</td>
+</tr>
+<tr>
+<td style="text-align:left">ggpur</td>
+<td style="text-align:left">ggu</td>
+</tr>
+<tr>
+<td style="text-align:left">ggpush</td>
+<td style="text-align:left">ggp</td>
+</tr>
+<tr>
+<td style="text-align:left">ggsup</td>
+<td style="text-align:left">git branch –set-upstream-to = origin/$(current_branch)</td>
+</tr>
+<tr>
+<td style="text-align:left">gignore</td>
+<td style="text-align:left">git update-index –assume-unchanged</td>
+</tr>
+<tr>
+<td style="text-align:left">gignored</td>
+<td style="text-align:left">`git ls-files -v \</td>
+<td>grep “^[[:lower:]]”`</td>
+</tr>
+<tr>
+<td style="text-align:left">git-svn-dcommit-push</td>
+<td style="text-align:left">git svn dcommit &amp;&amp; git push github master:svntrunk</td>
+</tr>
+<tr>
+<td style="text-align:left">gk</td>
+<td style="text-align:left">\gitk –all –branches</td>
+</tr>
+<tr>
+<td style="text-align:left">gke</td>
+<td style="text-align:left">\gitk –all $(git log -g –pretty = format:%h)</td>
+</tr>
+<tr>
+<td style="text-align:left">gl</td>
+<td style="text-align:left">git pull</td>
+</tr>
+<tr>
+<td style="text-align:left">glg</td>
+<td style="text-align:left">git log –stat –color</td>
+</tr>
+<tr>
+<td style="text-align:left">glgg</td>
+<td style="text-align:left">git log –graph –color</td>
+</tr>
+<tr>
+<td style="text-align:left">glgga</td>
+<td style="text-align:left">git log –graph –decorate –all</td>
+</tr>
+<tr>
+<td style="text-align:left">glgm</td>
+<td style="text-align:left">git log –graph –max-count = 10</td>
+</tr>
+<tr>
+<td style="text-align:left">glgp</td>
+<td style="text-align:left">git log –stat –color -p</td>
+</tr>
+<tr>
+<td style="text-align:left">glo</td>
+<td style="text-align:left">git log –oneline –decorate –color</td>
+</tr>
+<tr>
+<td style="text-align:left">glog</td>
+<td style="text-align:left">git log –oneline –decorate –color –graph</td>
+</tr>
+<tr>
+<td style="text-align:left">glol</td>
+<td style="text-align:left">git log –graph –pretty = format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit</td>
+</tr>
+<tr>
+<td style="text-align:left">glola</td>
+<td style="text-align:left">git log –graph –pretty = format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit –all</td>
+</tr>
+<tr>
+<td style="text-align:left">glp</td>
+<td style="text-align:left">_git_log_prettily</td>
+</tr>
+<tr>
+<td style="text-align:left">gm</td>
+<td style="text-align:left">git merge</td>
+</tr>
+<tr>
+<td style="text-align:left">gmom</td>
+<td style="text-align:left">git merge origin/master</td>
+</tr>
+<tr>
+<td style="text-align:left">gmt</td>
+<td style="text-align:left">git mergetool –no-prompt</td>
+</tr>
+<tr>
+<td style="text-align:left">gmtvim</td>
+<td style="text-align:left">git mergetool –no-prompt –tool = vimdiff</td>
+</tr>
+<tr>
+<td style="text-align:left">gmum</td>
+<td style="text-align:left">git merge upstream/master</td>
+</tr>
+<tr>
+<td style="text-align:left">gp</td>
+<td style="text-align:left">git push</td>
+</tr>
+<tr>
+<td style="text-align:left">gpd</td>
+<td style="text-align:left">git push –dry-run</td>
+</tr>
+<tr>
+<td style="text-align:left">gpoat</td>
+<td style="text-align:left">git push origin –all &amp;&amp; git push origin –tags </td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">gpristine</td>
+<td style="text-align:left">git reset –hard &amp;&amp; git clean -dfx </td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">gpu</td>
+<td style="text-align:left">git push upstream</td>
+</tr>
+<tr>
+<td style="text-align:left">gpv</td>
+<td style="text-align:left">git push -v</td>
+</tr>
+<tr>
+<td style="text-align:left">gr</td>
+<td style="text-align:left">git remote</td>
+</tr>
+<tr>
+<td style="text-align:left">gra</td>
+<td style="text-align:left">git remote add</td>
+</tr>
+<tr>
+<td style="text-align:left">grb</td>
+<td style="text-align:left">git rebase</td>
+</tr>
+<tr>
+<td style="text-align:left">grba</td>
+<td style="text-align:left">git rebase –abort</td>
+</tr>
+<tr>
+<td style="text-align:left">grbc</td>
+<td style="text-align:left">git rebase –continue</td>
+</tr>
+<tr>
+<td style="text-align:left">grbi</td>
+<td style="text-align:left">git rebase -i</td>
+</tr>
+<tr>
+<td style="text-align:left">grbm</td>
+<td style="text-align:left">git rebase master</td>
+</tr>
+<tr>
+<td style="text-align:left">grbs</td>
+<td style="text-align:left">git rebase –skip</td>
+</tr>
+<tr>
+<td style="text-align:left">grh</td>
+<td style="text-align:left">git reset HEAD</td>
+</tr>
+<tr>
+<td style="text-align:left">grhh</td>
+<td style="text-align:left">git reset HEAD –hard</td>
+</tr>
+<tr>
+<td style="text-align:left">grmv</td>
+<td style="text-align:left">git remote rename</td>
+</tr>
+<tr>
+<td style="text-align:left">grrm</td>
+<td style="text-align:left">git remote remove</td>
+</tr>
+<tr>
+<td style="text-align:left">grset</td>
+<td style="text-align:left">git remote set-url</td>
+</tr>
+<tr>
+<td style="text-align:left">grt</td>
+<td style="text-align:left">cd $(git rev-parse –show-toplevel \</td>
+<td>\</td>
+<td>echo “.”)</td>
+</tr>
+<tr>
+<td style="text-align:left">gru</td>
+<td style="text-align:left">git reset –</td>
+</tr>
+<tr>
+<td style="text-align:left">grup</td>
+<td style="text-align:left">git remote update</td>
+</tr>
+<tr>
+<td style="text-align:left">grv</td>
+<td style="text-align:left">git remote -v</td>
+</tr>
+<tr>
+<td style="text-align:left">gsb</td>
+<td style="text-align:left">git status -sb</td>
+</tr>
+<tr>
+<td style="text-align:left">gsd</td>
+<td style="text-align:left">git svn dcommit</td>
+</tr>
+<tr>
+<td style="text-align:left">gsi</td>
+<td style="text-align:left">git submodule init</td>
+</tr>
+<tr>
+<td style="text-align:left">gsps</td>
+<td style="text-align:left">git show –pretty = short –show-signature</td>
+</tr>
+<tr>
+<td style="text-align:left">gsr</td>
+<td style="text-align:left">git svn rebase</td>
+</tr>
+<tr>
+<td style="text-align:left">gss</td>
+<td style="text-align:left">git status -s</td>
+</tr>
+<tr>
+<td style="text-align:left">gst</td>
+<td style="text-align:left">git status</td>
+</tr>
+<tr>
+<td style="text-align:left">gsta</td>
+<td style="text-align:left">git stash</td>
+</tr>
+<tr>
+<td style="text-align:left">gstaa</td>
+<td style="text-align:left">git stash apply</td>
+</tr>
+<tr>
+<td style="text-align:left">gstd</td>
+<td style="text-align:left">git stash drop</td>
+</tr>
+<tr>
+<td style="text-align:left">gstl</td>
+<td style="text-align:left">git stash list</td>
+</tr>
+<tr>
+<td style="text-align:left">gstp</td>
+<td style="text-align:left">git stash pop</td>
+</tr>
+<tr>
+<td style="text-align:left">gsts</td>
+<td style="text-align:left">git stash show –text</td>
+</tr>
+<tr>
+<td style="text-align:left">gsu</td>
+<td style="text-align:left">git submodule update</td>
+</tr>
+<tr>
+<td style="text-align:left">gts</td>
+<td style="text-align:left">git tag -s</td>
+</tr>
+<tr>
+<td style="text-align:left">gunignore</td>
+<td style="text-align:left">git update-index –no-assume-unchanged</td>
+</tr>
+<tr>
+<td style="text-align:left">gunwip</td>
+<td style="text-align:left">git log -n 1 \</td>
+<td>grep -q -c “--wip--“ &amp;&amp; git reset HEAD~1</td>
+</tr>
+<tr>
+<td style="text-align:left">gup</td>
+<td style="text-align:left">git pull –rebase</td>
+</tr>
+<tr>
+<td style="text-align:left">gupv</td>
+<td style="text-align:left">git pull –rebase -v</td>
+</tr>
+<tr>
+<td style="text-align:left">glum</td>
+<td style="text-align:left">git pull upstream master</td>
+</tr>
+<tr>
+<td style="text-align:left">gvt</td>
+<td style="text-align:left">git verify-tag</td>
+</tr>
+<tr>
+<td style="text-align:left">gwch</td>
+<td style="text-align:left">git whatchanged -p –abbrev-commit –pretty = medium</td>
+</tr>
+<tr>
+<td style="text-align:left">gwip</td>
+<td style="text-align:left">git add -A; git rm $(git ls-files –deleted) 2&gt; /dev/null; git commit -m “–wip–”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Deprecated-Aliases"><a href="#Deprecated-Aliases" class="headerlink" title="Deprecated Aliases"></a>Deprecated Aliases</h2><p>These are aliases that have been removed, renamed, or otherwise modified in a way that may, or may not, receive further support.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Alias</th>
+<th style="text-align:left">Command</th>
+<th>Modification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">gap</td>
+<td style="text-align:left">git add –patch</td>
+<td>new alias <code>gapa</code></td>
+</tr>
+<tr>
+<td style="text-align:left">gcl</td>
+<td style="text-align:left">git config –list</td>
+<td>new alias <code>gcf</code></td>
+</tr>
+<tr>
+<td style="text-align:left">gdc</td>
+<td style="text-align:left">git diff –cached</td>
+<td>new alias <code>gdca</code></td>
+</tr>
+<tr>
+<td style="text-align:left">gdt</td>
+<td style="text-align:left">git difftool</td>
+<td>no replacement</td>
+</tr>
+<tr>
+<td style="text-align:left">ggpull</td>
+<td style="text-align:left">git pull origin $(current_branch)</td>
+<td>new alias <code>ggl</code> (<code>ggpull</code> still exists for now though)</td>
+</tr>
+<tr>
+<td style="text-align:left">ggpur</td>
+<td style="text-align:left">git pull –rebase origin $(current_branch)</td>
+<td>new alias <code>ggu</code> (<code>ggpur</code> still exists for now though)</td>
+</tr>
+<tr>
+<td style="text-align:left">ggpush</td>
+<td style="text-align:left">git push origin $(current_branch)</td>
+<td>new alias <code>ggp</code> (<code>ggpush</code> still exists for now though)</td>
+</tr>
+<tr>
+<td style="text-align:left">gk</td>
+<td style="text-align:left">gitk –all –branches</td>
+<td>now aliased to <code>\gitk --all --branches</code></td>
+</tr>
+<tr>
+<td style="text-align:left">glg</td>
+<td style="text-align:left">git log –stat –max-count = 10</td>
+<td>now aliased to <code>git log --stat --color</code></td>
+</tr>
+<tr>
+<td style="text-align:left">glgg</td>
+<td style="text-align:left">git log –graph –max-count = 10</td>
+<td>now aliased to <code>git log --graph --color</code></td>
+</tr>
+<tr>
+<td style="text-align:left">gwc</td>
+<td style="text-align:left">git whatchanged -p –abbrev-commit –pretty = medium</td>
+<td>new alias <code>gwch</code></td>
+</tr>
+<tr>
+<td style="text-align:left">gwip</td>
+<td style="text-align:left">git add -A; git ls-files –deleted -z \</td>
+<td>xargs -r0 git rm; git commit -m “–wip–”</td>
+<td>now aliased to <code>git add -A; git rm $(git ls-files --deleted) 2&gt; /dev/null; git commit -m &quot;--wip--&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><h3 id="Current"><a href="#Current" class="headerlink" title="Current"></a>Current</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Command</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">current_branch</td>
+<td style="text-align:left">Return the name of the current branch</td>
+</tr>
+<tr>
+<td style="text-align:left">current_repository</td>
+<td style="text-align:left">Return the names of the current remotes</td>
+</tr>
+<tr>
+<td style="text-align:left">git_current_user_name</td>
+<td style="text-align:left">Returns the <code>user.name</code> config value</td>
+</tr>
+<tr>
+<td style="text-align:left">git_current_user_email</td>
+<td style="text-align:left">Returns the <code>user.email</code> config value</td>
+</tr>
+</tbody>
+</table>
+<h3 id="WiP"><a href="#WiP" class="headerlink" title="WiP"></a>WiP</h3><p>These features allow to pause a branch development and switch to another one (<em>“Work in Progress”</em>,  or wip). When you want to go back to work, just unwip it.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Command</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">work_in_progress</td>
+<td style="text-align:left">Echoes a warning if the current branch is a wip</td>
+</tr>
+<tr>
+<td style="text-align:left">gwip</td>
+<td style="text-align:left">Commit wip branch</td>
+</tr>
+<tr>
+<td style="text-align:left">gunwip</td>
+<td style="text-align:left">Uncommit wip branch</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
+          
+            <a href="/tags/oh-my-zsh/" rel="tag"># oh-my-zsh</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/20/Android博客收集/" rel="next" title="Android博客收集">
+                <i class="fa fa-chevron-left"></i> Android博客收集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/02/Java注解学习/" rel="prev" title="Java注解学习">
+                Java注解学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/22/git-aliases-at-oh-my-zsh/"
+           data-title="git aliases at oh-my-zsh" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2016/06/22/git-aliases-at-oh-my-zsh/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/git_logo.png"
+               alt="xiaoming" />
+          <p class="site-author-name" itemprop="name">xiaoming</p>
+           
+              <p class="site-description motion-element" itemprop="description">read the fucking source code</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3192882571" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-git-Plugin"><span class="nav-number">1.</span> <span class="nav-text">The git Plugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Aliases"><span class="nav-number">2.</span> <span class="nav-text">Aliases</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deprecated-Aliases"><span class="nav-number">3.</span> <span class="nav-text">Deprecated Aliases</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functions"><span class="nav-number">4.</span> <span class="nav-text">Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Current"><span class="nav-number">4.1.</span> <span class="nav-text">Current</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WiP"><span class="nav-number">4.2.</span> <span class="nav-text">WiP</span></a></li></ol></li></ol></div>
+            
+            <!--by xiaoming-->
+            <div >
+              <img src="/img/333CDC0C0E16121D97E740B0D234CB20.jpg" alt="..." width="200">
+              <img src="/img/D201873535E8B182D738FEA8B9C30EF6.jpg" alt="..." width="200">
+            </div>
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoming</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhoushengming"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
