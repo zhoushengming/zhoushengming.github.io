@@ -111,7 +111,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -177,7 +177,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">coding..</p>
+        <h1 class="site-subtitle" itemprop="description">coding..</h1>
       
   </div>
 
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">openssl学习</h1>
+          <h2 class="post-title" itemprop="name headline">openssl学习</h2>
         
 
         <div class="post-meta">
@@ -489,15 +489,15 @@
                alt="xiaoming" />
           <p class="site-author-name" itemprop="name">xiaoming</p>
            
-              <p class="site-description motion-element" itemprop="description">read the fucking source code</p>
-          
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -541,6 +541,15 @@
                 </a>
               </span>
             
+              <span class="links-of-author-item">
+                <a href="https://blog.csdn.net/u010954948" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-tree"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
           
         </div>
 
@@ -574,7 +583,7 @@
   &copy;  2015 - 
   <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">xiaoming</span>
 </div>
@@ -601,6 +610,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
@@ -706,11 +717,6 @@
     })();
   </script>
 
-  
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
