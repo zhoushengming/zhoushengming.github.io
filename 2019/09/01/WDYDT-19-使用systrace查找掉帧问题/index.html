@@ -1,0 +1,817 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="这次遇到的问题发生在了listview的绘制上，也是研究systrace的时候偶然发现的。">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WDYDT-19-使用systrace查找掉帧问题">
+<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2019/09/01/WDYDT-19-使用systrace查找掉帧问题/index.html">
+<meta property="og:site_name" content="码字猴">
+<meta property="og:description" content="这次遇到的问题发生在了listview的绘制上，也是研究systrace的时候偶然发现的。">
+<meta property="og:image" content="https://github.com/img/wdydt-19/WX20190901-012311@2x.png">
+<meta property="og:image" content="https://github.com/img/wdydt-19/WX20190901-012405@2x.png">
+<meta property="og:image" content="https://github.com/img/wdydt-19/WX20190901-012426@2x.png">
+<meta property="og:updated_time" content="2019-08-31T17:36:13.307Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WDYDT-19-使用systrace查找掉帧问题">
+<meta name="twitter:description" content="这次遇到的问题发生在了listview的绘制上，也是研究systrace的时候偶然发现的。">
+<meta name="twitter:image" content="https://github.com/img/wdydt-19/WX20190901-012311@2x.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2019/09/01/WDYDT-19-使用systrace查找掉帧问题/"/>
+
+
+
+
+
+  <title>WDYDT-19-使用systrace查找掉帧问题 | 码字猴</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">码字猴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">coding..</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-codes">
+          <a href="/codes" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+            
+            Codes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-interview">
+          <a href="/interview" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-smile-o"></i> <br />
+            
+            面试题集
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-plan">
+          <a href="/plan" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
+            
+            计划
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2019/09/01/WDYDT-19-使用systrace查找掉帧问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaoming">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/git_logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码字猴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">WDYDT-19-使用systrace查找掉帧问题</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-01T01:12:51+08:00">
+                2019-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/01/WDYDT-19-使用systrace查找掉帧问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/09/01/WDYDT-19-使用systrace查找掉帧问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- abstract area -->
+<p>这次遇到的问题发生在了listview的绘制上，也是研究systrace的时候偶然发现的。</p>
+<a id="more"></a>
+<p>命令：</p>
+<blockquote>
+<p> python systrace.py -b 32768 -o mytrace.html sched  gfx view am dalvik binder_driver core_services -a &lt;包名&gt;</p>
+</blockquote>
+<h3 id="解释一下命令"><a href="#解释一下命令" class="headerlink" title="解释一下命令"></a>解释一下命令</h3><p>systrace是android提供的一个性能优化工具。</p>
+<p>路径在android sdk/platform-tools/,是一个Python脚本，所以需要Python环境，我用的Python2.7。</p>
+<p>说一下参数，这里只用了一部分：</p>
+<p>-b   即buffer大小</p>
+<p>-o   output，结果输出到哪里</p>
+<p>sched  cpu的调度信息</p>
+<p>gfx   图像图形相关的</p>
+<p>view  view相关</p>
+<p>am  ActivityManager</p>
+<p>dalvik  java虚拟机，gc啥的</p>
+<p>binder_driver  binder相关的，对这块我还是小白</p>
+<p>core_services 核心服务的情况</p>
+<p>-a 你的包名</p>
+<h3 id="掉帧"><a href="#掉帧" class="headerlink" title="掉帧"></a>掉帧</h3><p><img src="/img/wdydt-19/WX20190901-012311@2x.png"></p>
+<p>首先，我们先找到自己的进程，可以看到一堆F,那种红色的F就是有问题，准确的说，不是绿色的都有问题。</p>
+<p><img src="/img/wdydt-19/WX20190901-012405@2x.png"></p>
+<p>上边这个就是有问题的，我们放大一些看一下。明显layout过程太长了，超过了一帧，即16ms。</p>
+<p><img src="/img/wdydt-19/WX20190901-012426@2x.png"></p>
+<p>点击layout，发现耗时24ms, layout里边有一些inflate，通过查看listview的代码，我们可以发现这么几个地方：</p>
+<p>ref: android.widget.AbsListView#obtainView<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">View obtainView(int position, boolean[] outMetadata) &#123;</div><div class="line">    Trace.traceBegin(Trace.TRACE_TAG_VIEW, &quot;obtainView&quot;);  // 搜集trace</div><div class="line"></div><div class="line">    outMetadata[0] = false;</div><div class="line"></div><div class="line">    // Check whether we have a transient state view. Attempt to re-bind the</div><div class="line">    // data and discard the view if we fail.</div><div class="line">    final View transientView = mRecycler.getTransientStateView(position);</div><div class="line">    if (transientView != null) &#123;</div><div class="line">        final LayoutParams params = (LayoutParams) transientView.getLayoutParams();</div><div class="line"></div><div class="line">        // If the view type hasn&apos;t changed, attempt to re-bind the data.</div><div class="line">        if (params.viewType == mAdapter.getItemViewType(position)) &#123;</div><div class="line">            final View updatedView = mAdapter.getView(position, transientView, this);  // adapter#getView 这是我们的方法，我们会在这里inflate</div><div class="line"></div><div class="line">            // If we failed to re-bind the data, scrap the obtained view.</div><div class="line">            if (updatedView != transientView) &#123;</div><div class="line">                setItemViewLayoutParams(updatedView, position);</div><div class="line">                mRecycler.addScrapView(updatedView, position);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        outMetadata[0] = true;</div><div class="line"></div><div class="line">        // Finish the temporary detach started in addScrapView().</div><div class="line">        transientView.dispatchFinishTemporaryDetach();</div><div class="line">        return transientView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    final View scrapView = mRecycler.getScrapView(position);</div><div class="line">    final View child = mAdapter.getView(position, scrapView, this); // adapter#getView 这是我们的方法，我们会在这里inflate</div><div class="line">    if (scrapView != null) &#123;</div><div class="line">        if (child != scrapView) &#123;</div><div class="line">            // Failed to re-bind the data, return scrap to the heap.</div><div class="line">            mRecycler.addScrapView(scrapView, position);</div><div class="line">        &#125; else if (child.isTemporarilyDetached()) &#123;</div><div class="line">            outMetadata[0] = true;</div><div class="line"></div><div class="line">            // Finish the temporary detach started in addScrapView().</div><div class="line">            child.dispatchFinishTemporaryDetach();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (mCacheColorHint != 0) &#123;</div><div class="line">        child.setDrawingCacheBackgroundColor(mCacheColorHint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (child.getImportantForAccessibility() == IMPORTANT_FOR_ACCESSIBILITY_AUTO) &#123;</div><div class="line">        child.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    setItemViewLayoutParams(child, position);</div><div class="line"></div><div class="line">    if (AccessibilityManager.getInstance(mContext).isEnabled()) &#123;</div><div class="line">        if (mAccessibilityDelegate == null) &#123;</div><div class="line">            mAccessibilityDelegate = new ListItemAccessibilityDelegate();</div><div class="line">        &#125;</div><div class="line">        if (child.getAccessibilityDelegate() == null) &#123;</div><div class="line">            child.setAccessibilityDelegate(mAccessibilityDelegate);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Trace.traceEnd(Trace.TRACE_TAG_VIEW);</div><div class="line"></div><div class="line">    return child;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>所以是我们在adapter的getView方法里inflate过多导致的，应该复用view，避免多次inflate。同时，可以看出来inflate是一个比较耗时的方法。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/12/决定要改改我的简历/" rel="next" title="决定要改改我的简历">
+                <i class="fa fa-chevron-left"></i> 决定要改改我的简历
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/09/01/WDYDT-19-使用systrace查找掉帧问题/"
+           data-title="WDYDT-19-使用systrace查找掉帧问题" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2019/09/01/WDYDT-19-使用systrace查找掉帧问题/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/git_logo.png"
+               alt="xiaoming" />
+          <p class="site-author-name" itemprop="name">xiaoming</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3192882571" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://blog.csdn.net/u010954948" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-tree"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解释一下命令"><span class="nav-number">1.</span> <span class="nav-text">解释一下命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掉帧"><span class="nav-number">2.</span> <span class="nav-text">掉帧</span></a></li></ol></div>
+            
+            <!--by xiaoming-->
+            <div >
+              <img src="/img/333CDC0C0E16121D97E740B0D234CB20.jpg" alt="..." width="200">
+              <img src="/img/D201873535E8B182D738FEA8B9C30EF6.jpg" alt="..." width="200">
+            </div>
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoming</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhoushengming"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
