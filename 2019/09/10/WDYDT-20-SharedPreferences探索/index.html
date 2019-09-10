@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="前几天遇到了一个使用sp(SharedPreferences,以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp初始的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。 (源码基于android-28)">
+<meta name="description" content="前几天遇到了一个使用SharedPreferences(以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp#getInt()的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。 (源码基于android-28)">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WDYDT-20-SharedPreferences探索">
 <meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2019/09/10/WDYDT-20-SharedPreferences探索/index.html">
 <meta property="og:site_name" content="码字猴">
-<meta property="og:description" content="前几天遇到了一个使用sp(SharedPreferences,以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp初始的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。 (源码基于android-28)">
-<meta property="og:updated_time" content="2019-09-10T06:42:52.484Z">
+<meta property="og:description" content="前几天遇到了一个使用SharedPreferences(以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp#getInt()的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。 (源码基于android-28)">
+<meta property="og:updated_time" content="2019-09-10T06:46:45.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WDYDT-20-SharedPreferences探索">
-<meta name="twitter:description" content="前几天遇到了一个使用sp(SharedPreferences,以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp初始的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。 (源码基于android-28)">
+<meta name="twitter:description" content="前几天遇到了一个使用SharedPreferences(以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp#getInt()的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。 (源码基于android-28)">
 
 
 
@@ -381,7 +381,7 @@
 
       
         <!-- abstract area -->
-<p>前几天遇到了一个使用sp(SharedPreferences,以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp初始的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。</p>
+<p>前几天遇到了一个使用SharedPreferences(以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp#getInt()的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。</p>
 <p>(源码基于android-28)</p>
 <a id="more"></a>
 <p>我接下来会顺着我们使用sp的步骤，一步一步的来分析。<br>主要包含：sp的创建、sp的数据读取、sp的写入。</p>
