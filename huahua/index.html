@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>花姐姐，我来啦！！</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
+    <script src="./js/jquery-3.1.1.min.js"></script>
+    <script src="./js/snowfall.jquery.min.js"></script>
+    <script type="text/javascript">
+    //参数n为休眠时间，单位为毫秒:
+    function sleep(n) {
+        var start = new Date().getTime();
+        //  console.log('休眠前：' + start);
+        while (true) {
+            if (new Date().getTime() - start > n) {
+                break;
+            }
+        }
+        // console.log('休眠后：' + new Date().getTime());
+    }
+    var arr = ["我爱你!", "我爱你! 么么哒", "I love you ", "Je t`aime,Je t`adore", "打游戏打到自闭", "Ich liebe Dich ", "Minarakastan sinua ", "IK hou van jou ", "嘿嘿嘿", "Miluji te ", "Jeg elsker dig ", "chit pa de ", "あいしてる ", "사랑해 ", "Ch`an Rak Khun ", "Em ye`u anh ", "e`g elska tig ", "Jag lskar dig ", "Ani ohev otach ", "Szeretlek ", "S`agapo ", "Tave Myliu ", "Te sakam ", "Inhobbok ", "Kocham Cie ", "一把输光", "Eu amo-te ", "Ami tomay bhalobashi ", "Bong salang oun ", "斗地主", "Mahal Kita ", "saya Cinta Mu ", "bi chamd hairtal ", "Tora dost daram ", "Я люблю тебя ", "Te amo,Tequiero ", "您的身份是狗", "请看牌", "Seni seviyorum ", "ja vas kokhaju ", "Mina armastan sind ", "开黑", "ti amo ", "Es tevi Milu ", "Te lu besc,Te Ador ", "Yes Kezi Seeroom yem ", "哈哈哈哈", "ahs te obicham ", "main tumse pyar karta hoon ", "Ana Ahebak ", "上王者", "Arabic Ana ahebek ", "Soul.app", "Mein tumhay pyar kerti hun ", "Mein tumhay pyar kerta hun ", "Nagligivaget ", "Volim Te ", "Saja kasih saudari ", "排位", "T Dua Shume ", "Ljubim te ", "kia hoahai ", "Tamil n`an unnaik kathalikkinren ", "您请看", ];
+
+    var loveint = arr.length - 1;
+    // var eggShowing = false;
+    var eggInt = 1;
+
+    function love() {
+        if (loveint < 0) {
+
+            loveint = arr.length - 1;
+        }
+
+        // console.log(arr[loveint] + loveint);
+        $("#iloveyou").text(arr[loveint]);
+    }
+
+    function showEgg() {
+        console.log("showEgg");
+        if (eggInt % 2 == 0) {
+            $("#egg").show();
+        } else {
+            $("#egg").hide();
+        }
+        eggInt++;
+    }
+
+    // function hideEgg() {
+    //     console.log("hideEgg");
+    //     $("#egg").hide();
+    //     eggShowing = false;
+    // }
+    $(document).ready(function() {
+        console.log("ready");
+        setInterval(function() {
+            love();
+            loveint--;
+        }, 200);
+
+        setInterval(function() {
+            showEgg();
+        }, 500);
+        $(document).snowfall({ flakeCount: 100, maxSpeed: 5 });
+
+        // $("#hua").dblclick(function() {
+        //     $("#egg").show();
+        //     eggShowing = true;
+        //     setTimeout("hideEgg()", 2000);
+        // });
+
+        $("#me").dblclick(function() {
+            alert("爱你哦")
+        });
+
+    });
+    </script>
+    <style type="text/css">
+    body {
+        overflow: hidden;
+        margin: 0 auto;
+        background: url('./images/9aa6d845a9982c306548f30420517587.jpg') no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+    }
+
+    .snowfall-flakes:before {
+        content: "";
+        /*绝对定位*/
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 10px;
+        height: 16px;
+        transform: rotate(-45deg);
+        background-color: red;
+        border-radius: 5px 5px 1px 1px;
+    }
+
+    .snowfall-flakes:after {
+        content: "";
+        /*激活伪元素的必要因素*/
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 10px;
+        height: 16px;
+        transform: translateX(4.3px) rotate(45deg);
+        background-color: red;
+        border-radius: 5px 5px 1px 1px;
+    }
+    </style>
+</head>
+
+<body>
+    <div style="margin-top: 15%; ">
+        <div style="position: absolute;top: 0px;left:0px;right: 0px; width: 100%;" id="egg">
+            <div style="position: absolute;top: 0px;margin-left:50px; left: 0px; width: 10%;">
+                <img src="./images/1841580881506_.pic.jpg" width="100%" style="transform: rotate(7deg);">
+                <img src="./images/1851580881524_.pic.jpg" width="100%" style="transform: rotate(-7deg);">
+                <img src="./images/1821580881426_.pic.jpg" width="100%" style="transform: rotate(7deg);">
+                <img src="./images/1831580881439_.pic.jpg" width="100%" style="transform: rotate(-7deg);">
+                <img src="./images/1821580881426_.pic.jpg" width="100%" style="transform: rotate(7deg);">
+            </div>
+            <div style="position: absolute;top: 0px;margin-right: 50px;right: 0px;  width: 10%;">
+                <img src="./images/1821580881426_.pic.jpg" width="100%" style="transform: rotate(7deg);">
+                <img src="./images/1831580881439_.pic.jpg" width="100%" style="transform: rotate(-7deg);">
+                <img src="./images/1841580881506_.pic.jpg" width="100%" style="transform: rotate(7deg);">
+                <img src="./images/1851580881524_.pic.jpg" width="100%" style="transform: rotate(-7deg);">
+                <img src="./images/1821580881426_.pic.jpg" width="100%" style="transform: rotate(7deg);">
+            </div>
+        </div>
+        <div id="main" style="width: 60%; margin: auto;">
+            <div>
+                <p id="iloveyou" style="text-align: center; font-size: 50px;">来来来</p>
+            </div>
+            <div style="width:100%; margin: auto;">
+                <img src="./images/me.png" width="25%" id="me">
+                <img src="./images/arrow.png" width="19%" style="margin-bottom: 30px;margin-left: 10%;margin-right: 10%;">
+                <img src="./images/WX20200205-134743@2x.png" width="30%">
+            </div>
+            <div style="width: 100%;margin-top: 30px; text-align: center;">
+                <audio controls="controls" autoplay="autoplay">
+                    <source src="./images/520.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
