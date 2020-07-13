@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>记一种签名认证方法 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2017-12-08 10:21">
-      December 8, 2017 am
+      2017年12月8日 上午
     </time>
   </div>
 
@@ -205,16 +208,18 @@
 <p>数字签名，就是只有信息的发送者才能产生的别人无法伪造的一段数字串，这段数字串同时也是对信息的发送者发送信息真实性的一个有效证明。</p>
 <p>数字签名是非对称密钥加密技术与数字摘要技术的应用。</p>
 <a id="more"></a>
+
+
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>数字签名的文件的完整性是很容易验证的（不需要骑缝章，骑缝签名，也不需要笔迹专家），而且数字签名具有不可抵赖性（不需要笔迹专家来验证）。</p>
 <p>简单地说,所谓数字签名就是附加在数据单元上的一些数据,或是对数据单元所作的密码变换。这种数据或变换允许数据单元的接收者用以确认数据单元的来源和数据单元的完整性并保护数据,防止被人(例如接收者)进行伪造。它是对电子形式的消息进行签名的一种方法,一个签名消息能在一个通信网络中传输。<br>基于公钥密码体制和私钥密码体制都可以获得数字签名,主要是基于公钥密码体制的数字签名。包括普通数字签名和特殊数字签名。<br>普通数字签名算法有RSA、ElGamal、Fiat-Shamir、Guillou- Quisquarter、Schnorr、Ong-Schnorr-Shamir数字签名算法、Des/DSA,椭圆曲线数字签名算法和有限自动机数字签名算法等。<br>特殊数字签名有盲签名、代理签名、群签名、不可否认签名、公平盲签名、门限签名、具有消息恢复功能的签名等,它与具体应用环境密切相关。显然,数字签名的应用涉及到法律问题,美国联邦政府基于有限域上的离散对数问题制定了自己的数字签名标准(DSS)。</p>
 <blockquote>
-<p><a href="https://baike.baidu.com/item/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/212550" target="_blank" rel="external">数字签名-百度百科</a></p>
+<p><a href="https://baike.baidu.com/item/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/212550" target="_blank" rel="noopener">数字签名-百度百科</a></p>
 </blockquote>
 <h2 id="一种实现方式"><a href="#一种实现方式" class="headerlink" title="一种实现方式"></a>一种实现方式</h2><p>此方法不属于非对称加密。</p>
 <p>首先定义几个概念</p>
 <blockquote>
-<p>token 服务端生成，每5分钟变一次，有15分钟的有效期<br>sign 签名，客户端生成<br>salt 盐，用于加盐<br>timestamp 时间戳</p>
 </blockquote>
+<p>token 服务端生成，每5分钟变一次，有15分钟的有效期<br>sign 签名，客户端生成<br>salt 盐，用于加盐<br>timestamp 时间戳</p>
 <p>首先，客户端Client(简称C)向服务端Server(简称S)请求token，token可以通过登录验证生成，并和C的SN绑定，C的所有请求都要携带SN和timestamp，token获取成功后，由C保存在本地。</p>
 <p>平常的请求，C端取得http requestbody，使用token+salt做秘钥，body+时间戳做明文进行加密，生成sign，进行请求，S端拿到request，取得requestbody，使用服务器上缓存的token+salt对requestbody+时间戳进行加密（B、C端salt相同，或者定期同步），获得B_sign，通过对比sign和B_sign，确定请求的完整性和合法性。</p>
 <p>通过登录获取token，还应该返回authToken，token每五分钟改变一次，客户端应当可以使用authToken去服务器获取新token。authToken的有效时间应该更长，如果无法使用authToken获取token，说明用户需要重新登陆。<br>salt十分重要，为防止反编译，最好使用jni写在so库。<br>服务端需要验证请求的时间，如果C端请求的timestamp与服务器相差超过5分钟，则视为非法请求。</p>
@@ -230,25 +235,25 @@
                     
                       <a class="hover-with-bg" href="/tags/Android/">Android</a>
                     
-                      <a class="hover-with-bg" href="/tags/加密/">加密</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A0%E5%AF%86/">加密</a>
                     
-                      <a class="hover-with-bg" href="/tags/安全/">安全</a>
+                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
                     
                   </div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2017/12/08/非对称加密/">
+                      <a href="/2017/12/08/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">非对称加密</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
@@ -257,7 +262,7 @@
                     
                       <a href="/2017/11/17/Mac-SSH-NFS-Ubuntu/">
                         <span class="hidden-mobile">Mac SSH&NFS Ubuntu</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -274,7 +279,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -301,7 +306,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -310,7 +315,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -353,9 +358,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

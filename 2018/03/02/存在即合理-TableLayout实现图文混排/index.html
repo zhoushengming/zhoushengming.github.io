@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>存在即合理--TableLayout实现布局约束 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2018-03-02 16:38">
-      March 2, 2018 pm
+      2018年3月2日 下午
     </time>
   </div>
 
@@ -160,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      943 字
+      946 字
     </span>
   
 
@@ -203,23 +206,97 @@
             <article class="markdown-body">
               <p>写android好久了，我都没怎么用过TableLayout，昨天小白问我一个布局问题，这个布局问题的描述为：线性布局防止右侧布局挤出去、图文混排效果、字少包裹内容 字多占满剩余、不知道怎么解释的效果。其实想实现的效果如下：<br><img src="/img/EAE885FA5952F0A84E0B924AC3126F6A.jpg" srcset="/img/loading.gif"><br>当标题文字很长的时候，应该显示出这样的效果：<br><img src="/img/5D9A84A5D02BCDC0D3860E75518A615D.jpg" srcset="/img/loading.gif"><br>我们想了好久都没找到合适的方法，不知道哪里来的灵感，我突然想起了被人们遗忘的TableLayout。</p>
 <a id="more"></a>
+
 <h2 id="TableLayout介绍"><a href="#TableLayout介绍" class="headerlink" title="TableLayout介绍"></a>TableLayout介绍</h2><h3 id="Tablelayout简介"><a href="#Tablelayout简介" class="headerlink" title="Tablelayout简介"></a>Tablelayout简介</h3><p>Tablelayout类以行和列的形式对控件进行管理，每一行为一个TableRow对象，或一个View控件。<br>当为TableRow对象时，可在TableRow下添加子控件，默认情况下，每个子控件占据一列。<br>当为View时，该View将独占一行。</p>
 <h3 id="TableLayout行列数的确定"><a href="#TableLayout行列数的确定" class="headerlink" title="TableLayout行列数的确定"></a>TableLayout行列数的确定</h3><p>TableLayout的行数由开发人员直接指定，即有多少个TableRow对象（或View控件），就有多少行。<br>TableLayout的列数等于含有最多子控件的TableRow的列数。如第一TableRow含2个子控件，第二个TableRow含3个，第三个TableRow含4个，那么该TableLayout的列数为4.</p>
 <h3 id="TableLayout可设置的属性详解"><a href="#TableLayout可设置的属性详解" class="headerlink" title="TableLayout可设置的属性详解"></a>TableLayout可设置的属性详解</h3><p>TableLayout可设置的属性包括全局属性及单元格属性。</p>
-<h4 id="全局属性也即列属性，有以下3个参数："><a href="#全局属性也即列属性，有以下3个参数：" class="headerlink" title="全局属性也即列属性，有以下3个参数："></a>全局属性也即列属性，有以下3个参数：</h4><figure class="highlight dts"><table><tr><td class="code"><pre><div class="line"><span class="symbol">android:</span>stretchColumns    <span class="comment">// 设置可伸展的列。该列可以向行方向伸展，最多可占据一整行。</span></div><div class="line"><span class="symbol">android:</span>shrinkColumns     <span class="comment">// 设置可收缩的列。当该列子控件的内容太多，已经挤满所在行，那么该子控件的内容将往列方向显示。</span></div><div class="line"><span class="symbol">android:</span>collapseColumns     <span class="comment">// 设置要隐藏的列。</span></div></pre></td></tr></table></figure>
+<h4 id="全局属性也即列属性，有以下3个参数："><a href="#全局属性也即列属性，有以下3个参数：" class="headerlink" title="全局属性也即列属性，有以下3个参数："></a>全局属性也即列属性，有以下3个参数：</h4><div class="hljs"><pre><code class="hljs dts"><span class="hljs-symbol">android:</span>stretchColumns    <span class="hljs-comment">// 设置可伸展的列。该列可以向行方向伸展，最多可占据一整行。</span>
+<span class="hljs-symbol">android:</span>shrinkColumns     <span class="hljs-comment">// 设置可收缩的列。当该列子控件的内容太多，已经挤满所在行，那么该子控件的内容将往列方向显示。</span>
+<span class="hljs-symbol">android:</span>collapseColumns     <span class="hljs-comment">// 设置要隐藏的列。</span></code></pre></div>
+
 <p>示例：</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><div class="line"><span class="symbol">android:</span>stretchColumns=<span class="string">"0"</span>       <span class="comment">// 第0列可伸展</span></div><div class="line"><span class="symbol">android:</span>shrinkColumns=<span class="string">"1,2"</span>      <span class="comment">// 第1,2列皆可收缩</span></div><div class="line"><span class="symbol">android:</span>collapseColumns=<span class="string">"*"</span>      <span class="comment">// 隐藏所有行</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs dts"><span class="hljs-symbol">android:</span>stretchColumns=<span class="hljs-string">"0"</span>       <span class="hljs-comment">// 第0列可伸展</span>
+<span class="hljs-symbol">android:</span>shrinkColumns=<span class="hljs-string">"1,2"</span>      <span class="hljs-comment">// 第1,2列皆可收缩</span>
+<span class="hljs-symbol">android:</span>collapseColumns=<span class="hljs-string">"*"</span>      <span class="hljs-comment">// 隐藏所有行</span></code></pre></div>
+
 <p>说明：列可以同时具备stretchColumns及shrinkColumns属性，若此，那么当该列的内容N多时，将“多行”显示其内容。（这里不是真正的多行，而是系统根据需要自动调节该行的layout_height）</p>
-<h4 id="单元格属性，有以下2个参数："><a href="#单元格属性，有以下2个参数：" class="headerlink" title="单元格属性，有以下2个参数："></a>单元格属性，有以下2个参数：</h4><figure class="highlight dts"><table><tr><td class="code"><pre><div class="line"><span class="symbol">android:</span>layout_column    <span class="comment">// 指定该单元格在第几列显示</span></div><div class="line"><span class="symbol">android:</span>layout_span       <span class="comment">// 指定该单元格占据的列数（未指定时，为1）</span></div></pre></td></tr></table></figure>
+<h4 id="单元格属性，有以下2个参数："><a href="#单元格属性，有以下2个参数：" class="headerlink" title="单元格属性，有以下2个参数："></a>单元格属性，有以下2个参数：</h4><div class="hljs"><pre><code class="hljs dts"><span class="hljs-symbol">android:</span>layout_column    <span class="hljs-comment">// 指定该单元格在第几列显示</span>
+<span class="hljs-symbol">android:</span>layout_span       <span class="hljs-comment">// 指定该单元格占据的列数（未指定时，为1）</span></code></pre></div>
+
 <p>示例：</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><div class="line"><span class="symbol">android:</span>layout_column=<span class="string">"1"</span>    <span class="comment">// 该控件显示在第1列</span></div><div class="line"><span class="symbol">android:</span>layout_span=<span class="string">"2"</span>      <span class="comment">// 该控件占据2列</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs dts"><span class="hljs-symbol">android:</span>layout_column=<span class="hljs-string">"1"</span>    <span class="hljs-comment">// 该控件显示在第1列</span>
+<span class="hljs-symbol">android:</span>layout_span=<span class="hljs-string">"2"</span>      <span class="hljs-comment">// 该控件占据2列</span></code></pre></div>
+
 <p>说明：一个控件也可以同时具备这两个特性。</p>
 <blockquote>
-<p>以上介绍参考自：<a href="http://blog.csdn.net/justoneroad/article/details/6835915" target="_blank" rel="external">android:TableLayout表格布局详解</a></p>
+<p>以上介绍参考自：<a href="http://blog.csdn.net/justoneroad/article/details/6835915" target="_blank" rel="noopener">android:TableLayout表格布局详解</a></p>
 </blockquote>
 <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>话说回到刚开始的场景，我们希望实现的效果是这样：<br><img src="/img/EAE885FA5952F0A84E0B924AC3126F6A.jpg" srcset="/img/loading.gif"><br>当标题文字很长的时候，应该显示出这样的效果：<br><img src="/img/5D9A84A5D02BCDC0D3860E75518A615D.jpg" srcset="/img/loading.gif"></p>
 <p>在使用RelativeLayout的布局方法时，当标题部分过长时，后面的icon会被挤出布局，导致icon显示不出来。<br>最后，我们使用了TableLayout的布局方式，其中使用shrinkColumns来指定第0列是可以收缩的。这样第1列就不会被挤掉。<br>具体布局代码如下：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">    <span class="attr">android:paddingLeft</span>=<span class="string">"20dp"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/ll_item_bd"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"40dp"</span></div><div class="line">        <span class="attr">android:gravity</span>=<span class="string">"center_vertical"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/iv_flag"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:src</span>=<span class="string">"@drawable/ic_action_info"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TableLayout</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:shrinkColumns</span>=<span class="string">"0"</span></div><div class="line">            <span class="attr">android:layout_marginLeft</span>=<span class="string">"8dp"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>&gt;</div><div class="line">            <span class="tag">&lt;<span class="name">TableRow</span>&gt;</span></div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">                    <span class="attr">android:id</span>=<span class="string">"@+id/tv_patient_content"</span></div><div class="line">                    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">                    <span class="attr">android:ellipsize</span>=<span class="string">"end"</span></div><div class="line">                    <span class="attr">android:singleLine</span>=<span class="string">"true"</span></div><div class="line">                    <span class="attr">android:text</span>=<span class="string">"这是一段很长很长很长很长很长很长的"</span></div><div class="line">                    <span class="attr">android:textSize</span>=<span class="string">"18sp"</span>/&gt;</div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">                    <span class="attr">android:id</span>=<span class="string">"@+id/iv_exception"</span></div><div class="line">                    <span class="attr">android:layout_width</span>=<span class="string">"16dp"</span></div><div class="line">                    <span class="attr">android:layout_height</span>=<span class="string">"16dp"</span></div><div class="line">                    <span class="attr">android:scaleType</span>=<span class="string">"fitXY"</span></div><div class="line">                    <span class="attr">android:src</span>=<span class="string">"@drawable/ic_action_info"</span></div><div class="line">                    <span class="attr">android:visibility</span>=<span class="string">"visible"</span>/&gt;</div><div class="line">            <span class="tag">&lt;/<span class="name">TableRow</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">        <span class="tag">&lt;/<span class="name">TableLayout</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv_patient_complete"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginRight</span>=<span class="string">"20dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"未完成"</span></div><div class="line">            <span class="attr">android:textSize</span>=<span class="string">"16sp"</span>/&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">View</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/line"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"1px"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"#D8D8D8"</span>/&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span></span>
+<span class="hljs-tag">    <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span>
+<span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span>
+<span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span>
+<span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span></span>
+<span class="hljs-tag">    <span class="hljs-attr">android:paddingLeft</span>=<span class="hljs-string">"20dp"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span></span>
+<span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/ll_item_bd"</span></span>
+<span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span>
+<span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"40dp"</span></span>
+<span class="hljs-tag">        <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">"center_vertical"</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">ImageView</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/iv_flag"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/ic_action_info"</span>/&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">TableLayout</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"0dp"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:shrinkColumns</span>=<span class="hljs-string">"0"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:layout_marginLeft</span>=<span class="hljs-string">"8dp"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"1"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">TableRow</span>&gt;</span>
+
+                <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/tv_patient_content"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:ellipsize</span>=<span class="hljs-string">"end"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:singleLine</span>=<span class="hljs-string">"true"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:text</span>=<span class="hljs-string">"这是一段很长很长很长很长很长很长的"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">"18sp"</span>/&gt;</span>
+
+                <span class="hljs-tag">&lt;<span class="hljs-name">ImageView</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/iv_exception"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"16dp"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"16dp"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:scaleType</span>=<span class="hljs-string">"fitXY"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/ic_action_info"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">android:visibility</span>=<span class="hljs-string">"visible"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">TableRow</span>&gt;</span>
+
+
+        <span class="hljs-tag">&lt;/<span class="hljs-name">TableLayout</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/tv_patient_complete"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:layout_marginRight</span>=<span class="hljs-string">"20dp"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:text</span>=<span class="hljs-string">"未完成"</span></span>
+<span class="hljs-tag">            <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">"16sp"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">View</span></span>
+<span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/line"</span></span>
+<span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span>
+<span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"1px"</span></span>
+<span class="hljs-tag">        <span class="hljs-attr">android:background</span>=<span class="hljs-string">"#D8D8D8"</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></code></pre></div>
             </article>
             <hr>
             <div>
@@ -235,26 +312,26 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2018/03/19/知乎的世说新语/">
+                      <a href="/2018/03/19/%E7%9F%A5%E4%B9%8E%E7%9A%84%E4%B8%96%E8%AF%B4%E6%96%B0%E8%AF%AD/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">知乎的世说新语</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2018/02/24/2018的上半年/">
+                      <a href="/2018/02/24/2018%E7%9A%84%E4%B8%8A%E5%8D%8A%E5%B9%B4/">
                         <span class="hidden-mobile">2018的上半年</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -271,7 +348,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -298,7 +375,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -307,7 +384,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -350,9 +427,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

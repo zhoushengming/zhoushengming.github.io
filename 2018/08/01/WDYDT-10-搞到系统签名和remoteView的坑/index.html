@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>WDYDT-10-搞到系统签名和remoteView的坑 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2018-08-01 15:27">
-      August 1, 2018 pm
+      2018年8月1日 下午
     </time>
   </div>
 
@@ -160,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      823 字
+      825 字
     </span>
   
 
@@ -202,19 +205,110 @@
             
             <article class="markdown-body">
               <!-- abstract area -->
+
 <p>由于miui的一个广播的权限是SignatureOrSystem，所以我想拿到这个广播就要系统签名，所以我从网上找到了一个根据系统签名文件生成keystore的方法。</p>
 <a id="more"></a>
+
 <h3 id="系统签名APP"><a href="#系统签名APP" class="headerlink" title="系统签名APP"></a>系统签名APP</h3><p>首先你要找的系统的签名存放地址：<br>/build/target/product/security/</p>
-<p>如果直接用这个签名给APP签名可以用一下命令：<br><figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">java -jar signapk<span class="selector-class">.jar</span> platform<span class="selector-class">.x509</span><span class="selector-class">.pem</span> platform<span class="selector-class">.pk8</span> XXX<span class="selector-class">.apk</span> XXXNew.apk</div></pre></td></tr></table></figure></p>
-<p>如果想生成keystore，需要一下命令<br><figure class="highlight delphi"><table><tr><td class="code"><pre><div class="line"># </div><div class="line">openssl pkcs8 -inform DER -nocrypt -<span class="keyword">in</span> <span class="keyword">platform</span>.pk8 -<span class="keyword">out</span> <span class="keyword">platform</span>.pem</div><div class="line"></div><div class="line"># 设置的密码是android <span class="keyword">name</span>是androiddebugkey</div><div class="line">openssl pkcs12 -<span class="keyword">export</span> -<span class="keyword">in</span> <span class="keyword">platform</span>.x509.pem -<span class="keyword">out</span> <span class="keyword">platform</span>.p12 -inkey <span class="keyword">platform</span>.pem -password pass:android -<span class="keyword">name</span> androiddebugkey</div><div class="line"></div><div class="line">#生成<span class="keyword">platform</span>.keystore</div><div class="line">keytool -importkeystore -deststorepass android -destkeystore ./<span class="keyword">platform</span>.keystore -srckeystore <span class="keyword">platform</span>.p12 -srcstoretype PKCS12 -srcstorepass android</div></pre></td></tr></table></figure></p>
+<p>如果直接用这个签名给APP签名可以用一下命令：</p>
+<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-tag">java</span> <span class="hljs-selector-tag">-jar</span> <span class="hljs-selector-tag">signapk</span><span class="hljs-selector-class">.jar</span> <span class="hljs-selector-tag">platform</span><span class="hljs-selector-class">.x509</span><span class="hljs-selector-class">.pem</span> <span class="hljs-selector-tag">platform</span><span class="hljs-selector-class">.pk8</span> <span class="hljs-selector-tag">XXX</span><span class="hljs-selector-class">.apk</span> <span class="hljs-selector-tag">XXXNew</span><span class="hljs-selector-class">.apk</span></code></pre></div>
+
+<p>如果想生成keystore，需要一下命令</p>
+<div class="hljs"><pre><code class="hljs delphi"># 
+openssl pkcs8 -inform DER -nocrypt -<span class="hljs-keyword">in</span> <span class="hljs-keyword">platform</span>.pk8 -<span class="hljs-keyword">out</span> <span class="hljs-keyword">platform</span>.pem
+
+# 设置的密码是android <span class="hljs-keyword">name</span>是androiddebugkey
+openssl pkcs12 -<span class="hljs-keyword">export</span> -<span class="hljs-keyword">in</span> <span class="hljs-keyword">platform</span>.x509.pem -<span class="hljs-keyword">out</span> <span class="hljs-keyword">platform</span>.p12 -inkey <span class="hljs-keyword">platform</span>.pem -password pass:android -<span class="hljs-keyword">name</span> androiddebugkey
+
+#生成<span class="hljs-keyword">platform</span>.keystore
+keytool -importkeystore -deststorepass android -destkeystore ./<span class="hljs-keyword">platform</span>.keystore -srckeystore <span class="hljs-keyword">platform</span>.p12 -srcstoretype PKCS12 -srcstorepass android</code></pre></div>
+
 <p>参考：</p>
 <blockquote>
-<p><a href="https://blog.csdn.net/QQxiaoqiang1573/article/details/52252843" target="_blank" rel="external">https://blog.csdn.net/QQxiaoqiang1573/article/details/52252843</a><br><a href="http://www.cnblogs.com/blairsProgrammer/p/4220904.html" target="_blank" rel="external">http://www.cnblogs.com/blairsProgrammer/p/4220904.html</a><br>权限相关 <a href="https://blog.csdn.net/jltxgcy/article/details/48288467" target="_blank" rel="external">https://blog.csdn.net/jltxgcy/article/details/48288467</a> </p>
+<p><a href="https://blog.csdn.net/QQxiaoqiang1573/article/details/52252843" target="_blank" rel="noopener">https://blog.csdn.net/QQxiaoqiang1573/article/details/52252843</a><br><a href="http://www.cnblogs.com/blairsProgrammer/p/4220904.html" target="_blank" rel="noopener">http://www.cnblogs.com/blairsProgrammer/p/4220904.html</a><br>权限相关 <a href="https://blog.csdn.net/jltxgcy/article/details/48288467" target="_blank" rel="noopener">https://blog.csdn.net/jltxgcy/article/details/48288467</a> </p>
 </blockquote>
-<p>然后你就可以配置gradle实现自动签名了，配置如下：<br><figure class="highlight nginx"><table><tr><td class="code"><pre><div class="line"><span class="section">android</span> &#123;</div><div class="line">    <span class="section">signingConfigs</span> &#123;</div><div class="line">        <span class="section">androiddebugkey</span> &#123;</div><div class="line">            <span class="attribute">keyAlias</span> <span class="string">'you key name'</span></div><div class="line">            keyPassword <span class="string">'you password'</span></div><div class="line">            storeFile file(<span class="string">'../testkey-signer/platform.keystore'</span>)</div><div class="line">            storePassword <span class="string">'you password'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    buildTypes &#123;</div><div class="line">        <span class="section">release</span> &#123;</div><div class="line">            <span class="attribute">minifyEnabled</span> <span class="literal">false</span></div><div class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></div><div class="line">            signingConfig signingConfigs.androiddebugkey</div><div class="line">        &#125;</div><div class="line">        <span class="literal">debug</span> &#123;</div><div class="line">            <span class="attribute">signingConfig</span> signingConfigs.androiddebugkey</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>然后你就可以配置gradle实现自动签名了，配置如下：</p>
+<div class="hljs"><pre><code class="hljs nginx"><span class="hljs-section">android</span> &#123;
+    <span class="hljs-section">signingConfigs</span> &#123;
+        <span class="hljs-section">androiddebugkey</span> &#123;
+            <span class="hljs-attribute">keyAlias</span> <span class="hljs-string">'you key name'</span>
+            keyPassword <span class="hljs-string">'you password'</span>
+            storeFile file(<span class="hljs-string">'../testkey-signer/platform.keystore'</span>)
+            storePassword <span class="hljs-string">'you password'</span>
+        &#125;
+    &#125;
+    buildTypes &#123;
+        <span class="hljs-section">release</span> &#123;
+            <span class="hljs-attribute">minifyEnabled</span> <span class="hljs-literal">false</span>
+            proguardFiles getDefaultProguardFile(<span class="hljs-string">'proguard-android.txt'</span>), <span class="hljs-string">'proguard-rules.pro'</span>
+            signingConfig signingConfigs.androiddebugkey
+        &#125;
+        <span class="hljs-literal">debug</span> &#123;
+            <span class="hljs-attribute">signingConfig</span> signingConfigs.androiddebugkey
+        &#125;
+    &#125;</code></pre></div>
 <p>注意 signingConfigs 必须放到buildTypes前面，不然会报错，原因和声明顺序有关。</p>
 <h3 id="RemoteView的一个坑"><a href="#RemoteView的一个坑" class="headerlink" title="RemoteView的一个坑"></a>RemoteView的一个坑</h3><p>RemoteView被使用在notification和widget中，可以设置点击事件，一般有两种setOnClickPendingIntent和setOnClickFillInIntent。<br>其中setOnClickPendingIntent是传入PendingIntent，setOnClickFillInIntent传入Intent。<br>但是！！！<br>setOnClickPendingIntent是不支持LisetView的。<br>如果在listview的情况在使用setOnClickFillInIntent，传入的intent只会被AppWidgetProvider(其实这是个BroadcastReceiver)接收。</p>
-<p>一下是SDK中的代码:<br><figure class="highlight applescript"><table><tr><td class="code"><pre><div class="line">package android.widget;</div><div class="line">public <span class="built_in">class</span> RemoteViews implements Parcelable, Filter &#123;</div><div class="line"></div><div class="line">     /**</div><div class="line">     * Equivalent <span class="keyword">to</span> calling</div><div class="line">     * &#123;@link android.view.View<span class="comment">#setOnClickListener(android.view.View.OnClickListener)&#125;</span></div><div class="line">     * <span class="keyword">to</span> <span class="built_in">launch</span> <span class="keyword">the</span> provided &#123;@link PendingIntent&#125;.</div><div class="line">     *</div><div class="line">     * When setting <span class="keyword">the</span> <span class="keyword">on</span>-click action <span class="keyword">of</span> items within collections (eg. &#123;@link ListView&#125;,</div><div class="line">     * &#123;@link StackView&#125; etc.), this method will <span class="keyword">not</span> work. Instead, use &#123;@link</div><div class="line">     * RemoteViews<span class="comment">#setPendingIntentTemplate(int, PendingIntent)&#125; in conjunction with</span></div><div class="line">     * &#123;@link RemoteViews<span class="comment">#setOnClickFillInIntent(int, Intent)&#125;.</span></div><div class="line">     *</div><div class="line">     * @param viewId The <span class="built_in">id</span> <span class="keyword">of</span> <span class="keyword">the</span> view <span class="keyword">that</span> will trigger <span class="keyword">the</span> &#123;@link PendingIntent&#125; when clicked</div><div class="line">     * @param pendingIntent The &#123;@link PendingIntent&#125; <span class="keyword">to</span> send when user clicks</div><div class="line">     */</div><div class="line">    public void setOnClickPendingIntent(int viewId, PendingIntent pendingIntent) &#123;</div><div class="line">        addAction(new SetOnClickPendingIntent(viewId, pendingIntent));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * When using collections (eg. &#123;@link ListView&#125;, &#123;@link StackView&#125; etc.) <span class="keyword">in</span> widgets, <span class="keyword">it</span> <span class="keyword">is</span> very</div><div class="line">     * costly <span class="keyword">to</span> <span class="keyword">set</span> PendingIntents <span class="keyword">on</span> <span class="keyword">the</span> individual items, <span class="keyword">and</span> <span class="keyword">is</span> hence <span class="keyword">not</span> permitted. Instead</div><div class="line">     * this method should be used <span class="keyword">to</span> <span class="keyword">set</span> a single PendingIntent template <span class="keyword">on</span> <span class="keyword">the</span> collection, <span class="keyword">and</span></div><div class="line">     * individual items can differentiate their <span class="keyword">on</span>-click behavior using</div><div class="line">     * &#123;@link RemoteViews<span class="comment">#setOnClickFillInIntent(int, Intent)&#125;.</span></div><div class="line">     *</div><div class="line">     * @param viewId The <span class="built_in">id</span> <span class="keyword">of</span> <span class="keyword">the</span> collection who's children will use this PendingIntent template</div><div class="line">     *          when clicked</div><div class="line">     * @param pendingIntentTemplate The &#123;@link PendingIntent&#125; <span class="keyword">to</span> be combined <span class="keyword">with</span> extras specified</div><div class="line">     *          <span class="keyword">by</span> a child <span class="keyword">of</span> viewId <span class="keyword">and</span> executed when <span class="keyword">that</span> child <span class="keyword">is</span> clicked</div><div class="line">     */</div><div class="line">    public void setPendingIntentTemplate(int viewId, PendingIntent pendingIntentTemplate) &#123;</div><div class="line">        addAction(new SetPendingIntentTemplate(viewId, pendingIntentTemplate));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * When using collections (eg. &#123;@link ListView&#125;, &#123;@link StackView&#125; etc.) <span class="keyword">in</span> widgets, <span class="keyword">it</span> <span class="keyword">is</span> very</div><div class="line">     * costly <span class="keyword">to</span> <span class="keyword">set</span> PendingIntents <span class="keyword">on</span> <span class="keyword">the</span> individual items, <span class="keyword">and</span> <span class="keyword">is</span> hence <span class="keyword">not</span> permitted. Instead</div><div class="line">     * a single PendingIntent template can be <span class="keyword">set</span> <span class="keyword">on</span> <span class="keyword">the</span> collection, see &#123;@link</div><div class="line">     * RemoteViews<span class="comment">#setPendingIntentTemplate(int, PendingIntent)&#125;, and the individual on-click</span></div><div class="line">     * action <span class="keyword">of</span> a <span class="keyword">given</span> <span class="built_in">item</span> can be distinguished <span class="keyword">by</span> setting a fillInIntent <span class="keyword">on</span> <span class="keyword">that</span> <span class="built_in">item</span>. The</div><div class="line">     * fillInIntent <span class="keyword">is</span> <span class="keyword">then</span> combined <span class="keyword">with</span> <span class="keyword">the</span> PendingIntent template <span class="keyword">in</span> order <span class="keyword">to</span> determine <span class="keyword">the</span> final</div><div class="line">     * intent which will be executed when <span class="keyword">the</span> <span class="built_in">item</span> <span class="keyword">is</span> clicked. This works <span class="keyword">as</span> follows: any fields</div><div class="line">     * which are left blank <span class="keyword">in</span> <span class="keyword">the</span> PendingIntent template, <span class="keyword">but</span> are provided <span class="keyword">by</span> <span class="keyword">the</span> fillInIntent</div><div class="line">     * will be overwritten, <span class="keyword">and</span> <span class="keyword">the</span> resulting PendingIntent will be used. The <span class="built_in">rest</span></div><div class="line">     * <span class="keyword">of</span> <span class="keyword">the</span> PendingIntent template will <span class="keyword">then</span> be filled <span class="keyword">in</span> <span class="keyword">with</span> <span class="keyword">the</span> associated fields <span class="keyword">that</span> are</div><div class="line">     * <span class="keyword">set</span> <span class="keyword">in</span> fillInIntent. See &#123;@link Intent<span class="comment">#fillIn(Intent, int)&#125; for more details.</span></div><div class="line">     *</div><div class="line">     * @param viewId The <span class="built_in">id</span> <span class="keyword">of</span> <span class="keyword">the</span> view <span class="keyword">on</span> which <span class="keyword">to</span> <span class="keyword">set</span> <span class="keyword">the</span> fillInIntent</div><div class="line">     * @param fillInIntent The intent which will be combined <span class="keyword">with</span> <span class="keyword">the</span> parent's PendingIntent</div><div class="line">     *        <span class="keyword">in</span> order <span class="keyword">to</span> determine <span class="keyword">the</span> <span class="keyword">on</span>-click behavior <span class="keyword">of</span> <span class="keyword">the</span> view specified <span class="keyword">by</span> viewId</div><div class="line">     */</div><div class="line">    public void setOnClickFillInIntent(int viewId, Intent fillInIntent) &#123;</div><div class="line">        addAction(new SetOnClickFillInIntent(viewId, fillInIntent));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一下是SDK中的代码:</p>
+<div class="hljs"><pre><code class="hljs zephir">package android.widget;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RemoteViews</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Parcelable</span>, <span class="hljs-title">Filter</span> </span>&#123;
+
+     <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Equivalent to calling</span>
+<span class="hljs-comment">     * &#123;<span class="hljs-doctag">@link</span> android.view.View#setOnClickListener(android.view.View.OnClickListener)&#125;</span>
+<span class="hljs-comment">     * to launch the provided &#123;<span class="hljs-doctag">@link</span> PendingIntent&#125;.</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * When setting the on-click action of items within collections (eg. &#123;<span class="hljs-doctag">@link</span> ListView&#125;,</span>
+<span class="hljs-comment">     * &#123;<span class="hljs-doctag">@link</span> StackView&#125; etc.), this method will not work. Instead, use &#123;<span class="hljs-doctag">@link</span></span>
+<span class="hljs-comment">     * RemoteViews#setPendingIntentTemplate(int, PendingIntent)&#125; in conjunction with</span>
+<span class="hljs-comment">     * &#123;<span class="hljs-doctag">@link</span> RemoteViews#setOnClickFillInIntent(int, Intent)&#125;.</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> viewId The id of the view that will trigger the &#123;<span class="hljs-doctag">@link</span> PendingIntent&#125; when clicked</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> pendingIntent The &#123;<span class="hljs-doctag">@link</span> PendingIntent&#125; to send when user clicks</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> void setOnClickPendingIntent(<span class="hljs-keyword">int</span> viewId, PendingIntent pendingIntent) &#123;
+        addAction(<span class="hljs-keyword">new</span> SetOnClickPendingIntent(viewId, pendingIntent));
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * When using collections (eg. &#123;<span class="hljs-doctag">@link</span> ListView&#125;, &#123;<span class="hljs-doctag">@link</span> StackView&#125; etc.) in widgets, it is very</span>
+<span class="hljs-comment">     * costly to set PendingIntents on the individual items, and is hence not permitted. Instead</span>
+<span class="hljs-comment">     * this method should be used to set a single PendingIntent template on the collection, and</span>
+<span class="hljs-comment">     * individual items can differentiate their on-click behavior using</span>
+<span class="hljs-comment">     * &#123;<span class="hljs-doctag">@link</span> RemoteViews#setOnClickFillInIntent(int, Intent)&#125;.</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> viewId The id of the collection who's children will use this PendingIntent template</span>
+<span class="hljs-comment">     *          when clicked</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> pendingIntentTemplate The &#123;<span class="hljs-doctag">@link</span> PendingIntent&#125; to be combined with extras specified</span>
+<span class="hljs-comment">     *          by a child of viewId and executed when that child is clicked</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> void setPendingIntentTemplate(<span class="hljs-keyword">int</span> viewId, PendingIntent pendingIntentTemplate) &#123;
+        addAction(<span class="hljs-keyword">new</span> SetPendingIntentTemplate(viewId, pendingIntentTemplate));
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * When using collections (eg. &#123;<span class="hljs-doctag">@link</span> ListView&#125;, &#123;<span class="hljs-doctag">@link</span> StackView&#125; etc.) in widgets, it is very</span>
+<span class="hljs-comment">     * costly to set PendingIntents on the individual items, and is hence not permitted. Instead</span>
+<span class="hljs-comment">     * a single PendingIntent template can be set on the collection, see &#123;<span class="hljs-doctag">@link</span></span>
+<span class="hljs-comment">     * RemoteViews#setPendingIntentTemplate(int, PendingIntent)&#125;, and the individual on-click</span>
+<span class="hljs-comment">     * action of a given item can be distinguished by setting a fillInIntent on that item. The</span>
+<span class="hljs-comment">     * fillInIntent is then combined with the PendingIntent template in order to determine the final</span>
+<span class="hljs-comment">     * intent which will be executed when the item is clicked. This works as follows: any fields</span>
+<span class="hljs-comment">     * which are left blank in the PendingIntent template, but are provided by the fillInIntent</span>
+<span class="hljs-comment">     * will be overwritten, and the resulting PendingIntent will be used. The rest</span>
+<span class="hljs-comment">     * of the PendingIntent template will then be filled in with the associated fields that are</span>
+<span class="hljs-comment">     * set in fillInIntent. See &#123;<span class="hljs-doctag">@link</span> Intent#fillIn(Intent, int)&#125; for more details.</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> viewId The id of the view on which to set the fillInIntent</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> fillInIntent The intent which will be combined with the parent's PendingIntent</span>
+<span class="hljs-comment">     *        in order to determine the on-click behavior of the view specified by viewId</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> void setOnClickFillInIntent(<span class="hljs-keyword">int</span> viewId, Intent fillInIntent) &#123;
+        addAction(<span class="hljs-keyword">new</span> SetOnClickFillInIntent(viewId, fillInIntent));
+    &#125;
+&#125;</code></pre></div>
+
+
 
             </article>
             <hr>
@@ -224,7 +318,7 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
@@ -234,16 +328,16 @@
                       <a href="/2018/08/02/WDYDT-11-Android-Signature-Version-V1-V2/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">WDYDT-11-Android Signature Version V1 V2</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2018/07/24/WDYDT-9-Java性能优化权威指南/">
+                      <a href="/2018/07/24/WDYDT-9-Java%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">
                         <span class="hidden-mobile">WDYDT-9-Java性能优化权威指南</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -260,7 +354,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -287,7 +381,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -296,7 +390,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -339,9 +433,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

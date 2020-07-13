@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>Java注解学习 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2016-07-02 16:06">
-      July 2, 2016 pm
+      2016年7月2日 下午
     </time>
   </div>
 
@@ -201,7 +204,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>这段时间使用了butterKnife、retrofit等框架，对Java注解产生了兴趣，感觉不懂Annotation，用着这些框架也不放心：）<br><a id="more"></a></p>
+              <p>这段时间使用了butterKnife、retrofit等框架，对Java注解产生了兴趣，感觉不懂Annotation，用着这些框架也不放心：）</p>
+<a id="more"></a>
 <h3 id="什么是注解（Annotation）："><a href="#什么是注解（Annotation）：" class="headerlink" title="什么是注解（Annotation）："></a>什么是注解（Annotation）：</h3><ul>
 <li> Annotation（注解）就是Java提供了一种元程序中的元素关联任何信息和着任何元数据（metadata）的途径和方法。Annotion(注解)是一个接口，程序可以通过反射来获取指定程序元素的Annotion对象，然后通过Annotion对象来获取注解里面的元数据。</li>
 <li> Annotation(注解)是JDK5.0及以后版本引入的。它可以用于创建文档，跟踪代码中的依赖性，甚至执行基本编译时检查。从某些方面看，annotation就像修饰符一样被使用，并应用于包、类 型、构造方法、方法、成员变量、参数、本地变量的声明中。这些信息被存储在Annotation的“name=value”结构对中。</li>
@@ -220,7 +224,15 @@
 <p>1.CONSTRUCTOR:用于描述构造器<br>2.FIELD:用于描述域<br>3.LOCAL_VARIABLE:用于描述局部变量<br>4.METHOD:用于描述方法<br>5.PACKAGE:用于描述包<br>6.PARAMETER:用于描述参数<br>7.TYPE:用于描述类、接口(包括注解类型) 或enum声明</p>
 </blockquote>
 </li>
-<li>示例<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NoDBColumn &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE,ElementType.FIELD&#125;)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NoDBColumn &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>示例<div class="hljs"><pre><code class="hljs java"><span class="hljs-meta">@Target</span>(ElementType.FIELD)
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> NoDBColumn &#123;
+
+&#125;
+<span class="hljs-meta">@Target</span>(&#123;ElementType.TYPE,ElementType.FIELD&#125;)
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> NoDBColumn &#123;
+
+&#125;</code></pre></div>
+
 </li>
 </ul>
 <h3 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h3><ul>
@@ -229,10 +241,31 @@
 <p>1.SOURCE:在源文件中有效（即源文件保留）<br>2.CLASS:在class文件中有效（即class保留）<br>3.RUNTIME:在运行时有效（即运行时保留）</p>
 </blockquote>
 </li>
-<li>示例<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Column &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> "fieldName"</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">setFuncName</span><span class="params">()</span> <span class="keyword">default</span> "setField"</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getFuncName</span><span class="params">()</span> <span class="keyword">default</span> "getField"</span>; </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">defaultDBValue</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>示例<div class="hljs"><pre><code class="hljs java"><span class="hljs-meta">@Target</span>(ElementType.FIELD)
+<span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> Column &#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">name</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> "fieldName"</span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">setFuncName</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> "setField"</span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getFuncName</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> "getField"</span>; 
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">defaultDBValue</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">false</span></span>;
+&#125;</code></pre></div>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>&#123;
+
+    <span class="hljs-meta">@Column</span>(name = <span class="hljs-string">"java"</span>,setFuncName = <span class="hljs-string">"jdj"</span>,getFuncName = <span class="hljs-string">"jjj"</span>,defaultDBValue = <span class="hljs-keyword">false</span>)
+    <span class="hljs-keyword">private</span> String ss;
+
+    <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"不能这么用"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getString</span><span class="hljs-params">()</span></span>&#123;
+
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.toString();
+    &#125;
+&#125;</code></pre></div>
+
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Column</span>(name = <span class="string">"java"</span>,setFuncName = <span class="string">"jdj"</span>,getFuncName = <span class="string">"jjj"</span>,defaultDBValue = <span class="keyword">false</span>)</div><div class="line">    <span class="keyword">private</span> String ss;</div><div class="line"></div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"不能这么用"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getString</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h3><ul>
 <li>@Documented用于描述其它类型的annotation应该被作为被标注的程序成员的公共API，因此可以被例如javadoc此类的工具文档化。即是否会保存到Javadoc文档中。</li>
 </ul>
@@ -240,12 +273,20 @@
 <li>@Inherited 元注解是一个标记注解，@Inherited阐述了某个被标注的类型是被继承的。如果一个使用了@Inherited修饰的annotation类型被用于一个class，则这个annotation将被用于该class的子类。</li>
 <li>注意：@Inherited annotation类型是被标注过的class的子类所继承。类并不从它所实现的接口继承annotation，方法并不从它所重载的方法继承annotation。</li>
 <li>当@Inherited annotation类型标注的annotation的Retention是RetentionPolicy.RUNTIME，则反射API增强了这种继承性。如果我们使用java.lang.reflect去查询一个@Inherited annotation类型的annotation时，反射代码检查将展开工作：检查class和其父类，直到发现指定的annotation类型被发现，或者到达类继承结构的顶层。</li>
-<li>示例<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Inherited</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Greeting &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> FontColor&#123; BULE,RED,GREEN&#125;;</div><div class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">FontColor <span class="title">fontColor</span><span class="params">()</span> <span class="keyword">default</span> FontColor.GREEN</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>示例<div class="hljs"><pre><code class="hljs java"><span class="hljs-meta">@Inherited</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> Greeting &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> FontColor&#123; BULE,RED,GREEN&#125;;
+    <span class="hljs-function">String <span class="hljs-title">name</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function">FontColor <span class="hljs-title">fontColor</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> FontColor.GREEN</span>;
+&#125;</code></pre></div>
+
 </li>
 </ul>
 <h3 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h3><ul>
-<li>使用@interface自定义注解时，自动继承了java.lang.annotation.Annotation接口，由编译程序自动完成其他细节。在定义注解时，不能继承其他的注解或接口。@interface用来声明一个注解，其中的每一个方法实际上是声明了一个配置参数。方法的名称就是参数的名称，返回值类型就是参数的类型（返回值类型只能是基本类型、Class、String、enum）。可以通过default来声明参数的默认值。</li>
-<li>定义注解格式：<br><code>public @interface 注解名 {定义体}</code></li>
+<li><p>使用@interface自定义注解时，自动继承了java.lang.annotation.Annotation接口，由编译程序自动完成其他细节。在定义注解时，不能继承其他的注解或接口。@interface用来声明一个注解，其中的每一个方法实际上是声明了一个配置参数。方法的名称就是参数的名称，返回值类型就是参数的类型（返回值类型只能是基本类型、Class、String、enum）。可以通过default来声明参数的默认值。</p>
+</li>
+<li><p>定义注解格式：<br><code>public @interface 注解名 {定义体}</code></p>
+</li>
 <li><p>注解参数的可支持数据类型：</p>
 <blockquote>
 <p>1.所有基本数据类型（int,float,boolean,byte,double,char,long,short)<br>2.String类型<br>3.Class类型<br>4.enum类型<br>5.Annotation类型<br>6.以上所有类型的数组</p>
@@ -263,22 +304,169 @@
 <p>Class：类定义<br>Constructor：构造器定义<br>Field：累的成员变量定义<br>Method：类的方法定义<br>Package：类的包定义</p>
 </blockquote>
 </li>
-<li><p>java.lang.reflect 包下主要包含一些实现反射功能的工具类，实际上，java.lang.reflect 包所有提供的反射API扩充了读取运行时Annotation信息的能力。当一个Annotation类型被定义为运行时的Annotation后，该注解才能是运行时可见，当class文件被装载时被保存在class文件中的Annotation才会被虚拟机读取。<br>*　AnnotatedElement 接口是所有程序元素（Class、Method和Constructor）的父接口，所以程序通过反射获取了某个类的AnnotatedElement对象之后，程序就可以调用该对象的如下四个个方法来访问Annotation信息：</p>
+<li><p>java.lang.reflect 包下主要包含一些实现反射功能的工具类，实际上，java.lang.reflect 包所有提供的反射API扩充了读取运行时Annotation信息的能力。当一个Annotation类型被定义为运行时的Annotation后，该注解才能是运行时可见，当class文件被装载时被保存在class文件中的Annotation才会被虚拟机读取。</p>
+</li>
+<li><p>　AnnotatedElement 接口是所有程序元素（Class、Method和Constructor）的父接口，所以程序通过反射获取了某个类的AnnotatedElement对象之后，程序就可以调用该对象的如下四个个方法来访问Annotation信息：</p>
 <blockquote>
-<p>方法1：<t extends="" annotation=""> T getAnnotation(Class<t> annotationClass): 返回改程序元素上存在的、指定类型的注解，如果该类型注解不存在，则返回null。<br>方法2：Annotation[] getAnnotations():返回该程序元素上存在的所有注解。<br>方法3：boolean is AnnotationPresent(Class&lt;?extends Annotation&gt; annotationClass):判断该程序元素上是否包含指定类型的注解，存在则返回true，否则返回false.<br>方法4：Annotation[] getDeclaredAnnotations()：返回直接存在于此元素上的所有注释。与此接口中的其他方法不同，该方法将忽略继承的注释。（如果没有注释直接存在于此元素上，则返回长度为零的一个数组。）该方法的调用者可以随意修改返回的数组；这不会对其他调用者返回的数组产生任何影响。</t></t></p>
+<p>方法1：<T extends Annotation> T getAnnotation(Class<T> annotationClass): 返回改程序元素上存在的、指定类型的注解，如果该类型注解不存在，则返回null。<br>方法2：Annotation[] getAnnotations():返回该程序元素上存在的所有注解。<br>方法3：boolean is AnnotationPresent(Class&lt;?extends Annotation&gt; annotationClass):判断该程序元素上是否包含指定类型的注解，存在则返回true，否则返回false.<br>方法4：Annotation[] getDeclaredAnnotations()：返回直接存在于此元素上的所有注释。与此接口中的其他方法不同，该方法将忽略继承的注释。（如果没有注释直接存在于此元素上，则返回长度为零的一个数组。）该方法的调用者可以随意修改返回的数组；这不会对其他调用者返回的数组产生任何影响。</p>
 </blockquote>
 </li>
-<li>示例<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/***********注解声明***************/</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 水果名称注解</div><div class="line"> * <span class="doctag">@author</span> peida</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> FruitName &#123;</div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li><p>示例</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">/***********注解声明***************/</span>
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 水果名称注解</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> peida</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-meta">@Target</span>(ElementType.FIELD)
+<span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)
+<span class="hljs-meta">@Documented</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> FruitName &#123;
+    <span class="hljs-function">String <span class="hljs-title">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> ""</span>;
+&#125;</code></pre></div>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 水果颜色注解</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> peida</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-meta">@Target</span>(ElementType.FIELD)
+<span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)
+<span class="hljs-meta">@Documented</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> FruitColor &#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 颜色枚举</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@author</span> peida</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> Color&#123; BULE,RED,GREEN&#125;;
+    
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 颜色属性</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function">Color <span class="hljs-title">fruitColor</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> Color.GREEN</span>;
+
+&#125;</code></pre></div>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 水果供应者注解</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> peida</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-meta">@Target</span>(ElementType.FIELD)
+<span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)
+<span class="hljs-meta">@Documented</span>
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> FruitProvider &#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 供应商编号</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">id</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> -1</span>;
+    
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 供应商名称</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">name</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> ""</span>;
+    
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 供应商地址</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">address</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> ""</span>;
+&#125;</code></pre></div>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">/***********注解使用***************/</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Apple</span> </span>&#123;
+    
+    <span class="hljs-meta">@FruitName</span>(<span class="hljs-string">"Apple"</span>)
+    <span class="hljs-keyword">private</span> String appleName;
+    
+    <span class="hljs-meta">@FruitColor</span>(fruitColor=Color.RED)
+    <span class="hljs-keyword">private</span> String appleColor;
+    
+    <span class="hljs-meta">@FruitProvider</span>(id=<span class="hljs-number">1</span>,name=<span class="hljs-string">"陕西红富士集团"</span>,address=<span class="hljs-string">"陕西省西安市延安路89号红富士大厦"</span>)
+    <span class="hljs-keyword">private</span> String appleProvider;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAppleColor</span><span class="hljs-params">(String appleColor)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.appleColor = appleColor;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getAppleColor</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> appleColor;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAppleName</span><span class="hljs-params">(String appleName)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.appleName = appleName;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getAppleName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> appleName;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAppleProvider</span><span class="hljs-params">(String appleProvider)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.appleProvider = appleProvider;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getAppleProvider</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> appleProvider;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">displayName</span><span class="hljs-params">()</span></span>&#123;
+        System.out.println(<span class="hljs-string">"水果的名字是：苹果"</span>);
+    &#125;
+&#125;</code></pre></div>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">/***********注解处理器***************/</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FruitInfoUtil</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getFruitInfo</span><span class="hljs-params">(Class&lt;?&gt; clazz)</span></span>&#123;
+        
+        String strFruitName=<span class="hljs-string">" 水果名称："</span>;
+        String strFruitColor=<span class="hljs-string">" 水果颜色："</span>;
+        String strFruitProvicer=<span class="hljs-string">"供应商信息："</span>;
+        
+        Field[] fields = clazz.getDeclaredFields();
+        
+        <span class="hljs-keyword">for</span>(Field field :fields)&#123;
+            <span class="hljs-keyword">if</span>(field.isAnnotationPresent(FruitName<span class="hljs-class">.<span class="hljs-keyword">class</span>))</span>&#123;
+                FruitName fruitName = (FruitName) field.getAnnotation(FruitName<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
+                strFruitName=strFruitName+fruitName.value();
+                System.out.println(strFruitName);
+            &#125;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(field.isAnnotationPresent(FruitColor<span class="hljs-class">.<span class="hljs-keyword">class</span>))</span>&#123;
+                FruitColor fruitColor= (FruitColor) field.getAnnotation(FruitColor<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
+                strFruitColor=strFruitColor+fruitColor.fruitColor().toString();
+                System.out.println(strFruitColor);
+            &#125;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(field.isAnnotationPresent(FruitProvider<span class="hljs-class">.<span class="hljs-keyword">class</span>))</span>&#123;
+                FruitProvider fruitProvider= (FruitProvider) field.getAnnotation(FruitProvider<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
+                strFruitProvicer=<span class="hljs-string">" 供应商编号："</span>+fruitProvider.id()+<span class="hljs-string">" 供应商名称："</span>+fruitProvider.name()+<span class="hljs-string">" 供应商地址："</span>+fruitProvider.address();
+                System.out.println(strFruitProvicer);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">/***********输出结果***************/</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FruitRun</span> </span>&#123;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> args</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        
+        FruitInfoUtil.getFruitInfo(Apple<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
+        
+    &#125;
+
+&#125;
+
+====================================
+ 水果名称：Apple
+ 水果颜色：RED
+ 供应商编号：<span class="hljs-number">1</span> 供应商名称：陕西红富士集团 供应商地址：陕西省西安市延安路<span class="hljs-number">89</span>号红富士大厦</code></pre></div>
+
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 水果颜色注解</div><div class="line"> * <span class="doctag">@author</span> peida</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> FruitColor &#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 颜色枚举</div><div class="line">     * <span class="doctag">@author</span> peida</div><div class="line">     *</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Color&#123; BULE,RED,GREEN&#125;;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 颜色属性</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Color <span class="title">fruitColor</span><span class="params">()</span> <span class="keyword">default</span> Color.GREEN</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 水果供应者注解</div><div class="line"> * <span class="doctag">@author</span> peida</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> FruitProvider &#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 供应商编号</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">id</span><span class="params">()</span> <span class="keyword">default</span> -1</span>;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 供应商名称</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 供应商地址</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">address</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/***********注解使用***************/</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Apple</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="meta">@FruitName</span>(<span class="string">"Apple"</span>)</div><div class="line">    <span class="keyword">private</span> String appleName;</div><div class="line">    </div><div class="line">    <span class="meta">@FruitColor</span>(fruitColor=Color.RED)</div><div class="line">    <span class="keyword">private</span> String appleColor;</div><div class="line">    </div><div class="line">    <span class="meta">@FruitProvider</span>(id=<span class="number">1</span>,name=<span class="string">"陕西红富士集团"</span>,address=<span class="string">"陕西省西安市延安路89号红富士大厦"</span>)</div><div class="line">    <span class="keyword">private</span> String appleProvider;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAppleColor</span><span class="params">(String appleColor)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.appleColor = appleColor;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAppleColor</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> appleColor;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAppleName</span><span class="params">(String appleName)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.appleName = appleName;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAppleName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> appleName;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAppleProvider</span><span class="params">(String appleProvider)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.appleProvider = appleProvider;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAppleProvider</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> appleProvider;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayName</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"水果的名字是：苹果"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/***********注解处理器***************/</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FruitInfoUtil</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getFruitInfo</span><span class="params">(Class&lt;?&gt; clazz)</span></span>&#123;</div><div class="line">        </div><div class="line">        String strFruitName=<span class="string">" 水果名称："</span>;</div><div class="line">        String strFruitColor=<span class="string">" 水果颜色："</span>;</div><div class="line">        String strFruitProvicer=<span class="string">"供应商信息："</span>;</div><div class="line">        </div><div class="line">        Field[] fields = clazz.getDeclaredFields();</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(Field field :fields)&#123;</div><div class="line">            <span class="keyword">if</span>(field.isAnnotationPresent(FruitName.class))&#123;</div><div class="line">                FruitName fruitName = (FruitName) field.getAnnotation(FruitName.class);</div><div class="line">                strFruitName=strFruitName+fruitName.value();</div><div class="line">                System.out.println(strFruitName);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(field.isAnnotationPresent(FruitColor.class))&#123;</div><div class="line">                FruitColor fruitColor= (FruitColor) field.getAnnotation(FruitColor.class);</div><div class="line">                strFruitColor=strFruitColor+fruitColor.fruitColor().toString();</div><div class="line">                System.out.println(strFruitColor);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(field.isAnnotationPresent(FruitProvider.class))&#123;</div><div class="line">                FruitProvider fruitProvider= (FruitProvider) field.getAnnotation(FruitProvider.class);</div><div class="line">                strFruitProvicer=<span class="string">" 供应商编号："</span>+fruitProvider.id()+<span class="string">" 供应商名称："</span>+fruitProvider.name()+<span class="string">" 供应商地址："</span>+fruitProvider.address();</div><div class="line">                System.out.println(strFruitProvicer);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/***********输出结果***************/</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FruitRun</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> args</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        </div><div class="line">        FruitInfoUtil.getFruitInfo(Apple.class);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">====================================</div><div class="line"> 水果名称：Apple</div><div class="line"> 水果颜色：RED</div><div class="line"> 供应商编号：<span class="number">1</span> 供应商名称：陕西红富士集团 供应商地址：陕西省西安市延安路<span class="number">89</span>号红富士大厦</div></pre></td></tr></table></figure>
 <hr>
 <blockquote>
-<p>感谢 <a href="http://www.cnblogs.com/peida/" target="_blank" rel="external">http://www.cnblogs.com/peida/</a></p>
+<p>感谢 <a href="http://www.cnblogs.com/peida/" target="_blank" rel="noopener">http://www.cnblogs.com/peida/</a></p>
 </blockquote>
 
             </article>
@@ -292,23 +480,23 @@
                     
                       <a class="hover-with-bg" href="/tags/java/">java</a>
                     
-                      <a class="hover-with-bg" href="/tags/注解/">注解</a>
+                      <a class="hover-with-bg" href="/tags/%E6%B3%A8%E8%A7%A3/">注解</a>
                     
                   </div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2016/07/16/openssl学习/">
+                      <a href="/2016/07/16/openssl%E5%AD%A6%E4%B9%A0/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">openssl学习</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
@@ -317,7 +505,7 @@
                     
                       <a href="/2016/06/22/git-aliases-at-oh-my-zsh/">
                         <span class="hidden-mobile">git aliases at oh-my-zsh</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -334,7 +522,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -361,7 +549,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -370,7 +558,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -413,9 +601,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

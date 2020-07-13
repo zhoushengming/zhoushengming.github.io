@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>WDYDT-20-SharedPreferences探索 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2019-09-10 13:20">
-      September 10, 2019 pm
+      2019年9月10日 下午
     </time>
   </div>
 
@@ -202,29 +205,404 @@
             
             <article class="markdown-body">
               <!-- abstract area -->
+
 <p>前几天遇到了一个使用SharedPreferences(以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp#getInt()的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。</p>
 <p>(源码基于android-28)</p>
 <a id="more"></a>
+
 <p>我接下来会顺着我们使用sp的步骤，一步一步的来分析。<br>主要包含：sp的创建、sp的数据读取、sp的写入。</p>
 <h3 id="sp的创建"><a href="#sp的创建" class="headerlink" title="sp的创建"></a>sp的创建</h3><p>通话context#getSharedPreferences可以获取到sp实例。</p>
-<figure class="highlight"><table><tr><td class="code"><pre><div class="line">android.content.Context#getSharedPreferences(java.io.File, int)</div><div class="line"></div><div class="line">public abstract SharedPreferences getSharedPreferences(File file, @PreferencesMode int mode);</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java">android.content.Context#getSharedPreferences(java.io.File, int)
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> SharedPreferences <span class="hljs-title">getSharedPreferences</span><span class="hljs-params">(File file, @PreferencesMode <span class="hljs-keyword">int</span> mode)</span></span>;</code></pre></div>
+
 <p>通过源码可以看出，这里的具体实现应该是在ContextImpl.java</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(String name, <span class="keyword">int</span> mode)</span> </span>&#123;</div><div class="line">    <span class="comment">// At least one application in the world actually passes in a null</span></div><div class="line">    <span class="comment">// name.  This happened to work because when we generated the file name</span></div><div class="line">    <span class="comment">// we would stringify it to "null.xml".  Nice.</span></div><div class="line">    <span class="keyword">if</span> (mPackageInfo.getApplicationInfo().targetSdkVersion &lt;</div><div class="line">            Build.VERSION_CODES.KITKAT) &#123;</div><div class="line">        <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</div><div class="line">            name = <span class="string">"null"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    File file;</div><div class="line">    <span class="keyword">synchronized</span> (ContextImpl.class) &#123;  <span class="comment">//字节码 同步锁</span></div><div class="line">        <span class="keyword">if</span> (mSharedPrefsPaths == <span class="keyword">null</span>) &#123;</div><div class="line">            mSharedPrefsPaths = <span class="keyword">new</span> ArrayMap&lt;&gt;();  <span class="comment">// sp path的内存缓存</span></div><div class="line">        &#125;</div><div class="line">        file = mSharedPrefsPaths.get(name);</div><div class="line">        <span class="keyword">if</span> (file == <span class="keyword">null</span>) &#123;</div><div class="line">            file = getSharedPreferencesPath(name);  <span class="comment">// 见下边的方法</span></div><div class="line">            mSharedPrefsPaths.put(name, file);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> getSharedPreferences(file, mode);  <span class="comment">// 见下边的方法</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> File <span class="title">getSharedPreferencesPath</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> makeFilename(getPreferencesDir(), name + <span class="string">".xml"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(File file, <span class="keyword">int</span> mode)</span> </span>&#123;</div><div class="line">    SharedPreferencesImpl sp;  <span class="comment">//SharedPreferencesImpl 真正的实现类</span></div><div class="line">    <span class="keyword">synchronized</span> (ContextImpl.class) &#123;</div><div class="line">        <span class="keyword">final</span> ArrayMap&lt;File, SharedPreferencesImpl&gt; cache = getSharedPreferencesCacheLocked();  <span class="comment">// 缓存</span></div><div class="line">        sp = cache.get(file);  <span class="comment">// 从缓存中拿到sp impl</span></div><div class="line">        <span class="keyword">if</span> (sp == <span class="keyword">null</span>) &#123;</div><div class="line">            checkMode(mode);</div><div class="line">            <span class="keyword">if</span> (getApplicationInfo().targetSdkVersion &gt;= android.os.Build.VERSION_CODES.O) &#123;</div><div class="line">                <span class="keyword">if</span> (isCredentialProtectedStorage()</div><div class="line">                        &amp;&amp; !getSystemService(UserManager.class)</div><div class="line">                                .isUserUnlockingOrUnlocked(UserHandle.myUserId())) &#123;</div><div class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"SharedPreferences in credential encrypted "</span></div><div class="line">                            + <span class="string">"storage are not available until after user is unlocked"</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            sp = <span class="keyword">new</span> SharedPreferencesImpl(file, mode);  <span class="comment">// 创建 sp impl</span></div><div class="line">            cache.put(file, sp);</div><div class="line">            <span class="keyword">return</span> sp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> ((mode &amp; Context.MODE_MULTI_PROCESS) != <span class="number">0</span> ||</div><div class="line">        getApplicationInfo().targetSdkVersion &lt; android.os.Build.VERSION_CODES.HONEYCOMB) &#123;</div><div class="line">        <span class="comment">// If somebody else (some other process) changed the prefs</span></div><div class="line">        <span class="comment">// file behind our back, we reload it.  This has been the</span></div><div class="line">        <span class="comment">// historical (if undocumented) behavior.</span></div><div class="line">        sp.startReloadIfChangedUnexpectedly();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@GuardedBy</span>(<span class="string">"ContextImpl.class"</span>)</div><div class="line"><span class="function"><span class="keyword">private</span> ArrayMap&lt;File, SharedPreferencesImpl&gt; <span class="title">getSharedPreferencesCacheLocked</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (sSharedPrefsCache == <span class="keyword">null</span>) &#123;</div><div class="line">        sSharedPrefsCache = <span class="keyword">new</span> ArrayMap&lt;&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> String packageName = getPackageName();</div><div class="line">    ArrayMap&lt;File, SharedPreferencesImpl&gt; packagePrefs = sSharedPrefsCache.get(packageName);</div><div class="line">    <span class="keyword">if</span> (packagePrefs == <span class="keyword">null</span>) &#123;</div><div class="line">        packagePrefs = <span class="keyword">new</span> ArrayMap&lt;&gt;();</div><div class="line">        sSharedPrefsCache.put(packageName, packagePrefs);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> packagePrefs;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> SharedPreferences <span class="hljs-title">getSharedPreferences</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> mode)</span> </span>&#123;
+    <span class="hljs-comment">// At least one application in the world actually passes in a null</span>
+    <span class="hljs-comment">// name.  This happened to work because when we generated the file name</span>
+    <span class="hljs-comment">// we would stringify it to "null.xml".  Nice.</span>
+    <span class="hljs-keyword">if</span> (mPackageInfo.getApplicationInfo().targetSdkVersion &lt;
+            Build.VERSION_CODES.KITKAT) &#123;
+        <span class="hljs-keyword">if</span> (name == <span class="hljs-keyword">null</span>) &#123;
+            name = <span class="hljs-string">"null"</span>;
+        &#125;
+    &#125;
+
+    File file;
+    <span class="hljs-keyword">synchronized</span> (ContextImpl<span class="hljs-class">.<span class="hljs-keyword">class</span>) </span>&#123;  <span class="hljs-comment">//字节码 同步锁</span>
+        <span class="hljs-keyword">if</span> (mSharedPrefsPaths == <span class="hljs-keyword">null</span>) &#123;
+            mSharedPrefsPaths = <span class="hljs-keyword">new</span> ArrayMap&lt;&gt;();  <span class="hljs-comment">// sp path的内存缓存</span>
+        &#125;
+        file = mSharedPrefsPaths.get(name);
+        <span class="hljs-keyword">if</span> (file == <span class="hljs-keyword">null</span>) &#123;
+            file = getSharedPreferencesPath(name);  <span class="hljs-comment">// 见下边的方法</span>
+            mSharedPrefsPaths.put(name, file);
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> getSharedPreferences(file, mode);  <span class="hljs-comment">// 见下边的方法</span>
+&#125;
+
+<span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> File <span class="hljs-title">getSharedPreferencesPath</span><span class="hljs-params">(String name)</span> </span>&#123;
+    <span class="hljs-keyword">return</span> makeFilename(getPreferencesDir(), name + <span class="hljs-string">".xml"</span>);
+&#125;
+
+<span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> SharedPreferences <span class="hljs-title">getSharedPreferences</span><span class="hljs-params">(File file, <span class="hljs-keyword">int</span> mode)</span> </span>&#123;
+    SharedPreferencesImpl sp;  <span class="hljs-comment">//SharedPreferencesImpl 真正的实现类</span>
+    <span class="hljs-keyword">synchronized</span> (ContextImpl<span class="hljs-class">.<span class="hljs-keyword">class</span>) </span>&#123;
+        <span class="hljs-keyword">final</span> ArrayMap&lt;File, SharedPreferencesImpl&gt; cache = getSharedPreferencesCacheLocked();  <span class="hljs-comment">// 缓存</span>
+        sp = cache.get(file);  <span class="hljs-comment">// 从缓存中拿到sp impl</span>
+        <span class="hljs-keyword">if</span> (sp == <span class="hljs-keyword">null</span>) &#123;
+            checkMode(mode);
+            <span class="hljs-keyword">if</span> (getApplicationInfo().targetSdkVersion &gt;= android.os.Build.VERSION_CODES.O) &#123;
+                <span class="hljs-keyword">if</span> (isCredentialProtectedStorage()
+                        &amp;&amp; !getSystemService(UserManager<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>
+<span class="hljs-class">                                .<span class="hljs-title">isUserUnlockingOrUnlocked</span>(<span class="hljs-title">UserHandle</span>.<span class="hljs-title">myUserId</span>())) </span>&#123;
+                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(<span class="hljs-string">"SharedPreferences in credential encrypted "</span>
+                            + <span class="hljs-string">"storage are not available until after user is unlocked"</span>);
+                &#125;
+            &#125;
+            sp = <span class="hljs-keyword">new</span> SharedPreferencesImpl(file, mode);  <span class="hljs-comment">// 创建 sp impl</span>
+            cache.put(file, sp);
+            <span class="hljs-keyword">return</span> sp;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">if</span> ((mode &amp; Context.MODE_MULTI_PROCESS) != <span class="hljs-number">0</span> ||
+        getApplicationInfo().targetSdkVersion &lt; android.os.Build.VERSION_CODES.HONEYCOMB) &#123;
+        <span class="hljs-comment">// If somebody else (some other process) changed the prefs</span>
+        <span class="hljs-comment">// file behind our back, we reload it.  This has been the</span>
+        <span class="hljs-comment">// historical (if undocumented) behavior.</span>
+        sp.startReloadIfChangedUnexpectedly();
+    &#125;
+    <span class="hljs-keyword">return</span> sp;
+&#125;
+
+<span class="hljs-meta">@GuardedBy</span>(<span class="hljs-string">"ContextImpl.class"</span>)
+<span class="hljs-function"><span class="hljs-keyword">private</span> ArrayMap&lt;File, SharedPreferencesImpl&gt; <span class="hljs-title">getSharedPreferencesCacheLocked</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (sSharedPrefsCache == <span class="hljs-keyword">null</span>) &#123;
+        sSharedPrefsCache = <span class="hljs-keyword">new</span> ArrayMap&lt;&gt;();
+    &#125;
+
+    <span class="hljs-keyword">final</span> String packageName = getPackageName();
+    ArrayMap&lt;File, SharedPreferencesImpl&gt; packagePrefs = sSharedPrefsCache.get(packageName);
+    <span class="hljs-keyword">if</span> (packagePrefs == <span class="hljs-keyword">null</span>) &#123;
+        packagePrefs = <span class="hljs-keyword">new</span> ArrayMap&lt;&gt;();
+        sSharedPrefsCache.put(packageName, packagePrefs);
+    &#125;
+
+    <span class="hljs-keyword">return</span> packagePrefs;
+&#125;</code></pre></div>
 <p>所以sharedPreferences的真正实现在SharedPreferencesImpl。</p>
-<p>再来看一下SharedPreferencesImpl的初始化过程<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">SharedPreferencesImpl(File file, <span class="keyword">int</span> mode) &#123;</div><div class="line">    mFile = file;</div><div class="line">    mBackupFile = makeBackupFile(file);  <span class="comment">// 获取备份文件</span></div><div class="line">    mMode = mode;</div><div class="line">    mLoaded = <span class="keyword">false</span>;</div><div class="line">    mMap = <span class="keyword">null</span>;</div><div class="line">    mThrowable = <span class="keyword">null</span>;</div><div class="line">    startLoadFromDisk();  <span class="comment">// 初始化数据</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startLoadFromDisk</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">        mLoaded = <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">new</span> Thread(<span class="string">"SharedPreferencesImpl-load"</span>) &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            loadFromDisk();  <span class="comment">// 异步从磁盘读取数据</span></div><div class="line">        &#125;</div><div class="line">    &#125;.start();</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">loadFromDisk</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">        <span class="keyword">if</span> (mLoaded) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mBackupFile.exists()) &#123;</div><div class="line">            mFile.delete();</div><div class="line">            mBackupFile.renameTo(mFile);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    .... <span class="comment">// 加载数据到map里边</span></div><div class="line"></div><div class="line">    <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">        mLoaded = <span class="keyword">true</span>;   <span class="comment">// 标记数据加载完成</span></div><div class="line">        mThrowable = thrown;</div><div class="line">        ....</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            .... <span class="comment">// 初始化mMap，正常情况下会 mMap = map</span></div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">            mThrowable = t;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            mLock.notifyAll(); <span class="comment">// 释放锁</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再来看一下SharedPreferencesImpl的初始化过程</p>
+<div class="hljs"><pre><code class="hljs java">SharedPreferencesImpl(File file, <span class="hljs-keyword">int</span> mode) &#123;
+    mFile = file;
+    mBackupFile = makeBackupFile(file);  <span class="hljs-comment">// 获取备份文件</span>
+    mMode = mode;
+    mLoaded = <span class="hljs-keyword">false</span>;
+    mMap = <span class="hljs-keyword">null</span>;
+    mThrowable = <span class="hljs-keyword">null</span>;
+    startLoadFromDisk();  <span class="hljs-comment">// 初始化数据</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startLoadFromDisk</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">synchronized</span> (mLock) &#123;
+        mLoaded = <span class="hljs-keyword">false</span>;
+    &#125;
+    <span class="hljs-keyword">new</span> Thread(<span class="hljs-string">"SharedPreferencesImpl-load"</span>) &#123;
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+            loadFromDisk();  <span class="hljs-comment">// 异步从磁盘读取数据</span>
+        &#125;
+    &#125;.start();
+&#125;
+
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">loadFromDisk</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">synchronized</span> (mLock) &#123;
+        <span class="hljs-keyword">if</span> (mLoaded) &#123;
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        <span class="hljs-keyword">if</span> (mBackupFile.exists()) &#123;
+            mFile.delete();
+            mBackupFile.renameTo(mFile);
+        &#125;
+    &#125;
+    .... <span class="hljs-comment">// 加载数据到map里边</span>
+
+    <span class="hljs-keyword">synchronized</span> (mLock) &#123;
+        mLoaded = <span class="hljs-keyword">true</span>;   <span class="hljs-comment">// 标记数据加载完成</span>
+        mThrowable = thrown;
+        ....
+        <span class="hljs-keyword">try</span> &#123;
+            .... <span class="hljs-comment">// 初始化mMap，正常情况下会 mMap = map</span>
+        &#125; <span class="hljs-keyword">catch</span> (Throwable t) &#123;
+            mThrowable = t;
+        &#125; <span class="hljs-keyword">finally</span> &#123;
+            mLock.notifyAll(); <span class="hljs-comment">// 释放锁</span>
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+
 <p>从上面的代码我们可以发现，sp的创建过程虽然复杂，但是耗时操作已经放到了子线程，所以我们在获取sp实例的时候不需要担心阻塞的问题。</p>
 <p>同时，我们注意到有两个变量比较重要：mLoaded和mLock，这两个变量是为了保证必须在数据从disk上加载完毕后，我们才能对sp进行读写操作。</p>
-<h3 id="sp的数据读取"><a href="#sp的数据读取" class="headerlink" title="sp的数据读取"></a>sp的数据读取</h3><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">sharedPreferences.getInt() <span class="comment">// 这是一种常用的获取sp数据的方式</span></div></pre></td></tr></table></figure>
+<h3 id="sp的数据读取"><a href="#sp的数据读取" class="headerlink" title="sp的数据读取"></a>sp的数据读取</h3><div class="hljs"><pre><code class="hljs java">sharedPreferences.getInt() <span class="hljs-comment">// 这是一种常用的获取sp数据的方式</span></code></pre></div>
+
 <p>来看一下具体的实现：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><div class="line"></div><div class="line">android.app.SharedPreferencesImpl#getInt</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getInt(String key, int defValue) &#123;</div><div class="line">        synchronized (mLock) &#123;  // 这里用了mLock，保证上边的初始化和现在的读取互斥</div><div class="line">            awaitLoadedLocked(); // 检查或等待数据加载完成</div><div class="line">            Integer v = (Integer)mMap.get(key);</div><div class="line">            return v != null ? v : defValue;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @GuardedBy("mLock")</div><div class="line">    private void awaitLoadedLocked() &#123;</div><div class="line">        if (!mLoaded) &#123;</div><div class="line">            // Raise an explicit StrictMode onReadFromDisk for this</div><div class="line">            // thread, since the real read will be in a different</div><div class="line">            // thread and otherwise ignored by StrictMode.</div><div class="line">            BlockGuard.getThreadPolicy().onReadFromDisk();</div><div class="line">        &#125;</div><div class="line">        while (!mLoaded) &#123; // 如果没有加载完成，</div><div class="line">            try &#123;</div><div class="line">                mLock.wait(); // 等待加载完成，这里会阻塞线程</div><div class="line">            &#125; catch (InterruptedException unused) &#123;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        if (mThrowable != null) &#123;</div><div class="line">            throw new IllegalStateException(mThrowable);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java">
+android.app.SharedPreferencesImpl#getInt
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getInt</span><span class="hljs-params">(String key, <span class="hljs-keyword">int</span> defValue)</span> </span>&#123;
+        <span class="hljs-keyword">synchronized</span> (mLock) &#123;  <span class="hljs-comment">// 这里用了mLock，保证上边的初始化和现在的读取互斥</span>
+            awaitLoadedLocked(); <span class="hljs-comment">// 检查或等待数据加载完成</span>
+            Integer v = (Integer)mMap.get(key);
+            <span class="hljs-keyword">return</span> v != <span class="hljs-keyword">null</span> ? v : defValue;
+        &#125;
+    &#125;
+
+
+    <span class="hljs-meta">@GuardedBy</span>(<span class="hljs-string">"mLock"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">awaitLoadedLocked</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (!mLoaded) &#123;
+            <span class="hljs-comment">// Raise an explicit StrictMode onReadFromDisk for this</span>
+            <span class="hljs-comment">// thread, since the real read will be in a different</span>
+            <span class="hljs-comment">// thread and otherwise ignored by StrictMode.</span>
+            BlockGuard.getThreadPolicy().onReadFromDisk();
+        &#125;
+        <span class="hljs-keyword">while</span> (!mLoaded) &#123; <span class="hljs-comment">// 如果没有加载完成，</span>
+            <span class="hljs-keyword">try</span> &#123;
+                mLock.wait(); <span class="hljs-comment">// 等待加载完成，这里会阻塞线程</span>
+            &#125; <span class="hljs-keyword">catch</span> (InterruptedException unused) &#123;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">if</span> (mThrowable != <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(mThrowable);
+        &#125;
+    &#125;</code></pre></div>
+
 <p>所以，因为awaitLoadedLocked的存在，我们在getInt的时候，可能会有一定的耗时。只要你不是刚初始化sp，就立刻去get数据，一般也不会阻塞。</p>
-<h3 id="sp的写入"><a href="#sp的写入" class="headerlink" title="sp的写入"></a>sp的写入</h3><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">sharedPreferences.edit().putInt().apply();</div><div class="line">sharedPreferences.edit().putInt().commit();</div></pre></td></tr></table></figure>
+<h3 id="sp的写入"><a href="#sp的写入" class="headerlink" title="sp的写入"></a>sp的写入</h3><div class="hljs"><pre><code class="hljs java">sharedPreferences.edit().putInt().apply();
+sharedPreferences.edit().putInt().commit();</code></pre></div>
 <p>sp的写入有两种方式，apply和commit。</p>
 <p>这里有个新的类：Editor，他的实现在android.app.SharedPreferencesImpl.EditorImpl，我们重点关注apply和commit方法。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">apply</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">final</span> <span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line"></div><div class="line">          <span class="keyword">final</span> MemoryCommitResult mcr = commitToMemory();  <span class="comment">// 提交到内存</span></div><div class="line">          <span class="keyword">final</span> Runnable awaitCommit = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                  <span class="meta">@Override</span></div><div class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                      <span class="keyword">try</span> &#123;</div><div class="line">                          mcr.writtenToDiskLatch.await();</div><div class="line">                      &#125; <span class="keyword">catch</span> (InterruptedException ignored) &#123;</div><div class="line">                      &#125;</div><div class="line"></div><div class="line">                      <span class="keyword">if</span> (DEBUG &amp;&amp; mcr.wasWritten) &#123;</div><div class="line">                          Log.d(TAG, mFile.getName() + <span class="string">":"</span> + mcr.memoryStateGeneration</div><div class="line">                                  + <span class="string">" applied after "</span> + (System.currentTimeMillis() - startTime)</div><div class="line">                                  + <span class="string">" ms"</span>);</div><div class="line">                      &#125;</div><div class="line">                  &#125;</div><div class="line">              &#125;;</div><div class="line"></div><div class="line">          QueuedWork.addFinisher(awaitCommit);  <span class="comment">//这是个内部工具类，用于跟踪那些未完成的或尚未结束的全局任务，新任务通过方法 queue 加入。添加 finisher 的runnables，由 waitToFinish 方法保证执行，用于保证任务已被处理完成。</span></div><div class="line"></div><div class="line">          Runnable postWriteRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                  <span class="meta">@Override</span></div><div class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                      awaitCommit.run();</div><div class="line">                      QueuedWork.removeFinisher(awaitCommit);</div><div class="line">                  &#125;</div><div class="line">              &#125;;</div><div class="line"></div><div class="line">          SharedPreferencesImpl.<span class="keyword">this</span>.enqueueDiskWrite(mcr, postWriteRunnable); <span class="comment">// 真正的异步写入disk</span></div><div class="line"></div><div class="line">          <span class="comment">// Okay to notify the listeners before it's hit disk</span></div><div class="line">          <span class="comment">// because the listeners should always get the same</span></div><div class="line">          <span class="comment">// SharedPreferences instance back, which has the</span></div><div class="line">          <span class="comment">// changes reflected in memory.</span></div><div class="line">          notifyListeners(mcr); <span class="comment">// 通知观察者</span></div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="comment">// Returns true if any changes were made</span></div><div class="line">      <span class="function"><span class="keyword">private</span> MemoryCommitResult <span class="title">commitToMemory</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">long</span> memoryStateGeneration;</div><div class="line">          List&lt;String&gt; keysModified = <span class="keyword">null</span>;</div><div class="line">          Set&lt;OnSharedPreferenceChangeListener&gt; listeners = <span class="keyword">null</span>;</div><div class="line">          Map&lt;String, Object&gt; mapToWriteToDisk;</div><div class="line"></div><div class="line">          <span class="keyword">synchronized</span> (SharedPreferencesImpl.<span class="keyword">this</span>.mLock) &#123; <span class="comment">// 使用sp中的那个数据访问锁，保证线程安全</span></div><div class="line">              <span class="comment">// We optimistically don't make a deep copy until</span></div><div class="line">              <span class="comment">// a memory commit comes in when we're already</span></div><div class="line">              <span class="comment">// writing to disk.</span></div><div class="line">              <span class="keyword">if</span> (mDiskWritesInFlight &gt; <span class="number">0</span>) &#123;</div><div class="line">                  <span class="comment">// We can't modify our mMap as a currently</span></div><div class="line">                  <span class="comment">// in-flight write owns it.  Clone it before</span></div><div class="line">                  <span class="comment">// modifying it.</span></div><div class="line">                  <span class="comment">// noinspection unchecked</span></div><div class="line">                  mMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(mMap);</div><div class="line">              &#125;</div><div class="line">              mapToWriteToDisk = mMap; <span class="comment">// 拿到sp中的map</span></div><div class="line">              mDiskWritesInFlight++;</div><div class="line"></div><div class="line">              <span class="keyword">boolean</span> hasListeners = mListeners.size() &gt; <span class="number">0</span>;</div><div class="line">              <span class="keyword">if</span> (hasListeners) &#123;</div><div class="line">                  keysModified = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">                  listeners = <span class="keyword">new</span> HashSet&lt;OnSharedPreferenceChangeListener&gt;(mListeners.keySet());</div><div class="line">              &#125;</div><div class="line"></div><div class="line">              <span class="keyword">synchronized</span> (mEditorLock) &#123;</div><div class="line">                  <span class="keyword">boolean</span> changesMade = <span class="keyword">false</span>;</div><div class="line"></div><div class="line">                  <span class="keyword">if</span> (mClear) &#123;</div><div class="line">                      <span class="keyword">if</span> (!mapToWriteToDisk.isEmpty()) &#123;</div><div class="line">                          changesMade = <span class="keyword">true</span>;</div><div class="line">                          mapToWriteToDisk.clear();</div><div class="line">                      &#125;</div><div class="line">                      mClear = <span class="keyword">false</span>;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  <span class="keyword">for</span> (Map.Entry&lt;String, Object&gt; e : mModified.entrySet()) &#123;</div><div class="line">                      String k = e.getKey();</div><div class="line">                      Object v = e.getValue();</div><div class="line">                      <span class="comment">// "this" is the magic value for a removal mutation. In addition,</span></div><div class="line">                      <span class="comment">// setting a value to "null" for a given key is specified to be</span></div><div class="line">                      <span class="comment">// equivalent to calling remove on that key.</span></div><div class="line">                      <span class="keyword">if</span> (v == <span class="keyword">this</span> || v == <span class="keyword">null</span>) &#123;</div><div class="line">                          <span class="keyword">if</span> (!mapToWriteToDisk.containsKey(k)) &#123;</div><div class="line">                              <span class="keyword">continue</span>;</div><div class="line">                          &#125;</div><div class="line">                          mapToWriteToDisk.remove(k);  <span class="comment">//写入数据到map中，即内存中</span></div><div class="line">                      &#125; <span class="keyword">else</span> &#123;</div><div class="line">                          <span class="keyword">if</span> (mapToWriteToDisk.containsKey(k)) &#123;</div><div class="line">                              Object existingValue = mapToWriteToDisk.get(k);</div><div class="line">                              <span class="keyword">if</span> (existingValue != <span class="keyword">null</span> &amp;&amp; existingValue.equals(v)) &#123;</div><div class="line">                                  <span class="keyword">continue</span>;</div><div class="line">                              &#125;</div><div class="line">                          &#125;</div><div class="line">                          mapToWriteToDisk.put(k, v); <span class="comment">//写入数据到map中，即内存中 </span></div><div class="line">                      &#125;</div><div class="line"></div><div class="line">                      changesMade = <span class="keyword">true</span>;</div><div class="line">                      <span class="keyword">if</span> (hasListeners) &#123;</div><div class="line">                          keysModified.add(k);</div><div class="line">                      &#125;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  mModified.clear();</div><div class="line"></div><div class="line">                  <span class="keyword">if</span> (changesMade) &#123;</div><div class="line">                      mCurrentMemoryStateGeneration++;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  memoryStateGeneration = mCurrentMemoryStateGeneration;</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">new</span> MemoryCommitResult(memoryStateGeneration, keysModified, listeners,</div><div class="line">                  mapToWriteToDisk);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">commit</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">long</span> startTime = <span class="number">0</span>;</div><div class="line"></div><div class="line">          <span class="keyword">if</span> (DEBUG) &#123;</div><div class="line">              startTime = System.currentTimeMillis();</div><div class="line">          &#125;</div><div class="line"></div><div class="line">          MemoryCommitResult mcr = commitToMemory();</div><div class="line"></div><div class="line">          SharedPreferencesImpl.<span class="keyword">this</span>.enqueueDiskWrite(</div><div class="line">              mcr, <span class="keyword">null</span> <span class="comment">/* sync write on this thread okay */</span>); <span class="comment">//这里的写入是异步的</span></div><div class="line">          <span class="keyword">try</span> &#123;</div><div class="line">              mcr.writtenToDiskLatch.await();  <span class="comment">// 但是这里会阻塞等待写入完成</span></div><div class="line">          &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">              <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">          &#125; <span class="keyword">finally</span> &#123;</div><div class="line">              <span class="keyword">if</span> (DEBUG) &#123;</div><div class="line">                  Log.d(TAG, mFile.getName() + <span class="string">":"</span> + mcr.memoryStateGeneration</div><div class="line">                          + <span class="string">" committed after "</span> + (System.currentTimeMillis() - startTime)</div><div class="line">                          + <span class="string">" ms"</span>);</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">          notifyListeners(mcr);</div><div class="line">          <span class="keyword">return</span> mcr.writeToDiskResult;</div><div class="line">      &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">enqueueDiskWrite</span><span class="params">(<span class="keyword">final</span> MemoryCommitResult mcr,</span></span></div><div class="line">                                <span class="keyword">final</span> Runnable postWriteRunnable) &#123;</div><div class="line">      <span class="keyword">final</span> <span class="keyword">boolean</span> isFromSyncCommit = (postWriteRunnable == <span class="keyword">null</span>);</div><div class="line"></div><div class="line">      <span class="keyword">final</span> Runnable writeToDiskRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">              <span class="meta">@Override</span></div><div class="line">              <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                  <span class="keyword">synchronized</span> (mWritingToDiskLock) &#123;</div><div class="line">                      writeToFile(mcr, isFromSyncCommit); <span class="comment">// 异步写入文件</span></div><div class="line">                  &#125;</div><div class="line">                  <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">                      mDiskWritesInFlight--;</div><div class="line">                  &#125;</div><div class="line">                  <span class="keyword">if</span> (postWriteRunnable != <span class="keyword">null</span>) &#123;</div><div class="line">                      postWriteRunnable.run();</div><div class="line">                  &#125;</div><div class="line">              &#125;</div><div class="line">          &#125;;</div><div class="line"></div><div class="line">      <span class="comment">// Typical #commit() path with fewer allocations, doing a write on</span></div><div class="line">      <span class="comment">// the current thread.</span></div><div class="line">      <span class="keyword">if</span> (isFromSyncCommit) &#123;</div><div class="line">          <span class="keyword">boolean</span> wasEmpty = <span class="keyword">false</span>;</div><div class="line">          <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">              wasEmpty = mDiskWritesInFlight == <span class="number">1</span>;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">if</span> (wasEmpty) &#123;</div><div class="line">              writeToDiskRunnable.run();</div><div class="line">              <span class="keyword">return</span>;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      QueuedWork.queue(writeToDiskRunnable, !isFromSyncCommit);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@GuardedBy</span>(<span class="string">"mWritingToDiskLock"</span>)</div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeToFile</span><span class="params">(MemoryCommitResult mcr, <span class="keyword">boolean</span> isFromSyncCommit)</span> </span>&#123;</div><div class="line">      .... <span class="comment">//写入相关的</span></div><div class="line"></div><div class="line">          <span class="keyword">if</span> (!backupFileExists) &#123;</div><div class="line">              <span class="keyword">if</span> (!mFile.renameTo(mBackupFile)) &#123;</div><div class="line">                  Log.e(TAG, <span class="string">"Couldn't rename file "</span> + mFile</div><div class="line">                        + <span class="string">" to backup file "</span> + mBackupFile);</div><div class="line">                  mcr.setDiskWriteResult(<span class="keyword">false</span>, <span class="keyword">false</span>); <span class="comment">// 对CountDownLatch进行countDown，释放阻塞</span></div><div class="line">                  <span class="keyword">return</span>;</div><div class="line">              &#125;</div><div class="line">          &#125; <span class="keyword">else</span> &#123;</div><div class="line">              mFile.delete();</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java">      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">apply</span><span class="hljs-params">()</span> </span>&#123;
+          <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> startTime = System.currentTimeMillis();
+
+          <span class="hljs-keyword">final</span> MemoryCommitResult mcr = commitToMemory();  <span class="hljs-comment">// 提交到内存</span>
+          <span class="hljs-keyword">final</span> Runnable awaitCommit = <span class="hljs-keyword">new</span> Runnable() &#123;
+                  <span class="hljs-meta">@Override</span>
+                  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+                      <span class="hljs-keyword">try</span> &#123;
+                          mcr.writtenToDiskLatch.await();
+                      &#125; <span class="hljs-keyword">catch</span> (InterruptedException ignored) &#123;
+                      &#125;
+
+                      <span class="hljs-keyword">if</span> (DEBUG &amp;&amp; mcr.wasWritten) &#123;
+                          Log.d(TAG, mFile.getName() + <span class="hljs-string">":"</span> + mcr.memoryStateGeneration
+                                  + <span class="hljs-string">" applied after "</span> + (System.currentTimeMillis() - startTime)
+                                  + <span class="hljs-string">" ms"</span>);
+                      &#125;
+                  &#125;
+              &#125;;
+
+          QueuedWork.addFinisher(awaitCommit);  <span class="hljs-comment">//这是个内部工具类，用于跟踪那些未完成的或尚未结束的全局任务，新任务通过方法 queue 加入。添加 finisher 的runnables，由 waitToFinish 方法保证执行，用于保证任务已被处理完成。</span>
+
+          Runnable postWriteRunnable = <span class="hljs-keyword">new</span> Runnable() &#123;
+                  <span class="hljs-meta">@Override</span>
+                  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+                      awaitCommit.run();
+                      QueuedWork.removeFinisher(awaitCommit);
+                  &#125;
+              &#125;;
+
+          SharedPreferencesImpl.<span class="hljs-keyword">this</span>.enqueueDiskWrite(mcr, postWriteRunnable); <span class="hljs-comment">// 真正的异步写入disk</span>
+
+          <span class="hljs-comment">// Okay to notify the listeners before it's hit disk</span>
+          <span class="hljs-comment">// because the listeners should always get the same</span>
+          <span class="hljs-comment">// SharedPreferences instance back, which has the</span>
+          <span class="hljs-comment">// changes reflected in memory.</span>
+          notifyListeners(mcr); <span class="hljs-comment">// 通知观察者</span>
+      &#125;
+
+      <span class="hljs-comment">// Returns true if any changes were made</span>
+      <span class="hljs-function"><span class="hljs-keyword">private</span> MemoryCommitResult <span class="hljs-title">commitToMemory</span><span class="hljs-params">()</span> </span>&#123;
+          <span class="hljs-keyword">long</span> memoryStateGeneration;
+          List&lt;String&gt; keysModified = <span class="hljs-keyword">null</span>;
+          Set&lt;OnSharedPreferenceChangeListener&gt; listeners = <span class="hljs-keyword">null</span>;
+          Map&lt;String, Object&gt; mapToWriteToDisk;
+
+          <span class="hljs-keyword">synchronized</span> (SharedPreferencesImpl.<span class="hljs-keyword">this</span>.mLock) &#123; <span class="hljs-comment">// 使用sp中的那个数据访问锁，保证线程安全</span>
+              <span class="hljs-comment">// We optimistically don't make a deep copy until</span>
+              <span class="hljs-comment">// a memory commit comes in when we're already</span>
+              <span class="hljs-comment">// writing to disk.</span>
+              <span class="hljs-keyword">if</span> (mDiskWritesInFlight &gt; <span class="hljs-number">0</span>) &#123;
+                  <span class="hljs-comment">// We can't modify our mMap as a currently</span>
+                  <span class="hljs-comment">// in-flight write owns it.  Clone it before</span>
+                  <span class="hljs-comment">// modifying it.</span>
+                  <span class="hljs-comment">// noinspection unchecked</span>
+                  mMap = <span class="hljs-keyword">new</span> HashMap&lt;String, Object&gt;(mMap);
+              &#125;
+              mapToWriteToDisk = mMap; <span class="hljs-comment">// 拿到sp中的map</span>
+              mDiskWritesInFlight++;
+
+              <span class="hljs-keyword">boolean</span> hasListeners = mListeners.size() &gt; <span class="hljs-number">0</span>;
+              <span class="hljs-keyword">if</span> (hasListeners) &#123;
+                  keysModified = <span class="hljs-keyword">new</span> ArrayList&lt;String&gt;();
+                  listeners = <span class="hljs-keyword">new</span> HashSet&lt;OnSharedPreferenceChangeListener&gt;(mListeners.keySet());
+              &#125;
+
+              <span class="hljs-keyword">synchronized</span> (mEditorLock) &#123;
+                  <span class="hljs-keyword">boolean</span> changesMade = <span class="hljs-keyword">false</span>;
+
+                  <span class="hljs-keyword">if</span> (mClear) &#123;
+                      <span class="hljs-keyword">if</span> (!mapToWriteToDisk.isEmpty()) &#123;
+                          changesMade = <span class="hljs-keyword">true</span>;
+                          mapToWriteToDisk.clear();
+                      &#125;
+                      mClear = <span class="hljs-keyword">false</span>;
+                  &#125;
+
+                  <span class="hljs-keyword">for</span> (Map.Entry&lt;String, Object&gt; e : mModified.entrySet()) &#123;
+                      String k = e.getKey();
+                      Object v = e.getValue();
+                      <span class="hljs-comment">// "this" is the magic value for a removal mutation. In addition,</span>
+                      <span class="hljs-comment">// setting a value to "null" for a given key is specified to be</span>
+                      <span class="hljs-comment">// equivalent to calling remove on that key.</span>
+                      <span class="hljs-keyword">if</span> (v == <span class="hljs-keyword">this</span> || v == <span class="hljs-keyword">null</span>) &#123;
+                          <span class="hljs-keyword">if</span> (!mapToWriteToDisk.containsKey(k)) &#123;
+                              <span class="hljs-keyword">continue</span>;
+                          &#125;
+                          mapToWriteToDisk.remove(k);  <span class="hljs-comment">//写入数据到map中，即内存中</span>
+                      &#125; <span class="hljs-keyword">else</span> &#123;
+                          <span class="hljs-keyword">if</span> (mapToWriteToDisk.containsKey(k)) &#123;
+                              Object existingValue = mapToWriteToDisk.get(k);
+                              <span class="hljs-keyword">if</span> (existingValue != <span class="hljs-keyword">null</span> &amp;&amp; existingValue.equals(v)) &#123;
+                                  <span class="hljs-keyword">continue</span>;
+                              &#125;
+                          &#125;
+                          mapToWriteToDisk.put(k, v); <span class="hljs-comment">//写入数据到map中，即内存中 </span>
+                      &#125;
+
+                      changesMade = <span class="hljs-keyword">true</span>;
+                      <span class="hljs-keyword">if</span> (hasListeners) &#123;
+                          keysModified.add(k);
+                      &#125;
+                  &#125;
+
+                  mModified.clear();
+
+                  <span class="hljs-keyword">if</span> (changesMade) &#123;
+                      mCurrentMemoryStateGeneration++;
+                  &#125;
+
+                  memoryStateGeneration = mCurrentMemoryStateGeneration;
+              &#125;
+          &#125;
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MemoryCommitResult(memoryStateGeneration, keysModified, listeners,
+                  mapToWriteToDisk);
+      &#125;
+
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">commit</span><span class="hljs-params">()</span> </span>&#123;
+          <span class="hljs-keyword">long</span> startTime = <span class="hljs-number">0</span>;
+
+          <span class="hljs-keyword">if</span> (DEBUG) &#123;
+              startTime = System.currentTimeMillis();
+          &#125;
+
+          MemoryCommitResult mcr = commitToMemory();
+
+          SharedPreferencesImpl.<span class="hljs-keyword">this</span>.enqueueDiskWrite(
+              mcr, <span class="hljs-keyword">null</span> <span class="hljs-comment">/* sync write on this thread okay */</span>); <span class="hljs-comment">//这里的写入是异步的</span>
+          <span class="hljs-keyword">try</span> &#123;
+              mcr.writtenToDiskLatch.await();  <span class="hljs-comment">// 但是这里会阻塞等待写入完成</span>
+          &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;
+              <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+          &#125; <span class="hljs-keyword">finally</span> &#123;
+              <span class="hljs-keyword">if</span> (DEBUG) &#123;
+                  Log.d(TAG, mFile.getName() + <span class="hljs-string">":"</span> + mcr.memoryStateGeneration
+                          + <span class="hljs-string">" committed after "</span> + (System.currentTimeMillis() - startTime)
+                          + <span class="hljs-string">" ms"</span>);
+              &#125;
+          &#125;
+          notifyListeners(mcr);
+          <span class="hljs-keyword">return</span> mcr.writeToDiskResult;
+      &#125;
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">enqueueDiskWrite</span><span class="hljs-params">(<span class="hljs-keyword">final</span> MemoryCommitResult mcr,</span></span>
+<span class="hljs-function"><span class="hljs-params">                                <span class="hljs-keyword">final</span> Runnable postWriteRunnable)</span> </span>&#123;
+      <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> isFromSyncCommit = (postWriteRunnable == <span class="hljs-keyword">null</span>);
+
+      <span class="hljs-keyword">final</span> Runnable writeToDiskRunnable = <span class="hljs-keyword">new</span> Runnable() &#123;
+              <span class="hljs-meta">@Override</span>
+              <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+                  <span class="hljs-keyword">synchronized</span> (mWritingToDiskLock) &#123;
+                      writeToFile(mcr, isFromSyncCommit); <span class="hljs-comment">// 异步写入文件</span>
+                  &#125;
+                  <span class="hljs-keyword">synchronized</span> (mLock) &#123;
+                      mDiskWritesInFlight--;
+                  &#125;
+                  <span class="hljs-keyword">if</span> (postWriteRunnable != <span class="hljs-keyword">null</span>) &#123;
+                      postWriteRunnable.run();
+                  &#125;
+              &#125;
+          &#125;;
+
+      <span class="hljs-comment">// Typical #commit() path with fewer allocations, doing a write on</span>
+      <span class="hljs-comment">// the current thread.</span>
+      <span class="hljs-keyword">if</span> (isFromSyncCommit) &#123;
+          <span class="hljs-keyword">boolean</span> wasEmpty = <span class="hljs-keyword">false</span>;
+          <span class="hljs-keyword">synchronized</span> (mLock) &#123;
+              wasEmpty = mDiskWritesInFlight == <span class="hljs-number">1</span>;
+          &#125;
+          <span class="hljs-keyword">if</span> (wasEmpty) &#123;
+              writeToDiskRunnable.run();
+              <span class="hljs-keyword">return</span>;
+          &#125;
+      &#125;
+
+      QueuedWork.queue(writeToDiskRunnable, !isFromSyncCommit);
+  &#125;
+
+  <span class="hljs-meta">@GuardedBy</span>(<span class="hljs-string">"mWritingToDiskLock"</span>)
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">writeToFile</span><span class="hljs-params">(MemoryCommitResult mcr, <span class="hljs-keyword">boolean</span> isFromSyncCommit)</span> </span>&#123;
+      .... <span class="hljs-comment">//写入相关的</span>
+
+          <span class="hljs-keyword">if</span> (!backupFileExists) &#123;
+              <span class="hljs-keyword">if</span> (!mFile.renameTo(mBackupFile)) &#123;
+                  Log.e(TAG, <span class="hljs-string">"Couldn't rename file "</span> + mFile
+                        + <span class="hljs-string">" to backup file "</span> + mBackupFile);
+                  mcr.setDiskWriteResult(<span class="hljs-keyword">false</span>, <span class="hljs-keyword">false</span>); <span class="hljs-comment">// 对CountDownLatch进行countDown，释放阻塞</span>
+                  <span class="hljs-keyword">return</span>;
+              &#125;
+          &#125; <span class="hljs-keyword">else</span> &#123;
+              mFile.delete();
+          &#125;
+      &#125;
+  &#125;</code></pre></div>
+
 <p>所以apply是先提交到内存，异步存储到disk。而commit是先提交到内存后，然后阻塞线程到存储disk完成。</p>
 <h3 id="QueuedWork"><a href="#QueuedWork" class="headerlink" title="QueuedWork"></a>QueuedWork</h3><p>这里需要补充一下QueuedWork，这个类我们用不到，因为是@hide，我们需要知道的是这个queue是异步的，是通过Handler实现的，线程名称是queued-work-looper。感觉这个代码比较关键：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Lazily create a handler on a separate thread.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@return</span> the handler</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Handler <span class="title">getHandler</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (sLock) &#123;</div><div class="line">        <span class="keyword">if</span> (sHandler == <span class="keyword">null</span>) &#123;</div><div class="line">            HandlerThread handlerThread = <span class="keyword">new</span> HandlerThread(<span class="string">"queued-work-looper"</span>,</div><div class="line">                    Process.THREAD_PRIORITY_FOREGROUND);</div><div class="line">            handlerThread.start();</div><div class="line"></div><div class="line">            sHandler = <span class="keyword">new</span> QueuedWorkHandler(handlerThread.getLooper());</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sHandler;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Lazily create a handler on a separate thread.</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@return</span> the handler</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Handler <span class="hljs-title">getHandler</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">synchronized</span> (sLock) &#123;
+        <span class="hljs-keyword">if</span> (sHandler == <span class="hljs-keyword">null</span>) &#123;
+            HandlerThread handlerThread = <span class="hljs-keyword">new</span> HandlerThread(<span class="hljs-string">"queued-work-looper"</span>,
+                    Process.THREAD_PRIORITY_FOREGROUND);
+            handlerThread.start();
+
+            sHandler = <span class="hljs-keyword">new</span> QueuedWorkHandler(handlerThread.getLooper());
+        &#125;
+        <span class="hljs-keyword">return</span> sHandler;
+    &#125;
+&#125;</code></pre></div>
+
 <p>以上是所有内容，The End.</p>
 
             </article>
@@ -242,26 +620,26 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/03/12/OkHttp源码阅读/">
+                      <a href="/2020/03/12/OkHttp%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">OkHttp源码阅读</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2019/09/01/WDYDT-19-使用systrace查找掉帧问题/">
+                      <a href="/2019/09/01/WDYDT-19-%E4%BD%BF%E7%94%A8systrace%E6%9F%A5%E6%89%BE%E6%8E%89%E5%B8%A7%E9%97%AE%E9%A2%98/">
                         <span class="hidden-mobile">WDYDT-19-使用systrace查找掉帧问题</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -278,7 +656,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -305,7 +683,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -314,7 +692,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -357,9 +735,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

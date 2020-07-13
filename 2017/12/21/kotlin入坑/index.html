@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>kotlin入坑 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2017-12-21 16:15">
-      December 21, 2017 pm
+      2017年12月21日 下午
     </time>
   </div>
 
@@ -203,9 +206,15 @@
             <article class="markdown-body">
               <p>这个是一些学习笔记。碎碎记。</p>
 <a id="more"></a>
+
 <p>kotlin与android，现在是kotlin通过插件编译成jvm能运行的机器码，java有的东西kotlin都有。</p>
 <p>kotlin支持方法拓展，但是不能写到类里边。写到类里边无效。这个特性非常重要，为拓展提供了新思路。<br>方法拓展还可以给已有方法重命名，当然，原来方法名还能用，就是包了一层。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> 类名.拓展方法（args）&#123;&#125; //子类可以继承</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">var</span> TextView.text: CharSequence  <span class="comment">// 拓展 重命名</span></div><div class="line">	<span class="keyword">get</span>() = getText()</div><div class="line">	<span class="keyword">set</span>(v) = setText(v)</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> 类名.拓展方法（args）&#123;&#125; //子类可以继承</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">var</span> TextView.text: CharSequence  <span class="hljs-comment">// 拓展 重命名</span>
+	<span class="hljs-keyword">get</span>() = getText()
+	<span class="hljs-keyword">set</span>(v) = setText(v)</code></pre></div>
+
 <p>支持lambda，我感觉相当于匿名内部类。</p>
 <p>好像要在Javabean的对象前加data</p>
 <p>支持对象copy并修改值。</p>
@@ -219,53 +228,187 @@
 <li>一部分是静态方法的情况 : 将方法用 companion object { } 包裹即可，这个叫“伴生对象”，可以给伴生对象起名字，放到object后，也可不加。</li>
 </ol>
 <p>bean类不用写getter、setter了， 其实还有，只是不用写，可以重写。</p>
-<figure class="highlight cs"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> classs Person &#123;</div><div class="line">	<span class="keyword">var</span> name: String = <span class="string">""</span></div><div class="line">		<span class="keyword">get</span>() = field.toUpperCase() </div><div class="line">		<span class="keyword">set</span>(<span class="keyword">value</span>)&#123;</div><div class="line">			field = <span class="string">"Name: $value"</span> </div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs cs"><span class="hljs-keyword">public</span> classs Person &#123;
+	<span class="hljs-keyword">var</span> name: String = <span class="hljs-string">""</span>
+		<span class="hljs-keyword">get</span>() = field.toUpperCase() 
+		<span class="hljs-keyword">set</span>(<span class="hljs-keyword">value</span>)&#123;
+			field = <span class="hljs-string">"Name: $value"</span> 
+		&#125;
+&#125;</code></pre></div>
+
 <p>重写用override，加到fun前面</p>
 <p>是空安全的，支持?:操作符，和Java里的意思不一样，java里的那个三目运算符只能用if、else表示，但是可以简写</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><div class="line">hah?.<span class="built_in">print</span>() <span class="comment">//hah不为空才打印</span></div><div class="line">hah!!/<span class="built_in">print</span>() <span class="comment">//强制打印，可能会有exception</span></div><div class="line">hah?.name?:<span class="string">"null"</span> <span class="comment">// null打印null，代替值</span></div><div class="line"></div><div class="line"><span class="comment">//在变量类型后面加上问号，代表该变量是可空变量  可空变量需要强制判null</span></div><div class="line"><span class="keyword">var</span> name: <span class="built_in">String</span>? = <span class="string">"zhangsan"</span>  </div><div class="line"></div><div class="line"><span class="keyword">var</span> lenght:Int = <span class="keyword">if</span>(haha!=<span class="keyword">null</span>) haha.length: <span class="number">-1</span> <span class="comment">// 原来java的三目这么用了</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs dart">hah?.<span class="hljs-built_in">print</span>() <span class="hljs-comment">//hah不为空才打印</span>
+hah!!/<span class="hljs-built_in">print</span>() <span class="hljs-comment">//强制打印，可能会有exception</span>
+hah?.name?:<span class="hljs-string">"null"</span> <span class="hljs-comment">// null打印null，代替值</span>
+
+<span class="hljs-comment">//在变量类型后面加上问号，代表该变量是可空变量  可空变量需要强制判null</span>
+<span class="hljs-keyword">var</span> name: <span class="hljs-built_in">String</span>? = <span class="hljs-string">"zhangsan"</span>  
+
+<span class="hljs-keyword">var</span> lenght:Int = <span class="hljs-keyword">if</span>(haha!=<span class="hljs-keyword">null</span>) haha.length: <span class="hljs-number">-1</span> <span class="hljs-comment">// 原来java的三目这么用了</span></code></pre></div>
+
 <p>with函数，直接使用with括号对象的属性方法。</p>
 <p>kotlin强制指定泛型，不加报错</p>
-<figure class="highlight lasso"><table><tr><td class="code"><pre><div class="line"><span class="built_in">var</span> <span class="built_in">list</span> = ArrayList&lt;<span class="built_in">String</span>&gt;()</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs lasso"><span class="hljs-built_in">var</span> <span class="hljs-built_in">list</span> = ArrayList&lt;<span class="hljs-built_in">String</span>&gt;()</code></pre></div>
+
 <p>集合里边有好多拓展方法，map mapto,groupBy,filter很多，详见</p>
-<figure class="highlight lsl"><table><tr><td class="code"><pre><div class="line">kotlin-stdlib<span class="number">-1.1</span><span class="number">.51</span>-sources.jar!/generated/_Collections.kt</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs angelscript">kotlin-stdlib<span class="hljs-number">-1.1</span><span class="hljs-number">.51</span>-sources.jar!/generated/_Collections.kt</code></pre></div>
+
 <p>有个库叫anko，这是一个对Android使用kotlin的拓展库，JetBrains开发的。提供了新方式写UI布局。</p>
 <p>记一个简化过程<br>简化 setOnClickListener()</p>
 <p>我们用 Android 中非常典型的例子去解释它是怎么工作的:View.setOnClickListener()方法。如果我 们想用 Java 的方式去增加点击事件的回调，我首先要编写一个 OnClickListener 接口:<br>然后我们要编写一个匿名内部类去实现这个接口:</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><div class="line">public<span class="built_in"> interface </span>OnClickListener &#123; </div><div class="line">	void onClick(View v);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight aspectj"><table><tr><td class="code"><pre><div class="line">view.setOnClickListener(<span class="keyword">new</span> OnClickListener()&#123; </div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">		Toast.makeText(v.getContext(), <span class="string">"Click"</span>, Toast.LENGTH_SHORT).show();</div><div class="line"> 	&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs routeros">public<span class="hljs-built_in"> interface </span>OnClickListener &#123; 
+	void onClick(View v);
+&#125;</code></pre></div>
+
+<div class="hljs"><pre><code class="hljs reasonml">view.set<span class="hljs-constructor">OnClickListener(<span class="hljs-params">new</span> OnClickListener()</span>&#123; 
+	@Override
+	public void on<span class="hljs-constructor">Click(View <span class="hljs-params">v</span>)</span> &#123;
+		<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Toast</span>.</span></span>make<span class="hljs-constructor">Text(<span class="hljs-params">v</span>.<span class="hljs-params">getContext</span>()</span>, <span class="hljs-string">"Click"</span>, Toast.LENGTH_SHORT).show<span class="hljs-literal">()</span>;
+ 	&#125;
+&#125;)</code></pre></div>
+
 <p>我们将把上面的代码转换成 Kotlin(使用了 Anko 的 toast 函数):</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line">view.setOnClickListener(<span class="keyword">object</span> : OnClickListener &#123; </div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onClick</span><span class="params">(v: <span class="type">View</span>)</span></span> &#123;</div><div class="line">		toast(<span class="string">"Click"</span>) </div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs kotlin">view.setOnClickListener(<span class="hljs-keyword">object</span> : OnClickListener &#123; 
+	<span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onClick</span><span class="hljs-params">(v: <span class="hljs-type">View</span>)</span></span> &#123;
+		toast(<span class="hljs-string">"Click"</span>) 
+	&#125;
+&#125;</code></pre></div>
+
 <p>很幸运的是，Kotlin 允许 Java 库的一些优化，Interface 中包含单个函数可以被替代为一个函数。 如果我们这么去定义了，它会正常执行:</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">setOnClickListener</span><span class="params">(listener: (<span class="type">View</span>)</span></span> -&gt; <span class="built_in">Unit</span>)</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">setOnClickListener</span><span class="hljs-params">(listener: (<span class="hljs-type">View</span>) -&gt; <span class="hljs-type">Unit</span>)</span></span></code></pre></div>
+
 <p>一个 lambda 表达式通过参数的形式被定义在箭头的左边(被圆括号包围)，然后在箭头的右边返<br>回结果值。在这个例子中，我们接收一个 View，然后返回一个 Unit(没有东西)。所以根据这种思<br>想，我们可以把前面的代码简化成这样:</p>
-<figure class="highlight cos"><table><tr><td class="code"><pre><div class="line"><span class="keyword">view</span>.setOnClickListener(&#123; <span class="keyword">view</span> -&gt; toast(<span class="string">"Click"</span>)&#125;)</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs reasonml">view.set<span class="hljs-constructor">OnClickListener(&#123; <span class="hljs-params">view</span> -&gt; <span class="hljs-params">toast</span>(<span class="hljs-string">"Click"</span>)</span>&#125;)</code></pre></div>
+
 <p>这是非常棒的简化!当我们定义了一个方法，我们必须使用大括号包围，然后在箭头的左边指定参数， 在箭头的右边返回函数执行的结果。如果左边的参数没有使用到，我们甚至可以省略左边的参数:</p>
-<figure class="highlight cos"><table><tr><td class="code"><pre><div class="line"><span class="keyword">view</span>.setOnClickListener(&#123; toast(<span class="string">"Click"</span>) &#125;)</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs isbl"><span class="hljs-variable">view.setOnClickListener</span>(&#123; <span class="hljs-function"><span class="hljs-title">toast</span>(<span class="hljs-string">"Click"</span>) &#125;)</span></code></pre></div>
+
 <p>如果这个函数的最后一个参数是一个函数，我们可以把这个函数移动到圆括号外面: </p>
-<figure class="highlight less"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">view</span><span class="selector-class">.setOnClickListener</span>() &#123; <span class="selector-tag">toast</span>(<span class="string">"Click"</span>) &#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs less"><span class="hljs-selector-tag">view</span><span class="hljs-selector-class">.setOnClickListener</span>() &#123; <span class="hljs-selector-tag">toast</span>(<span class="hljs-string">"Click"</span>) &#125;</code></pre></div>
+
 <p>并且，最后，如果这个函数只有一个参数，我们可以省略这个圆括号: </p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">view<span class="selector-class">.setOnClickListener</span> &#123; toast(<span class="string">"Click"</span>) &#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs cos"><span class="hljs-keyword">view</span>.setOnClickListener &#123; toast(<span class="hljs-string">"Click"</span>) &#125;</code></pre></div>
+
 <p>比原始的 Java 代码简短了 5 倍多，并且更加容易理解它所做的事情。非常让人影响深刻。</p>
 <p>inline 内联函数， Anko也是基于这个思想来实现的 Android layout 的 DSL 化。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="title">testInline</span><span class="params">(code: ()</span></span> -&gt; <span class="built_in">Unit</span>) &#123;</div><div class="line">    code();</div><div class="line">&#125;</div><div class="line"></div><div class="line">testInline &#123;</div><div class="line">    print(<span class="string">"af"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">testInline</span><span class="hljs-params">(code: () -&gt; <span class="hljs-type">Unit</span>)</span></span> &#123;
+    code();
+&#125;
+
+testInline &#123;
+    print(<span class="hljs-string">"af"</span>)
+&#125;</code></pre></div>
+
 <p>委托，标准委托，用by<br>lazy 懒加载，就是使用的时候才进行调用，一般用于初始化</p>
-<figure class="highlight coq"><table><tr><td class="code"><pre><div class="line">val datebase: SQLiteOpenHelper <span class="built_in">by</span> <span class="built_in">lazy</span> &#123;</div><div class="line">    MyDatabaseHelper(applicationContext)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs reasonml"><span class="hljs-keyword">val</span> datebase: SQLiteOpenHelper by <span class="hljs-keyword">lazy</span> &#123;
+    <span class="hljs-constructor">MyDatabaseHelper(<span class="hljs-params">applicationContext</span>)</span>
+&#125;</code></pre></div>
+
 <p>observable 观察者</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> property <span class="keyword">by</span> Delegates.observable(<span class="string">""</span>)&#123;</div><div class="line">    d,old,new -&gt;  <span class="comment">// 这个是一个lambda表达式 实际是onchange 源码在下边几行</span></div><div class="line">    database.saveChanges(<span class="keyword">this</span>,new)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 源码</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">observable</span><span class="params">(initialValue: <span class="type">T</span>, <span class="keyword">crossinline</span> onChange: (<span class="type">property</span>: <span class="type">KProperty</span>&lt;*&gt;, oldValue: <span class="type">T</span>, newValue: <span class="type">T</span>)</span></span> -&gt; <span class="built_in">Unit</span>):</div><div class="line">    ReadWriteProperty&lt;Any?, T&gt; = <span class="keyword">object</span> : ObservableProperty&lt;T&gt;(initialValue) &#123;</div><div class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">afterChange</span><span class="params">(property: <span class="type">KProperty</span>&lt;*&gt;, oldValue: <span class="type">T</span>, newValue: <span class="type">T</span>)</span></span> = onChange(property, oldValue, newValue)</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="comment">// 也可以这么写</span></div><div class="line"><span class="keyword">var</span> property <span class="keyword">by</span> Delegates.observable(<span class="string">""</span>, onChange = &#123;</div><div class="line">    property: KProperty&lt;*&gt;, oldValue: String, newValue: String -&gt;</div><div class="line">    database.saveChanges(oldValue, newValue)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs kotlin">
+<span class="hljs-keyword">var</span> property <span class="hljs-keyword">by</span> Delegates.observable(<span class="hljs-string">""</span>)&#123;
+    d,old,new -&gt;  <span class="hljs-comment">// 这个是一个lambda表达式 实际是onchange 源码在下边几行</span>
+    database.saveChanges(<span class="hljs-keyword">this</span>,new)
+&#125;
+
+<span class="hljs-comment">// 源码</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> <span class="hljs-title">observable</span><span class="hljs-params">(initialValue: <span class="hljs-type">T</span>, <span class="hljs-keyword">crossinline</span> onChange: (<span class="hljs-type">property</span>: <span class="hljs-type">KProperty</span>&lt;*&gt;, <span class="hljs-type">oldValue</span>: <span class="hljs-type">T</span>, <span class="hljs-type">newValue</span>: <span class="hljs-type">T</span>) -&gt; <span class="hljs-type">Unit</span>)</span></span>:
+    ReadWriteProperty&lt;Any?, T&gt; = <span class="hljs-keyword">object</span> : ObservableProperty&lt;T&gt;(initialValue) &#123;
+        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">afterChange</span><span class="hljs-params">(property: <span class="hljs-type">KProperty</span>&lt;*&gt;, oldValue: <span class="hljs-type">T</span>, newValue: <span class="hljs-type">T</span>)</span></span> = onChange(property, oldValue, newValue)
+    &#125;
+
+<span class="hljs-comment">// 也可以这么写</span>
+<span class="hljs-keyword">var</span> property <span class="hljs-keyword">by</span> Delegates.observable(<span class="hljs-string">""</span>, onChange = &#123;
+    property: KProperty&lt;*&gt;, oldValue: String, newValue: String -&gt;
+    database.saveChanges(oldValue, newValue)
+&#125;)</code></pre></div>
+
 <p>Vetoable 否决器（姑且这么叫吧）用于决定一个值是不是可以赋给变量</p>
-<figure class="highlight haxe"><table><tr><td class="code"><pre><div class="line"><span class="comment">//只能是"HAHA"</span></div><div class="line"><span class="keyword">var</span> onlyHAHA by Delegates.vetoable(<span class="string">""</span>, &#123; p, old, <span class="keyword">new</span> <span class="type"></span>-&gt;</div><div class="line">    <span class="keyword">new</span> <span class="type"></span>== <span class="string">"HAHA"</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs haxe"><span class="hljs-comment">//只能是"HAHA"</span>
+<span class="hljs-keyword">var</span> onlyHAHA by Delegates.vetoable(<span class="hljs-string">""</span>, &#123; p, old, <span class="hljs-keyword">new</span> <span class="hljs-type"></span>-&gt;
+    <span class="hljs-keyword">new</span> <span class="hljs-type"></span>== <span class="hljs-string">"HAHA"</span>
+&#125;)</code></pre></div>
+
 <p>Not Null 指定变量不能为空，为null则抛出异常</p>
-<figure class="highlight lasso"><table><tr><td class="code"><pre><div class="line"><span class="built_in">var</span> notNull: <span class="built_in">String</span> <span class="keyword">by</span> Delegates.notNull()</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs lasso"><span class="hljs-built_in">var</span> notNull: <span class="hljs-built_in">String</span> <span class="hljs-keyword">by</span> Delegates.notNull()</code></pre></div>
+
 <p>从Map中获取映射值；map以构造方法的方式传入bean，bean中属性后添加by map,即可自动匹配,if field_name==map.key then:field_value=map.value</p>
 <p>自定义一个委托，实现一个值只能修改一次</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 定义</span></div><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">NotNullSingleValueVar</span>&lt;<span class="type">T</span>&gt;</span>() : ReadWriteProperty&lt;Any?, T&gt; &#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">var</span> value: T? = <span class="literal">null</span></div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getValue</span><span class="params">(thisRef: <span class="type">Any</span>?, property: <span class="type">KProperty</span>&lt;*&gt;)</span></span>: T &#123;</div><div class="line">        <span class="keyword">return</span> value ?: <span class="keyword">throw</span> IllegalStateException(<span class="string">"not initialized"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setValue</span><span class="params">(thisRef: <span class="type">Any</span>?, property: <span class="type">KProperty</span>&lt;*&gt;, value: <span class="type">T</span>)</span></span> &#123;</div><div class="line">        <span class="keyword">this</span>.value = <span class="keyword">if</span> (<span class="keyword">this</span>.value == <span class="literal">null</span>) value <span class="keyword">else</span> <span class="keyword">throw</span> IllegalStateException(<span class="string">"already initialized"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//封装</span></div><div class="line"><span class="keyword">object</span> DelegatesExt &#123;</div><div class="line">    <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">notNullSingleValue</span><span class="params">()</span></span>:</div><div class="line">            ReadWriteProperty&lt;Any?, T&gt; &#123;</div><div class="line">        <span class="keyword">return</span> NotNullSingleValueVar()</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// demo</span></div><div class="line">    <span class="keyword">var</span> notNullSingle: String <span class="keyword">by</span> DelegatesExt.notNullSingleValue()</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">// 定义</span>
+<span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NotNullSingleValueVar</span>&lt;<span class="hljs-type">T</span>&gt;</span>() : ReadWriteProperty&lt;Any?, T&gt; &#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> value: T? = <span class="hljs-literal">null</span>
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getValue</span><span class="hljs-params">(thisRef: <span class="hljs-type">Any</span>?, property: <span class="hljs-type">KProperty</span>&lt;*&gt;)</span></span>: T &#123;
+        <span class="hljs-keyword">return</span> value ?: <span class="hljs-keyword">throw</span> IllegalStateException(<span class="hljs-string">"not initialized"</span>)
+    &#125;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">setValue</span><span class="hljs-params">(thisRef: <span class="hljs-type">Any</span>?, property: <span class="hljs-type">KProperty</span>&lt;*&gt;, value: <span class="hljs-type">T</span>)</span></span> &#123;
+        <span class="hljs-keyword">this</span>.value = <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.value == <span class="hljs-literal">null</span>) value <span class="hljs-keyword">else</span> <span class="hljs-keyword">throw</span> IllegalStateException(<span class="hljs-string">"already initialized"</span>)
+    &#125;
+
+&#125;
+
+<span class="hljs-comment">//封装</span>
+<span class="hljs-keyword">object</span> DelegatesExt &#123;
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> <span class="hljs-title">notNullSingleValue</span><span class="hljs-params">()</span></span>:
+            ReadWriteProperty&lt;Any?, T&gt; &#123;
+        <span class="hljs-keyword">return</span> NotNullSingleValueVar()
+    &#125;
+&#125;
+
+<span class="hljs-comment">// demo</span>
+    <span class="hljs-keyword">var</span> notNullSingle: String <span class="hljs-keyword">by</span> DelegatesExt.notNullSingleValue()</code></pre></div>
+
+
 <p>object关键字；在参数中，相当于new一个匿名内部类；修饰类，相当于单例模式</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line">view.setOnClickListener(new OnClickListener()&#123; </div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="keyword">public</span> void onClick(View v) &#123;</div><div class="line">		Toast.makeText(v.getContext(), <span class="string">"Click"</span>, Toast.LENGTH_SHORT).show();</div><div class="line"> 	&#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 我们将把上面的代码转换成 Kotlin(使用了 Anko 的 toast 函数):</span></div><div class="line">view.setOnClickListener(<span class="keyword">object</span> : OnClickListener &#123; </div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onClick</span><span class="params">(v: <span class="type">View</span>)</span></span> &#123;</div><div class="line">		toast(<span class="string">"Click"</span>) </div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 简单单例模式</span></div><div class="line"><span class="keyword">object</span> Obj&#123;</div><div class="line">    init&#123;</div><div class="line">        println(<span class="string">"object init..."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs kotlin">view.setOnClickListener(new OnClickListener()&#123; 
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-keyword">public</span> void onClick(View v) &#123;
+		Toast.makeText(v.getContext(), <span class="hljs-string">"Click"</span>, Toast.LENGTH_SHORT).show();
+ 	&#125;
+&#125;)
+
+<span class="hljs-comment">// 我们将把上面的代码转换成 Kotlin(使用了 Anko 的 toast 函数):</span>
+view.setOnClickListener(<span class="hljs-keyword">object</span> : OnClickListener &#123; 
+	<span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onClick</span><span class="hljs-params">(v: <span class="hljs-type">View</span>)</span></span> &#123;
+		toast(<span class="hljs-string">"Click"</span>) 
+	&#125;
+&#125;
+
+<span class="hljs-comment">// 简单单例模式</span>
+<span class="hljs-keyword">object</span> Obj&#123;
+    <span class="hljs-keyword">init</span>&#123;
+        println(<span class="hljs-string">"object init..."</span>)
+    &#125;
+&#125;</code></pre></div>
+
 <p>泛型函数<br>不仅类可以有类型参数。函数也可以有。类型参数要放在函数名称之前：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">singletonList</span><span class="params">(item: <span class="type">T</span>)</span></span>: List&lt;T&gt; &#123;</div><div class="line">    <span class="comment">// ……</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> T.<span class="title">basicToString</span><span class="params">()</span></span> : String &#123;  <span class="comment">// 扩展函数</span></div><div class="line">    <span class="comment">// ……</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//要调用泛型函数，在调用处函数名之后指定类型参数即可：</span></div><div class="line"><span class="keyword">val</span> l = singletonList&lt;<span class="built_in">Int</span>&gt;(<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> <span class="hljs-title">singletonList</span><span class="hljs-params">(item: <span class="hljs-type">T</span>)</span></span>: List&lt;T&gt; &#123;
+    <span class="hljs-comment">// ……</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> T.<span class="hljs-title">basicToString</span><span class="hljs-params">()</span></span> : String &#123;  <span class="hljs-comment">// 扩展函数</span>
+    <span class="hljs-comment">// ……</span>
+&#125;
+
+<span class="hljs-comment">//要调用泛型函数，在调用处函数名之后指定类型参数即可：</span>
+<span class="hljs-keyword">val</span> l = singletonList&lt;<span class="hljs-built_in">Int</span>&gt;(<span class="hljs-number">1</span>)</code></pre></div>
+
 <p>还有好多不容易理解的特性，以后继续更新。</p>
 <p>放个图，哈哈</p>
-<p><img src="/img/kotlin_haha.jpg" srcset="/img/loading.gif"></p>
+<img src="/img/kotlin_haha.jpg" srcset="/img/loading.gif">
+
+
+
+
+
+
+
+
+
+
+
 
             </article>
             <hr>
@@ -284,26 +427,26 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2017/12/25/一年又一年——2017末/">
+                      <a href="/2017/12/25/%E4%B8%80%E5%B9%B4%E5%8F%88%E4%B8%80%E5%B9%B4%E2%80%94%E2%80%942017%E6%9C%AB/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">一年又一年——2017末</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2017/12/08/非对称加密/">
+                      <a href="/2017/12/08/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/">
                         <span class="hidden-mobile">非对称加密</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -320,7 +463,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -347,7 +490,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -356,7 +499,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -399,9 +542,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>git aliases at oh-my-zsh - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2016-06-22 15:36">
-      June 22, 2016 pm
+      2016年6月22日 下午
     </time>
   </div>
 
@@ -160,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      904 字
+      906 字
     </span>
   
 
@@ -203,597 +206,584 @@
             <article class="markdown-body">
               <p><a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git">https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git</a></p>
 <h2 id="The-git-Plugin"><a href="#The-git-Plugin" class="headerlink" title="The git Plugin"></a>The git Plugin</h2><a id="more"></a>
+
 <p>The <a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git">git</a> plugin provides many <a href="#aliases">aliases</a> and a few useful <a href="#functions">functions</a>.</p>
 <p>Enable it by adding <em>git</em> to the <a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/templates/zshrc.zsh-template#L48"><em>plugins array</em></a> before sourcing OMZ (see [[Plugins]]).</p>
 <h2 id="Aliases"><a href="#Aliases" class="headerlink" title="Aliases"></a>Aliases</h2><table>
 <thead>
 <tr>
-<th style="text-align:left">Alias</th>
-<th style="text-align:left">Command</th>
+<th align="left">Alias</th>
+<th align="left">Command</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">g</td>
-<td style="text-align:left">git</td>
+<tbody><tr>
+<td align="left">g</td>
+<td align="left">git</td>
 </tr>
 <tr>
-<td style="text-align:left">ga</td>
-<td style="text-align:left">git add</td>
+<td align="left">ga</td>
+<td align="left">git add</td>
 </tr>
 <tr>
-<td style="text-align:left">gaa</td>
-<td style="text-align:left">git add –all</td>
+<td align="left">gaa</td>
+<td align="left">git add –all</td>
 </tr>
 <tr>
-<td style="text-align:left">gapa</td>
-<td style="text-align:left">git add –patch</td>
+<td align="left">gapa</td>
+<td align="left">git add –patch</td>
 </tr>
 <tr>
-<td style="text-align:left">gb</td>
-<td style="text-align:left">git branch</td>
+<td align="left">gb</td>
+<td align="left">git branch</td>
 </tr>
 <tr>
-<td style="text-align:left">gba</td>
-<td style="text-align:left">git branch -a</td>
+<td align="left">gba</td>
+<td align="left">git branch -a</td>
 </tr>
 <tr>
-<td style="text-align:left">gbda</td>
-<td style="text-align:left">git branch –merged \</td>
-<td>command grep -vE “^(*\</td>
-<td>\s<em>master\s</em>$)” \</td>
-<td>command xargs -n 1 git branch -d</td>
+<td align="left">gbda</td>
+<td align="left">git branch –merged | command grep -vE “^(*|\s<em>master\s</em>$)” | command xargs -n 1 git branch -d</td>
 </tr>
 <tr>
-<td style="text-align:left">gbl</td>
-<td style="text-align:left">git blame -b -w</td>
+<td align="left">gbl</td>
+<td align="left">git blame -b -w</td>
 </tr>
 <tr>
-<td style="text-align:left">gbnm</td>
-<td style="text-align:left">git branch –no-merged</td>
+<td align="left">gbnm</td>
+<td align="left">git branch –no-merged</td>
 </tr>
 <tr>
-<td style="text-align:left">gbr</td>
-<td style="text-align:left">git branch –remote</td>
+<td align="left">gbr</td>
+<td align="left">git branch –remote</td>
 </tr>
 <tr>
-<td style="text-align:left">gbs</td>
-<td style="text-align:left">git bisect</td>
+<td align="left">gbs</td>
+<td align="left">git bisect</td>
 </tr>
 <tr>
-<td style="text-align:left">gbsb</td>
-<td style="text-align:left">git bisect bad</td>
+<td align="left">gbsb</td>
+<td align="left">git bisect bad</td>
 </tr>
 <tr>
-<td style="text-align:left">gbsg</td>
-<td style="text-align:left">git bisect good</td>
+<td align="left">gbsg</td>
+<td align="left">git bisect good</td>
 </tr>
 <tr>
-<td style="text-align:left">gbsr</td>
-<td style="text-align:left">git bisect reset</td>
+<td align="left">gbsr</td>
+<td align="left">git bisect reset</td>
 </tr>
 <tr>
-<td style="text-align:left">gbss</td>
-<td style="text-align:left">git bisect start</td>
+<td align="left">gbss</td>
+<td align="left">git bisect start</td>
 </tr>
 <tr>
-<td style="text-align:left">gc</td>
-<td style="text-align:left">git commit -v</td>
+<td align="left">gc</td>
+<td align="left">git commit -v</td>
 </tr>
 <tr>
-<td style="text-align:left">gc!</td>
-<td style="text-align:left">git commit -v –amend</td>
+<td align="left">gc!</td>
+<td align="left">git commit -v –amend</td>
 </tr>
 <tr>
-<td style="text-align:left">gca</td>
-<td style="text-align:left">git commit -v -a</td>
+<td align="left">gca</td>
+<td align="left">git commit -v -a</td>
 </tr>
 <tr>
-<td style="text-align:left">gcam</td>
-<td style="text-align:left">git commit -a -m</td>
+<td align="left">gcam</td>
+<td align="left">git commit -a -m</td>
 </tr>
 <tr>
-<td style="text-align:left">gca!</td>
-<td style="text-align:left">git commit -v -a –amend</td>
+<td align="left">gca!</td>
+<td align="left">git commit -v -a –amend</td>
 </tr>
 <tr>
-<td style="text-align:left">gcan!</td>
-<td style="text-align:left">git commit -v -a -s –no-edit –amend</td>
+<td align="left">gcan!</td>
+<td align="left">git commit -v -a -s –no-edit –amend</td>
 </tr>
 <tr>
-<td style="text-align:left">gcb</td>
-<td style="text-align:left">git checkout -b</td>
+<td align="left">gcb</td>
+<td align="left">git checkout -b</td>
 </tr>
 <tr>
-<td style="text-align:left">gcf</td>
-<td style="text-align:left">git config –list</td>
+<td align="left">gcf</td>
+<td align="left">git config –list</td>
 </tr>
 <tr>
-<td style="text-align:left">gcl</td>
-<td style="text-align:left">git clone –recursive</td>
+<td align="left">gcl</td>
+<td align="left">git clone –recursive</td>
 </tr>
 <tr>
-<td style="text-align:left">gclean</td>
-<td style="text-align:left">git clean -df</td>
+<td align="left">gclean</td>
+<td align="left">git clean -df</td>
 </tr>
 <tr>
-<td style="text-align:left">gcm</td>
-<td style="text-align:left">git checkout master</td>
+<td align="left">gcm</td>
+<td align="left">git checkout master</td>
 </tr>
 <tr>
-<td style="text-align:left">gcmsg</td>
-<td style="text-align:left">git commit -m</td>
+<td align="left">gcmsg</td>
+<td align="left">git commit -m</td>
 </tr>
 <tr>
-<td style="text-align:left">gco</td>
-<td style="text-align:left">git checkout</td>
+<td align="left">gco</td>
+<td align="left">git checkout</td>
 </tr>
 <tr>
-<td style="text-align:left">gcount</td>
-<td style="text-align:left">git shortlog -sn</td>
+<td align="left">gcount</td>
+<td align="left">git shortlog -sn</td>
 </tr>
 <tr>
-<td style="text-align:left">gcp</td>
-<td style="text-align:left">git cherry-pick</td>
+<td align="left">gcp</td>
+<td align="left">git cherry-pick</td>
 </tr>
 <tr>
-<td style="text-align:left">gcs</td>
-<td style="text-align:left">git commit -S</td>
+<td align="left">gcs</td>
+<td align="left">git commit -S</td>
 </tr>
 <tr>
-<td style="text-align:left">gd</td>
-<td style="text-align:left">git diff</td>
+<td align="left">gd</td>
+<td align="left">git diff</td>
 </tr>
 <tr>
-<td style="text-align:left">gdca</td>
-<td style="text-align:left">git diff –cached</td>
+<td align="left">gdca</td>
+<td align="left">git diff –cached</td>
 </tr>
 <tr>
-<td style="text-align:left">gdt</td>
-<td style="text-align:left">git diff-tree –no-commit-id –name-only -r</td>
+<td align="left">gdt</td>
+<td align="left">git diff-tree –no-commit-id –name-only -r</td>
 </tr>
 <tr>
-<td style="text-align:left">gdw</td>
-<td style="text-align:left">git diff –word-diff</td>
+<td align="left">gdw</td>
+<td align="left">git diff –word-diff</td>
 </tr>
 <tr>
-<td style="text-align:left">gf</td>
-<td style="text-align:left">git fetch</td>
+<td align="left">gf</td>
+<td align="left">git fetch</td>
 </tr>
 <tr>
-<td style="text-align:left">gfa</td>
-<td style="text-align:left">git fetch –all –prune</td>
+<td align="left">gfa</td>
+<td align="left">git fetch –all –prune</td>
 </tr>
 <tr>
-<td style="text-align:left">gfo</td>
-<td style="text-align:left">git fetch origin</td>
+<td align="left">gfo</td>
+<td align="left">git fetch origin</td>
 </tr>
 <tr>
-<td style="text-align:left">gg</td>
-<td style="text-align:left">git gui citool</td>
+<td align="left">gg</td>
+<td align="left">git gui citool</td>
 </tr>
 <tr>
-<td style="text-align:left">gga</td>
-<td style="text-align:left">git gui citool –amend</td>
+<td align="left">gga</td>
+<td align="left">git gui citool –amend</td>
 </tr>
 <tr>
-<td style="text-align:left">ggpull</td>
-<td style="text-align:left">ggl</td>
+<td align="left">ggpull</td>
+<td align="left">ggl</td>
 </tr>
 <tr>
-<td style="text-align:left">ggpur</td>
-<td style="text-align:left">ggu</td>
+<td align="left">ggpur</td>
+<td align="left">ggu</td>
 </tr>
 <tr>
-<td style="text-align:left">ggpush</td>
-<td style="text-align:left">ggp</td>
+<td align="left">ggpush</td>
+<td align="left">ggp</td>
 </tr>
 <tr>
-<td style="text-align:left">ggsup</td>
-<td style="text-align:left">git branch –set-upstream-to = origin/$(current_branch)</td>
+<td align="left">ggsup</td>
+<td align="left">git branch –set-upstream-to = origin/$(current_branch)</td>
 </tr>
 <tr>
-<td style="text-align:left">gignore</td>
-<td style="text-align:left">git update-index –assume-unchanged</td>
+<td align="left">gignore</td>
+<td align="left">git update-index –assume-unchanged</td>
 </tr>
 <tr>
-<td style="text-align:left">gignored</td>
-<td style="text-align:left">`git ls-files -v \</td>
-<td>grep “^[[:lower:]]”`</td>
+<td align="left">gignored</td>
+<td align="left"><code>git ls-files -v | grep &quot;^[[:lower:]]&quot;</code></td>
 </tr>
 <tr>
-<td style="text-align:left">git-svn-dcommit-push</td>
-<td style="text-align:left">git svn dcommit &amp;&amp; git push github master:svntrunk</td>
+<td align="left">git-svn-dcommit-push</td>
+<td align="left">git svn dcommit &amp;&amp; git push github master:svntrunk</td>
 </tr>
 <tr>
-<td style="text-align:left">gk</td>
-<td style="text-align:left">\gitk –all –branches</td>
+<td align="left">gk</td>
+<td align="left">\gitk –all –branches</td>
 </tr>
 <tr>
-<td style="text-align:left">gke</td>
-<td style="text-align:left">\gitk –all $(git log -g –pretty = format:%h)</td>
+<td align="left">gke</td>
+<td align="left">\gitk –all $(git log -g –pretty = format:%h)</td>
 </tr>
 <tr>
-<td style="text-align:left">gl</td>
-<td style="text-align:left">git pull</td>
+<td align="left">gl</td>
+<td align="left">git pull</td>
 </tr>
 <tr>
-<td style="text-align:left">glg</td>
-<td style="text-align:left">git log –stat –color</td>
+<td align="left">glg</td>
+<td align="left">git log –stat –color</td>
 </tr>
 <tr>
-<td style="text-align:left">glgg</td>
-<td style="text-align:left">git log –graph –color</td>
+<td align="left">glgg</td>
+<td align="left">git log –graph –color</td>
 </tr>
 <tr>
-<td style="text-align:left">glgga</td>
-<td style="text-align:left">git log –graph –decorate –all</td>
+<td align="left">glgga</td>
+<td align="left">git log –graph –decorate –all</td>
 </tr>
 <tr>
-<td style="text-align:left">glgm</td>
-<td style="text-align:left">git log –graph –max-count = 10</td>
+<td align="left">glgm</td>
+<td align="left">git log –graph –max-count = 10</td>
 </tr>
 <tr>
-<td style="text-align:left">glgp</td>
-<td style="text-align:left">git log –stat –color -p</td>
+<td align="left">glgp</td>
+<td align="left">git log –stat –color -p</td>
 </tr>
 <tr>
-<td style="text-align:left">glo</td>
-<td style="text-align:left">git log –oneline –decorate –color</td>
+<td align="left">glo</td>
+<td align="left">git log –oneline –decorate –color</td>
 </tr>
 <tr>
-<td style="text-align:left">glog</td>
-<td style="text-align:left">git log –oneline –decorate –color –graph</td>
+<td align="left">glog</td>
+<td align="left">git log –oneline –decorate –color –graph</td>
 </tr>
 <tr>
-<td style="text-align:left">glol</td>
-<td style="text-align:left">git log –graph –pretty = format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit</td>
+<td align="left">glol</td>
+<td align="left">git log –graph –pretty = format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit</td>
 </tr>
 <tr>
-<td style="text-align:left">glola</td>
-<td style="text-align:left">git log –graph –pretty = format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit –all</td>
+<td align="left">glola</td>
+<td align="left">git log –graph –pretty = format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit –all</td>
 </tr>
 <tr>
-<td style="text-align:left">glp</td>
-<td style="text-align:left">_git_log_prettily</td>
+<td align="left">glp</td>
+<td align="left">_git_log_prettily</td>
 </tr>
 <tr>
-<td style="text-align:left">gm</td>
-<td style="text-align:left">git merge</td>
+<td align="left">gm</td>
+<td align="left">git merge</td>
 </tr>
 <tr>
-<td style="text-align:left">gmom</td>
-<td style="text-align:left">git merge origin/master</td>
+<td align="left">gmom</td>
+<td align="left">git merge origin/master</td>
 </tr>
 <tr>
-<td style="text-align:left">gmt</td>
-<td style="text-align:left">git mergetool –no-prompt</td>
+<td align="left">gmt</td>
+<td align="left">git mergetool –no-prompt</td>
 </tr>
 <tr>
-<td style="text-align:left">gmtvim</td>
-<td style="text-align:left">git mergetool –no-prompt –tool = vimdiff</td>
+<td align="left">gmtvim</td>
+<td align="left">git mergetool –no-prompt –tool = vimdiff</td>
 </tr>
 <tr>
-<td style="text-align:left">gmum</td>
-<td style="text-align:left">git merge upstream/master</td>
+<td align="left">gmum</td>
+<td align="left">git merge upstream/master</td>
 </tr>
 <tr>
-<td style="text-align:left">gp</td>
-<td style="text-align:left">git push</td>
+<td align="left">gp</td>
+<td align="left">git push</td>
 </tr>
 <tr>
-<td style="text-align:left">gpd</td>
-<td style="text-align:left">git push –dry-run</td>
+<td align="left">gpd</td>
+<td align="left">git push –dry-run</td>
 </tr>
 <tr>
-<td style="text-align:left">gpoat</td>
-<td style="text-align:left">git push origin –all &amp;&amp; git push origin –tags </td>
+<td align="left">gpoat</td>
+<td align="left">git push origin –all &amp;&amp; git push origin –tags</td>
 </tr>
 <tr>
-<td style="text-align:left"></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr>
-<td style="text-align:left">gpristine</td>
-<td style="text-align:left">git reset –hard &amp;&amp; git clean -dfx </td>
+<td align="left">gpristine</td>
+<td align="left">git reset –hard &amp;&amp; git clean -dfx</td>
 </tr>
 <tr>
-<td style="text-align:left"></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr>
-<td style="text-align:left">gpu</td>
-<td style="text-align:left">git push upstream</td>
+<td align="left">gpu</td>
+<td align="left">git push upstream</td>
 </tr>
 <tr>
-<td style="text-align:left">gpv</td>
-<td style="text-align:left">git push -v</td>
+<td align="left">gpv</td>
+<td align="left">git push -v</td>
 </tr>
 <tr>
-<td style="text-align:left">gr</td>
-<td style="text-align:left">git remote</td>
+<td align="left">gr</td>
+<td align="left">git remote</td>
 </tr>
 <tr>
-<td style="text-align:left">gra</td>
-<td style="text-align:left">git remote add</td>
+<td align="left">gra</td>
+<td align="left">git remote add</td>
 </tr>
 <tr>
-<td style="text-align:left">grb</td>
-<td style="text-align:left">git rebase</td>
+<td align="left">grb</td>
+<td align="left">git rebase</td>
 </tr>
 <tr>
-<td style="text-align:left">grba</td>
-<td style="text-align:left">git rebase –abort</td>
+<td align="left">grba</td>
+<td align="left">git rebase –abort</td>
 </tr>
 <tr>
-<td style="text-align:left">grbc</td>
-<td style="text-align:left">git rebase –continue</td>
+<td align="left">grbc</td>
+<td align="left">git rebase –continue</td>
 </tr>
 <tr>
-<td style="text-align:left">grbi</td>
-<td style="text-align:left">git rebase -i</td>
+<td align="left">grbi</td>
+<td align="left">git rebase -i</td>
 </tr>
 <tr>
-<td style="text-align:left">grbm</td>
-<td style="text-align:left">git rebase master</td>
+<td align="left">grbm</td>
+<td align="left">git rebase master</td>
 </tr>
 <tr>
-<td style="text-align:left">grbs</td>
-<td style="text-align:left">git rebase –skip</td>
+<td align="left">grbs</td>
+<td align="left">git rebase –skip</td>
 </tr>
 <tr>
-<td style="text-align:left">grh</td>
-<td style="text-align:left">git reset HEAD</td>
+<td align="left">grh</td>
+<td align="left">git reset HEAD</td>
 </tr>
 <tr>
-<td style="text-align:left">grhh</td>
-<td style="text-align:left">git reset HEAD –hard</td>
+<td align="left">grhh</td>
+<td align="left">git reset HEAD –hard</td>
 </tr>
 <tr>
-<td style="text-align:left">grmv</td>
-<td style="text-align:left">git remote rename</td>
+<td align="left">grmv</td>
+<td align="left">git remote rename</td>
 </tr>
 <tr>
-<td style="text-align:left">grrm</td>
-<td style="text-align:left">git remote remove</td>
+<td align="left">grrm</td>
+<td align="left">git remote remove</td>
 </tr>
 <tr>
-<td style="text-align:left">grset</td>
-<td style="text-align:left">git remote set-url</td>
+<td align="left">grset</td>
+<td align="left">git remote set-url</td>
 </tr>
 <tr>
-<td style="text-align:left">grt</td>
-<td style="text-align:left">cd $(git rev-parse –show-toplevel \</td>
-<td>\</td>
-<td>echo “.”)</td>
+<td align="left">grt</td>
+<td align="left">cd $(git rev-parse –show-toplevel || echo “.”)</td>
 </tr>
 <tr>
-<td style="text-align:left">gru</td>
-<td style="text-align:left">git reset –</td>
+<td align="left">gru</td>
+<td align="left">git reset –</td>
 </tr>
 <tr>
-<td style="text-align:left">grup</td>
-<td style="text-align:left">git remote update</td>
+<td align="left">grup</td>
+<td align="left">git remote update</td>
 </tr>
 <tr>
-<td style="text-align:left">grv</td>
-<td style="text-align:left">git remote -v</td>
+<td align="left">grv</td>
+<td align="left">git remote -v</td>
 </tr>
 <tr>
-<td style="text-align:left">gsb</td>
-<td style="text-align:left">git status -sb</td>
+<td align="left">gsb</td>
+<td align="left">git status -sb</td>
 </tr>
 <tr>
-<td style="text-align:left">gsd</td>
-<td style="text-align:left">git svn dcommit</td>
+<td align="left">gsd</td>
+<td align="left">git svn dcommit</td>
 </tr>
 <tr>
-<td style="text-align:left">gsi</td>
-<td style="text-align:left">git submodule init</td>
+<td align="left">gsi</td>
+<td align="left">git submodule init</td>
 </tr>
 <tr>
-<td style="text-align:left">gsps</td>
-<td style="text-align:left">git show –pretty = short –show-signature</td>
+<td align="left">gsps</td>
+<td align="left">git show –pretty = short –show-signature</td>
 </tr>
 <tr>
-<td style="text-align:left">gsr</td>
-<td style="text-align:left">git svn rebase</td>
+<td align="left">gsr</td>
+<td align="left">git svn rebase</td>
 </tr>
 <tr>
-<td style="text-align:left">gss</td>
-<td style="text-align:left">git status -s</td>
+<td align="left">gss</td>
+<td align="left">git status -s</td>
 </tr>
 <tr>
-<td style="text-align:left">gst</td>
-<td style="text-align:left">git status</td>
+<td align="left">gst</td>
+<td align="left">git status</td>
 </tr>
 <tr>
-<td style="text-align:left">gsta</td>
-<td style="text-align:left">git stash</td>
+<td align="left">gsta</td>
+<td align="left">git stash</td>
 </tr>
 <tr>
-<td style="text-align:left">gstaa</td>
-<td style="text-align:left">git stash apply</td>
+<td align="left">gstaa</td>
+<td align="left">git stash apply</td>
 </tr>
 <tr>
-<td style="text-align:left">gstd</td>
-<td style="text-align:left">git stash drop</td>
+<td align="left">gstd</td>
+<td align="left">git stash drop</td>
 </tr>
 <tr>
-<td style="text-align:left">gstl</td>
-<td style="text-align:left">git stash list</td>
+<td align="left">gstl</td>
+<td align="left">git stash list</td>
 </tr>
 <tr>
-<td style="text-align:left">gstp</td>
-<td style="text-align:left">git stash pop</td>
+<td align="left">gstp</td>
+<td align="left">git stash pop</td>
 </tr>
 <tr>
-<td style="text-align:left">gsts</td>
-<td style="text-align:left">git stash show –text</td>
+<td align="left">gsts</td>
+<td align="left">git stash show –text</td>
 </tr>
 <tr>
-<td style="text-align:left">gsu</td>
-<td style="text-align:left">git submodule update</td>
+<td align="left">gsu</td>
+<td align="left">git submodule update</td>
 </tr>
 <tr>
-<td style="text-align:left">gts</td>
-<td style="text-align:left">git tag -s</td>
+<td align="left">gts</td>
+<td align="left">git tag -s</td>
 </tr>
 <tr>
-<td style="text-align:left">gunignore</td>
-<td style="text-align:left">git update-index –no-assume-unchanged</td>
+<td align="left">gunignore</td>
+<td align="left">git update-index –no-assume-unchanged</td>
 </tr>
 <tr>
-<td style="text-align:left">gunwip</td>
-<td style="text-align:left">git log -n 1 \</td>
-<td>grep -q -c “--wip--“ &amp;&amp; git reset HEAD~1</td>
+<td align="left">gunwip</td>
+<td align="left">git log -n 1 | grep -q -c “--wip--“ &amp;&amp; git reset HEAD~1</td>
 </tr>
 <tr>
-<td style="text-align:left">gup</td>
-<td style="text-align:left">git pull –rebase</td>
+<td align="left">gup</td>
+<td align="left">git pull –rebase</td>
 </tr>
 <tr>
-<td style="text-align:left">gupv</td>
-<td style="text-align:left">git pull –rebase -v</td>
+<td align="left">gupv</td>
+<td align="left">git pull –rebase -v</td>
 </tr>
 <tr>
-<td style="text-align:left">glum</td>
-<td style="text-align:left">git pull upstream master</td>
+<td align="left">glum</td>
+<td align="left">git pull upstream master</td>
 </tr>
 <tr>
-<td style="text-align:left">gvt</td>
-<td style="text-align:left">git verify-tag</td>
+<td align="left">gvt</td>
+<td align="left">git verify-tag</td>
 </tr>
 <tr>
-<td style="text-align:left">gwch</td>
-<td style="text-align:left">git whatchanged -p –abbrev-commit –pretty = medium</td>
+<td align="left">gwch</td>
+<td align="left">git whatchanged -p –abbrev-commit –pretty = medium</td>
 </tr>
 <tr>
-<td style="text-align:left">gwip</td>
-<td style="text-align:left">git add -A; git rm $(git ls-files –deleted) 2&gt; /dev/null; git commit -m “–wip–”</td>
+<td align="left">gwip</td>
+<td align="left">git add -A; git rm $(git ls-files –deleted) 2&gt; /dev/null; git commit -m “–wip–”</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="Deprecated-Aliases"><a href="#Deprecated-Aliases" class="headerlink" title="Deprecated Aliases"></a>Deprecated Aliases</h2><p>These are aliases that have been removed, renamed, or otherwise modified in a way that may, or may not, receive further support.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Alias</th>
-<th style="text-align:left">Command</th>
+<th align="left">Alias</th>
+<th align="left">Command</th>
 <th>Modification</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">gap</td>
-<td style="text-align:left">git add –patch</td>
+<tbody><tr>
+<td align="left">gap</td>
+<td align="left">git add –patch</td>
 <td>new alias <code>gapa</code></td>
 </tr>
 <tr>
-<td style="text-align:left">gcl</td>
-<td style="text-align:left">git config –list</td>
+<td align="left">gcl</td>
+<td align="left">git config –list</td>
 <td>new alias <code>gcf</code></td>
 </tr>
 <tr>
-<td style="text-align:left">gdc</td>
-<td style="text-align:left">git diff –cached</td>
+<td align="left">gdc</td>
+<td align="left">git diff –cached</td>
 <td>new alias <code>gdca</code></td>
 </tr>
 <tr>
-<td style="text-align:left">gdt</td>
-<td style="text-align:left">git difftool</td>
+<td align="left">gdt</td>
+<td align="left">git difftool</td>
 <td>no replacement</td>
 </tr>
 <tr>
-<td style="text-align:left">ggpull</td>
-<td style="text-align:left">git pull origin $(current_branch)</td>
+<td align="left">ggpull</td>
+<td align="left">git pull origin $(current_branch)</td>
 <td>new alias <code>ggl</code> (<code>ggpull</code> still exists for now though)</td>
 </tr>
 <tr>
-<td style="text-align:left">ggpur</td>
-<td style="text-align:left">git pull –rebase origin $(current_branch)</td>
+<td align="left">ggpur</td>
+<td align="left">git pull –rebase origin $(current_branch)</td>
 <td>new alias <code>ggu</code> (<code>ggpur</code> still exists for now though)</td>
 </tr>
 <tr>
-<td style="text-align:left">ggpush</td>
-<td style="text-align:left">git push origin $(current_branch)</td>
+<td align="left">ggpush</td>
+<td align="left">git push origin $(current_branch)</td>
 <td>new alias <code>ggp</code> (<code>ggpush</code> still exists for now though)</td>
 </tr>
 <tr>
-<td style="text-align:left">gk</td>
-<td style="text-align:left">gitk –all –branches</td>
+<td align="left">gk</td>
+<td align="left">gitk –all –branches</td>
 <td>now aliased to <code>\gitk --all --branches</code></td>
 </tr>
 <tr>
-<td style="text-align:left">glg</td>
-<td style="text-align:left">git log –stat –max-count = 10</td>
+<td align="left">glg</td>
+<td align="left">git log –stat –max-count = 10</td>
 <td>now aliased to <code>git log --stat --color</code></td>
 </tr>
 <tr>
-<td style="text-align:left">glgg</td>
-<td style="text-align:left">git log –graph –max-count = 10</td>
+<td align="left">glgg</td>
+<td align="left">git log –graph –max-count = 10</td>
 <td>now aliased to <code>git log --graph --color</code></td>
 </tr>
 <tr>
-<td style="text-align:left">gwc</td>
-<td style="text-align:left">git whatchanged -p –abbrev-commit –pretty = medium</td>
+<td align="left">gwc</td>
+<td align="left">git whatchanged -p –abbrev-commit –pretty = medium</td>
 <td>new alias <code>gwch</code></td>
 </tr>
 <tr>
-<td style="text-align:left">gwip</td>
-<td style="text-align:left">git add -A; git ls-files –deleted -z \</td>
-<td>xargs -r0 git rm; git commit -m “–wip–”</td>
+<td align="left">gwip</td>
+<td align="left">git add -A; git ls-files –deleted -z | xargs -r0 git rm; git commit -m “–wip–”</td>
 <td>now aliased to <code>git add -A; git rm $(git ls-files --deleted) 2&gt; /dev/null; git commit -m &quot;--wip--&quot;</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><h3 id="Current"><a href="#Current" class="headerlink" title="Current"></a>Current</h3><table>
 <thead>
 <tr>
-<th style="text-align:left">Command</th>
-<th style="text-align:left">Description</th>
+<th align="left">Command</th>
+<th align="left">Description</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">current_branch</td>
-<td style="text-align:left">Return the name of the current branch</td>
+<tbody><tr>
+<td align="left">current_branch</td>
+<td align="left">Return the name of the current branch</td>
 </tr>
 <tr>
-<td style="text-align:left">current_repository</td>
-<td style="text-align:left">Return the names of the current remotes</td>
+<td align="left">current_repository</td>
+<td align="left">Return the names of the current remotes</td>
 </tr>
 <tr>
-<td style="text-align:left">git_current_user_name</td>
-<td style="text-align:left">Returns the <code>user.name</code> config value</td>
+<td align="left">git_current_user_name</td>
+<td align="left">Returns the <code>user.name</code> config value</td>
 </tr>
 <tr>
-<td style="text-align:left">git_current_user_email</td>
-<td style="text-align:left">Returns the <code>user.email</code> config value</td>
+<td align="left">git_current_user_email</td>
+<td align="left">Returns the <code>user.email</code> config value</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h3 id="WiP"><a href="#WiP" class="headerlink" title="WiP"></a>WiP</h3><p>These features allow to pause a branch development and switch to another one (<em>“Work in Progress”</em>,  or wip). When you want to go back to work, just unwip it.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Command</th>
-<th style="text-align:left">Description</th>
+<th align="left">Command</th>
+<th align="left">Description</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">work_in_progress</td>
-<td style="text-align:left">Echoes a warning if the current branch is a wip</td>
+<tbody><tr>
+<td align="left">work_in_progress</td>
+<td align="left">Echoes a warning if the current branch is a wip</td>
 </tr>
 <tr>
-<td style="text-align:left">gwip</td>
-<td style="text-align:left">Commit wip branch</td>
+<td align="left">gwip</td>
+<td align="left">Commit wip branch</td>
 </tr>
 <tr>
-<td style="text-align:left">gunwip</td>
-<td style="text-align:left">Uncommit wip branch</td>
+<td align="left">gunwip</td>
+<td align="left">Uncommit wip branch</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 
             </article>
             <hr>
@@ -814,26 +804,26 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2016/07/02/Java注解学习/">
+                      <a href="/2016/07/02/Java%E6%B3%A8%E8%A7%A3%E5%AD%A6%E4%B9%A0/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Java注解学习</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2016/06/20/Android博客收集/">
+                      <a href="/2016/06/20/Android%E5%8D%9A%E5%AE%A2%E6%94%B6%E9%9B%86/">
                         <span class="hidden-mobile">Android博客收集</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -850,7 +840,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -877,7 +867,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -886,7 +876,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -929,9 +919,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

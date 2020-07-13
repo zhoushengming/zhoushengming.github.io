@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>定制适合自己的Android studio插件 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2020-06-26 02:06">
-      June 26, 2020 am
+      2020年6月26日 凌晨
     </time>
   </div>
 
@@ -202,18 +205,55 @@
             
             <article class="markdown-body">
               <!-- abstract area -->
+
 <p>我们经常会去Android studio的plugin中心寻找满足自己需要的plugin，我前段时间去找了一个Translate的插件，作者是bob。<br>这个插件是挺好用的，但是有个问题，就是他会在工具栏中生成一个独占一列的tab，我用的是mac，这样就会把整个工具栏占满，导致好多图标显示不出来，<br>比如qq、微信、电量等，这个很难受，然后我决定改造一个这个插件。</p>
 <a id="more"></a>
+
 <p>我查了一下，如何开发一个Android studio插件。<br>发现需要自己定义一个Action，然后把这个action通过一个plugin.xml注册到Android studio中，<br>注册的时候要指明这个action作用在工具栏还是右键菜单。<br>那我们只需要找到这个文件，然后修改就可以了。</p>
 <p>首先需要找到这个插件存放的位置。查到在 ~/Library/Application Support/AndroidStudio4.0<br>这个翻译插件的名字竟然叫plugin.jar，别的插件都是已功能命名的，比如GsonFormat.jar</p>
 <p>我需要对这个jar进行解压，命令为：</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">unzip -x -<span class="selector-tag">q</span> plugin<span class="selector-class">.jar</span> -d plugin</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs stata">unzip -x -q <span class="hljs-keyword">plugin</span>.jar -<span class="hljs-keyword">d</span> <span class="hljs-keyword">plugin</span></code></pre></div>
+
 <p>查看一下jar包里边都有啥</p>
-<figure class="highlight gherkin"><table><tr><td class="code"><pre><div class="line">.</div><div class="line">|<span class="string">____META-INF</span></div><div class="line">|<span class="string"> </span>|<span class="string">____MANIFEST.MF</span></div><div class="line">|<span class="string"> </span>|<span class="string">____plugin.xml</span></div><div class="line">|____translate_tool_window</div><div class="line">|<span class="string"> </span>|<span class="string">____logo.png</span></div><div class="line">|____com</div><div class="line">|<span class="string"> </span>|____huangmb</div><div class="line">|<span class="string"> </span>|<span class="string"> </span>|____idea</div><div class="line">|<span class="string"> </span>|<span class="string"> </span>|<span class="string"> </span>|<span class="string">____省略</span></div><div class="line">|<span class="string"> </span>|____intellij</div><div class="line">|<span class="string"> </span>|<span class="string"> </span>|____uiDesigner</div><div class="line">|<span class="string"> </span>|<span class="string"> </span>|<span class="string"> </span>|<span class="string">____省略</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs gherkin">.
+|<span class="hljs-string">____META-INF</span>
+|<span class="hljs-string"> </span>|<span class="hljs-string">____MANIFEST.MF</span>
+|<span class="hljs-string"> </span>|<span class="hljs-string">____plugin.xml</span>
+|____translate_tool_window
+|<span class="hljs-string"> </span>|<span class="hljs-string">____logo.png</span>
+|____com
+|<span class="hljs-string"> </span>|____huangmb
+|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|____idea
+|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">____省略</span>
+|<span class="hljs-string"> </span>|____intellij
+|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|____uiDesigner
+|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">____省略</span></code></pre></div>
+
 <p>查看plugin.xml</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">idea-plugin</span> <span class="attr">version</span>=<span class="string">"2"</span>&gt;</span></div><div class="line">    .......</div><div class="line">    <span class="tag">&lt;<span class="name">actions</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- Add your actions here --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">group</span> <span class="attr">id</span>=<span class="string">"Hello"</span> <span class="attr">text</span>=<span class="string">"Translate"</span> <span class="attr">description</span>=<span class="string">"translate plugin"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">separator</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">add-to-group</span> <span class="attr">group-id</span>=<span class="string">"MainMenu"</span> <span class="attr">anchor</span>=<span class="string">"last"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">add-to-group</span> <span class="attr">group-id</span>=<span class="string">"EditorPopupMenu"</span> <span class="attr">relative-to-action</span>=<span class="string">"EditorToggleColumnMode"</span> <span class="attr">anchor</span>=<span class="string">"after"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">add-to-group</span> <span class="attr">group-id</span>=<span class="string">"MainToolBar"</span> <span class="attr">anchor</span>=<span class="string">"last"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">add-to-group</span> <span class="attr">group-id</span>=<span class="string">"NavBarToolBar"</span> <span class="attr">anchor</span>=<span class="string">"last"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">id</span>=<span class="string">"TranslatePlugin.TranslateAction"</span></span></div><div class="line">                    <span class="attr">class</span>=<span class="string">"com.huangmb.idea.action.TranslateAction"</span></div><div class="line">                    <span class="attr">text</span>=<span class="string">"Translate"</span></div><div class="line">                    <span class="attr">icon</span>=<span class="string">"/translate_tool_window/logo.png"</span></div><div class="line">                    <span class="attr">description</span>=<span class="string">"toggle translate"</span>&gt;</div><div class="line">                <span class="tag">&lt;<span class="name">keyboard-shortcut</span> <span class="attr">keymap</span>=<span class="string">"$default"</span> <span class="attr">first-keystroke</span>=<span class="string">"ctrl meta T"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">group</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">actions</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">idea-plugin</span>&gt;</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">idea-plugin</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"2"</span>&gt;</span>
+    .......
+    <span class="hljs-tag">&lt;<span class="hljs-name">actions</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- Add your actions here --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">group</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"Hello"</span> <span class="hljs-attr">text</span>=<span class="hljs-string">"Translate"</span> <span class="hljs-attr">description</span>=<span class="hljs-string">"translate plugin"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">separator</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">add-to-group</span> <span class="hljs-attr">group-id</span>=<span class="hljs-string">"MainMenu"</span> <span class="hljs-attr">anchor</span>=<span class="hljs-string">"last"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">add-to-group</span> <span class="hljs-attr">group-id</span>=<span class="hljs-string">"EditorPopupMenu"</span> <span class="hljs-attr">relative-to-action</span>=<span class="hljs-string">"EditorToggleColumnMode"</span> <span class="hljs-attr">anchor</span>=<span class="hljs-string">"after"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">add-to-group</span> <span class="hljs-attr">group-id</span>=<span class="hljs-string">"MainToolBar"</span> <span class="hljs-attr">anchor</span>=<span class="hljs-string">"last"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">add-to-group</span> <span class="hljs-attr">group-id</span>=<span class="hljs-string">"NavBarToolBar"</span> <span class="hljs-attr">anchor</span>=<span class="hljs-string">"last"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"TranslatePlugin.TranslateAction"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">class</span>=<span class="hljs-string">"com.huangmb.idea.action.TranslateAction"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">text</span>=<span class="hljs-string">"Translate"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">icon</span>=<span class="hljs-string">"/translate_tool_window/logo.png"</span></span>
+<span class="hljs-tag">                    <span class="hljs-attr">description</span>=<span class="hljs-string">"toggle translate"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">keyboard-shortcut</span> <span class="hljs-attr">keymap</span>=<span class="hljs-string">"$default"</span> <span class="hljs-attr">first-keystroke</span>=<span class="hljs-string">"ctrl meta T"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">action</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">group</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">actions</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">idea-plugin</span>&gt;</span></code></pre></div>
+
 <p>需要删掉group-id=”MainMenu”的那一行，删除后重新打包</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">jar cvf plugin<span class="selector-class">.jar</span> META-INF/MANIFEST<span class="selector-class">.MF</span> *</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs stata">jar cvf <span class="hljs-keyword">plugin</span>.jar <span class="hljs-keyword">META</span>-<span class="hljs-keyword">INF</span>/MANIFEST.MF *</code></pre></div>
+
 <p>然后打开Android studio卸载旧的插件，然后选择从磁盘安装插件，选择我们新生成的那个jar。</p>
 <p>重启Android studio。</p>
 <p>一切都变得顺滑了。。。</p>
@@ -226,26 +266,26 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/27/Android-App直接调用隐藏Api/">
+                      <a href="/2020/06/27/Android-App%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8%E9%9A%90%E8%97%8FApi/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Android App直接调用隐藏Api</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/12/转载-Android-4-4系统获取root权限的方法/">
+                      <a href="/2020/06/12/%E8%BD%AC%E8%BD%BD-Android-4-4%E7%B3%BB%E7%BB%9F%E8%8E%B7%E5%8F%96root%E6%9D%83%E9%99%90%E7%9A%84%E6%96%B9%E6%B3%95/">
                         <span class="hidden-mobile">转载:Android 4.4系统获取root权限的方法</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -262,7 +302,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -289,7 +329,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -298,7 +338,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -341,9 +381,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

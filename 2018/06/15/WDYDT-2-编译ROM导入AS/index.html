@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>WDYDT-2-编译ROM导入AS - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2018-06-15 22:45">
-      June 15, 2018 pm
+      2018年6月15日 晚上
     </time>
   </div>
 
@@ -160,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      315 字
+      322 字
     </span>
   
 
@@ -202,22 +205,44 @@
             
             <article class="markdown-body">
               <!-- abstract area -->
+
 <p>昨天编了个ROM，今天又失败了，结果是让执行make update-api, 然后就好了。<br>今天还搞了个android.ipr,可以把Android的源代码导入到Android studio进行查看。</p>
 <a id="more"></a>
+
 <p>ROM的编译还是挺有意思的，搞了两天重要搞好了。</p>
 <p>然后这几天都是在找看代码的方法，都是一些vim+ctags什么的，感觉有点难度，<br>然后看到一个用Android Studio搞得，果断搞了一下</p>
 <blockquote>
-<p>查考： <a href="https://www.jianshu.com/p/fb16fa459acf" target="_blank" rel="external">Android Studio导入android源码技巧</a></p>
+<p>查考： <a href="https://www.jianshu.com/p/fb16fa459acf" target="_blank" rel="noopener">Android Studio导入android源码技巧</a></p>
 </blockquote>
 <p>然后就是Android studio打开巨慢，然后看了idegen下边的README，上边说要改heap size，然后改了一下</p>
 <blockquote>
-<p>heap size 修改： <a href="https://blog.csdn.net/QQxiaoqiang1573/article/details/72903237" target="_blank" rel="external">https://blog.csdn.net/QQxiaoqiang1573/article/details/72903237</a></p>
+<p>heap size 修改： <a href="https://blog.csdn.net/QQxiaoqiang1573/article/details/72903237" target="_blank" rel="noopener">https://blog.csdn.net/QQxiaoqiang1573/article/details/72903237</a></p>
 </blockquote>
-<p>然后还可以改android.iml 里边的excludeFolder，只把自己关心的目录放进去，其他的都是用<excludefolder url="file://$MODULE_DIR$/.repo"><br>这种方式给exclude掉。</excludefolder></p>
+<p>然后还可以改android.iml 里边的excludeFolder，只把自己关心的目录放进去，其他的都是用<excludeFolder url="file://$MODULE_DIR$/.repo" /><br>这种方式给exclude掉。</p>
 <p>具体的效果我还没有试，节后吧，我是在公司的电脑上搞得，这几天要过节，希望我还能每天更新我的博客。</p>
 <p>节日快乐！！</p>
 <p>对了，今天还写了个脚本，用于生成WDYDT，代码如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line">number_path=<span class="string">"./number_wdydt"</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ ! -f <span class="string">"<span class="variable">$number_path</span>"</span> ]; <span class="keyword">then</span></div><div class="line">touch <span class="variable">$number_path</span></div><div class="line"><span class="built_in">echo</span> 1 &gt; <span class="variable">$number_path</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line">number_wdydt=`cat <span class="variable">$number_path</span>`</div><div class="line"></div><div class="line"><span class="comment">#echo $number_wdydt</span></div><div class="line"><span class="built_in">let</span> number_wdydt+=1</div><div class="line"><span class="comment">#echo $number_wdydt</span></div><div class="line"><span class="comment">#echo $number_wdydt &gt; $number_path</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"Gen this page:"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"WDYDT-<span class="variable">$number_wdydt</span>-$*"</span></div><div class="line"></div><div class="line">hexo new <span class="string">"WDYDT-<span class="variable">$number_wdydt</span>-$*"</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span>
+
+number_path=<span class="hljs-string">"./number_wdydt"</span>
+
+<span class="hljs-keyword">if</span> [ ! -f <span class="hljs-string">"<span class="hljs-variable">$number_path</span>"</span> ]; <span class="hljs-keyword">then</span>
+touch <span class="hljs-variable">$number_path</span>
+<span class="hljs-built_in">echo</span> 1 &gt; <span class="hljs-variable">$number_path</span>
+<span class="hljs-keyword">fi</span>
+
+number_wdydt=`cat <span class="hljs-variable">$number_path</span>`
+
+<span class="hljs-comment">#echo $number_wdydt</span>
+<span class="hljs-built_in">let</span> number_wdydt+=1
+<span class="hljs-comment">#echo $number_wdydt</span>
+<span class="hljs-comment">#echo $number_wdydt &gt; $number_path</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Gen this page:"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"WDYDT-<span class="hljs-variable">$number_wdydt</span>-$*"</span>
+
+hexo new <span class="hljs-string">"WDYDT-<span class="hljs-variable">$number_wdydt</span>-$*"</span></code></pre></div>
+
 <p>本篇文章写了14分钟。</p>
 
             </article>
@@ -235,26 +260,26 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2018/06/19/WDYDT-3-AS搭建源码阅读环境改进/">
+                      <a href="/2018/06/19/WDYDT-3-AS%E6%90%AD%E5%BB%BA%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E6%94%B9%E8%BF%9B/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">WDYDT-3-AS搭建源码阅读环境改进</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2018/06/14/WDYDT-1-第一篇/">
+                      <a href="/2018/06/14/WDYDT-1-%E7%AC%AC%E4%B8%80%E7%AF%87/">
                         <span class="hidden-mobile">WDYDT-1-第一篇</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -271,7 +296,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -298,7 +323,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -307,7 +332,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -350,9 +375,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

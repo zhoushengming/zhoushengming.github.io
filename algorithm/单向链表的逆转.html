@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>单向链表的逆转 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/vdysjx.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -167,8 +170,150 @@
 
 <div class="page-content">
   <!-- abstract area -->
-<p>以下是逆转单链表的三个方法。<br><a id="more"></a></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">package</span> com.ericcode;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 单向链表 </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</div><div class="line">        Node next;</div><div class="line">        <span class="keyword">int</span> value;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"value:"</span> + value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Node head = initData();</div><div class="line">        printNode(head);</div><div class="line"></div><div class="line">        <span class="comment">// 方法一</span></div><div class="line"><span class="comment">//        head = reverse1(head);</span></div><div class="line">        <span class="comment">// 方法二</span></div><div class="line"><span class="comment">//        head = reverse2(head);</span></div><div class="line"></div><div class="line">        <span class="comment">// 方法三</span></div><div class="line">        reverse3(head);</div><div class="line">        head = reverse3Head;</div><div class="line">        </div><div class="line">        printNode(head);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Node reverse3Head;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 递归思想，把head后边的链表看成一个整体A，假设head后边的链表已经反转好了，</div><div class="line">     * 那我们只需要把后边链表的next指向head。</div><div class="line">     * 以此类推，整体A也可以使用上边的方法，进行拆分，一直把链表拆分到head没有next，</div><div class="line">     * 那就可以进行一层层的return。</div><div class="line">     * 比较麻烦的是，每次递归返回的都是尾结点，所以我们需要找到并保存新的head，</div><div class="line">     * 新的head就是拆分过程中，没有next的节点</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title">reverse3</span><span class="params">(Node head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) &#123;</div><div class="line">            reverse3Head = head;</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Node next = head.next;</div><div class="line">        Node result = reverse3(next);</div><div class="line">        result.next = head;</div><div class="line">        head.next = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 使用p和q两个指针配合工作，使得两个节点间的指向反向，同时用r记录剩下的链表。</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title">reverse1</span><span class="params">(Node head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Node p = head;</div><div class="line">        Node q = head.next;</div><div class="line">        Node r;</div><div class="line">        head.next = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (q != <span class="keyword">null</span>) &#123;</div><div class="line">            r = q.next;</div><div class="line">            q.next = p;</div><div class="line">            p = q;</div><div class="line">            q = r;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> p;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 对于一条链表，从第2个节点到第N个节点，依次逐节点插入到第1个节点(head节点)之后，</div><div class="line">     (N-1)次这样的操作结束之后将第1个节点挪到新表的表尾即可</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title">reverse2</span><span class="params">(Node head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Node p = head.next;</div><div class="line">        Node q;</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (p.next != <span class="keyword">null</span>) &#123;</div><div class="line">            q = p.next;</div><div class="line">            p.next = q.next;</div><div class="line">            q.next = head.next;</div><div class="line">            head.next = q;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        p.next = head;</div><div class="line">        Node result = head.next;</div><div class="line">        head.next = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printNode</span><span class="params">(Node head)</span> </span>&#123;</div><div class="line">        StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</div><div class="line">        Node temp = head;</div><div class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</div><div class="line">            stringBuffer.append(temp.value).append(<span class="string">","</span>);</div><div class="line">            temp = temp.next;</div><div class="line">        &#125;</div><div class="line">        System.out.println(stringBuffer);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title">initData</span><span class="params">()</span> </span>&#123;</div><div class="line">        Node node1 = <span class="keyword">new</span> Node();</div><div class="line">        node1.value = <span class="number">1</span>;</div><div class="line"></div><div class="line">        Node node2 = <span class="keyword">new</span> Node();</div><div class="line">        node2.value = <span class="number">2</span>;</div><div class="line"></div><div class="line">        Node node3 = <span class="keyword">new</span> Node();</div><div class="line">        node3.value = <span class="number">3</span>;</div><div class="line"></div><div class="line">        Node node4 = <span class="keyword">new</span> Node();</div><div class="line">        node4.value = <span class="number">4</span>;</div><div class="line"></div><div class="line">        Node node5 = <span class="keyword">new</span> Node();</div><div class="line">        node5.value = <span class="number">5</span>;</div><div class="line"></div><div class="line">        Node node6 = <span class="keyword">new</span> Node();</div><div class="line">        node6.value = <span class="number">6</span>;</div><div class="line"></div><div class="line">        node1.next = node2;</div><div class="line">        node2.next = node3;</div><div class="line">        node3.next = node4;</div><div class="line">        node4.next = node5;</div><div class="line">        node5.next = node6;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> node1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+<p>以下是逆转单链表的三个方法。</p>
+<a id="more"></a>
+
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.ericcode;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> 单向链表 </span>&#123;
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>&#123;
+        Node next;
+        <span class="hljs-keyword">int</span> value;
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-string">"value:"</span> + value;
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Node head = initData();
+        printNode(head);
+
+        <span class="hljs-comment">// 方法一</span>
+<span class="hljs-comment">//        head = reverse1(head);</span>
+        <span class="hljs-comment">// 方法二</span>
+<span class="hljs-comment">//        head = reverse2(head);</span>
+
+        <span class="hljs-comment">// 方法三</span>
+        reverse3(head);
+        head = reverse3Head;
+        
+        printNode(head);
+    &#125;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Node reverse3Head;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 递归思想，把head后边的链表看成一个整体A，假设head后边的链表已经反转好了，</span>
+<span class="hljs-comment">     * 那我们只需要把后边链表的next指向head。</span>
+<span class="hljs-comment">     * 以此类推，整体A也可以使用上边的方法，进行拆分，一直把链表拆分到head没有next，</span>
+<span class="hljs-comment">     * 那就可以进行一层层的return。</span>
+<span class="hljs-comment">     * 比较麻烦的是，每次递归返回的都是尾结点，所以我们需要找到并保存新的head，</span>
+<span class="hljs-comment">     * 新的head就是拆分过程中，没有next的节点</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Node <span class="hljs-title">reverse3</span><span class="hljs-params">(Node head)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>) &#123;
+            reverse3Head = head;
+            <span class="hljs-keyword">return</span> head;
+        &#125;
+
+        Node next = head.next;
+        Node result = reverse3(next);
+        result.next = head;
+        head.next = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">return</span> head;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 使用p和q两个指针配合工作，使得两个节点间的指向反向，同时用r记录剩下的链表。</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Node <span class="hljs-title">reverse1</span><span class="hljs-params">(Node head)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">return</span> head;
+        &#125;
+
+        Node p = head;
+        Node q = head.next;
+        Node r;
+        head.next = <span class="hljs-keyword">null</span>;
+
+        <span class="hljs-keyword">while</span> (q != <span class="hljs-keyword">null</span>) &#123;
+            r = q.next;
+            q.next = p;
+            p = q;
+            q = r;
+        &#125;
+
+        <span class="hljs-keyword">return</span> p;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 对于一条链表，从第2个节点到第N个节点，依次逐节点插入到第1个节点(head节点)之后，</span>
+<span class="hljs-comment">     (N-1)次这样的操作结束之后将第1个节点挪到新表的表尾即可</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Node <span class="hljs-title">reverse2</span><span class="hljs-params">(Node head)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">return</span> head;
+        &#125;
+
+        Node p = head.next;
+        Node q;
+
+        <span class="hljs-keyword">while</span> (p.next != <span class="hljs-keyword">null</span>) &#123;
+            q = p.next;
+            p.next = q.next;
+            q.next = head.next;
+            head.next = q;
+        &#125;
+
+        p.next = head;
+        Node result = head.next;
+        head.next = <span class="hljs-keyword">null</span>;
+
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printNode</span><span class="hljs-params">(Node head)</span> </span>&#123;
+        StringBuffer stringBuffer = <span class="hljs-keyword">new</span> StringBuffer();
+        Node temp = head;
+        <span class="hljs-keyword">while</span> (temp != <span class="hljs-keyword">null</span>) &#123;
+            stringBuffer.append(temp.value).append(<span class="hljs-string">","</span>);
+            temp = temp.next;
+        &#125;
+        System.out.println(stringBuffer);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Node <span class="hljs-title">initData</span><span class="hljs-params">()</span> </span>&#123;
+        Node node1 = <span class="hljs-keyword">new</span> Node();
+        node1.value = <span class="hljs-number">1</span>;
+
+        Node node2 = <span class="hljs-keyword">new</span> Node();
+        node2.value = <span class="hljs-number">2</span>;
+
+        Node node3 = <span class="hljs-keyword">new</span> Node();
+        node3.value = <span class="hljs-number">3</span>;
+
+        Node node4 = <span class="hljs-keyword">new</span> Node();
+        node4.value = <span class="hljs-number">4</span>;
+
+        Node node5 = <span class="hljs-keyword">new</span> Node();
+        node5.value = <span class="hljs-number">5</span>;
+
+        Node node6 = <span class="hljs-keyword">new</span> Node();
+        node6.value = <span class="hljs-number">6</span>;
+
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        node5.next = node6;
+
+        <span class="hljs-keyword">return</span> node1;
+    &#125;
+&#125;</code></pre></div>
+
 
 </div>
 
@@ -192,7 +337,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -201,7 +346,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -244,9 +389,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>非对称加密 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2017-12-08 11:24">
-      December 8, 2017 am
+      2017年12月8日 上午
     </time>
   </div>
 
@@ -160,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      794 字
+      795 字
     </span>
   
 
@@ -203,6 +206,7 @@
             <article class="markdown-body">
               <p>非对称加密有一对公钥和私钥，成对出现，使用时，如果A想给你发消息，你把公钥给A，让A使用公钥对消息进行加密，加密后发给你，然后你用私钥解开，别人虽然能拿到公钥和密文，但是解不开，因为公钥可以加密明文成为密文，但是却无法使用公钥对密文进行解密，只有私钥能够解密公钥加密的东西，而私钥只有你自己有，这就保证了信息的安全性。</p>
 <a id="more"></a>
+
 <h3 id="神奇的数学"><a href="#神奇的数学" class="headerlink" title="神奇的数学"></a>神奇的数学</h3><p>但是你可能有疑问了，为啥公钥加密了，用公钥却解不开，这么神奇？<br>对，就是这么神奇，这个要从一个牛B的数学现象说起。<br>当然，我说的是非对称加密算法的一种，也是比较常用的一种，这种算法叫RSA。</p>
 <p>这个数学现象就是：两个大素数相乘十分容易，但那时想要对其乘积进行因式分解却极其困难。</p>
 <h3 id="啥是素数"><a href="#啥是素数" class="headerlink" title="啥是素数"></a>啥是素数</h3><p>质数（prime number）又称素数，有无限个。<br>质数定义为在大于1的自然数中，除了1和它本身以外不再有其他因数。</p>
@@ -212,10 +216,10 @@
 <p>二、模运算<br>①{[a(mod n)]×[b(mod n)]}modn≡（a×b)(mod n)<br>②如果（a×b）=（a×c）（mod n),a与n互素，则<br>b=c(mod n)</p>
 <p>三、费马定理<br>若p是素数，a与p互素，则<br>a^(p-1）≡1 （mod p）</p>
 <p>四、欧拉定理<br>欧拉函数φ（n）表示不大于n且与n互素的正整数的个数。<br>当n是素数，φ（n)=n-1。n=pq,p,q均为素数时，则φ（n)= φ（p）φ（q)=（p-1）（q-1）。<br>对于互素的a和n，有a^φ（n)≡1(mod n)</p>
-<h3 id="RSA实现方式"><a href="#RSA实现方式" class="headerlink" title="RSA实现方式"></a>RSA实现方式</h3><p>RSA的算法涉及三个参数，n、e1、e2。<br>其中，n是两个大质数p、q的积，n的二进制表示时所占用的位数，就是所谓的密钥长度。<br>e1和e2是一对相关的值，e1可以任意取，但要求e1与(p-1）<em>(q-1）互质；再选择e2，要求（e2</em>e1）mod((p-1）*(q-1））=1。<br>（n，e1）,(n，e2）就是密钥对。其中(n，e1）为公钥，(n，e2）为私钥。[1]<br>RSA加解密的算法完全相同，设A为明文，B为密文，则：A=B^e2 mod n；B=A^e1 mod n；（公钥加密体制中，一般用公钥加密，私钥解密）<br>e1和e2可以互换使用，即：<br>A=B^e1 mod n；B=A^e2 mod n;</p>
+<h3 id="RSA实现方式"><a href="#RSA实现方式" class="headerlink" title="RSA实现方式"></a>RSA实现方式</h3><p>RSA的算法涉及三个参数，n、e1、e2。<br>其中，n是两个大质数p、q的积，n的二进制表示时所占用的位数，就是所谓的密钥长度。<br>e1和e2是一对相关的值，e1可以任意取，但要求e1与(p-1）<em>(q-1）互质；再选择e2，要求（e2*e1）mod((p-1）</em>(q-1））=1。<br>（n，e1）,(n，e2）就是密钥对。其中(n，e1）为公钥，(n，e2）为私钥。[1]<br>RSA加解密的算法完全相同，设A为明文，B为密文，则：A=B^e2 mod n；B=A^e1 mod n；（公钥加密体制中，一般用公钥加密，私钥解密）<br>e1和e2可以互换使用，即：<br>A=B^e1 mod n；B=A^e2 mod n;</p>
 <h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><p>RSA 1024位已经被认为不安全了，因为现在的计算机已经越来越快了，一直增加秘钥的位数也不是长久之计，也许RSA会逐渐被其他算法取代。</p>
 <blockquote>
-<p><a href="https://www.zhihu.com/question/23879943/answer/27383875" target="_blank" rel="external">https://www.zhihu.com/question/23879943/answer/27383875</a><br><a href="http://blog.sina.com.cn/s/blog_4a0fa5420101f2lj.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4a0fa5420101f2lj.html</a><br><a href="https://baike.baidu.com/item/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86/891345?fr=aladdin" target="_blank" rel="external">https://baike.baidu.com/item/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86/891345?fr=aladdin</a></p>
+<p><a href="https://www.zhihu.com/question/23879943/answer/27383875" target="_blank" rel="noopener">https://www.zhihu.com/question/23879943/answer/27383875</a><br><a href="http://blog.sina.com.cn/s/blog_4a0fa5420101f2lj.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_4a0fa5420101f2lj.html</a><br><a href="https://baike.baidu.com/item/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86/891345?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86/891345?fr=aladdin</a></p>
 </blockquote>
 
             </article>
@@ -227,32 +231,32 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/加密/">加密</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A0%E5%AF%86/">加密</a>
                     
                   </div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2017/12/21/kotlin入坑/">
+                      <a href="/2017/12/21/kotlin%E5%85%A5%E5%9D%91/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">kotlin入坑</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2017/12/08/记一种签名认证方法/">
+                      <a href="/2017/12/08/%E8%AE%B0%E4%B8%80%E7%A7%8D%E7%AD%BE%E5%90%8D%E8%AE%A4%E8%AF%81%E6%96%B9%E6%B3%95/">
                         <span class="hidden-mobile">记一种签名认证方法</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -269,7 +273,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -296,7 +300,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -305,7 +309,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -348,9 +352,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

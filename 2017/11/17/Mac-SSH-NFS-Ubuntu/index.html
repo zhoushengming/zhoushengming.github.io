@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>Mac SSH&amp;NFS Ubuntu - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2017-11-17 11:29">
-      November 17, 2017 am
+      2017年11月17日 上午
     </time>
   </div>
 
@@ -160,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      922 字
+      926 字
     </span>
   
 
@@ -205,20 +208,29 @@
 <ol>
 <li>使用SSH操作Ubuntu；</li>
 <li>使用mount NFS挂载代码到MacBook，使用Android Studio修改代码；<a id="more"></a>
+
 </li>
 </ol>
 <h1 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h1><p>首先搞定SSH， 以下是服务端和客户端配置。</p>
-<h2 id="服务端（Ubuntu）"><a href="#服务端（Ubuntu）" class="headerlink" title="服务端（Ubuntu）"></a>服务端（Ubuntu）</h2><figure class="highlight routeros"><table><tr><td class="code"><pre><div class="line">sudo  apt-<span class="builtin-name">get</span> install openssh-server</div></pre></td></tr></table></figure>
+<h2 id="服务端（Ubuntu）"><a href="#服务端（Ubuntu）" class="headerlink" title="服务端（Ubuntu）"></a>服务端（Ubuntu）</h2><div class="hljs"><pre><code class="hljs pgsql">sudo  apt-<span class="hljs-keyword">get</span> install openssh-<span class="hljs-keyword">server</span></code></pre></div>
 <p>如果安装失败，缺少依赖库，可以通过添加apt软件源的方式解决。如果还是无法安装，就需要一个一个依赖库的下载。<br>常用库下载地址：</p>
-<p><a href="http://launchpadlibrarian.net/130237887/libtasn1-3-dbg_2.14-2_i386.deb" target="_blank" rel="external">http://launchpadlibrarian.net/130237887/libtasn1-3-dbg_2.14-2_i386.deb</a><br><a href="http://launchpadlibrarian.net/130237888/libtasn1-3_2.14-2_i386.deb" target="_blank" rel="external">http://launchpadlibrarian.net/130237888/libtasn1-3_2.14-2_i386.deb</a><br><a href="http://launchpadlibrarian.net/130237883/libtasn1-3_2.14-2_amd64.deb" target="_blank" rel="external">http://launchpadlibrarian.net/130237883/libtasn1-3_2.14-2_amd64.deb</a><br><a href="http://launchpadlibrarian.net/130237889/libtasn1-3-bin_2.14-2_i386.deb" target="_blank" rel="external">http://launchpadlibrarian.net/130237889/libtasn1-3-bin_2.14-2_i386.deb</a><br><a href="http://security.ubuntu.com/ubuntu/pool/main/g/gnutls26/libgnutls26_2.12.23-12ubuntu2.8_amd64.deb" target="_blank" rel="external">http://security.ubuntu.com/ubuntu/pool/main/g/gnutls26/libgnutls26_2.12.23-12ubuntu2.8_amd64.deb</a><br><a href="https://launchpadlibrarian.net/85099924/libtasn1-3_2.10-1ubuntu1_amd64.deb" target="_blank" rel="external">https://launchpadlibrarian.net/85099924/libtasn1-3_2.10-1ubuntu1_amd64.deb</a><br><a href="https://launchpadlibrarian.net/85099923/libtasn1-3-dbg_2.10-1ubuntu1_amd64.deb" target="_blank" rel="external">https://launchpadlibrarian.net/85099923/libtasn1-3-dbg_2.10-1ubuntu1_amd64.deb</a><br><a href="http://launchpadlibrarian.net/154418135/libplist1_1.10-1_amd64.deb" target="_blank" rel="external">http://launchpadlibrarian.net/154418135/libplist1_1.10-1_amd64.deb</a><br><a href="http://launchpadlibrarian.net/154432952/libusbmuxd2_1.0.8-2ubuntu1_amd64.deb" target="_blank" rel="external">http://launchpadlibrarian.net/154432952/libusbmuxd2_1.0.8-2ubuntu1_amd64.deb</a><br><a href="https://launchpadlibrarian.net/264961543/libusbmuxd-tools_1.0.10-3_amd64.deb" target="_blank" rel="external">https://launchpadlibrarian.net/264961543/libusbmuxd-tools_1.0.10-3_amd64.deb</a><br><a href="https://launchpadlibrarian.net/160013007/libgcrypt11_1.5.3-2ubuntu4_amd64.deb" target="_blank" rel="external">https://launchpadlibrarian.net/160013007/libgcrypt11_1.5.3-2ubuntu4_amd64.deb</a><br><a href="https://launchpadlibrarian.net/160012809/libgcrypt11_1.5.3-2ubuntu4.debian.tar.gz" target="_blank" rel="external">https://launchpadlibrarian.net/160012809/libgcrypt11_1.5.3-2ubuntu4.debian.tar.gz</a></p>
-<p>启动ssh server<br><figure class="highlight routeros"><table><tr><td class="code"><pre><div class="line">sudo /etc/init.d/ssh start </div><div class="line"><span class="comment"># 或者 </span><span class="built_in"></span></div><div class="line">service ssh start</div></pre></td></tr></table></figure></p>
+<p><a href="http://launchpadlibrarian.net/130237887/libtasn1-3-dbg_2.14-2_i386.deb" target="_blank" rel="noopener">http://launchpadlibrarian.net/130237887/libtasn1-3-dbg_2.14-2_i386.deb</a><br><a href="http://launchpadlibrarian.net/130237888/libtasn1-3_2.14-2_i386.deb" target="_blank" rel="noopener">http://launchpadlibrarian.net/130237888/libtasn1-3_2.14-2_i386.deb</a><br><a href="http://launchpadlibrarian.net/130237883/libtasn1-3_2.14-2_amd64.deb" target="_blank" rel="noopener">http://launchpadlibrarian.net/130237883/libtasn1-3_2.14-2_amd64.deb</a><br><a href="http://launchpadlibrarian.net/130237889/libtasn1-3-bin_2.14-2_i386.deb" target="_blank" rel="noopener">http://launchpadlibrarian.net/130237889/libtasn1-3-bin_2.14-2_i386.deb</a><br><a href="http://security.ubuntu.com/ubuntu/pool/main/g/gnutls26/libgnutls26_2.12.23-12ubuntu2.8_amd64.deb" target="_blank" rel="noopener">http://security.ubuntu.com/ubuntu/pool/main/g/gnutls26/libgnutls26_2.12.23-12ubuntu2.8_amd64.deb</a><br><a href="https://launchpadlibrarian.net/85099924/libtasn1-3_2.10-1ubuntu1_amd64.deb" target="_blank" rel="noopener">https://launchpadlibrarian.net/85099924/libtasn1-3_2.10-1ubuntu1_amd64.deb</a><br><a href="https://launchpadlibrarian.net/85099923/libtasn1-3-dbg_2.10-1ubuntu1_amd64.deb" target="_blank" rel="noopener">https://launchpadlibrarian.net/85099923/libtasn1-3-dbg_2.10-1ubuntu1_amd64.deb</a><br><a href="http://launchpadlibrarian.net/154418135/libplist1_1.10-1_amd64.deb" target="_blank" rel="noopener">http://launchpadlibrarian.net/154418135/libplist1_1.10-1_amd64.deb</a><br><a href="http://launchpadlibrarian.net/154432952/libusbmuxd2_1.0.8-2ubuntu1_amd64.deb" target="_blank" rel="noopener">http://launchpadlibrarian.net/154432952/libusbmuxd2_1.0.8-2ubuntu1_amd64.deb</a><br><a href="https://launchpadlibrarian.net/264961543/libusbmuxd-tools_1.0.10-3_amd64.deb" target="_blank" rel="noopener">https://launchpadlibrarian.net/264961543/libusbmuxd-tools_1.0.10-3_amd64.deb</a><br><a href="https://launchpadlibrarian.net/160013007/libgcrypt11_1.5.3-2ubuntu4_amd64.deb" target="_blank" rel="noopener">https://launchpadlibrarian.net/160013007/libgcrypt11_1.5.3-2ubuntu4_amd64.deb</a><br><a href="https://launchpadlibrarian.net/160012809/libgcrypt11_1.5.3-2ubuntu4.debian.tar.gz" target="_blank" rel="noopener">https://launchpadlibrarian.net/160012809/libgcrypt11_1.5.3-2ubuntu4.debian.tar.gz</a></p>
+<p>启动ssh server</p>
+<div class="hljs"><pre><code class="hljs routeros">sudo /etc/init.d/ssh start 
+<span class="hljs-comment"># 或者 </span>
+service ssh start</code></pre></div>
+
 <h2 id="客户端（MacBook）"><a href="#客户端（MacBook）" class="headerlink" title="客户端（MacBook）"></a>客户端（MacBook）</h2><p>应该都已经安装了SSH，没有安装的话可以用homebrew安装。</p>
 <p>安装后，使用以下命令访问服务器就可以了。</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><div class="line"><span class="attribute">ssh</span> username<span class="variable">@ipAddress</span></div></pre></td></tr></table></figure>
-<h2 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h2><p>将客户端~/.ssh/id_rsa.pub  的内容添加到服务端的~/.ssh/authorized_keys文件中（没有该文件就创建一个）。</p>
+<div class="hljs"><pre><code class="hljs nginx"><span class="hljs-attribute">ssh</span> username<span class="hljs-variable">@ipAddress</span></code></pre></div>
+
+<h2 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h2><p>将客户端<del>/.ssh/id_rsa.pub  的内容添加到服务端的</del>/.ssh/authorized_keys文件中（没有该文件就创建一个）。</p>
 <h2 id="服务器别名设置"><a href="#服务器别名设置" class="headerlink" title="服务器别名设置"></a>服务器别名设置</h2><p>使用cd ~/.ssh/ 进入ssh目录，会看到有config、known_hosts两个文件，一般的没有设置的话，只会有known_hosts，可以使用touch config命令创建config文件。</p>
 <p>使用vim编辑config文件，添加如下内容：</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><div class="line">Host servername</div><div class="line">HostName 1xx.1xx.1xx.67<span class="built_in"></span></div><div class="line">User root</div><div class="line">IdentitiesOnly <span class="literal">yes</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs routeros">Host servername
+HostName 1xx.1xx.1xx.67
+User root
+IdentitiesOnly <span class="hljs-literal">yes</span></code></pre></div>
 <p>其中： </p>
 <ol>
 <li>Host 后边的是名称，以后可以根据这个名称进行访问； </li>
@@ -226,44 +238,57 @@
 <li>User为主机登录的用户名； </li>
 <li>IdentitiesOnly yes固有配置；</li>
 </ol>
-<p>这样就可以用以下命令访问服务器了。<br><figure class="highlight ebnf"><table><tr><td class="code"><pre><div class="line"><span class="attribute">ssh servername</span></div></pre></td></tr></table></figure></p>
+<p>这样就可以用以下命令访问服务器了。</p>
+<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">ssh servername</span></code></pre></div>
+
+
+
 <hr>
-<h1 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h1><p>NFS（Network File System）是挂载硬盘的一种方式，使用mount命令挂载。记得使用sudo。<br><figure class="highlight groovy"><table><tr><td class="code"><pre><div class="line">sudo mount -t nfs -o resvport,rw <span class="string">ipAddress:</span><span class="regexp">/home/</span>xxx  ~/xxxx</div></pre></td></tr></table></figure></p>
+<h1 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h1><p>NFS（Network File System）是挂载硬盘的一种方式，使用mount命令挂载。记得使用sudo。</p>
+<div class="hljs"><pre><code class="hljs elm"><span class="hljs-title">sudo</span> mount -t nfs -o resv<span class="hljs-keyword">port</span>,rw ipAddress:/home/xxx  ~/xxxx</code></pre></div>
+
 <h2 id="服务器端配置（Ubuntu）"><a href="#服务器端配置（Ubuntu）" class="headerlink" title="服务器端配置（Ubuntu）"></a>服务器端配置（Ubuntu）</h2><ol>
 <li>安装Ubuntu nfs服务器端：</li>
 </ol>
-<figure class="highlight processing"><table><tr><td class="code"><pre><div class="line">sudo apt-<span class="built_in">get</span> install <span class="built_in">nfs</span>-kernel-server</div></pre></td></tr></table></figure>
-<ol>
+<div class="hljs"><pre><code class="hljs pgsql">sudo apt-<span class="hljs-keyword">get</span> install nfs-kernel-<span class="hljs-keyword">server</span></code></pre></div>
+<ol start="2">
 <li>安装nfs的客户端：<br>(在安装nsf-kernel-server的时候，也会安装nfs-commom。如果没有安装这个软件包，则要执行1.2中的命令了)</li>
 </ol>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="symbol">sudo</span> apt-<span class="meta">get</span> install nfs-<span class="meta">common</span>​</div></pre></td></tr></table></figure>
-<ol>
+<div class="hljs"><pre><code class="hljs armasm"><span class="hljs-symbol">sudo</span> apt-<span class="hljs-meta">get</span> install nfs-<span class="hljs-meta">common</span>​</code></pre></div>
+<ol start="3">
 <li>设置共享的文件目录</li>
 </ol>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><div class="line">sudo <span class="built_in">mkdir</span> <span class="comment">/***/</span>***</div></pre></td></tr></table></figure>
-<ol>
+<div class="hljs"><pre><code class="hljs arduino">sudo <span class="hljs-built_in">mkdir</span> <span class="hljs-comment">/***/</span>***</code></pre></div>
+<ol start="4">
 <li>修改配置文件/etc/exports</li>
 </ol>
 <p>在最后一行添加：</p>
-<figure class="highlight lisp"><table><tr><td class="code"><pre><div class="line">/home/USER/nfs *(<span class="name">rw</span>,sync,no_root_squash,no_subtree_check)</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs lisp">/home/USER/nfs *(<span class="hljs-name">rw</span>,sync,no_root_squash,no_subtree_check)</code></pre></div>
+
 <blockquote>
 <p>前面那个目录是与nfs服务客户端共享的目录，*代表允许所有的网段访问（也可以使用具体的IP）<br>rw：挂接此目录的客户端对该共享目录具有读写权限<br>sync：资料同步写入内存和硬盘<br>no_root_squash：客户机用root访问该共享文件夹时，不映射root用户。（root_squash：客户机用root用户访问该共享文件夹时，将root用户映射成匿名用户）<br>no_subtree_check：不检查父目录的权限。</p>
 </blockquote>
-<ol>
+<ol start="5">
 <li>nfs是一个RPC程序，使用它前，需要映射好端口，通过rpcbind 设定：</li>
 </ol>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><div class="line">sudo<span class="built_in"> service </span>rpcbind restart restart</div></pre></td></tr></table></figure>
-<ol>
+<div class="hljs"><pre><code class="hljs routeros">sudo<span class="hljs-built_in"> service </span>rpcbind restart restart</code></pre></div>
+
+<ol start="6">
 <li>重启nfs服务：</li>
 </ol>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><div class="line">sudo<span class="built_in"> service </span>restartnfs-kernel-server restart</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs routeros">sudo<span class="hljs-built_in"> service </span>restartnfs-kernel-server restart</code></pre></div>
+
 <blockquote>
 <p>如果修改了/etc/exports，记得要重启服务，即5、6两步。</p>
 </blockquote>
 <h2 id="客户端配置（MacBook）"><a href="#客户端配置（MacBook）" class="headerlink" title="客户端配置（MacBook）"></a>客户端配置（MacBook）</h2><p>直接挂载即可：</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><div class="line">sudo mount -t nfs -o resvport,rw <span class="string">ipAddress:</span><span class="regexp">/home/</span>xxx  ~/xxxx</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs elm"><span class="hljs-title">sudo</span> mount -t nfs -o resv<span class="hljs-keyword">port</span>,rw ipAddress:/home/xxx  ~/xxxx</code></pre></div>
+
+
 <h2 id="无写入权限问题"><a href="#无写入权限问题" class="headerlink" title="无写入权限问题"></a>无写入权限问题</h2><p>需要将服务器的共享目录更改权限，即添加本组和其他用户的读写权限。</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><div class="line">sudo chmod -R go+rw <span class="regexp">/xxx/</span>xxx</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs awk">sudo chmod -R go+rw <span class="hljs-regexp">/xxx/</span>xxx</code></pre></div>
+
+
 <h2 id="使用Android-Studio"><a href="#使用Android-Studio" class="headerlink" title="使用Android Studio"></a>使用Android Studio</h2><p>挂载成功后，即可以像操作本地文件一样操作服务器了，用Android Studio打开相应的工程即可。</p>
 <hr>
 <p>The End.</p>
@@ -277,32 +302,32 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/工具/">工具</a>
+                      <a class="hover-with-bg" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a>
                     
                   </div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2017/12/08/记一种签名认证方法/">
+                      <a href="/2017/12/08/%E8%AE%B0%E4%B8%80%E7%A7%8D%E7%AD%BE%E5%90%8D%E8%AE%A4%E8%AF%81%E6%96%B9%E6%B3%95/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">记一种签名认证方法</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2017/11/14/好久没写博客了，原因竟然是。。/">
+                      <a href="/2017/11/14/%E5%A5%BD%E4%B9%85%E6%B2%A1%E5%86%99%E5%8D%9A%E5%AE%A2%E4%BA%86%EF%BC%8C%E5%8E%9F%E5%9B%A0%E7%AB%9F%E7%84%B6%E6%98%AF%E3%80%82%E3%80%82/">
                         <span class="hidden-mobile">好久没写博客了，原因竟然是。。</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -319,7 +344,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -346,7 +371,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -355,7 +380,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -398,9 +423,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
   <link rel="icon" type="image/png" href="/git_logo.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="read the fucking source code">
-  <meta name="author" content="周生明">
-  <meta name="keywords" content="undefined">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
   <title>WDYDT-6-五个关于C++的神话 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,6 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
@@ -34,9 +33,13 @@
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
+
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
@@ -44,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -52,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -71,7 +74,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -83,7 +86,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -95,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -107,7 +110,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -119,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -135,12 +138,12 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fade-in-up">
+          <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
             </span>
@@ -150,7 +153,7 @@
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
     <time datetime="2018-07-13 17:52">
-      July 13, 2018 pm
+      2018年7月13日 下午
     </time>
   </div>
 
@@ -202,20 +205,43 @@
             
             <article class="markdown-body">
               <!-- abstract area -->
+
 <p>对于学C++学崩溃的人可以看看，挺好的</p>
 <a id="more"></a>
+
+
 <h3 id="“Five-Popular-Myths-about-C-”"><a href="#“Five-Popular-Myths-about-C-”" class="headerlink" title="“Five Popular Myths about C++”"></a>“Five Popular Myths about C++”</h3><h3 id="Myth-1-“To-understand-C-you-must-first-learn-C”"><a href="#Myth-1-“To-understand-C-you-must-first-learn-C”" class="headerlink" title="Myth 1: “To understand C++, you must first learn C”"></a>Myth 1: “To understand C++, you must first learn C”</h3><p>想要理解c++,必须先学c</p>
 <p>No. Learning basic programming using C++ is far easier than with C.</p>
 <p>这是不对的，c++基础编程的学习要远远比 c 容易</p>
 <p>C is almost a subset of C++, but it is not the best subset to learn first because C lacks the notational support, the type safety, and the easier-to-use standard library offered by C++ to simplify simple tasks. Consider a trivial function to compose an email address:</p>
 <p>c 可以看作是 c++ 的一部分，但并不是最容易学的那部分，因为 c 没有运算符重载，没有类型安全，也没有用起来更加方便的 c++ 的标准库，这些库可以大大简化工作。试着考虑做一个组合电邮地址的小功能函数：</p>
 <p>c++的代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">compose</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span>&amp; name, <span class="keyword">const</span> <span class="built_in">string</span>&amp; domain)</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">return</span> name+<span class="string">'@'</span>+domain;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>It can be used like this<br>这样使用<br><figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">string </span><span class="keyword">addr </span>= compose(<span class="string">"gre"</span>,<span class="string">"research.att.com"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">compose</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; name, <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; domain)</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-keyword">return</span> name+<span class="hljs-string">'@'</span>+domain;
+&#125;</code></pre></div>
+
+<p>It can be used like this<br>这样使用</p>
+<div class="hljs"><pre><code class="hljs armasm"><span class="hljs-keyword">string </span><span class="hljs-keyword">addr </span>= compose(<span class="hljs-string">"gre"</span>,<span class="hljs-string">"research.att.com"</span>)<span class="hljs-comment">;</span></code></pre></div>
+
 <p>The C version requires explicit manipulation of characters and explicit memory management:<br>c版本就需要显式的字符控制和显式的内存管理，代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span>* <span class="title">compose</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* domain)</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">char</span>* res = <span class="built_in">malloc</span>(<span class="built_in">strlen</span>(name)+<span class="built_in">strlen</span>(domain)+<span class="number">2</span>); <span class="comment">// space for strings, '@', and 0</span></div><div class="line">  <span class="keyword">char</span>* p = <span class="built_in">strcpy</span>(res,name);</div><div class="line">  p += <span class="built_in">strlen</span>(name);</div><div class="line">  *p = <span class="string">'@'</span>;</div><div class="line">  <span class="built_in">strcpy</span>(p+<span class="number">1</span>,domain);</div><div class="line">  <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">char</span>* <span class="hljs-title">compose</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* name, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* domain)</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-keyword">char</span>* res = <span class="hljs-built_in">malloc</span>(<span class="hljs-built_in">strlen</span>(name)+<span class="hljs-built_in">strlen</span>(domain)+<span class="hljs-number">2</span>); <span class="hljs-comment">// space for strings, '@', and 0</span>
+  <span class="hljs-keyword">char</span>* p = <span class="hljs-built_in">strcpy</span>(res,name);
+  p += <span class="hljs-built_in">strlen</span>(name);
+  *p = <span class="hljs-string">'@'</span>;
+  <span class="hljs-built_in">strcpy</span>(p+<span class="hljs-number">1</span>,domain);
+  <span class="hljs-keyword">return</span> res;
+&#125;</code></pre></div>
+
 <p>It can be used like this<br>使用时是这样的</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">char</span>* addr = compose(<span class="string">"gre"</span>,<span class="string">"research.att.com"</span>);</div><div class="line"><span class="comment">// …</span></div><div class="line"><span class="comment">// release memory when done</span></div><div class="line"><span class="comment">// 最后使用完，记得释放内存</span></div><div class="line"><span class="built_in">free</span>(addr);</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">char</span>* addr = compose(<span class="hljs-string">"gre"</span>,<span class="hljs-string">"research.att.com"</span>);
+<span class="hljs-comment">// …</span>
+<span class="hljs-comment">// release memory when done</span>
+<span class="hljs-comment">// 最后使用完，记得释放内存</span>
+<span class="hljs-built_in">free</span>(addr);</code></pre></div>
+
 <p>Which version would you rather teach? Which version is easier to use? Did I really get the C version right? Are you sure? Why?<br>你愿意教哪个版本？哪一个用起来更简单？我的c代码写对了吗？你确定？为什么？</p>
 <p>Finally, which version is likely to be the most efficient? Yes, the C++ version, because it does not have to count the argument characters and does not use the free store (dynamic memory) for short argument strings.<br>最后，哪一个版本更高效？当然是 c++了，因为它不需要计算字符的长度，也不要申请、释放动态内存</p>
 <h4 id="Learning-C"><a href="#Learning-C" class="headerlink" title="Learning C++"></a>Learning C++</h4><p>c++ 的学习</p>
@@ -234,81 +260,263 @@
 </ul>
 <p>However, C is not the easiest or most useful subset of C++ to learn first. Furthermore, once you know a reasonable amount of C++, the C subset is easily learned. Learning C before C++ implies suffering errors that are easily avoided in C++ and learning techniques for mitigating them.<br>可是，c “作为 c++ 的一部分”在初期的学习中并不是最容易最有用的。另外，一旦你懂了一些 c++ 后，再去学c会更容易。先学习 c,经常掉入陷阱，但这些陷阱在 c++ 中可以轻易的避免或通过其他技术弱化。</p>
 <p>For a modern approach to teaching C++, see my Programming: Principles and Practice Using C++ [13]. It even has a chapter at the end showing how to use C. It has been used, reasonably successfully, with tens of thousands of beginning students in several universities. Its second edition uses C++11 and C++14 facilities to ease learning.<br>对于c++教学的现代方法，参考《Programming: Principles and Practice Using C++》第二版。在最后有一章展示如何使用 c.成千上万的大学初学者已经开始使用,毫无疑问，它很有效。在第二版中使用 c++11 和 c++14的工具使学习更容易。</p>
-<p>With C++11 [11-12], C++ has become more approachable for novices. For example, here is standard-library vector initialized with a sequence of elements:<br>新版的c++11 对于新手更容易上手。举个例子，用初始化列表初始化 vector<br><figure class="highlight lsl"><table><tr><td class="code"><pre><div class="line"><span class="type">vector</span>&lt;int&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">13</span>&#125;;</div></pre></td></tr></table></figure></p>
+<p>With C++11 [11-12], C++ has become more approachable for novices. For example, here is standard-library vector initialized with a sequence of elements:<br>新版的c++11 对于新手更容易上手。举个例子，用初始化列表初始化 vector </p>
+<div class="hljs"><pre><code class="hljs angelscript">vector&lt;<span class="hljs-built_in">int</span>&gt; v = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">8</span>,<span class="hljs-number">13</span>&#125;;</code></pre></div>
+
 <p>In C++98, we could only initialize arrays with lists. In C++11, we can define a constructor to accept a {} initializer list for any type for which we want one.<br>在 c++98,我们只能用初始化列表初始化数组，而在c++11中，我们可以为任何需要的类型定义一个接受初始化列表的构造函数</p>
-<p>We could traverse that vector with a range-for loop:<br>我们可以用范围 for 循环遍历这个 vector<br><figure class="highlight lisp"><table><tr><td class="code"><pre><div class="line">for(<span class="name">int</span> x : v) test(<span class="name">x</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>We could traverse that vector with a range-for loop:<br>我们可以用范围 for 循环遍历这个 vector</p>
+<div class="hljs"><pre><code class="hljs lisp">for(<span class="hljs-name">int</span> x : v) test(<span class="hljs-name">x</span>)<span class="hljs-comment">;</span></code></pre></div>
+
 <p>This will call test() once for each element of v.<br>每一个 v 中的元素都会调用一次test();</p>
 <p>A range-for loop can traverse any sequence, so we could have simplified that example by using the initializer list directly:<br>范围 for 循环可以遍历任何序列，所以我们可以简化一下刚才的例子，直接使用初始化列表</p>
-<figure class="highlight lisp"><table><tr><td class="code"><pre><div class="line">for (<span class="name">int</span> x : &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">13</span>&#125;) test(<span class="name">x</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> x : &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">8</span>,<span class="hljs-number">13</span>&#125;) test(x);</code></pre></div>
+
 <p>One of the aims of C++11 was to make simple things simple. Naturally, this is done without adding performance penalties.</p>
 <p>c++11 的一个目的就是将简单的事情简单化，当然，这样做不会带有额外的性能损失</p>
 <h3 id="Myth-2-“C-is-an-Object-Oriented-Language”"><a href="#Myth-2-“C-is-an-Object-Oriented-Language”" class="headerlink" title="Myth 2: “C++ is an Object-Oriented Language”"></a>Myth 2: “C++ is an Object-Oriented Language”</h3><p>c++ 是面向对象的语言</p>
 <p>No. C++ supports OOP and other programming styles, but is deliberately not limited to any narrow view of “Object Oriented.” It supports a synthesis of programming techniques including object-oriented and generic programming. More often than not, the best solution to a problem involves more than one style (“paradigm”). By “best,” I mean shortest, most comprehensible, most efficient, most maintainable, etc.<br>不完全正确，c++ 不仅支持面向对象还支持其他编程方式，不能刻意地限制于面向对象狭隘的层面。它支持一套组合编程技术包括面向对象和泛型编程。通常情况下，一个问题最佳的解决方案涉及多种风格。我说的最佳，意思是代码更简洁，容易理解，更加高效，更容易维护等等</p>
 <p>The “C++ is an OOPL” myth leads people to consider C++ unnecessary (when compared to C) unless you need large class hierarchies with many virtual (run-time polymorphic) functions – and for many people and for many problems, such use is inappropriate. Believing this myth leads others to condemn C++ for not being purely OO; after all, if you equate “good” and “object-oriented,” C++ obviously contains much that is not OO and must therefore be deemed “not good.” In either case, this myth provides a good excuse for not learning C++.<br>这种观点使人们认为 c++ 相对 c 来说，不是那么必须，除非你需要一个庞大的类层次，并且带有许多虚函数（运行时多态）。对于许多人和许多问题来说，这样使用并不合适。这个流言导致人们的谴责 c++ ，因为它的面向对象不够彻底。毕竟，如果你认为好就是面向对象，显然 c++ 包含更多的非面向对象的东西，因此被认为是不好的，这也为不要学习c++ 提供了一个好的借口。</p>
-<p>Consider an example:<br>考虑这样一个例子<br><figure class="highlight ada"><table><tr><td class="code"><pre><div class="line">void rotate_and_draw(vector&lt;Shape*&gt;&amp; vs, int r)</div><div class="line">&#123;</div><div class="line">  for_each(vs.<span class="keyword">begin</span>(),vs.<span class="keyword">end</span>(), [](Shape* p) &#123; p-&gt;rotate(r); &#125;);  // rotate <span class="keyword">all</span> elements <span class="keyword">of</span> vs</div><div class="line">  <span class="keyword">for</span> (Shape* p : <span class="type">vs</span>) p-&gt;draw();                                  // draw <span class="keyword">all</span> elements <span class="keyword">of</span> vs</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Consider an example:<br>考虑这样一个例子</p>
+<div class="hljs"><pre><code class="hljs reasonml">void rotate<span class="hljs-constructor">_and_draw(<span class="hljs-params">vector</span>&lt;Shape<span class="hljs-operator">*</span>&gt;&amp; <span class="hljs-params">vs</span>, <span class="hljs-params">int</span> <span class="hljs-params">r</span>)</span>
+&#123;
+  for<span class="hljs-constructor">_each(<span class="hljs-params">vs</span>.<span class="hljs-params">begin</span>()</span>,vs.<span class="hljs-keyword">end</span><span class="hljs-literal">()</span>, <span class="hljs-literal">[]</span>(Shape* p) &#123; p-&gt;rotate(r); &#125;);  <span class="hljs-comment">// rotate all elements of vs</span>
+  for (Shape* p : vs) p-&gt;draw<span class="hljs-literal">()</span>;                                  <span class="hljs-comment">// draw all elements of vs</span>
+&#125;</code></pre></div>
 <p>Is this object-oriented? Of course it is; it relies critically on a class hierarchy with virtual functions. It is generic? Of course it is; it relies critically on a parameterized container (vector) and the generic function for_each. Is this functional? Sort of; it uses a lambda (the [] construct). So what is it?  It is modern C++: C++11.<br>这是面向对象吗？当然是，它很大程度上依赖带有虚函数的类层次结构。它是泛型吗？当然是拉，它同样依赖于参数化的模板容器 vector 和泛型函数 for_each.它是函数式的吗？它使用了 lambda 表达式，这点来说也算是。那么它到底是什么类型的？它就是现代的c++,c++11.</p>
 <p>I used both the range-for loop and the standard-library algorithm for_each just to show off features. In real code, I would have use only one loop, which I could have written either way.<br>我同时使用了 范围 for 循环和标准库的算法 for_each ，仅仅是为了展示一下这个特性，实际中，我只会用一种循环，用另一种写法</p>
 <h4 id="Generic-Programming"><a href="#Generic-Programming" class="headerlink" title="Generic Programming"></a>Generic Programming</h4><p>泛型编程</p>
 <p>Would you like this code more generic? After all, it works only for vectors of pointers to Shapes. How about lists and built-in arrays? What about “smart pointers” (resource-management pointers), such as shared_ptr and unique_ptr? What about objects that are not called Shape that you can draw() and rotate()? Consider:<br>你想让这段代码再通用一点吗（模版化，泛型）？毕竟，它只是用于形状的容器指针。列表和内置数组会怎样呢？像 shared_ptr 和 unique_ptr 的智能指针呢？那些不叫 Shape 的类可以用 draw() 和 rotate() 吗？想一想：</p>
-<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">template&lt;typename Iter&gt;</div><div class="line">void rotate_and_draw(Iter <span class="built_in">first</span>, Iter <span class="built_in">last</span>, int r)</div><div class="line">&#123;</div><div class="line">  for_each(<span class="built_in">first</span>,<span class="built_in">last</span>,[](auto p) &#123; p-&gt;rotate(r); &#125;);  // rotate all elements of [<span class="built_in">first</span>:<span class="built_in">last</span>)</div><div class="line">  <span class="keyword">for</span> (auto p = <span class="built_in">first</span>; p!=<span class="built_in">last</span>; ++p) p-&gt;<span class="built_in">draw</span>();       // <span class="built_in">draw</span> all elements of [<span class="built_in">first</span>:<span class="built_in">last</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs maxima">template&lt;typename Iter&gt;
+void rotate_and_draw(Iter <span class="hljs-built_in">first</span>, Iter <span class="hljs-built_in">last</span>, int r)
+&#123;
+  for_each(<span class="hljs-built_in">first</span>,<span class="hljs-built_in">last</span>,[](auto p) &#123; p-&gt;rotate(r); &#125;);  // rotate all elements of [<span class="hljs-built_in">first</span>:<span class="hljs-built_in">last</span>)
+  <span class="hljs-keyword">for</span> (auto p = <span class="hljs-built_in">first</span>; p!=<span class="hljs-built_in">last</span>; ++p) p-&gt;<span class="hljs-built_in">draw</span>();       // <span class="hljs-built_in">draw</span> all elements of [<span class="hljs-built_in">first</span>:<span class="hljs-built_in">last</span>)
+&#125;</code></pre></div>
+
+
 <p>This works for any sequence you can iterate through from first to last. That’s the style of the C++ standard-library algorithms. I used auto to avoid having to name the type of the interface to “shape-like objects.” That’s a C++11 feature meaning “use the type of the expression used as initializer,” so for the for-loop p’s type is deduced to be whatever type first is. The use of auto to denote the argument type of a lambda is a C++14 feature, but already in use.<br>这段代码适用于任何可以从头到尾迭代的序列。这就是c++ 标准库算法的风格。我使用了 auto 关键字避免为类似 Shape 对象的接口类型命名。这是c++11的一个特性，意思是使用表达式的类型作为初始化类型，对于 for 循环来说，指针 p 的类型是由 Iter first 的类型得出的。使用 auto 表示 lambda 表达式参数的类型，是c++14的特征，但是现在已经可以用了。</p>
-<p>Consider:<br>思考一下：<br><figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">void user(list&lt;unique_ptr&lt;Shape<span class="meta">&gt;&gt;</span>&amp; lus, Container&lt;Blob&gt;&amp; vb)</div><div class="line">&#123;</div><div class="line">rotate_and_draw(lst.<span class="keyword">begin</span>(),lst.<span class="keyword">end</span>());</div><div class="line">rotate_and_draw(<span class="keyword">begin</span>(vb),<span class="keyword">end</span>(vb));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Consider:<br>思考一下：</p>
+<div class="hljs"><pre><code class="hljs reasonml">void user(<span class="hljs-built_in">list</span>&lt;unique_ptr&lt;Shape&gt;&gt;&amp; lus, Container&lt;Blob&gt;&amp; vb)
+&#123;
+rotate<span class="hljs-constructor">_and_draw(<span class="hljs-params">lst</span>.<span class="hljs-params">begin</span>()</span>,lst.<span class="hljs-keyword">end</span><span class="hljs-literal">()</span>);
+rotate<span class="hljs-constructor">_and_draw(<span class="hljs-params">begin</span>(<span class="hljs-params">vb</span>)</span>,<span class="hljs-keyword">end</span>(vb));
+&#125;</code></pre></div>
+
 <p>Here, I assume that Blob is some graphical type with operations draw() and rotate() and that Container is some container type. The standard-library list (std::list) has member functions begin() and end() to help the user traverse its sequence of elements. That’s nice and classical OOP. But what if Container is something that does not support the C++ standard library’s notion of iterating over a half-open sequence, [b:e)? Something that does not have begin() and end() members? Well, I have never seen something container-like, that I couldn’t traverse, so we can define free-standing begin() and end() with appropriate semantics. The standard library provides that for C-style arrays, so if Container is a C-style array, the problem is solved – and C-style arrays are still very common.<br>在这段代码里，我假设 Bolb 是一个图像类型，带有draw() and rotate()，Container 是任意的容器类型。标准库的 list 有2个成员函数 begin() end() ,可以用于函数 user 遍历它序列中元素。这是典型的 面向对象编程。但是，如果类型 Container 不支持 c++ 标准里半开区间的迭代概念呢？或者没有 begin() end()的成员呢？当然，我从没见过容器类型不能遍历，那么我们可以自定义合适的 begin() end().标准库为 c 风格的数组提供了上面的成员，所以即便 Container 是c 风格的数组，问题也可以解决，c 风格的数组仍然常用。</p>
 <h4 id="Adaptation"><a href="#Adaptation" class="headerlink" title="Adaptation"></a>Adaptation</h4><p>适用性</p>
-<p>Consider a harder case: What if Container holds pointers to objects and has a different model for access and traversal? For example, assume that you are supposed to access a Container like this<br>思考一个复杂的情况，如果 Container 存储对象的指针，有一套不同访问和遍历方式。举例，假设你可以这样访问 Container 的元素<br><figure class="highlight coq"><table><tr><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="built_in">auto</span> p = c.<span class="built_in">first</span>(); p!=nullptr; p=c.next()) &#123; /* <span class="built_in">do</span> something <span class="built_in">with</span> *p */&#125;</div></pre></td></tr></table></figure></p>
+<p>Consider a harder case: What if Container holds pointers to objects and has a different model for access and traversal? For example, assume that you are supposed to access a Container like this<br>思考一个复杂的情况，如果 Container 存储对象的指针，有一套不同访问和遍历方式。举例，假设你可以这样访问 Container 的元素</p>
+<div class="hljs"><pre><code class="hljs coq"><span class="hljs-keyword">for</span> (<span class="hljs-built_in">auto</span> p = c.<span class="hljs-built_in">first</span>(); p!=nullptr; p=c.next()) &#123; /* <span class="hljs-built_in">do</span> something <span class="hljs-built_in">with</span> *p */&#125;</code></pre></div>
 <p>This style is not uncommon. We can map it to a [b:e) sequence like this<br>这种样式不常见，我们将区间指针做映射像下面这样</p>
-<figure class="highlight elm"><table><tr><td class="code"><pre><div class="line"><span class="title">template</span>&lt;typename <span class="type">T</span>&gt; struct <span class="type">Iter</span> &#123;</div><div class="line">  <span class="type">T</span>* current;</div><div class="line">  <span class="type">Container</span>&lt;<span class="type">T</span>&gt;&amp; c;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line"><span class="title">template</span>&lt;typename <span class="type">T</span>&gt; <span class="type">Iter</span>&lt;<span class="type">T</span>&gt; begin(<span class="type">Container</span>&lt;<span class="type">T</span>&gt;&amp; c) &#123; return <span class="type">Iter</span>&lt;<span class="type">T</span>&gt;&#123;c.first(),c&#125;; &#125;</div><div class="line"><span class="title">template</span>&lt;typename <span class="type">T</span>&gt; <span class="type">Iter</span>&lt;<span class="type">T</span>&gt; end(<span class="type">Container</span>&lt;<span class="type">T</span>&gt;&amp; c)   &#123; return <span class="type">Iter</span>&lt;<span class="type">T</span>&gt;&#123;nullptr&#125;; &#125;</div><div class="line"><span class="title">template</span>&lt;typename <span class="type">T</span>&gt; <span class="type">Iter</span>&lt;<span class="type">T</span>&gt; operator++(<span class="type">Iter</span>&lt;<span class="type">T</span>&gt; p)  &#123; p.current = c.next(); return this; &#125;</div><div class="line"><span class="title">template</span>&lt;typename <span class="type">T</span>&gt; <span class="type">T</span>*      operator*(<span class="type">Iter</span>&lt;<span class="type">T</span>&gt; p)   &#123; return p.current; &#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs elm"><span class="hljs-title">template</span>&lt;typename <span class="hljs-type">T</span>&gt; struct <span class="hljs-type">Iter</span> &#123;
+  <span class="hljs-type">T</span>* current;
+  <span class="hljs-type">Container</span>&lt;<span class="hljs-type">T</span>&gt;&amp; c;
+&#125;;
+ 
+<span class="hljs-title">template</span>&lt;typename <span class="hljs-type">T</span>&gt; <span class="hljs-type">Iter</span>&lt;<span class="hljs-type">T</span>&gt; begin(<span class="hljs-type">Container</span>&lt;<span class="hljs-type">T</span>&gt;&amp; c) &#123; return <span class="hljs-type">Iter</span>&lt;<span class="hljs-type">T</span>&gt;&#123;c.first(),c&#125;; &#125;
+<span class="hljs-title">template</span>&lt;typename <span class="hljs-type">T</span>&gt; <span class="hljs-type">Iter</span>&lt;<span class="hljs-type">T</span>&gt; end(<span class="hljs-type">Container</span>&lt;<span class="hljs-type">T</span>&gt;&amp; c)   &#123; return <span class="hljs-type">Iter</span>&lt;<span class="hljs-type">T</span>&gt;&#123;nullptr&#125;; &#125;
+<span class="hljs-title">template</span>&lt;typename <span class="hljs-type">T</span>&gt; <span class="hljs-type">Iter</span>&lt;<span class="hljs-type">T</span>&gt; operator++(<span class="hljs-type">Iter</span>&lt;<span class="hljs-type">T</span>&gt; p)  &#123; p.current = c.next(); return this; &#125;
+<span class="hljs-title">template</span>&lt;typename <span class="hljs-type">T</span>&gt; <span class="hljs-type">T</span>*      operator*(<span class="hljs-type">Iter</span>&lt;<span class="hljs-type">T</span>&gt; p)   &#123; return p.current; &#125;</code></pre></div>
+
 <p>Note that this is modification is nonintrusive: I did not have to make changes to Container or some Container class hierarchy to map Container into the model of traversal supported by the C++ standard library. It is a form of adaptation, rather than a form of refactoring.<br>注意这个修改是无关紧要的，我并没有为了把容器映射成c++ 标准库支持的迭代的模型而改写容器或容器类的层次机构。这只是一种改写的形式并不算重构。</p>
 <p>I chose this example to show that these generic programming techniques are not restricted to the standard library (in which they are pervasive). Also, for most common definitions of “object oriented,” they are not object-oriented.<br>我选择这个例子是为了说明泛型编程技术并不只在标准库中广泛使用。对于一些很普通的面向对象的定义，其实他们并不是面向对象的</p>
 <p>The idea that C++ code must be object-oriented (meaning use hierarchies and virtual functions everywhere) can be seriously damaging to performance. That view of OOP is great if you need run-time resolution of a set of types. I use it often for that. However, it is relatively rigid (not every related type fits into a hierarchy) and a virtual function call inhibits inlining (and that can cost you a factor of 50 in speed in simple and important cases).<br>c++ 必须是面向对象（层次结构和虚函数的滥用）的想法会严重危害到性能评价。如果你需要运行时解决一组类型时，OOP是非常棒的。我经常这样用。但是它相对也比较死板（不是所有相关的类型都刚好嵌入同一层次结构）而且虚函数会抑制内联（在处理简单重要的工作时，这回大大增加耗时）</p>
 <h3 id="Myth-3-“For-reliable-software-you-need-Garbage-Collection”"><a href="#Myth-3-“For-reliable-software-you-need-Garbage-Collection”" class="headerlink" title="Myth 3: “For reliable software, you need Garbage Collection”"></a>Myth 3: “For reliable software, you need Garbage Collection”</h3><p>作为可以信赖的软件，垃圾回收机制不可少</p>
 <p>Garbage collection does a good, but not perfect, job at reclaiming unused memory. It is not a panacea. Memory can be retained indirectly and many resources are not plain memory. Consider:<br>在回收未使用的内存上，垃圾回收机制做得很好，但不完美，它并不是万能的。内存可以被间接保留而且许多资源并不是简单的内存问题。</p>
-<figure class="highlight cs"><table><tr><td class="code"><pre><div class="line"><span class="comment">// take input from file iname and produce output on file oname</span></div><div class="line"><span class="comment">//从文件 iname 读入，输出到文件 oname</span></div><div class="line"><span class="keyword">class</span> <span class="title">Filter</span> &#123; </div><div class="line"><span class="keyword">public</span>:</div><div class="line">  Filter(<span class="keyword">const</span> <span class="keyword">string</span>&amp; iname, <span class="keyword">const</span> <span class="keyword">string</span>&amp; oname); <span class="comment">// constructor</span></div><div class="line">  ~Filter();                                        <span class="comment">// destructor</span></div><div class="line">  <span class="comment">// ...</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">  ifstream <span class="keyword">is</span>;</div><div class="line">  ofstream os;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>This Filter’s constructor opens two files. That done, the Filter performs some task on input from its input file producing output on its output file. The task could be hardwired into Filter, supplied as a lambda, or provided as a function that could be provided by a derived class overriding a virtual function. Those details are not important in a discussion of resource management. We can create Filters like this:<br>Filter 类的构造函数打开2个文件，然后执行读入输入文件、输入结果保存到输出文件的任务。这些任务可能包括硬连接 Filter，提供 lambda 表达式，或者提供一个覆盖派生类虚函数的函数。讨论资源管理的这些细节并不重要。我们可以这样创建 Filter 对象。<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">user</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  Filter flt &#123;“books”,”authors”&#125;;</div><div class="line">  Filter* p = <span class="keyword">new</span> Filter&#123;“novels”,”favorites”&#125;;</div><div class="line">  <span class="comment">// use flt and *p</span></div><div class="line">  <span class="keyword">delete</span> p;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-comment">// take input from file iname and produce output on file oname</span>
+<span class="hljs-comment">//从文件 iname 读入，输出到文件 oname</span>
+<span class="hljs-keyword">class</span> <span class="hljs-symbol">Filter</span> &#123; 
+<span class="hljs-keyword">public</span>:
+  Filter(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; iname, <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; oname); <span class="hljs-comment">// constructor</span>
+  ~Filter();                                        <span class="hljs-comment">// destructor</span>
+  <span class="hljs-comment">// ...</span>
+<span class="hljs-keyword">private</span>:
+  ifstream <span class="hljs-keyword">is</span>;
+  ofstream os;
+  <span class="hljs-comment">// ...</span>
+&#125;;</code></pre></div>
+
+<p>This Filter’s constructor opens two files. That done, the Filter performs some task on input from its input file producing output on its output file. The task could be hardwired into Filter, supplied as a lambda, or provided as a function that could be provided by a derived class overriding a virtual function. Those details are not important in a discussion of resource management. We can create Filters like this:<br>Filter 类的构造函数打开2个文件，然后执行读入输入文件、输入结果保存到输出文件的任务。这些任务可能包括硬连接 Filter，提供 lambda 表达式，或者提供一个覆盖派生类虚函数的函数。讨论资源管理的这些细节并不重要。我们可以这样创建 Filter 对象。</p>
+<div class="hljs"><pre><code class="hljs pgsql"><span class="hljs-type">void</span> <span class="hljs-keyword">user</span>()
+&#123;
+  <span class="hljs-keyword">Filter</span> flt &#123;“books”,”authors”&#125;;
+  <span class="hljs-keyword">Filter</span>* p = <span class="hljs-built_in">new</span> <span class="hljs-keyword">Filter</span>&#123;“novels”,”favorites”&#125;;
+  // use flt <span class="hljs-keyword">and</span> *p
+  <span class="hljs-keyword">delete</span> p;
+&#125;</code></pre></div>
+
 <p>From a resource management point of view, the problem here is how to guarantee that the files are closed and the resources associated with the two streams are properly reclaimed for potential re-use.<br>从资源管理的角度看，问题在于如何保证文件已经正确关闭以及与2个流对象关联的资源如何重新使用</p>
 <p>The conventional solution in languages and systems relying on garbage collection is to eliminate the delete (which is easily forgotten, leading to leaks) and the destructor (because garbage collected languages rarely have destructors and “finalizers” are best avoided because they can be logically tricky and often damage performance). A garbage collector can reclaim all memory, but we need user actions (code) to close the files and to release any non-memory resources (such as locks) associated with the streams. Thus memory is automatically (and in this case perfectly) reclaimed, but the management of other resources is manual and therefore open to errors and leaks.<br>对于依赖垃圾回收机制的语言和系统来说，方便的方法就是根除 delete（容易被忘记，导致溢出） 和 析构（垃圾回收机制的语言很少使用析构，finalizers 也最好避免因为它们逻辑古怪并且常常会影响性能）。垃圾回收器可以重用所有内存，但是需要用户手动关闭文件并释放与流对象相关的所有非内存资源。内存被自动回收了，但其他资源需要手动操作，那么就会带来报错和溢出的风险。</p>
 <p>The common and recommended C++ approach is to rely on destructors to ensure that resources are reclaimed. Typically, such resources are acquired in a constructor leading to the awkward name “Resource Acquisition Is Initialization” (RAII) for this simple and general technique. In user(), the destructor for flt  implicitly calls the destructors for the streams is and os. These constructors in turn close the files and release the resources associated with the streams. The delete would do the same for *p.<br>c++通常推荐使用析构去确保资源被回收。通常，构造使用的这些资源来自RAII（获得资源就是初始化）这一简单普通的技术。在函数 user 中，flt 的析构隐式调用is 和os 流对象的析构。这些析构（原文 constructors，构造？）依次关闭文件释放流对象关联的资源。 delete 对指针同样这么做。</p>
-<p>Experienced users of modern C++ will have noticed that user() is rather clumsy and unnecessarily error-prone. This would be better:<br>有 c++11 经验的用户可能已经注意到 user 函数相当笨拙并有出错的可能，这么写应该更好：<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">user2</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  Filter flt &#123;“books”,”authors”&#125;;</div><div class="line">  <span class="built_in">unique_ptr</span>&lt;Filter&gt; p &#123;<span class="keyword">new</span> Filter&#123;“novels”,”favorites”&#125;&#125;;</div><div class="line">  <span class="comment">// use flt and *p</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Experienced users of modern C++ will have noticed that user() is rather clumsy and unnecessarily error-prone. This would be better:<br>有 c++11 经验的用户可能已经注意到 user 函数相当笨拙并有出错的可能，这么写应该更好：</p>
+<div class="hljs"><pre><code class="hljs arcade"><span class="hljs-keyword">void</span> user2()
+&#123;
+  <span class="hljs-built_in">Filter</span> flt &#123;“books”,”authors”&#125;;
+  unique_ptr&lt;<span class="hljs-built_in">Filter</span>&gt; p &#123;<span class="hljs-keyword">new</span> <span class="hljs-built_in">Filter</span>&#123;“novels”,”favorites”&#125;&#125;;
+  <span class="hljs-comment">// use flt and *p</span>
+&#125;</code></pre></div>
+
 <p>Now *p will be implicitly released whenever user() is exited. The programmer cannot forget to do so. The unique_ptr is a standard-library class designed to ensure resource release without runtime or space overheads compared to the use of built-in “naked” pointers.<br>现在无论 user 何时退出，指针p指向的内存资源都会隐式释放。程序员应该记住这个方法，与内置指针不同，unique_ptr是一套可以保证资源释放后没有运行时和空间开销的标准库。</p>
 <p>However, we can still see the new, this solution is a bit verbose (the type Filter is repeated), and separating the construction of the ordinary pointer (using new) and the smart pointer (here, unique_ptr) inhibits some significant optimizations. We can improve this by using a C++14 helper function make_unique that constructs an object of a specified type and returns a unique_ptr to it:<br>但是，我们仍然发现 new 的存在，新的方案有点啰嗦（Filter类型重复了），而且这种普通指针和智能指针的分隔结构掩盖了我们代码优化的意义（我觉得原文应该是这个意思），我们可以使用 c++14提供的函数继续优化，函数 make_unique 构造指定类型的对象，然后返回其unique_ptr</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">user3</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  Filter flt &#123;“books”,”authors”&#125;;</div><div class="line">  <span class="keyword">auto</span> p = make_unique&lt;Filter&gt;(“novels”,”favorites”);</div><div class="line">  <span class="comment">// use flt and *p</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Unless we really needed the second Filter to have pointer semantics (which is unlikely) this would be better still:<br>除非我们真的需要第二个Filter 对象的指针，否则下面的代码更好。<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">user3</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  Filter flt &#123;“books”,”authors”&#125;;</div><div class="line">  Filter flt2 &#123;“novels”,”favorites”&#125;;</div><div class="line">  <span class="comment">// use flt and flt2</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>This last version is shorter, simpler, clearer, and faster than the original.<br>最后一个版本最好，简单简洁快速。<br>But what does Filter’s destructor do? It releases the resources owned by a Filter; that is, it closes the files (by invoking their destructors). In fact, that is done implicitly, so unless something else is needed for Filter, we could eliminate the explicit mention of the Filter destructor and let the compiler handle it all. So, what I would have written was just:<br>但是 Filter 析构应该做些什么呢？释放一个 Filter 对象的资源；就是关闭文件（通过调用流对象的析构），实际上，这些是隐式完成的，除非对于 Filter 还要额外做些什么，否则我们不会显式定义其析构，都交给编译器默认生成。所以我只要这样写就可以了：<br><figure class="highlight cs"><table><tr><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">Filter</span> &#123; <span class="comment">// take input from file iname and produce output on file oname</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">  Filter(<span class="keyword">const</span> <span class="keyword">string</span>&amp; iname, <span class="keyword">const</span> <span class="keyword">string</span>&amp; oname);</div><div class="line">  <span class="comment">// ...</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">  ifstream <span class="keyword">is</span>;</div><div class="line">  ofstream os;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">user3</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">  Filter flt &#123;“books”,”authors”&#125;;</div><div class="line">  Filter flt2 &#123;“novels”,”favorites”&#125;;</div><div class="line">  <span class="comment">// use flt and flt2</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<div class="hljs"><pre><code class="hljs arcade"><span class="hljs-keyword">void</span> user3()
+&#123;
+  <span class="hljs-built_in">Filter</span> flt &#123;“books”,”authors”&#125;;
+  auto p = make_unique&lt;<span class="hljs-built_in">Filter</span>&gt;(“novels”,”favorites”);
+  <span class="hljs-comment">// use flt and *p</span>
+&#125;</code></pre></div>
+
+<p>Unless we really needed the second Filter to have pointer semantics (which is unlikely) this would be better still:<br>除非我们真的需要第二个Filter 对象的指针，否则下面的代码更好。</p>
+<div class="hljs"><pre><code class="hljs arcade"><span class="hljs-keyword">void</span> user3()
+&#123;
+  <span class="hljs-built_in">Filter</span> flt &#123;“books”,”authors”&#125;;
+  <span class="hljs-built_in">Filter</span> flt2 &#123;“novels”,”favorites”&#125;;
+  <span class="hljs-comment">// use flt and flt2</span>
+&#125;</code></pre></div>
+
+<p>This last version is shorter, simpler, clearer, and faster than the original.<br>最后一个版本最好，简单简洁快速。<br>But what does Filter’s destructor do? It releases the resources owned by a Filter; that is, it closes the files (by invoking their destructors). In fact, that is done implicitly, so unless something else is needed for Filter, we could eliminate the explicit mention of the Filter destructor and let the compiler handle it all. So, what I would have written was just:<br>但是 Filter 析构应该做些什么呢？释放一个 Filter 对象的资源；就是关闭文件（通过调用流对象的析构），实际上，这些是隐式完成的，除非对于 Filter 还要额外做些什么，否则我们不会显式定义其析构，都交给编译器默认生成。所以我只要这样写就可以了：</p>
+<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">Filter</span> &#123; <span class="hljs-comment">// take input from file iname and produce output on file oname</span>
+<span class="hljs-keyword">public</span>:
+  Filter(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; iname, <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; oname);
+  <span class="hljs-comment">// ...</span>
+<span class="hljs-keyword">private</span>:
+  ifstream <span class="hljs-keyword">is</span>;
+  ofstream os;
+  <span class="hljs-comment">// ...</span>
+&#125;;
+ 
+<span class="hljs-built_in">void</span> user3()
+&#123;
+  Filter flt &#123;“books”,”authors”&#125;;
+  Filter flt2 &#123;“novels”,”favorites”&#125;;
+  <span class="hljs-comment">// use flt and flt2</span>
+&#125;</code></pre></div>
+
 <p>This happens to be simpler than what you would write in most garbage collected languages (e.g., Java or C#) and it is not open to leaks caused by forgetful programmers. It is also faster than the obvious alternatives (no spurious use of the free/dynamic store and no need to run a garbage collector). Typically, RAII also decreases the resource retention time relative to manual approaches.<br>这比那些支持垃圾回收的语言写起来更简洁，对于健忘的程序员，也不会导致溢出。显然也比其他可选方案快很多（无需模拟自由、动态内存的存储，无需运行垃圾回收机制）。相对于手动操作，RAII 也降低了资源滞留的时间。<br>This is my ideal for resource management. It handles not just memory, but general (non-memory) resources, such as file handles, thread handles, and locks. But is it really general? How about objects that needs to be passed around from function to function? What about objects that don’t have an obvious single owner?<br>这是我理想的资源管理方法，不仅用于内存，还可以用于普通资源像文件句柄，线程句柄，锁等等。但它真的通用了吗？如果对象需要在函数间传递呢？如果对象没有一个明确的单一所属呢？</p>
 <h4 id="Transferring-Ownership-move"><a href="#Transferring-Ownership-move" class="headerlink" title="Transferring Ownership: move"></a>Transferring Ownership: move</h4><p>所有权的移交：move</p>
 <p>Let us first consider the problem of moving objects around from scope to scope. The critical question is how to get a lot of information out of a scope without serious overhead from copying or error-prone pointer use. The traditional approach is to use a pointer:<br>我们先来思考一下在域间移动对象的问题。关键点在于在不避免拷贝或易错指针等重大开销的情况下怎么在域外获取其信息。传统方法是使用指针：</p>
-<figure class="highlight smali"><table><tr><td class="code"><pre><div class="line">X* make_X()</div><div class="line">&#123;</div><div class="line">  X* p =<span class="built_in"> new </span>X:</div><div class="line">  // ...<span class="built_in"> fill </span>X ..</div><div class="line"> <span class="built_in"> return </span>p;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">void user()</div><div class="line">&#123;</div><div class="line">  X* q = make_X();</div><div class="line">  // ... use *q ...</div><div class="line">  delete q;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs smali">X* make_X()
+&#123;
+  X* p =<span class="hljs-built_in"> new </span>X:
+  // ...<span class="hljs-built_in"> fill </span>X ..
+ <span class="hljs-built_in"> return </span>p;
+&#125;
+ 
+void user()
+&#123;
+  X* q = make_X();
+  // ... use *q ...
+  delete q;
+&#125;</code></pre></div>
+
 <p>Now who is responsible for deleting the object? In this simple case, obviously the caller of make_X() is, but in general the answer is not obvious. What if make_X() keeps a cache of objects to minimize allocation overhead? What if user() passed the pointer to some other_user()? The potential for confusion is large and leaks are not uncommon in this style of program.<br>现在谁负责指针的删除工作呢？在上例中，显然是 make_X 的调用者，但通常答案并不明确。如果为了降低开销，make_X 需要对象的缓存呢？如果 user 将指针传递给其他 other_user 呢？在这种编程风格中，极易混乱和溢出。</p>
 <p>I could use a shared_ptr or a unique_ptr to be explicit about the ownership of the created object. For example:<br>我可以使用 shared_ptr 或者 unique_ptr 显式的表明已有对象的归属。举例：</p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><div class="line">unique_ptr&lt;X&gt; make_X()<span class="comment">;</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-built_in">unique_ptr</span>&lt;X&gt; <span class="hljs-title">make_X</span><span class="hljs-params">()</span></span>;</code></pre></div>
+
 <p>But why use a pointer (smart or not) at all? Often, I don’t want a pointer and often a pointer would distract from the conventional use of an object. For example, a Matrix addition function creates a new object (the sum) from two arguments, but returning a pointer would lead to seriously odd code:<br>但是为嘛非要用指针（智能或非智能）呢？通常我也不想用指针，和传统的使用对象比较，返回指针有点多余（看下面好像是这个意思），比如说，Matrix 类型的加法函数，计算2个参数的和，但却返回一个指针，这看起来好奇怪。</p>
-<figure class="highlight julia"><table><tr><td class="code"><pre><div class="line">unique_ptr&lt;<span class="built_in">Matrix</span>&gt; operator+(<span class="keyword">const</span> <span class="built_in">Matrix</span>&amp; a, <span class="keyword">const</span> <span class="built_in">Matrix</span>&amp; b);</div><div class="line"><span class="built_in">Matrix</span> res = *(a+b);</div></pre></td></tr></table></figure>
-<p>That * is needed to get the sum, rather than a pointer to it. What I really want in many cases is an object, rather than a pointer to an object. Most often, I can easily get that. In particular, small objects are cheap to copy and I wouldn’t dream of using a pointer:<br>那个解引用应该是一个结果，而不是指向结果的指针。多数情况下，我只要一个对象，而不是指针。尤其是那些小的类型，只要简单的copy 就好，根本不用考虑指针。<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">double</span>)</span></span>; <span class="comment">// a square root function</span></div><div class="line"><span class="keyword">double</span> s2 = <span class="built_in">sqrt</span>(<span class="number">2</span>); <span class="comment">// get the square root of 2</span></div></pre></td></tr></table></figure></p>
-<p>On the other hand, objects holding lots of data are typically handles to most of that data. Consider istream, string, vector, list, and thread. They are all just a few words of data ensuring proper access to potentially large amounts of data. Consider again the Matrix addition. What we want is<br>另一方面，拥有许多数据的类型，一般也会有处理这些数据的操作，像 istream, string, vector, list, thread.它们只用几个简单的数据操作命令就保证了对大量数据的访问，再看回 Matrix 的加法函数，我们想要的是：<br><figure class="highlight stata"><table><tr><td class="code"><pre><div class="line"><span class="keyword">Matrix</span> operator+(<span class="keyword">const</span> <span class="keyword">Matrix</span>&amp; a, <span class="keyword">const</span> <span class="keyword">Matrix</span>&amp; b); <span class="comment">// return the sum of a and b</span></div><div class="line"><span class="keyword">Matrix</span> r = x+y;</div></pre></td></tr></table></figure></p>
-<p>We can easily get that.<br>简单的得到结果<br><figure class="highlight smali"><table><tr><td class="code"><pre><div class="line">Matrix operator+(const Matrix&amp; a,<span class="built_in"> const </span>Matrix&amp; b)</div><div class="line">&#123;</div><div class="line">  Matrix res;</div><div class="line">  // ...<span class="built_in"> fill </span>res with element sums ...</div><div class="line"> <span class="built_in"> return </span>res;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>By default, this copies the elements of res into r, but since res is just about to be destroyed and the memory holding its elements is to be freed, there is no need to copy: we can “steal” the elements. Anybody could have done that since the first days of C++, and many did, but it was tricky to implement and the technique was not widely understood. C++11 directly supports “stealing the representation” from a handle in the form of move operations that transfer ownership. Consider a simple 2-D Matrix of doubles:<br>默认情况下，这会拷贝 res 中的成员到 r,但是只要 res 销毁了，其成员占有的内存就会被释放，有一种不需要 copy 的方法,我们可以“偷”。从接触 c++的第一天起，很多人都想过这么干，但这种方法很难实现而且技术不容易被普遍接受。c++11直接支持“窃取信息”，通过move操作形式的句柄移交所有权，看一下二维双重 Matrix 的例子：<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Matrix</span> &#123;</span></div><div class="line">  <span class="keyword">double</span>* elem; <span class="comment">// pointer to elements</span></div><div class="line">  <span class="keyword">int</span> nrow;     <span class="comment">// number of rows</span></div><div class="line">  <span class="keyword">int</span> ncol;     <span class="comment">// number of columns</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">  Matrix(<span class="keyword">int</span> nr, <span class="keyword">int</span> nc)                  <span class="comment">// constructor: allocate elements</span></div><div class="line">    :elem&#123;<span class="keyword">new</span> <span class="keyword">double</span>[nr*nc]&#125;, nrow&#123;nr&#125;, ncol&#123;nc&#125;</div><div class="line">  &#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nr*nc; ++i) elem[i]=<span class="number">0</span>; <span class="comment">// initialize elements</span></div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  Matrix(<span class="keyword">const</span> Matrix&amp;);                  <span class="comment">// copy constructor</span></div><div class="line">  Matrix <span class="keyword">operator</span>=(<span class="keyword">const</span> Matrix&amp;);        <span class="comment">// copy assignment</span></div><div class="line"> </div><div class="line">  Matrix(Matrix&amp;&amp;);                       <span class="comment">// move constructor</span></div><div class="line">  Matrix <span class="keyword">operator</span>=(Matrix&amp;&amp;);             <span class="comment">// move assignment</span></div><div class="line"> </div><div class="line">  ~Matrix() &#123; <span class="keyword">delete</span>[] elem; &#125;            <span class="comment">// destructor: free the elements</span></div><div class="line"> </div><div class="line"><span class="comment">// …</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<div class="hljs"><pre><code class="hljs julia">unique_ptr&lt;<span class="hljs-built_in">Matrix</span>&gt; operator+(<span class="hljs-keyword">const</span> <span class="hljs-built_in">Matrix</span>&amp; a, <span class="hljs-keyword">const</span> <span class="hljs-built_in">Matrix</span>&amp; b);
+<span class="hljs-built_in">Matrix</span> res = *(a+b);</code></pre></div>
+
+<p>That * is needed to get the sum, rather than a pointer to it. What I really want in many cases is an object, rather than a pointer to an object. Most often, I can easily get that. In particular, small objects are cheap to copy and I wouldn’t dream of using a pointer:<br>那个解引用应该是一个结果，而不是指向结果的指针。多数情况下，我只要一个对象，而不是指针。尤其是那些小的类型，只要简单的copy 就好，根本不用考虑指针。</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">sqrt</span><span class="hljs-params">(<span class="hljs-keyword">double</span>)</span></span>; <span class="hljs-comment">// a square root function</span>
+<span class="hljs-keyword">double</span> s2 = <span class="hljs-built_in">sqrt</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">// get the square root of 2</span></code></pre></div>
+
+<p>On the other hand, objects holding lots of data are typically handles to most of that data. Consider istream, string, vector, list, and thread. They are all just a few words of data ensuring proper access to potentially large amounts of data. Consider again the Matrix addition. What we want is<br>另一方面，拥有许多数据的类型，一般也会有处理这些数据的操作，像 istream, string, vector, list, thread.它们只用几个简单的数据操作命令就保证了对大量数据的访问，再看回 Matrix 的加法函数，我们想要的是：</p>
+<div class="hljs"><pre><code class="hljs stata"><span class="hljs-keyword">Matrix</span> operator+(<span class="hljs-keyword">const</span> <span class="hljs-keyword">Matrix</span>&amp; a, <span class="hljs-keyword">const</span> <span class="hljs-keyword">Matrix</span>&amp; b); <span class="hljs-comment">// return the sum of a and b</span>
+<span class="hljs-keyword">Matrix</span> r = x+y;</code></pre></div>
+
+<p>We can easily get that.<br>简单的得到结果</p>
+<div class="hljs"><pre><code class="hljs smali">Matrix operator+(const Matrix&amp; a,<span class="hljs-built_in"> const </span>Matrix&amp; b)
+&#123;
+  Matrix res;
+  // ...<span class="hljs-built_in"> fill </span>res with element sums ...
+ <span class="hljs-built_in"> return </span>res;
+&#125;</code></pre></div>
+
+<p>By default, this copies the elements of res into r, but since res is just about to be destroyed and the memory holding its elements is to be freed, there is no need to copy: we can “steal” the elements. Anybody could have done that since the first days of C++, and many did, but it was tricky to implement and the technique was not widely understood. C++11 directly supports “stealing the representation” from a handle in the form of move operations that transfer ownership. Consider a simple 2-D Matrix of doubles:<br>默认情况下，这会拷贝 res 中的成员到 r,但是只要 res 销毁了，其成员占有的内存就会被释放，有一种不需要 copy 的方法,我们可以“偷”。从接触 c++的第一天起，很多人都想过这么干，但这种方法很难实现而且技术不容易被普遍接受。c++11直接支持“窃取信息”，通过move操作形式的句柄移交所有权，看一下二维双重 Matrix 的例子：</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Matrix</span> &#123;</span>
+  <span class="hljs-keyword">double</span>* elem; <span class="hljs-comment">// pointer to elements</span>
+  <span class="hljs-keyword">int</span> nrow;     <span class="hljs-comment">// number of rows</span>
+  <span class="hljs-keyword">int</span> ncol;     <span class="hljs-comment">// number of columns</span>
+<span class="hljs-keyword">public</span>:
+  Matrix(<span class="hljs-keyword">int</span> nr, <span class="hljs-keyword">int</span> nc)                  <span class="hljs-comment">// constructor: allocate elements</span>
+    :elem&#123;<span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[nr*nc]&#125;, nrow&#123;nr&#125;, ncol&#123;nc&#125;
+  &#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nr*nc; ++i) elem[i]=<span class="hljs-number">0</span>; <span class="hljs-comment">// initialize elements</span>
+  &#125;
+ 
+  Matrix(<span class="hljs-keyword">const</span> Matrix&amp;);                  <span class="hljs-comment">// copy constructor</span>
+  Matrix <span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> Matrix&amp;);        <span class="hljs-comment">// copy assignment</span>
+ 
+  Matrix(Matrix&amp;&amp;);                       <span class="hljs-comment">// move constructor</span>
+  Matrix <span class="hljs-keyword">operator</span>=(Matrix&amp;&amp;);             <span class="hljs-comment">// move assignment</span>
+ 
+  ~Matrix() &#123; <span class="hljs-keyword">delete</span>[] elem; &#125;            <span class="hljs-comment">// destructor: free the elements</span>
+ 
+<span class="hljs-comment">// …</span>
+&#125;;</code></pre></div>
+
 <p>A copy operation is recognized by its reference (&amp;) argument. Similarly, a move operation is recognized by its rvalue reference (&amp;&amp;) argument. A move operation is supposed to “steal” the representation and leave an “empty object” behind. For Matrix, that means something like this:<br>通过判断参数是左值引用或右值引用来区别 copy 和 move 移动。move “窃取信息”后，源对象就成了“空壳”。拿 Matrix 来说，就是这样的：</p>
-<figure class="highlight delphi"><table><tr><td class="code"><pre><div class="line">Matrix::Matrix(Matrix&amp;&amp; a)                   <span class="comment">// move constructor</span></div><div class="line">  :nrow<span class="comment">&#123;a.nrow&#125;</span>, ncol<span class="comment">&#123;a.ncol&#125;</span>, elem<span class="comment">&#123;a.elem&#125;</span>  <span class="comment">// “steal” the representation “窃取资源”</span></div><div class="line"><span class="comment">&#123;</span></div><div class="line">  a.elem = nullptr;                          // leave “nothing” behind 置空源对象</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs delphi">Matrix::Matrix(Matrix&amp;&amp; a)                   <span class="hljs-comment">// move constructor</span>
+  :nrow<span class="hljs-comment">&#123;a.nrow&#125;</span>, ncol<span class="hljs-comment">&#123;a.ncol&#125;</span>, elem<span class="hljs-comment">&#123;a.elem&#125;</span>  <span class="hljs-comment">// “steal” the representation “窃取资源”</span>
+<span class="hljs-comment">&#123;</span>
+<span class="hljs-comment">  a.elem = nullptr;                          // leave “nothing” behind 置空源对象</span>
+<span class="hljs-comment">&#125;</span></code></pre></div>
+
 <p>That’s it! When the compiler sees the return res; it realizes that res is soon to be destroyed. That is, res will not be used after the return. Therefore it applies the move constructor, rather than the copy constructor to transfer the return value. In particular, for<br>就这么简单！当编译器执行到 “return res;”,会意识到 res 很快就会被销毁。那样的话，在 return 后，res 就不能使用了。于是，编译器使用 move 构造而不是 copy 构造转移返回值。</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><div class="line"><span class="attribute">Matrix r</span> = a+b;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">Matrix r</span> = a+b;</code></pre></div>
+
 <p>the res inside operator+() becomes empty – giving the destructor a trivial task – and res’s elements are now owned by r. We have managed to get the elements of the result – potentially megabytes of memory – out of the function (operator+()) and into the caller’s variable. We have done that at a minimal cost (probably four word assignments).<br>特别注意的是，此时 operator+() 中的 res 已经空了，留下一点析构的善后工作，res 所有的元素现在归 r 所有。我们已经将operator+ 中的结果（或许有几兆）转移到调用者的变量中了，我们只用了一点成本，可能只是4行赋值语句。</p>
 <p>Expert C++ users have pointed out that there are cases where a good compiler can eliminate the copy on return completely (in this case saving the four word moves and the destructor call). However, that is implementation dependent, and I don’t like the performance of my basic programming techniques to depend on the degree of cleverness of individual compilers. Furthermore, a compiler that can eliminate the copy, can as easily eliminate the move. What we have here is a simple, reliable, and general way of eliminating complexity and cost of moving a lot of information from one scope to another.<br>已经有专业用户指出，某些情况下，好的编译器可以清除返回的 copy 信息（这中情况下，会保存4行 move 操作和析构调用）。然而这是对现实的依赖，我不喜欢由个别编译器的智能程度来决定我的基础编程能力的性能。而且能清除 copy 的编译器肯定能清除 move. 我们现在有一套简单可行通用的方法去消除域间移动大数据时带来的复杂性和开销。</p>
 <p>Often, we don’t even need to define all those copy and move operations. If a class is composed out of members that behave as desired, we can simply rely on the operations generated by default. Consider:<br>通常，我们不必定义所有的 copy move 操作，如果一个类缺少所需的成员操作，我们可以依赖默认生成的操作。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Matrix</span> &#123;</span></div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; elem; <span class="comment">// elements</span></div><div class="line">    <span class="keyword">int</span> nrow;            <span class="comment">// number of rows</span></div><div class="line">    <span class="keyword">int</span> ncol;            <span class="comment">// number of columns</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Matrix(<span class="keyword">int</span> nr, <span class="keyword">int</span> nc)    <span class="comment">// constructor: allocate elements</span></div><div class="line">      :elem(nr*nc), nrow&#123;nr&#125;, ncol&#123;nc&#125;</div><div class="line">    &#123; &#125;</div><div class="line"> </div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Matrix</span> &#123;</span>
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">double</span>&gt; elem; <span class="hljs-comment">// elements</span>
+    <span class="hljs-keyword">int</span> nrow;            <span class="hljs-comment">// number of rows</span>
+    <span class="hljs-keyword">int</span> ncol;            <span class="hljs-comment">// number of columns</span>
+<span class="hljs-keyword">public</span>:
+    Matrix(<span class="hljs-keyword">int</span> nr, <span class="hljs-keyword">int</span> nc)    <span class="hljs-comment">// constructor: allocate elements</span>
+      :elem(nr*nc), nrow&#123;nr&#125;, ncol&#123;nc&#125;
+    &#123; &#125;
+ 
+    <span class="hljs-comment">// ...</span>
+&#125;;</code></pre></div>
+
 <p>This version of Matrix behaves like the version above except that it copes slightly better with errors and has a slightly larger representation (a vector is usually three words).<br>这个版本很像上面的，除了对错误稍微的处理和更多的描述（没看明白这句啥意思）</p>
-<p>What about objects that are not handles? If they are small, like an int or a complex<double>, don’t worry. Otherwise, make them handles or return them using “smart” pointers, such as unique_ptr and shared_ptr. Don’t mess with “naked” new and delete operations.<br>那些不是句柄的对象呢？如果他们像 int 那么小，或者 complex<double>，不要担心。使用智能指针处理或返回他们，不要单纯的使用 new delete.</double></double></p>
+<p>What about objects that are not handles? If they are small, like an int or a complex<double>, don’t worry. Otherwise, make them handles or return them using “smart” pointers, such as unique_ptr and shared_ptr. Don’t mess with “naked” new and delete operations.<br>那些不是句柄的对象呢？如果他们像 int 那么小，或者 complex<double>，不要担心。使用智能指针处理或返回他们，不要单纯的使用 new delete.</p>
 <p>Unfortunately, a Matrix like the one I used in the example is not part of the ISO C++ standard library, but several are available (open source and commercial). For example, search the Web for “Origin Matrix Sutton” and see Chapter 29 of my The C++ Programming Language (Fourth Edition) [11] for a discussion of the design of such a matrix.<br>不幸的是，上面使用的 Matrix 并不是标准库里的，但是很多都可用。在网上搜索“Origin Matrix Sutton”，你可以看见在我的书The C++ Programming Language (Fourth Edition)的第29章在讨论如何设计这样的一个矩阵。</p>
 <h4 id="Shared-Ownership-shared-ptr"><a href="#Shared-Ownership-shared-ptr" class="headerlink" title="Shared Ownership: shared_ptr"></a>Shared Ownership: shared_ptr</h4><p>共享所有</p>
 <p>In discussions about garbage collection it is often observed that not every object has a unique owner. That means that we have to be able ensure that an object is destroyed/freed when the last reference to it disappears. In the model here, we have to have a mechanism to ensure that an object is destroyed when its last owner is destroyed. That is, we need a form of shared ownership. Say, we have a synchronized queue, a sync_queue, used to communicate between tasks. A producer and a consumer are each given a pointer to the sync_queue:<br>在讨论垃圾回收机制时，常常观察到不是所有的对象都有唯一的所有者。这就意味着当最后一个引用销毁后，我们必须确保该对象正确销毁释放。在这个例子中，我们必须有一套机制以保证最后一个所有者销毁后，该对象也会被销毁。我们需要一套所有权共享机制。这里，我们有一个用于任务间通讯的同步队列 sync_queue，提供者和使用者同时拥有指向 sync_queue 指针：</p>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><div class="line"><span class="keyword">void</span> startup()</div><div class="line">&#123;</div><div class="line">  sync_queue* p  = <span class="keyword">new</span> sync_queue&#123;<span class="number">200</span>&#125;;  <span class="comment">// trouble ahead!</span></div><div class="line">  thread t1 &#123;task1,iqueue,p&#125;;  <span class="comment">// task1 reads from *iqueue and writes to *p</span></div><div class="line">  thread t2 &#123;task2,p,oqueue&#125;;  <span class="comment">// task2 reads from *p and writes to *oqueue</span></div><div class="line">  t1.<span class="built_in">detach</span>();</div><div class="line">  t2.<span class="built_in">detach</span>();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">startup</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  sync_queue* p  = <span class="hljs-keyword">new</span> sync_queue&#123;<span class="hljs-number">200</span>&#125;;  <span class="hljs-comment">// trouble ahead!</span>
+  thread t1 &#123;task1,iqueue,p&#125;;  <span class="hljs-comment">// task1 reads from *iqueue and writes to *p</span>
+  thread t2 &#123;task2,p,oqueue&#125;;  <span class="hljs-comment">// task2 reads from *p and writes to *oqueue</span>
+  t1.<span class="hljs-built_in">detach</span>();
+  t2.<span class="hljs-built_in">detach</span>();
+&#125;</code></pre></div>
+
 <p>I assume that task1, task2, iqueue, and oqueue have been suitably defined elsewhere and apologize for letting the thread outlive the scope in which they were created (using detatch()). Also, you may imagine pipelines with many more tasks and sync_queues. However, here I am only interested in one question: “Who deletes the sync_queue created in startup()?” As written, there is only one good answer: “Whoever is the last to use the sync_queue.” This is a classic motivating case for garbage collection. The original form of garbage collection was counted pointers: maintain a use count for the object and when the count is about to go to zero delete the object. Many languages today rely on a variant of this idea and C++11 supports it in the form of shared_ptr. The example becomes:<br>我假设 task1 task2 iqueue oqueue 已经在其他地方定义，通过使用 detatch() 使线程的生命周期比它所在的域更长。你可能想到了多任务管道 和 sync_queues。可是在这里，我只对一件事感兴趣：谁删除了 startup() 中创建的sync_queue。只有一个正确的答案，那就是 sync_queue 最后的使用者。这是一个典型的垃圾回收机制的案列。垃圾回收的原型是计数指针：记录被使用的对象数，当计数为 0 时，删除对象。许多语言都是以这个原型演变来的，c++11中使用 shared_ptr 的形式 ，例子变为：</p>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><div class="line"><span class="keyword">void</span> startup()</div><div class="line">&#123;</div><div class="line">  <span class="keyword">auto</span> p = make_shared&lt;sync_queue&gt;(<span class="number">200</span>);  <span class="comment">// make a sync_queue and return a stared_ptr to it</span></div><div class="line">  thread t1 &#123;task1,iqueue,p&#125;;  <span class="comment">// task1 reads from *iqueue and writes to *p</span></div><div class="line">  thread t2 &#123;task2,p,oqueue&#125;;  <span class="comment">// task2 reads from *p and writes to *oqueue</span></div><div class="line">  t1.<span class="built_in">detach</span>();</div><div class="line">  t2.<span class="built_in">detach</span>();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">startup</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-keyword">auto</span> p = make_shared&lt;sync_queue&gt;(<span class="hljs-number">200</span>);  <span class="hljs-comment">// make a sync_queue and return a stared_ptr to it</span>
+  thread t1 &#123;task1,iqueue,p&#125;;  <span class="hljs-comment">// task1 reads from *iqueue and writes to *p</span>
+  thread t2 &#123;task2,p,oqueue&#125;;  <span class="hljs-comment">// task2 reads from *p and writes to *oqueue</span>
+  t1.<span class="hljs-built_in">detach</span>();
+  t2.<span class="hljs-built_in">detach</span>();
+&#125;</code></pre></div>
+
 <p>Now the destructors for task1 and task2 can destroy their shared_ptrs (and will do so implicitly in most good designs) and the last task to do so will destroy the sync_queue.<br>现在 task1 task2 的析构函数可以销毁他们的 shared_ptr（在多数好的设计中，这会做得很隐蔽），最后一个这个做得会销毁 sync_queue 对象。</p>
 <p>This is simple and reasonably efficient. It does not imply a complicated run-time system with a garbage collector. Importantly, it does not just reclaim the memory associated with the sync_queue. It reclaims the synchronization object (mutex, lock, or whatever) embedded in the sync_queue to mange the synchronization of the two threads running the two tasks. What we have here is again not just memory management, it is general resource management. That “hidden” synchronization object is handled exactly as the file handles and stream buffers were handled in the earlier example.<br>这简单合理高效。这不不是说一个复杂的运行系统一定要一个垃圾回收器。他不仅仅可以回收与 sync_queue 关联的内存，还能回收sync_queue中用于管理不同任务的多线程同步性的同步对象（互斥，锁等），不仅管理内存，还可以管理资源。隐藏的同步对象可以精确处理前面例子中的文件句柄和流句柄。</p>
 <p>We could try to eliminate the use of shared_ptr by introducing a unique owner in some scope that encloses the tasks, but doing so is not always simple, so C++11 provides both unique_ptr (for unique ownership) and shared_ptr (for shared ownership).<br>我们可以尝试通过引入唯一所有者在封装的域中淘汰 shared_ptr 。但这并不简单，所以 c++11 同时提供了 unique_ptr 和 shared_ptr。</p>
 <h4 id="Type-safety"><a href="#Type-safety" class="headerlink" title="Type safety"></a>Type safety</h4><p>类型安全</p>
 <p>Here, I have only addressed garbage collection in connection with resource management. It also has a role to play in type safety. As long as we have an explicit delete operation, it can be misused. For example:</p>
-<p>这里，我只谈到了和资源管理相关的垃圾回收机制，它同样在类型安全中起了重要作用。只要我们显式使用 delete 操作，就可能出现失误。例如：<br><figure class="highlight actionscript"><table><tr><td class="code"><pre><div class="line">X* p = <span class="keyword">new</span> X;</div><div class="line">X* q = p;</div><div class="line"><span class="keyword">delete</span> p;</div><div class="line"><span class="comment">// ...</span></div><div class="line"> <span class="comment">// the memory that held *p may have been re-used </span></div><div class="line"> <span class="comment">// p 指向的内存已经被回收了</span></div><div class="line">q-&gt;do_something();</div></pre></td></tr></table></figure></p>
+<p>这里，我只谈到了和资源管理相关的垃圾回收机制，它同样在类型安全中起了重要作用。只要我们显式使用 delete 操作，就可能出现失误。例如：</p>
+<div class="hljs"><pre><code class="hljs reasonml">X* p = <span class="hljs-keyword">new</span> X;
+X* q = p;
+delete p;
+<span class="hljs-comment">// ...</span>
+ <span class="hljs-comment">// the memory that held *p may have been re-used </span>
+ <span class="hljs-comment">// p 指向的内存已经被回收了</span>
+q-&gt;<span class="hljs-keyword">do</span><span class="hljs-constructor">_something()</span>;</code></pre></div>
+
 <p>Don’t do that. Naked deletes are dangerous – and unnecessary in general/user code. Leave deletes inside resource management classes, such as string, ostream, thread, unique_ptr, and shared_ptr. There, deletes are carefully matched with news and harmless.<br>千万不要那么做。在一般的用户代码中，delete 的使用的危险多余的。在 string ostream thread unique_ptr shared_ptr 的资源管理类中，不要使用 delete。因此小心配合 new 使用 delete 以确保无害。</p>
 <h4 id="Summary-Resource-Management-Ideals"><a href="#Summary-Resource-Management-Ideals" class="headerlink" title="Summary: Resource Management Ideals"></a>Summary: Resource Management Ideals</h4><p>总结：资源管理理念</p>
 <p>For resource management, I consider garbage collection a last choice, rather than “the solution” or an ideal:<br>对于资源管理，我会把作为最后的选择，而不是解决方案或理念</p>
@@ -320,32 +528,98 @@
 <p>Many people seem to believe that efficient code must be low level. Some even seem to believe that low-level code is inherently efficient (“If it’s that ugly, it must be fast! Someone must have spent a lot of time and ingenuity to write that!”). You can, of course, write efficient code using low-level facilities only, and some code has to be low-level to deal directly with machine resources. However, do measure to see if your efforts were worthwhile; modern C++ compilers are very effective and modern machine architectures are very tricky. If needed, such low-level code is typically best hidden behind an interface designed to allow more convenient use. Often, hiding the low level code behind a higher-level interface also enables better optimizations (e.g., by insulating the low-level code from “insane” uses). Where efficiency matters, first try to achieve it by expressing the desired solution at a high level, don’t dash for bits and pointers.<br>许多人认为底层的代码一定是高效的。甚至有人认为底层代码天生就是高效的（如果它很丑陋，那一定很高效。一定有人花了大量时间和精力去优化它）。当然你可以用底层代码写出高效的代码，有时为了直接处理硬件资源不得不使用底层代码。但是，你要评估下它值不值得：现代的c++ 编译器非常高效，同时现在的硬件架构也非常复杂。如果有需要的话，像这样的底层代码往往为了方便使用被设计成接口。通常，通过高层接口隐藏底层代码会带来更好的优化（比如避免底层代码的滥用）。需要效率的时候，首先尝试在高层接口中去实现，而不要乱用位和指针。</p>
 <h4 id="C’s-qsort"><a href="#C’s-qsort" class="headerlink" title="C’s qsort()"></a>C’s qsort()</h4><p>c语言的 qsort()</p>
 <p>Consider a simple example. If you want to sort a set of floating-point numbers in decreasing order, you could write a piece of code to do so. However, unless you have extreme requirements (e.g., have more numbers than would fit in memory), doing so would be most naïve. For decades, we have had library sort algorithms with acceptable performance characteristics. My least favorite is the ISO standard C library qsort():<br>考虑一个简单的例子。如果你要降序排列一组浮点数，你可以写一段代码实现它，但是除非必须要求那么做（内存受限），否则这么做太天真了。十年间，我们已经有了性能还不错的排序算法库。我最不喜欢 ios 标准库的 qsort 算法。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">greater</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* p, <span class="keyword">const</span> <span class="keyword">void</span>* q)</span>  <span class="comment">// three-way compare</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">double</span> x = *(<span class="keyword">double</span>*)p;  <span class="comment">// get the double value stored at the address p</span></div><div class="line">  <span class="keyword">double</span> y = *(<span class="keyword">double</span>*)q;</div><div class="line">  <span class="keyword">if</span> (x&gt;y) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">  <span class="keyword">if</span> (x&lt;y) <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_my_sort</span><span class="params">(<span class="keyword">double</span>* p, <span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">  qsort(p,n,<span class="keyword">sizeof</span>(*p),greater);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">double</span> a[<span class="number">500000</span>];</div><div class="line">  <span class="comment">// ... fill a ...</span></div><div class="line">  do_my_sort(a,<span class="keyword">sizeof</span>(a)/<span class="keyword">sizeof</span>(*a));  <span class="comment">// pass pointer and number of elements</span></div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">greater</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span>* p, <span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span>* q)</span>  <span class="hljs-comment">// three-way compare</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-keyword">double</span> x = *(<span class="hljs-keyword">double</span>*)p;  <span class="hljs-comment">// get the double value stored at the address p</span>
+  <span class="hljs-keyword">double</span> y = *(<span class="hljs-keyword">double</span>*)q;
+  <span class="hljs-keyword">if</span> (x&gt;y) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">if</span> (x&lt;y) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;
+ 
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">do_my_sort</span><span class="hljs-params">(<span class="hljs-keyword">double</span>* p, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> n)</span></span>
+<span class="hljs-function"></span>&#123;
+  qsort(p,n,<span class="hljs-keyword">sizeof</span>(*p),greater);
+&#125;
+ 
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-keyword">double</span> a[<span class="hljs-number">500000</span>];
+  <span class="hljs-comment">// ... fill a ...</span>
+  do_my_sort(a,<span class="hljs-keyword">sizeof</span>(a)/<span class="hljs-keyword">sizeof</span>(*a));  <span class="hljs-comment">// pass pointer and number of elements</span>
+  <span class="hljs-comment">// ...</span>
+&#125;</code></pre></div>
+
 <p>If you are not a C programmer or if you have not used qsort recently, this may require some explanation; qsort takes four arguments<br>如果你不是c 程序员，或者没用过 qsort 的话，可能需要解释下，qsort 接受 4 个参数：<br>A pointer to a sequence of bytes<br>数据指针<br>The number of elements<br>数据元素个数<br>The size of an element stored in those bytes<br>一个元素的大小<br>A function comparing two elements passed as pointers to their first bytes<br>一个函数，接受 2个参数，分别指向2个元素的首地址</p>
 <p>Note that this interface throws away information. We are not really sorting bytes. We are sorting doubles, but qsort doesn’t know that so that we have to supply information about how to compare doubles and the number of bytes used to hold a double. Of course, the compiler already knows such information perfectly well. However, qsort’s low-level interface prevents the compiler from taking advantage of type information. Having to state simple information explicitly is also an opportunity for errors. Did I swap qsort()’s two integer arguments? If I did, the compiler wouldn’t notice. Did my compare() follow the conventions for a C three-way compare?<br>注意，这个接口漏掉了什么。我们并不是真的要对字节排序。我们想对浮点数排序，但 qsort 不知道，所以我们不得不提供一些信息，包括怎么比较浮点数和保存浮点数需要的字节数。当然，编译器已经知道这些信息就再好不过了，但 qsort 的底层接口阻止编译器使用类型信息。不得不显式的表示信息也增加了出错的几率。我是不是写错了 qsort 中的2个参数，即使我错了，编译器也不会发现。我的比较函数有没有遵循 c 语言的 three-way 比较规则（什么时候返回1，-1，0）</p>
 <p>If you look at an industrial strength implementation of qsort (please do), you will notice that it works hard to compensate for the lack of information. For example, swapping elements expressed as a number of bytes takes work to do as efficiently as a swap of a pair of doubles. The expensive indirect calls to the comparison function can only be eliminated if the compiler does constant propagation for pointers to functions.<br>如果你看过一个 qsort 的实现，你会发现它会努力去弥补信息缺少带来的问题。比如，交换用字节数表示的元素时尽量做到和交换浮点数一样高效。如果编译器用常量指针做参数传递给函数会降低间接调用比较函数时的开销。</p>
 <h4 id="C-’s-sort"><a href="#C-’s-sort" class="headerlink" title="C++’s sort()"></a>C++’s sort()</h4><p>c++ 的 sort()</p>
 <p>Compare qsort() to its C++ equivalent, sort():<br>比较2个等价版本</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_my_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&amp; v)</span></span></div><div class="line">&#123;</div><div class="line">  sort(v,[](<span class="keyword">double</span> x, <span class="keyword">double</span> y) &#123; <span class="keyword">return</span> x&gt;y; &#125;);  <span class="comment">// sort v in decreasing order</span></div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; vd;</div><div class="line">  <span class="comment">// ... fill vd ...</span></div><div class="line">  do_my_sort(v);</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">do_my_sort</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">double</span>&gt;&amp; v)</span></span>
+<span class="hljs-function"></span>&#123;
+  sort(v,[](<span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y) &#123; <span class="hljs-keyword">return</span> x&gt;y; &#125;);  <span class="hljs-comment">// sort v in decreasing order</span>
+&#125;
+ 
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">double</span>&gt; vd;
+  <span class="hljs-comment">// ... fill vd ...</span>
+  do_my_sort(v);
+  <span class="hljs-comment">// ...</span>
+&#125;</code></pre></div>
+
 <p>Less explanation is needed here. A vector knows its size, so we don’t have to explicitly pass the number of elements. We never “lose” the type of elements, so we don’t have to deal with element sizes. By default, sort() sorts in increasing order, so I have to specify the comparison criteria, just as I did for qsort(). Here, I passed it as a lambda expression comparing two doubles using &gt;. As it happens, that lambda is trivially inlined by all C++ compilers I know of, so the comparison really becomes just a greater-than machine operation; there is no (inefficient) indirect function call.<br>这里不用太多解释。vector 知道自己的大小，我们不再需要显式传递元素的数量。我们不会漏掉元素的类型，所以也不用处理元素占用字节。默认情况下，sort 执行升序排列，所以必须指定比较规则像 qsort 那样。在这里，我传递一个 lambda 表达式，使用 &gt; 比较2个浮点数。据我所知所有的编译器执行 lambda 表达式时都是简单的内联，这样，比较变成了大于号的机器操作，没有低效的间接函数调用。</p>
 <p>I used a container version of sort() to avoid being explicit about the iterators. That is, to avoid having to write:<br>我使用了容器版本的 sort ，为了避免显式使用迭代器。避免像下面这样写：</p>
-<figure class="highlight llvm"><table><tr><td class="code"><pre><div class="line">std::sort(v.<span class="keyword">begin</span>(),v.<span class="keyword">end</span>(),[](<span class="keyword">double</span> <span class="keyword">x</span>, <span class="keyword">double</span> y) &#123; return <span class="keyword">x</span>&gt;y<span class="comment">; &#125;);</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs arduino"><span class="hljs-built_in">std</span>::sort(v.<span class="hljs-built_in">begin</span>(),v.<span class="hljs-built_in">end</span>(),[](<span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y) &#123; <span class="hljs-keyword">return</span> x&gt;y; &#125;);</code></pre></div>
+
 <p>I could go further and use a C++14 comparison object:<br>我可以更进一步，使用 c++14版本的对象：</p>
-<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line"><span class="built_in">sort</span>(v,greater&lt;&gt;()); // <span class="built_in">sort</span> v <span class="keyword">in</span> <span class="built_in">decreasing</span> order</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs lisp">sort(<span class="hljs-name">v</span>,greater&lt;&gt;())<span class="hljs-comment">; // sort v in decreasing order</span></code></pre></div>
 <p>Which version is faster? You can compile the qsort version as C or C++ without any performance difference, so this is really a comparison of programming styles, rather than of languages. The library implementations seem always to use the same algorithm for sort and qsort, so it is a comparison of programming styles, rather than of different algorithms. Different compilers and library implementations give different results, of course, but for each implementation we have a reasonable reflection of the effects of different levels of abstraction.<br>哪个版本更快？你可以用 c 或 c++ 编译 qsort,它们没有效率的差别，所以这只是编程风格的比较，而不是语言的比较。对于 sort 和 qsort 的库实现一直使用相同的算法，所以这也只是编程风格的比较，而不是算法。不同的编译器和库实现有不同的结果，当然，对于每一个实现，我们会理性的思考不同层次抽象的效果。</p>
 <p>I recently ran the examples and found the sort() version 2.5 times  faster than the qsort() version. Your mileage will vary from compiler to compiler and from machine to machine, but I have never seen qsort beat sort. I have seen sort run 10 times faster than qsort. How come? The C++ standard-library sort is clearly at a higher level than qsort as well as more general and flexible. It is type safe and parameterized over the storage type, element type, and sorting criteria. There isn’t a pointer, cast, size, or a byte in sight. The C++ standard library STL, of which sort is a part, tries very hard not to throw away information. This makes for excellent inlining and good optimizations.<br>我最近运行实例，发现 sort 比 qsort 快 2.5倍。由于编译器机器环境的不同，结果不同，但我从见过 qsort 比 sort 快。我见过 sort 比 qsort 快 10倍，怎么来的？c++标准库 sort 和 qsort 相比，明显是更高层次的抽象，同时也更通用更灵活。它类型安全，使存储类型，元素类型，排序规则参数化，看不到指针， 类型转换，长度，字节等等。c++ 标准库 STL,包括 sort, 努力做到不丢失信息，这有利于更好的内联和优化。</p>
 <p>Generality and high-level code can beat low-level code. It doesn’t always, of course, but the sort/qsort comparison is not an isolated example. Always start out with a higher-level, precise, and type safe version of the solution. Optimize (only) if needed.<br>通用性和高层次的代码比底层代码更优。当然，也不是总是，但 sort 和 qsort 并不是个例。总是从一个高层，精确，类型安全的版本着手解决，如果需要再优化。</p>
 <h3 id="Myth-5-“C-is-for-large-complicated-programs-only”"><a href="#Myth-5-“C-is-for-large-complicated-programs-only”" class="headerlink" title="Myth 5: “C++ is for large, complicated, programs only”"></a>Myth 5: “C++ is for large, complicated, programs only”</h3><p>c++ 只是用于大型复杂的程序</p>
 <p>C++ is a big language. The size of its definition is very similar to those of C# and Java. But that does not imply that you have to know every detail to use it or use every feature directly in every program. Consider an example using only foundational components from the standard library:<br>c++ 是一门大语言。它的定义大小和java c# 差不多。但那并不意味着你必须知道每一个使用细节或是在每一个程序中直接使用每一个特征。思考一个仅使用标准库基础组件的例子：</p>
-<figure class="highlight cs"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">set</span>&lt;<span class="keyword">string</span>&gt; <span class="title">get_addresses</span>(<span class="params">istream&amp; <span class="keyword">is</span></span>)</span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">set</span>&lt;<span class="keyword">string</span>&gt; addr;</div><div class="line">  regex pat &#123; R<span class="string">"((\w+([.-]\w+)*)@(\w+([.-]\w+)*))"</span>&#125;; <span class="comment">// email address pattern</span></div><div class="line">  smatch m;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">string</span> s; getline(<span class="keyword">is</span>,s); )                    <span class="comment">// read a line</span></div><div class="line">    <span class="keyword">if</span> (regex_search(s, m, pat))                     <span class="comment">// look for the pattern</span></div><div class="line">      addr.insert(m[<span class="number">0</span>]);                             <span class="comment">// save address in set</span></div><div class="line">  <span class="keyword">return</span> addr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs reasonml">set&lt;<span class="hljs-built_in">string</span>&gt; get<span class="hljs-constructor">_addresses(<span class="hljs-params">istream</span>&amp; <span class="hljs-params">is</span>)</span>
+&#123;
+  set&lt;<span class="hljs-built_in">string</span>&gt; addr;
+  regex pat &#123; R<span class="hljs-string">"((\w+([.-]\w+)*)@(\w+([.-]\w+)*))"</span>&#125;; <span class="hljs-comment">// email address pattern</span>
+  smatch m;
+  for (<span class="hljs-built_in">string</span> s; getline(is,s); )                    <span class="hljs-comment">// read a line</span>
+    <span class="hljs-keyword">if</span> (regex<span class="hljs-constructor">_search(<span class="hljs-params">s</span>, <span class="hljs-params">m</span>, <span class="hljs-params">pat</span>)</span>)                     <span class="hljs-comment">// look for the pattern</span>
+      addr.insert(m<span class="hljs-literal">[<span class="hljs-number">0</span>]</span>);                             <span class="hljs-comment">// save address in set</span>
+  return addr;
+&#125;</code></pre></div>
+
 <p>I assume you know regular expressions. If not, now may be a good time to read up on them. Note that I rely on move semantics to simply and efficiently return a potentially large set of strings. All standard-library containers provide move constructors, so there is no need to mess around with new.<br>假设你了解正则表达式。如果不会，现在或许是时候读一下了。注意，我依靠 move 语法对可能返回的大串字符进行简化优化。所有标准库容器都提供了移动构造函数，所以没必要用 new.</p>
 <p>For this to work, I need to include the appropriate standard library components:<br>为了正常运行，我需要包含适当的标准库组件:</p>
-<figure class="highlight autoit"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sstream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;regex&gt;</span></span></div><div class="line">using namespace std<span class="comment">;</span></div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs autoit"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;set&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;sstream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;regex&gt;</span></span>
+using namespace std<span class="hljs-comment">;</span></code></pre></div>
 <p>Let’s test it:<br>测试下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="built_in">istringstream</span> test &#123;  <span class="comment">// a stream initialized to a sting containing some addresses</span></div><div class="line">  <span class="string">"asasasa\n"</span></div><div class="line">  <span class="string">"bs@foo.com\n"</span></div><div class="line">  <span class="string">"ms@foo.bar.com$aaa\n"</span></div><div class="line">  <span class="string">"ms@foo.bar.com aaa\n"</span></div><div class="line">  <span class="string">"asdf bs.ms@x\n"</span></div><div class="line">  <span class="string">"$$bs.ms@x$$goo\n"</span></div><div class="line">  <span class="string">"cft foo-bar.ff@ss-tt.vv@yy asas"</span></div><div class="line">  <span class="string">"qwert\n"</span></div><div class="line">&#125;;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">auto</span> addr = get_addresses(test);  <span class="comment">// get the email addresses</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; s : addr)              <span class="comment">// write out the addresses</span></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">'\n'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">istringstream</span> test &#123;  <span class="hljs-comment">// a stream initialized to a sting containing some addresses</span>
+  <span class="hljs-string">"asasasa\n"</span>
+  <span class="hljs-string">"bs@foo.com\n"</span>
+  <span class="hljs-string">"ms@foo.bar.com$aaa\n"</span>
+  <span class="hljs-string">"ms@foo.bar.com aaa\n"</span>
+  <span class="hljs-string">"asdf bs.ms@x\n"</span>
+  <span class="hljs-string">"$$bs.ms@x$$goo\n"</span>
+  <span class="hljs-string">"cft foo-bar.ff@ss-tt.vv@yy asas"</span>
+  <span class="hljs-string">"qwert\n"</span>
+&#125;;
+ 
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-keyword">auto</span> addr = get_addresses(test);  <span class="hljs-comment">// get the email addresses</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; s : addr)              <span class="hljs-comment">// write out the addresses</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-string">'\n'</span>;
+&#125;</code></pre></div>
+
 <p>This is just an example. It is easy to modify get_addresses() to take the regex pattern as an argument, so that it could find URLs or whatever. It is easy to modify get_addresses() to recognize more than one occurrence of a pattern in a line. After all, C++ is designed for flexibility and generality, but not every program has to be a complete library or application framework. However, the point here is that the task of extracting email addresses from a stream is simply expressed and easily tested.<br>这只是一个例子。只要简单的修改下 get_addresses， 将正则表达式作为参数，就可以查找 URLs 或其他，简单修改下就可以识别一行里更多的匹配。毕竟 c++ 是为便捷和通用而生，但并不是每一个程序都可以成为一个完整的库或应用框架。重点是对于从流中提取 email 地址这个任务可以简单实现和测试。</p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
-<p> <a href="https://www.zhihu.com/question/38828701" target="_blank" rel="external">https://www.zhihu.com/question/38828701</a><br> <a href="https://blog.csdn.net/u013691335/article/details/43154875" target="_blank" rel="external">https://blog.csdn.net/u013691335/article/details/43154875</a></p>
+<p> <a href="https://www.zhihu.com/question/38828701" target="_blank" rel="noopener">https://www.zhihu.com/question/38828701</a><br> <a href="https://blog.csdn.net/u013691335/article/details/43154875" target="_blank" rel="noopener">https://blog.csdn.net/u013691335/article/details/43154875</a></p>
 </blockquote>
 
             </article>
@@ -356,26 +630,26 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2018/07/23/WDYDT-7-先学什么的矛盾/">
+                      <a href="/2018/07/23/WDYDT-7-%E5%85%88%E5%AD%A6%E4%BB%80%E4%B9%88%E7%9A%84%E7%9F%9B%E7%9B%BE/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">WDYDT-7-先学什么的矛盾</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2018/07/09/WDYDT-5-最近挺忙-Widget开发/">
+                      <a href="/2018/07/09/WDYDT-5-%E6%9C%80%E8%BF%91%E6%8C%BA%E5%BF%99-Widget%E5%BC%80%E5%8F%91/">
                         <span class="hidden-mobile">WDYDT-5-最近挺忙-Widget开发</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -392,7 +666,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -419,7 +693,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -428,7 +702,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -471,9 +745,6 @@
   
 
 
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
 
