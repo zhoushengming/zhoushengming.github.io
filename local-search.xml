@@ -12,6 +12,14 @@
     
     
     
+    <tags>
+      
+      <tag>Android</tag>
+      
+      <tag>编译</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -24,6 +32,14 @@
     <content type="html"><![CDATA[<!-- abstract area --><p>我们经常会去Android studio的plugin中心寻找满足自己需要的plugin，我前段时间去找了一个Translate的插件，作者是bob。<br>这个插件是挺好用的，但是有个问题，就是他会在工具栏中生成一个独占一列的tab，我用的是mac，这样就会把整个工具栏占满，导致好多图标显示不出来，<br>比如qq、微信、电量等，这个很难受，然后我决定改造一个这个插件。</p><a id="more"></a><p>我查了一下，如何开发一个Android studio插件。<br>发现需要自己定义一个Action，然后把这个action通过一个plugin.xml注册到Android studio中，<br>注册的时候要指明这个action作用在工具栏还是右键菜单。<br>那我们只需要找到这个文件，然后修改就可以了。</p><p>首先需要找到这个插件存放的位置。查到在 ~/Library/Application Support/AndroidStudio4.0<br>这个翻译插件的名字竟然叫plugin.jar，别的插件都是已功能命名的，比如GsonFormat.jar</p><p>我需要对这个jar进行解压，命令为：</p><div class="hljs"><pre><code class="hljs stata">unzip -x -q <span class="hljs-keyword">plugin</span>.jar -<span class="hljs-keyword">d</span> <span class="hljs-keyword">plugin</span></code></pre></div><p>查看一下jar包里边都有啥</p><div class="hljs"><pre><code class="hljs gherkin">.|<span class="hljs-string">____META-INF</span>|<span class="hljs-string"> </span>|<span class="hljs-string">____MANIFEST.MF</span>|<span class="hljs-string"> </span>|<span class="hljs-string">____plugin.xml</span>|____translate_tool_window|<span class="hljs-string"> </span>|<span class="hljs-string">____logo.png</span>|____com|<span class="hljs-string"> </span>|____huangmb|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|____idea|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">____省略</span>|<span class="hljs-string"> </span>|____intellij|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|____uiDesigner|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">____省略</span></code></pre></div><p>查看plugin.xml</p><div class="hljs"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">idea-plugin</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"2"</span>&gt;</span>    .......    <span class="hljs-tag">&lt;<span class="hljs-name">actions</span>&gt;</span>        <span class="hljs-comment">&lt;!-- Add your actions here --&gt;</span>        <span class="hljs-tag">&lt;<span class="hljs-name">group</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"Hello"</span> <span class="hljs-attr">text</span>=<span class="hljs-string">"Translate"</span> <span class="hljs-attr">description</span>=<span class="hljs-string">"translate plugin"</span>&gt;</span>            <span class="hljs-tag">&lt;<span class="hljs-name">separator</span>/&gt;</span>            <span class="hljs-tag">&lt;<span class="hljs-name">add-to-group</span> <span class="hljs-attr">group-id</span>=<span class="hljs-string">"MainMenu"</span> <span class="hljs-attr">anchor</span>=<span class="hljs-string">"last"</span>/&gt;</span>            <span class="hljs-tag">&lt;<span class="hljs-name">add-to-group</span> <span class="hljs-attr">group-id</span>=<span class="hljs-string">"EditorPopupMenu"</span> <span class="hljs-attr">relative-to-action</span>=<span class="hljs-string">"EditorToggleColumnMode"</span> <span class="hljs-attr">anchor</span>=<span class="hljs-string">"after"</span>/&gt;</span>            <span class="hljs-tag">&lt;<span class="hljs-name">add-to-group</span> <span class="hljs-attr">group-id</span>=<span class="hljs-string">"MainToolBar"</span> <span class="hljs-attr">anchor</span>=<span class="hljs-string">"last"</span>/&gt;</span>            <span class="hljs-tag">&lt;<span class="hljs-name">add-to-group</span> <span class="hljs-attr">group-id</span>=<span class="hljs-string">"NavBarToolBar"</span> <span class="hljs-attr">anchor</span>=<span class="hljs-string">"last"</span>/&gt;</span>            <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"TranslatePlugin.TranslateAction"</span></span><span class="hljs-tag">                    <span class="hljs-attr">class</span>=<span class="hljs-string">"com.huangmb.idea.action.TranslateAction"</span></span><span class="hljs-tag">                    <span class="hljs-attr">text</span>=<span class="hljs-string">"Translate"</span></span><span class="hljs-tag">                    <span class="hljs-attr">icon</span>=<span class="hljs-string">"/translate_tool_window/logo.png"</span></span><span class="hljs-tag">                    <span class="hljs-attr">description</span>=<span class="hljs-string">"toggle translate"</span>&gt;</span>                <span class="hljs-tag">&lt;<span class="hljs-name">keyboard-shortcut</span> <span class="hljs-attr">keymap</span>=<span class="hljs-string">"$default"</span> <span class="hljs-attr">first-keystroke</span>=<span class="hljs-string">"ctrl meta T"</span>/&gt;</span>            <span class="hljs-tag">&lt;/<span class="hljs-name">action</span>&gt;</span>        <span class="hljs-tag">&lt;/<span class="hljs-name">group</span>&gt;</span>    <span class="hljs-tag">&lt;/<span class="hljs-name">actions</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">idea-plugin</span>&gt;</span></code></pre></div><p>需要删掉group-id=”MainMenu”的那一行，删除后重新打包</p><div class="hljs"><pre><code class="hljs stata">jar cvf <span class="hljs-keyword">plugin</span>.jar <span class="hljs-keyword">META</span>-<span class="hljs-keyword">INF</span>/MANIFEST.MF *</code></pre></div><p>然后打开Android studio卸载旧的插件，然后选择从磁盘安装插件，选择我们新生成的那个jar。</p><p>重启Android studio。</p><p>一切都变得顺滑了。。。</p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>开发环境</tag>
+      
+      <tag>DIY</tag>
+      
+    </tags>
     
   </entry>
   
@@ -38,6 +54,14 @@
     
     
     
+    <tags>
+      
+      <tag>Android</tag>
+      
+      <tag>Root</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -50,6 +74,14 @@
     <content type="html"><![CDATA[<!-- abstract area --><p>OkHttp这个开源项目真的是一个神项目，我也一直想读OkHttp的源码，但是一直没有勇气，现在有了一套视频，我结合着视频和自己的理解，用了三个晚上把源码粗略的看了一遍，整理了一个思维导图。</p><a id="more"></a><blockquote><p>这个图片有点大，这个博客系统好像没有图片放大功能，可以在Chrome中右键“在新标签中打开图片”</p></blockquote><p>简单的介绍一下整个分析流程</p><ol><li><p>OkHttp的使用，分为同步请求和异步请求</p></li><li><p>如何处理多个请求并发情况</p></li><li><p>请求如何访问网络并拿到结果</p></li></ol><img src="/img/OkHttp.png" srcset="/img/loading.gif">]]></content>
     
     
+    
+    <tags>
+      
+      <tag>OkHttp</tag>
+      
+      <tag>源码</tag>
+      
+    </tags>
     
   </entry>
   
@@ -128,6 +160,12 @@
     
     
     
+    <tags>
+      
+      <tag>adb</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -159,6 +197,12 @@
     <content type="html"><![CDATA[<!-- abstract area --><p>需要动态加载一个jar包，然后一直报Class not found的错误，仔细阅读了博客，发现没有对jar进行处理，<br>需要使用dx命令对jar进行处理；</p><div class="hljs"><pre><code class="hljs reasonml">dx --dex --output=<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Loader_dex</span>.</span></span>jar <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Loader</span>.</span></span>jar</code></pre></div><a id="more"></a><h3 id="下面大体梳理一下动态加载jar的流程"><a href="#下面大体梳理一下动态加载jar的流程" class="headerlink" title="下面大体梳理一下动态加载jar的流程"></a>下面大体梳理一下动态加载jar的流程</h3><h4 id="1-jar包的制作"><a href="#1-jar包的制作" class="headerlink" title="1 jar包的制作"></a>1 jar包的制作</h4><p>代码写完后，对项目进行打包就行。比较简单。</p><h4 id="2-处理jar"><a href="#2-处理jar" class="headerlink" title="2 处理jar"></a>2 处理jar</h4><p>使用dx命令处理jar</p><div class="hljs"><pre><code class="hljs reasonml">dx --dex --output=<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Loader_dex</span>.</span></span>jar <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Loader</span>.</span></span>jar</code></pre></div><p>dx命令在Android SDK下，比如我电脑的dx文件路径为：sdk/build-tools/27.0.2/dx</p><h4 id="3-加载jar"><a href="#3-加载jar" class="headerlink" title="3 加载jar"></a>3 加载jar</h4><p>直接上代码</p><div class="hljs"><pre><code class="hljs reasonml"><span class="hljs-keyword">private</span> void load<span class="hljs-constructor">Jar()</span>&#123;       File dexoutputdir = get<span class="hljs-constructor">Dir(<span class="hljs-string">"dex1"</span>,0)</span>;       String dexPath = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Environment</span>.</span></span>get<span class="hljs-constructor">ExternalStorageDirectory()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span> + <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">File</span>.</span></span>separator + <span class="hljs-string">"Loader_dex.jar"</span>;       DexClassLoader loader = <span class="hljs-keyword">new</span> <span class="hljs-constructor">DexClassLoader(<span class="hljs-params">dexPath</span>,<span class="hljs-params">dexoutputdir</span>.<span class="hljs-params">getAbsolutePath</span>()</span>,null,get<span class="hljs-constructor">ClassLoader()</span>);              <span class="hljs-keyword">try</span> &#123;           Class clz = loader.load<span class="hljs-constructor">Class(<span class="hljs-string">"com.example.interf.JarLoader"</span>)</span>;           ILoader iShowToast = (ILoader) clz.<span class="hljs-keyword">new</span><span class="hljs-constructor">Instance()</span>;           <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Toast</span>.</span></span>make<span class="hljs-constructor">Text(<span class="hljs-params">this</span>,<span class="hljs-params">iShowToast</span>.<span class="hljs-params">sayHi</span>()</span>,Toast.LENGTH_LONG).show<span class="hljs-literal">()</span>;       &#125; catch (Exception e)&#123;            <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Log</span>.</span></span>d(<span class="hljs-string">"dd"</span>,e.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>);       &#125;   &#125;</code></pre></div><p>dexPath、 dexoutputdir尽量放到APP目录下。</p><p>此处需要注意DexClassLoader的四个参数：</p><ul><li>参数1 dexPath：待加载的dex文件路径，如果是外存路径，一定要加上读外存文件的权限( <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> )，否则会报与报错，Android4.4 KitKat及以后的版本需要此权限，之前的版本不需要该权限。</li><li>参数2 optimizedDirectory：解压后的dex存放位置，此位置一定要是可读写且仅该应用可读写（安全性考虑），所以只能放在data/data下。本文getDir(“dex1”, 0)会在/data/data/**package/下创建一个名叫”app_dex1“的文件夹，其内存放的文件是自动生成Loader_dex.dex；需要注意，data/data文件夹只有在手机root之后，才看得到。</li><li>参数3 libraryPath：指向包含本地库(so)的文件夹路径，可以设为null。</li><li>参数4 parent：父级类加载器，一般可以通过Context.getClassLoader获取到，也可以通过ClassLoader.getSystemClassLoader()取到。 </li></ul><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.cnblogs.com/HDK2016/p/8306915.html" target="_blank" rel="noopener">【Android】Android动态加载Jar、APK的实现</a></p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>编译</tag>
+      
+    </tags>
     
   </entry>
   
