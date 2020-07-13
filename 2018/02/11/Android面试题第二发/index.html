@@ -1,368 +1,207 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="zh-Hans">
 
 
 
-  
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/git_logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="read the fucking source code">
+  <meta name="author" content="周生明">
+  <meta name="keywords" content="undefined">
+  <title>Android面试题第二发 - 觉晓</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
-
-
-  
-  
-  
-  
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
-    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
   
 
-  
 
-  
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
-  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
 
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
 
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Android," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="Android大厂面试题锦集附答案(BAT TMD JD 小米)  转载自: 2018-02-10 何时夕 安卓巴士Android开发者门户https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;amp;mid=2651942440&amp;amp;idx=1&amp;amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;amp;chksm=8">
-<meta name="keywords" content="Android">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android面试题第二发">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2018/02/11/Android面试题第二发/index.html">
-<meta property="og:site_name" content="觉晓">
-<meta property="og:description" content="Android大厂面试题锦集附答案(BAT TMD JD 小米)  转载自: 2018-02-10 何时夕 安卓巴士Android开发者门户https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;amp;mid=2651942440&amp;amp;idx=1&amp;amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;amp;chksm=8">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2911038-5349d6ebb32372da?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-05-16T12:45:26.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android面试题第二发">
-<meta name="twitter:description" content="Android大厂面试题锦集附答案(BAT TMD JD 小米)  转载自: 2018-02-10 何时夕 安卓巴士Android开发者门户https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;amp;mid=2651942440&amp;amp;idx=1&amp;amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;amp;chksm=8">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2911038-5349d6ebb32372da?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/02/11/Android面试题第二发/"/>
-
-
-
-
-
-  <title>Android面试题第二发 | 觉晓</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script  src="/js/utils.js" ></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
-  
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">觉晓</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <h1 class="site-subtitle" itemprop="description">coding..</h1>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            博客
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-algorithm">
-          <a href="/algorithm" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
-            
-            算法
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-codes">
-          <a href="/codes" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
-            
-            代码片段
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-interview">
-          <a href="/interview" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-smile-o"></i> <br />
-            
-            面试题集
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
 </nav>
 
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/02/11/Android面试题第二发/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="周生明">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/QQ20200702-171655@2x.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="觉晓">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">Android面试题第二发</h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fade-in-up">
+            <span class="h2" id="subtitle">
               
-                <span class="post-meta-item-text">发表于</span>
+            </span>
+
+            
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-11T17:31:23+08:00">
-                2018-02-11
-              </time>
-            
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-02-11 17:31">
+      February 11, 2018 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      131
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
-
-            
-          </span>
+          </div>
 
           
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/02/11/Android面试题第二发/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/11/Android面试题第二发/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
+      </div>
+    </div>
+  </header>
+
+  <main>
     
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
-      
-        <p>Android大厂面试题锦集附答案(BAT TMD JD 小米)</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>Android大厂面试题锦集附答案(BAT TMD JD 小米)</p>
 <blockquote>
 <p>转载自: 2018-02-10 何时夕 安卓巴士Android开发者门户<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;mid=2651942440&amp;idx=1&amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;chksm=84fd7cccb38af5da737288d4b4ffe868d125e427a5caf7b4fdc005edf435c73eae68106f64f3&amp;mpshare=1&amp;scene=23&amp;srcid=0211LMUCPgy0HNWHurBeBLJV#rd" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzA3MjgwNDIzNQ==&amp;mid=2651942440&amp;idx=1&amp;sn=c1518479845e73a495fcc7f27593ce7f&amp;chksm=84fd7cccb38af5da737288d4b4ffe868d125e427a5caf7b4fdc005edf435c73eae68106f64f3&amp;mpshare=1&amp;scene=23&amp;srcid=0211LMUCPgy0HNWHurBeBLJV#rd</a></p>
 </blockquote>
@@ -370,7 +209,7 @@
 <blockquote>
 <p>上次写这篇文章的时候也差不多是一年前了，这一年我兜兜转转从android到java又回到android，校招面了很多大厂，阿里、京东、小米、头条、知乎、腾讯、有赞，也收获了几个offer。感谢大家的关注，让我在简书上面也混到了一个<strong>简书程序员优秀作者</strong>的称号，所以为了回馈大家，一篇<strong>最完全的android面经</strong>诞生了。这是我集合了牛客网、百度、简书等网站的<strong>几十篇面经</strong>和我自己面试的经历的合集，希望大家喜欢。<strong>(ps:里面当然会有纰漏，如果有问题欢迎大家留言或者加我QQ讨论)</strong>(pps:有<strong>简书</strong>的同学可以关注一波:<a href="https://www.jianshu.com/u/45661204c0d6" target="_blank" rel="external">何时夕</a>)</p>
 </blockquote>
-<h2 id="android事件分发机制，请详细说下整个流程"><a href="#android事件分发机制，请详细说下整个流程" class="headerlink" title="android事件分发机制，请详细说下整个流程"></a>android事件分发机制，请详细说下整个流程</h2><p><img src="http://upload-images.jianshu.io/upload_images/2911038-5349d6ebb32372da?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="事件分发（面试）.png" title="事件分发（面试）.png"></p>
+<h2 id="android事件分发机制，请详细说下整个流程"><a href="#android事件分发机制，请详细说下整个流程" class="headerlink" title="android事件分发机制，请详细说下整个流程"></a>android事件分发机制，请详细说下整个流程</h2><p><img src="http://upload-images.jianshu.io/upload_images/2911038-5349d6ebb32372da?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="事件分发（面试）.png" title="事件分发（面试）.png"></p>
 <h2 id="android-view绘制机制和加载过程，请详细说下整个流程"><a href="#android-view绘制机制和加载过程，请详细说下整个流程" class="headerlink" title="android view绘制机制和加载过程，请详细说下整个流程"></a>android view绘制机制和加载过程，请详细说下整个流程</h2><ul>
 <li><p>1.ViewRootImpl会调用performTraversals(),其内部会调用performMeasure()、performLayout、performDraw()。</p>
 </li>
@@ -1333,367 +1172,235 @@
 </ul>
 <p>写在最后:能看到这里的人,我挺佩服你的.这篇文章是我在<strong>头条</strong>面试之前整理的,最后<strong>80%</strong>的题目都命中了,所以祝你好运.</p>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/02/11/2018鸿洋博客总结/" rel="next" title="2018鸿洋博客总结">
-                <i class="fa fa-chevron-left"></i> 2018鸿洋博客总结
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/24/2018的上半年/" rel="prev" title="2018的上半年">
-                2018的上半年 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2018/02/11/Android面试题第二发/"
-           data-title="Android面试题第二发" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2018/02/11/Android面试题第二发/">
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/img/QQ20200702-171655@2x.png"
-               alt="周生明" />
-          <p class="site-author-name" itemprop="name">周生明</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-           
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">71</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://blog.csdn.net/u010954948" target="_blank" title="CSDN">
-                  
-                    <i class="fa fa-fw fa-tree"></i>
-                  
-                  CSDN
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Android/">Android</a>
+                    
+                  </div>
+                
+              </div>
               
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#android事件分发机制，请详细说下整个流程"><span class="nav-number">1.</span> <span class="nav-text">android事件分发机制，请详细说下整个流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android-view绘制机制和加载过程，请详细说下整个流程"><span class="nav-number">2.</span> <span class="nav-text">android view绘制机制和加载过程，请详细说下整个流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android四大组件的加载过程，请详细介绍下"><span class="nav-number">3.</span> <span class="nav-text">android四大组件的加载过程，请详细介绍下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity的启动模式"><span class="nav-number">4.</span> <span class="nav-text">Activity的启动模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A、B、C、D分别是四种Activity的启动模式，那么A-gt-B-gt-C-gt-D-gt-A-gt-B-gt-C-gt-D分别启动，最后的activity栈是怎么样的"><span class="nav-number">5.</span> <span class="nav-text">A、B、C、D分别是四种Activity的启动模式，那么A->B->C->D->A->B->C->D分别启动，最后的activity栈是怎么样的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity缓存方法"><span class="nav-number">6.</span> <span class="nav-text">Activity缓存方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service的生命周期，两种启动方法，有什么区别"><span class="nav-number">7.</span> <span class="nav-text">Service的生命周期，两种启动方法，有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么保证service不被杀死"><span class="nav-number">8.</span> <span class="nav-text">怎么保证service不被杀死</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态的Broadcast-和动态的有什么区别"><span class="nav-number">9.</span> <span class="nav-text">静态的Broadcast 和动态的有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1Intent可以传递哪些数据类型"><span class="nav-number">10.</span> <span class="nav-text">1Intent可以传递哪些数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1Json有什么优劣势、解析的原理"><span class="nav-number">11.</span> <span class="nav-text">1Json有什么优劣势、解析的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1一个语言的编译过程"><span class="nav-number">12.</span> <span class="nav-text">1一个语言的编译过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1动画有哪几类，各有什么特点"><span class="nav-number">13.</span> <span class="nav-text">1动画有哪几类，各有什么特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1Handler、Looper消息队列模型，各部分的作用"><span class="nav-number">14.</span> <span class="nav-text">1Handler、Looper消息队列模型，各部分的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1怎样退出终止App"><span class="nav-number">15.</span> <span class="nav-text">1怎样退出终止App</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1Android-IPC-Binder原理"><span class="nav-number">16.</span> <span class="nav-text">1Android IPC:Binder原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-在Activity和Service进行通讯的时候，用到了Binder。"><span class="nav-number">16.1.</span> <span class="nav-text">1.在Activity和Service进行通讯的时候，用到了Binder。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-系统给我们生成的Binder："><span class="nav-number">16.2.</span> <span class="nav-text">2.系统给我们生成的Binder：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1描述一次跨进程通讯"><span class="nav-number">17.</span> <span class="nav-text">1描述一次跨进程通讯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1android重要术语解释"><span class="nav-number">18.</span> <span class="nav-text">1android重要术语解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1理解Window和WindowManager"><span class="nav-number">19.</span> <span class="nav-text">1理解Window和WindowManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2Bitmap的处理"><span class="nav-number">20.</span> <span class="nav-text">2Bitmap的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2如何实现一个网络框架-参考Volley"><span class="nav-number">21.</span> <span class="nav-text">2如何实现一个网络框架(参考Volley)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2ClassLoader的基础知识"><span class="nav-number">22.</span> <span class="nav-text">2ClassLoader的基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2插件化框架描述：dynamicLoadApk为例子"><span class="nav-number">23.</span> <span class="nav-text">2插件化框架描述：dynamicLoadApk为例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2热修复：Andfix为例子"><span class="nav-number">24.</span> <span class="nav-text">2热修复：Andfix为例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2线程同步的问题，常用的线程同步"><span class="nav-number">25.</span> <span class="nav-text">2线程同步的问题，常用的线程同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2Asynctask和线程池，GC相关（怎么判断哪些内存该GC，GC算法）"><span class="nav-number">26.</span> <span class="nav-text">2Asynctask和线程池，GC相关（怎么判断哪些内存该GC，GC算法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2网络"><span class="nav-number">27.</span> <span class="nav-text">2网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2数据库性能优化：索引和事务，需要找本专门的书大概了解一下"><span class="nav-number">28.</span> <span class="nav-text">2数据库性能优化：索引和事务，需要找本专门的书大概了解一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#213-APK打包流程和其内容"><span class="nav-number">29.</span> <span class="nav-text">213.APK打包流程和其内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3网络劫持的类型原理：可以百度一下了解一下具体概念"><span class="nav-number">30.</span> <span class="nav-text">3网络劫持的类型原理：可以百度一下了解一下具体概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3java类加载过程："><span class="nav-number">31.</span> <span class="nav-text">3java类加载过程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3retrofit的了解"><span class="nav-number">32.</span> <span class="nav-text">3retrofit的了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3bundle的数据结构，如何存储"><span class="nav-number">33.</span> <span class="nav-text">3bundle的数据结构，如何存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3listview内点击buttom并移动的事件流完整拦截过程："><span class="nav-number">34.</span> <span class="nav-text">3listview内点击buttom并移动的事件流完整拦截过程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3service的意义：不需要界面，在后台执行的程序"><span class="nav-number">35.</span> <span class="nav-text">3service的意义：不需要界面，在后台执行的程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3android的IPC通信方式，线程（进程间）通信机制有哪些"><span class="nav-number">36.</span> <span class="nav-text">3android的IPC通信方式，线程（进程间）通信机制有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3操作系统进程和线程的区别"><span class="nav-number">37.</span> <span class="nav-text">3操作系统进程和线程的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3HashMap的实现过程：Capacity就是buckets的数目，Load-factor就是buckets填满程度的最大比例。如果对迭代性能要求很高的话不要把capacity设置过大，也不要把load-factor设置过小。"><span class="nav-number">38.</span> <span class="nav-text">3HashMap的实现过程：Capacity就是buckets的数目，Load factor就是buckets填满程度的最大比例。如果对迭代性能要求很高的话不要把capacity设置过大，也不要把load factor设置过小。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3mvc、mvp、mvvm："><span class="nav-number">39.</span> <span class="nav-text">3mvc、mvp、mvvm：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4java的线程如何实现"><span class="nav-number">40.</span> <span class="nav-text">4java的线程如何实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4ArrayList-如何删除重复的元素或者指定的元素；"><span class="nav-number">41.</span> <span class="nav-text">4ArrayList 如何删除重复的元素或者指定的元素；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4如何设计在-UDP-上层保证-UDP-的可靠性传输；"><span class="nav-number">42.</span> <span class="nav-text">4如何设计在 UDP 上层保证 UDP 的可靠性传输；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4Java-中内部类为什么可以访问外部类"><span class="nav-number">43.</span> <span class="nav-text">4Java 中内部类为什么可以访问外部类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4设计移动端的联系人存储与查询的功能，要求快速搜索联系人，可以用到哪些数据结构？数据库索引，平衡二叉树-B树、红黑树"><span class="nav-number">44.</span> <span class="nav-text">4设计移动端的联系人存储与查询的功能，要求快速搜索联系人，可以用到哪些数据结构？数据库索引，平衡二叉树(B树、红黑树)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4红黑树特点"><span class="nav-number">45.</span> <span class="nav-text">4红黑树特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4linux异步和同步i-o"><span class="nav-number">46.</span> <span class="nav-text">4linux异步和同步i/o:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4ConcurrentHashMap内部实现，HashTable的实现被废弃的原因"><span class="nav-number">47.</span> <span class="nav-text">4ConcurrentHashMap内部实现，HashTable的实现被废弃的原因:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4HandlerThread是什么"><span class="nav-number">48.</span> <span class="nav-text">4HandlerThread是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4IntentService是什么"><span class="nav-number">49.</span> <span class="nav-text">4IntentService是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5class和dex"><span class="nav-number">50.</span> <span class="nav-text">5class和dex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5内存泄漏"><span class="nav-number">51.</span> <span class="nav-text">5内存泄漏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5过度绘制、卡顿优化"><span class="nav-number">52.</span> <span class="nav-text">5过度绘制、卡顿优化:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5apk瘦身"><span class="nav-number">53.</span> <span class="nav-text">5apk瘦身:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5ANR的形成，各个组件上出现ARN的时间限制是多少"><span class="nav-number">54.</span> <span class="nav-text">5ANR的形成，各个组件上出现ARN的时间限制是多少</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5Serializable和Parcelable-的区别"><span class="nav-number">55.</span> <span class="nav-text">5Serializable和Parcelable 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5Sharedpreferences源码简述"><span class="nav-number">56.</span> <span class="nav-text">5Sharedpreferences源码简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5操作系统如何管理内存的："><span class="nav-number">57.</span> <span class="nav-text">5操作系统如何管理内存的：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5浏览器输入地址到返回结果发生了什么"><span class="nav-number">58.</span> <span class="nav-text">5浏览器输入地址到返回结果发生了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5java泛型类型擦除发生在什么时候，通配符有什么需要注意的。"><span class="nav-number">59.</span> <span class="nav-text">5java泛型类型擦除发生在什么时候，通配符有什么需要注意的。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6activity的生命周期"><span class="nav-number">60.</span> <span class="nav-text">6activity的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6面试常考的算法"><span class="nav-number">61.</span> <span class="nav-text">6面试常考的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6Launcher进程启动另外一个进程的过程：启动一个app"><span class="nav-number">62.</span> <span class="nav-text">6Launcher进程启动另外一个进程的过程：启动一个app</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6开源框架源码"><span class="nav-number">63.</span> <span class="nav-text">6开源框架源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Fresco"><span class="nav-number">63.1.</span> <span class="nav-text">1.Fresco</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-mvc框架："><span class="nav-number">63.1.1.</span> <span class="nav-text">1.mvc框架：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Drawable层次以及绘制："><span class="nav-number">63.1.2.</span> <span class="nav-text">2.Drawable层次以及绘制：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-职责链模式"><span class="nav-number">63.1.3.</span> <span class="nav-text">3.职责链模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-内存缓存"><span class="nav-number">63.1.4.</span> <span class="nav-text">4.内存缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-硬盘缓存"><span class="nav-number">63.1.5.</span> <span class="nav-text">5.硬盘缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-对象池"><span class="nav-number">63.1.6.</span> <span class="nav-text">6.对象池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-设计模式"><span class="nav-number">63.1.7.</span> <span class="nav-text">7.设计模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-自定义计数引用：类似c-智能指针"><span class="nav-number">63.1.8.</span> <span class="nav-text">8.自定义计数引用：类似c++智能指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-博客推荐"><span class="nav-number">63.1.9.</span> <span class="nav-text">9.博客推荐</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-oKhttp："><span class="nav-number">63.2.</span> <span class="nav-text">2.oKhttp：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-同步和异步："><span class="nav-number">63.2.1.</span> <span class="nav-text">1.同步和异步：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-连接池："><span class="nav-number">63.2.2.</span> <span class="nav-text">2.连接池：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-选择路线与建立连接"><span class="nav-number">63.2.3.</span> <span class="nav-text">3.选择路线与建立连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-建立连接"><span class="nav-number">63.2.4.</span> <span class="nav-text">2.建立连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-职责链模式"><span class="nav-number">63.2.5.</span> <span class="nav-text">4.职责链模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-博客推荐"><span class="nav-number">63.2.6.</span> <span class="nav-text">5.博客推荐</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-okio"><span class="nav-number">63.3.</span> <span class="nav-text">3.okio</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-简介"><span class="nav-number">63.3.1.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-比java-io的好处："><span class="nav-number">63.3.2.</span> <span class="nav-text">2.比java io的好处：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-内部实现："><span class="nav-number">63.3.3.</span> <span class="nav-text">3.内部实现：</span></a></li></ol></li></ol></li></ol></div>
-            
-            <!--by xiaoming-->
-            <div >
-              <img src="/img/333CDC0C0E16121D97E740B0D234CB20.jpg" alt="..." width="200">
-              <img src="/img/D201873535E8B182D738FEA8B9C30EF6.jpg" alt="..." width="200">
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/02/24/2018的上半年/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2018的上半年</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2018/02/11/2018鸿洋博客总结/">
+                        <span class="hidden-mobile">2018鸿洋博客总结</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
+
+            
           </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
+        </div>
+      </div>
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2015 - 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">周生明</span>
-</div>
-
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-          <span id="scrollpercent"><span>0</span>%</span>
-        
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
       </div>
     
-
   </div>
+</div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<!-- Custom -->
 
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-  
     
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"zhoushengming"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
-  
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Android面试题第二发&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 
@@ -1710,23 +1417,9 @@
 
 
 
-  
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

@@ -1,372 +1,211 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="zh-Hans">
 
 
 
-  
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/git_logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="read the fucking source code">
+  <meta name="author" content="周生明">
+  <meta name="keywords" content="undefined">
+  <title>kotlin入坑 - 觉晓</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
-
-
-  
-  
-  
-  
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
-    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
   
 
-  
 
-  
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
-  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
 
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
 
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Android,kotlin," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="这个是一些学习笔记。碎碎记。">
-<meta name="keywords" content="Android,kotlin">
-<meta property="og:type" content="article">
-<meta property="og:title" content="kotlin入坑">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2017/12/21/kotlin入坑/index.html">
-<meta property="og:site_name" content="觉晓">
-<meta property="og:description" content="这个是一些学习笔记。碎碎记。">
-<meta property="og:image" content="https://github.com/img/kotlin_haha.jpg">
-<meta property="og:updated_time" content="2018-05-16T12:45:26.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kotlin入坑">
-<meta name="twitter:description" content="这个是一些学习笔记。碎碎记。">
-<meta name="twitter:image" content="https://github.com/img/kotlin_haha.jpg">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/12/21/kotlin入坑/"/>
-
-
-
-
-
-  <title>kotlin入坑 | 觉晓</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script  src="/js/utils.js" ></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
-  
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">觉晓</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <h1 class="site-subtitle" itemprop="description">coding..</h1>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            博客
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-algorithm">
-          <a href="/algorithm" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
-            
-            算法
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-codes">
-          <a href="/codes" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
-            
-            代码片段
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-interview">
-          <a href="/interview" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-smile-o"></i> <br />
-            
-            面试题集
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
 </nav>
 
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2017/12/21/kotlin入坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="周生明">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/QQ20200702-171655@2x.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="觉晓">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">kotlin入坑</h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fade-in-up">
+            <span class="h2" id="subtitle">
               
-                <span class="post-meta-item-text">发表于</span>
+            </span>
+
+            
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T16:15:21+08:00">
-                2017-12-21
-              </time>
-            
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2017-12-21 16:15">
+      December 21, 2017 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
-
-            
-          </span>
+          </div>
 
           
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/21/kotlin入坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/21/kotlin入坑/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
+      </div>
+    </div>
+  </header>
+
+  <main>
     
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
-      
-        <p>这个是一些学习笔记。碎碎记。</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>这个是一些学习笔记。碎碎记。</p>
 <a id="more"></a>
 <p>kotlin与android，现在是kotlin通过插件编译成jvm能运行的机器码，java有的东西kotlin都有。</p>
 <p>kotlin支持方法拓展，但是不能写到类里边。写到类里边无效。这个特性非常重要，为拓展提供了新思路。<br>方法拓展还可以给已有方法重命名，当然，原来方法名还能用，就是包了一层。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">fun 类名.拓展方法（args）&#123;&#125; //子类可以继承</div><div class="line"></div><div class="line">public var TextView.text: CharSequence  // 拓展 重命名</div><div class="line">	get() = getText()</div><div class="line">	set(v) = setText(v)</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> 类名.拓展方法（args）&#123;&#125; //子类可以继承</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">var</span> TextView.text: CharSequence  <span class="comment">// 拓展 重命名</span></div><div class="line">	<span class="keyword">get</span>() = getText()</div><div class="line">	<span class="keyword">set</span>(v) = setText(v)</div></pre></td></tr></table></figure>
 <p>支持lambda，我感觉相当于匿名内部类。</p>
 <p>好像要在Javabean的对象前加data</p>
 <p>支持对象copy并修改值。</p>
@@ -380,388 +219,285 @@
 <li>一部分是静态方法的情况 : 将方法用 companion object { } 包裹即可，这个叫“伴生对象”，可以给伴生对象起名字，放到object后，也可不加。</li>
 </ol>
 <p>bean类不用写getter、setter了， 其实还有，只是不用写，可以重写。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public classs Person &#123;</div><div class="line">	var name: String = &quot;&quot;</div><div class="line">		get() = field.toUpperCase() </div><div class="line">		set(value)&#123;</div><div class="line">			field = &quot;Name: $value&quot; </div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> classs Person &#123;</div><div class="line">	<span class="keyword">var</span> name: String = <span class="string">""</span></div><div class="line">		<span class="keyword">get</span>() = field.toUpperCase() </div><div class="line">		<span class="keyword">set</span>(<span class="keyword">value</span>)&#123;</div><div class="line">			field = <span class="string">"Name: $value"</span> </div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>重写用override，加到fun前面</p>
 <p>是空安全的，支持?:操作符，和Java里的意思不一样，java里的那个三目运算符只能用if、else表示，但是可以简写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">hah?.print() //hah不为空才打印</div><div class="line">hah!!/print() //强制打印，可能会有exception</div><div class="line">hah?.name?:&quot;null&quot; // null打印null，代替值</div><div class="line"></div><div class="line">//在变量类型后面加上问号，代表该变量是可空变量  可空变量需要强制判null</div><div class="line">var name: String? = &quot;zhangsan&quot;  </div><div class="line"></div><div class="line">var lenght:Int = if(haha!=null) haha.length: -1 // 原来java的三目这么用了</div></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="code"><pre><div class="line">hah?.<span class="built_in">print</span>() <span class="comment">//hah不为空才打印</span></div><div class="line">hah!!/<span class="built_in">print</span>() <span class="comment">//强制打印，可能会有exception</span></div><div class="line">hah?.name?:<span class="string">"null"</span> <span class="comment">// null打印null，代替值</span></div><div class="line"></div><div class="line"><span class="comment">//在变量类型后面加上问号，代表该变量是可空变量  可空变量需要强制判null</span></div><div class="line"><span class="keyword">var</span> name: <span class="built_in">String</span>? = <span class="string">"zhangsan"</span>  </div><div class="line"></div><div class="line"><span class="keyword">var</span> lenght:Int = <span class="keyword">if</span>(haha!=<span class="keyword">null</span>) haha.length: <span class="number">-1</span> <span class="comment">// 原来java的三目这么用了</span></div></pre></td></tr></table></figure>
 <p>with函数，直接使用with括号对象的属性方法。</p>
 <p>kotlin强制指定泛型，不加报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var list = ArrayList&lt;String&gt;()</div></pre></td></tr></table></figure>
+<figure class="highlight lasso"><table><tr><td class="code"><pre><div class="line"><span class="built_in">var</span> <span class="built_in">list</span> = ArrayList&lt;<span class="built_in">String</span>&gt;()</div></pre></td></tr></table></figure>
 <p>集合里边有好多拓展方法，map mapto,groupBy,filter很多，详见</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kotlin-stdlib-1.1.51-sources.jar!/generated/_Collections.kt</div></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="code"><pre><div class="line">kotlin-stdlib<span class="number">-1.1</span><span class="number">.51</span>-sources.jar!/generated/_Collections.kt</div></pre></td></tr></table></figure>
 <p>有个库叫anko，这是一个对Android使用kotlin的拓展库，JetBrains开发的。提供了新方式写UI布局。</p>
 <p>记一个简化过程<br>简化 setOnClickListener()</p>
 <p>我们用 Android 中非常典型的例子去解释它是怎么工作的:View.setOnClickListener()方法。如果我 们想用 Java 的方式去增加点击事件的回调，我首先要编写一个 OnClickListener 接口:<br>然后我们要编写一个匿名内部类去实现这个接口:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public interface OnClickListener &#123; </div><div class="line">	void onClick(View v);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">view.setOnClickListener(new OnClickListener()&#123; </div><div class="line">	@Override</div><div class="line">	public void onClick(View v) &#123;</div><div class="line">		Toast.makeText(v.getContext(), &quot;Click&quot;, Toast.LENGTH_SHORT).show();</div><div class="line"> 	&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><div class="line">public<span class="built_in"> interface </span>OnClickListener &#123; </div><div class="line">	void onClick(View v);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="code"><pre><div class="line">view.setOnClickListener(<span class="keyword">new</span> OnClickListener()&#123; </div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">		Toast.makeText(v.getContext(), <span class="string">"Click"</span>, Toast.LENGTH_SHORT).show();</div><div class="line"> 	&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p>我们将把上面的代码转换成 Kotlin(使用了 Anko 的 toast 函数):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">view.setOnClickListener(object : OnClickListener &#123; </div><div class="line">	override fun onClick(v: View) &#123;</div><div class="line">		toast(&quot;Click&quot;) </div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line">view.setOnClickListener(<span class="keyword">object</span> : OnClickListener &#123; </div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onClick</span><span class="params">(v: <span class="type">View</span>)</span></span> &#123;</div><div class="line">		toast(<span class="string">"Click"</span>) </div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>很幸运的是，Kotlin 允许 Java 库的一些优化，Interface 中包含单个函数可以被替代为一个函数。 如果我们这么去定义了，它会正常执行:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fun setOnClickListener(listener: (View) -&gt; Unit)</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">setOnClickListener</span><span class="params">(listener: (<span class="type">View</span>)</span></span> -&gt; <span class="built_in">Unit</span>)</div></pre></td></tr></table></figure>
 <p>一个 lambda 表达式通过参数的形式被定义在箭头的左边(被圆括号包围)，然后在箭头的右边返<br>回结果值。在这个例子中，我们接收一个 View，然后返回一个 Unit(没有东西)。所以根据这种思<br>想，我们可以把前面的代码简化成这样:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">view.setOnClickListener(&#123; view -&gt; toast(&quot;Click&quot;)&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight cos"><table><tr><td class="code"><pre><div class="line"><span class="keyword">view</span>.setOnClickListener(&#123; <span class="keyword">view</span> -&gt; toast(<span class="string">"Click"</span>)&#125;)</div></pre></td></tr></table></figure>
 <p>这是非常棒的简化!当我们定义了一个方法，我们必须使用大括号包围，然后在箭头的左边指定参数， 在箭头的右边返回函数执行的结果。如果左边的参数没有使用到，我们甚至可以省略左边的参数:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">view.setOnClickListener(&#123; toast(&quot;Click&quot;) &#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight cos"><table><tr><td class="code"><pre><div class="line"><span class="keyword">view</span>.setOnClickListener(&#123; toast(<span class="string">"Click"</span>) &#125;)</div></pre></td></tr></table></figure>
 <p>如果这个函数的最后一个参数是一个函数，我们可以把这个函数移动到圆括号外面: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">view.setOnClickListener() &#123; toast(&quot;Click&quot;) &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">view</span><span class="selector-class">.setOnClickListener</span>() &#123; <span class="selector-tag">toast</span>(<span class="string">"Click"</span>) &#125;</div></pre></td></tr></table></figure>
 <p>并且，最后，如果这个函数只有一个参数，我们可以省略这个圆括号: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">view.setOnClickListener &#123; toast(&quot;Click&quot;) &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">view<span class="selector-class">.setOnClickListener</span> &#123; toast(<span class="string">"Click"</span>) &#125;</div></pre></td></tr></table></figure>
 <p>比原始的 Java 代码简短了 5 倍多，并且更加容易理解它所做的事情。非常让人影响深刻。</p>
 <p>inline 内联函数， Anko也是基于这个思想来实现的 Android layout 的 DSL 化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">inline fun testInline(code: () -&gt; Unit) &#123;</div><div class="line">    code();</div><div class="line">&#125;</div><div class="line"></div><div class="line">testInline &#123;</div><div class="line">    print(&quot;af&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="title">testInline</span><span class="params">(code: ()</span></span> -&gt; <span class="built_in">Unit</span>) &#123;</div><div class="line">    code();</div><div class="line">&#125;</div><div class="line"></div><div class="line">testInline &#123;</div><div class="line">    print(<span class="string">"af"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>委托，标准委托，用by<br>lazy 懒加载，就是使用的时候才进行调用，一般用于初始化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">val datebase: SQLiteOpenHelper by lazy &#123;</div><div class="line">    MyDatabaseHelper(applicationContext)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight coq"><table><tr><td class="code"><pre><div class="line">val datebase: SQLiteOpenHelper <span class="built_in">by</span> <span class="built_in">lazy</span> &#123;</div><div class="line">    MyDatabaseHelper(applicationContext)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>observable 观察者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">var property by Delegates.observable(&quot;&quot;)&#123;</div><div class="line">    d,old,new -&gt;  // 这个是一个lambda表达式 实际是onchange 源码在下边几行</div><div class="line">    database.saveChanges(this,new)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 源码</div><div class="line">public inline fun &lt;T&gt; observable(initialValue: T, crossinline onChange: (property: KProperty&lt;*&gt;, oldValue: T, newValue: T) -&gt; Unit):</div><div class="line">    ReadWriteProperty&lt;Any?, T&gt; = object : ObservableProperty&lt;T&gt;(initialValue) &#123;</div><div class="line">        override fun afterChange(property: KProperty&lt;*&gt;, oldValue: T, newValue: T) = onChange(property, oldValue, newValue)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">// 也可以这么写</div><div class="line">var property by Delegates.observable(&quot;&quot;, onChange = &#123;</div><div class="line">    property: KProperty&lt;*&gt;, oldValue: String, newValue: String -&gt;</div><div class="line">    database.saveChanges(oldValue, newValue)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> property <span class="keyword">by</span> Delegates.observable(<span class="string">""</span>)&#123;</div><div class="line">    d,old,new -&gt;  <span class="comment">// 这个是一个lambda表达式 实际是onchange 源码在下边几行</span></div><div class="line">    database.saveChanges(<span class="keyword">this</span>,new)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 源码</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">observable</span><span class="params">(initialValue: <span class="type">T</span>, <span class="keyword">crossinline</span> onChange: (<span class="type">property</span>: <span class="type">KProperty</span>&lt;*&gt;, oldValue: <span class="type">T</span>, newValue: <span class="type">T</span>)</span></span> -&gt; <span class="built_in">Unit</span>):</div><div class="line">    ReadWriteProperty&lt;Any?, T&gt; = <span class="keyword">object</span> : ObservableProperty&lt;T&gt;(initialValue) &#123;</div><div class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">afterChange</span><span class="params">(property: <span class="type">KProperty</span>&lt;*&gt;, oldValue: <span class="type">T</span>, newValue: <span class="type">T</span>)</span></span> = onChange(property, oldValue, newValue)</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="comment">// 也可以这么写</span></div><div class="line"><span class="keyword">var</span> property <span class="keyword">by</span> Delegates.observable(<span class="string">""</span>, onChange = &#123;</div><div class="line">    property: KProperty&lt;*&gt;, oldValue: String, newValue: String -&gt;</div><div class="line">    database.saveChanges(oldValue, newValue)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p>Vetoable 否决器（姑且这么叫吧）用于决定一个值是不是可以赋给变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//只能是&quot;HAHA&quot;</div><div class="line">var onlyHAHA by Delegates.vetoable(&quot;&quot;, &#123; p, old, new -&gt;</div><div class="line">    new == &quot;HAHA&quot;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight haxe"><table><tr><td class="code"><pre><div class="line"><span class="comment">//只能是"HAHA"</span></div><div class="line"><span class="keyword">var</span> onlyHAHA by Delegates.vetoable(<span class="string">""</span>, &#123; p, old, <span class="keyword">new</span> <span class="type"></span>-&gt;</div><div class="line">    <span class="keyword">new</span> <span class="type"></span>== <span class="string">"HAHA"</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p>Not Null 指定变量不能为空，为null则抛出异常</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var notNull: String by Delegates.notNull()</div></pre></td></tr></table></figure>
+<figure class="highlight lasso"><table><tr><td class="code"><pre><div class="line"><span class="built_in">var</span> notNull: <span class="built_in">String</span> <span class="keyword">by</span> Delegates.notNull()</div></pre></td></tr></table></figure>
 <p>从Map中获取映射值；map以构造方法的方式传入bean，bean中属性后添加by map,即可自动匹配,if field_name==map.key then:field_value=map.value</p>
 <p>自定义一个委托，实现一个值只能修改一次</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 定义</div><div class="line">private class NotNullSingleValueVar&lt;T&gt;() : ReadWriteProperty&lt;Any?, T&gt; &#123;</div><div class="line">    private var value: T? = null</div><div class="line"></div><div class="line">    override fun getValue(thisRef: Any?, property: KProperty&lt;*&gt;): T &#123;</div><div class="line">        return value ?: throw IllegalStateException(&quot;not initialized&quot;)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    override fun setValue(thisRef: Any?, property: KProperty&lt;*&gt;, value: T) &#123;</div><div class="line">        this.value = if (this.value == null) value else throw IllegalStateException(&quot;already initialized&quot;)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">//封装</div><div class="line">object DelegatesExt &#123;</div><div class="line">    fun &lt;T&gt; notNullSingleValue():</div><div class="line">            ReadWriteProperty&lt;Any?, T&gt; &#123;</div><div class="line">        return NotNullSingleValueVar()</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// demo</div><div class="line">    var notNullSingle: String by DelegatesExt.notNullSingleValue()</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 定义</span></div><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">NotNullSingleValueVar</span>&lt;<span class="type">T</span>&gt;</span>() : ReadWriteProperty&lt;Any?, T&gt; &#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">var</span> value: T? = <span class="literal">null</span></div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getValue</span><span class="params">(thisRef: <span class="type">Any</span>?, property: <span class="type">KProperty</span>&lt;*&gt;)</span></span>: T &#123;</div><div class="line">        <span class="keyword">return</span> value ?: <span class="keyword">throw</span> IllegalStateException(<span class="string">"not initialized"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setValue</span><span class="params">(thisRef: <span class="type">Any</span>?, property: <span class="type">KProperty</span>&lt;*&gt;, value: <span class="type">T</span>)</span></span> &#123;</div><div class="line">        <span class="keyword">this</span>.value = <span class="keyword">if</span> (<span class="keyword">this</span>.value == <span class="literal">null</span>) value <span class="keyword">else</span> <span class="keyword">throw</span> IllegalStateException(<span class="string">"already initialized"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//封装</span></div><div class="line"><span class="keyword">object</span> DelegatesExt &#123;</div><div class="line">    <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">notNullSingleValue</span><span class="params">()</span></span>:</div><div class="line">            ReadWriteProperty&lt;Any?, T&gt; &#123;</div><div class="line">        <span class="keyword">return</span> NotNullSingleValueVar()</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// demo</span></div><div class="line">    <span class="keyword">var</span> notNullSingle: String <span class="keyword">by</span> DelegatesExt.notNullSingleValue()</div></pre></td></tr></table></figure>
 <p>object关键字；在参数中，相当于new一个匿名内部类；修饰类，相当于单例模式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">view.setOnClickListener(new OnClickListener()&#123; </div><div class="line">	@Override</div><div class="line">	public void onClick(View v) &#123;</div><div class="line">		Toast.makeText(v.getContext(), &quot;Click&quot;, Toast.LENGTH_SHORT).show();</div><div class="line"> 	&#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">// 我们将把上面的代码转换成 Kotlin(使用了 Anko 的 toast 函数):</div><div class="line">view.setOnClickListener(object : OnClickListener &#123; </div><div class="line">	override fun onClick(v: View) &#123;</div><div class="line">		toast(&quot;Click&quot;) </div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 简单单例模式</div><div class="line">object Obj&#123;</div><div class="line">    init&#123;</div><div class="line">        println(&quot;object init...&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line">view.setOnClickListener(new OnClickListener()&#123; </div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="keyword">public</span> void onClick(View v) &#123;</div><div class="line">		Toast.makeText(v.getContext(), <span class="string">"Click"</span>, Toast.LENGTH_SHORT).show();</div><div class="line"> 	&#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 我们将把上面的代码转换成 Kotlin(使用了 Anko 的 toast 函数):</span></div><div class="line">view.setOnClickListener(<span class="keyword">object</span> : OnClickListener &#123; </div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onClick</span><span class="params">(v: <span class="type">View</span>)</span></span> &#123;</div><div class="line">		toast(<span class="string">"Click"</span>) </div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 简单单例模式</span></div><div class="line"><span class="keyword">object</span> Obj&#123;</div><div class="line">    init&#123;</div><div class="line">        println(<span class="string">"object init..."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>泛型函数<br>不仅类可以有类型参数。函数也可以有。类型参数要放在函数名称之前：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">fun &lt;T&gt; singletonList(item: T): List&lt;T&gt; &#123;</div><div class="line">    // ……</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; T.basicToString() : String &#123;  // 扩展函数</div><div class="line">    // ……</div><div class="line">&#125;</div><div class="line"></div><div class="line">//要调用泛型函数，在调用处函数名之后指定类型参数即可：</div><div class="line">val l = singletonList&lt;Int&gt;(1)</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">singletonList</span><span class="params">(item: <span class="type">T</span>)</span></span>: List&lt;T&gt; &#123;</div><div class="line">    <span class="comment">// ……</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> T.<span class="title">basicToString</span><span class="params">()</span></span> : String &#123;  <span class="comment">// 扩展函数</span></div><div class="line">    <span class="comment">// ……</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//要调用泛型函数，在调用处函数名之后指定类型参数即可：</span></div><div class="line"><span class="keyword">val</span> l = singletonList&lt;<span class="built_in">Int</span>&gt;(<span class="number">1</span>)</div></pre></td></tr></table></figure>
 <p>还有好多不容易理解的特性，以后继续更新。</p>
 <p>放个图，哈哈</p>
-<p><img src="/img/kotlin_haha.jpg"></p>
+<p><img src="/img/kotlin_haha.jpg" srcset="/img/loading.gif"></p>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-            <a href="/tags/kotlin/" rel="tag"># kotlin</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/12/08/非对称加密/" rel="next" title="非对称加密">
-                <i class="fa fa-chevron-left"></i> 非对称加密
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/25/一年又一年——2017末/" rel="prev" title="一年又一年——2017末">
-                一年又一年——2017末 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2017/12/21/kotlin入坑/"
-           data-title="kotlin入坑" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2017/12/21/kotlin入坑/">
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/img/QQ20200702-171655@2x.png"
-               alt="周生明" />
-          <p class="site-author-name" itemprop="name">周生明</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-           
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">71</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Android/">Android</a>
+                    
+                      <a class="hover-with-bg" href="/tags/kotlin/">kotlin</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/12/25/一年又一年——2017末/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一年又一年——2017末</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2017/12/08/非对称加密/">
+                        <span class="hidden-mobile">非对称加密</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
-          
 
-          
-
-          
             
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://blog.csdn.net/u010954948" target="_blank" title="CSDN">
-                  
-                    <i class="fa fa-fw fa-tree"></i>
-                  
-                  CSDN
-                </a>
-              </span>
-            
-          
+          </div>
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
+      </div>
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2015 - 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">周生明</span>
-</div>
-
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-          <span id="scrollpercent"><span>0</span>%</span>
-        
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
       </div>
     
-
   </div>
+</div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<!-- Custom -->
 
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-  
     
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"zhoushengming"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
-  
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "kotlin入坑&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 
@@ -778,23 +514,9 @@
 
 
 
-  
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

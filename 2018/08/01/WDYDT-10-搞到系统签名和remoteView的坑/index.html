@@ -1,734 +1,443 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="zh-Hans">
 
 
 
-  
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/git_logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="read the fucking source code">
+  <meta name="author" content="周生明">
+  <meta name="keywords" content="undefined">
+  <title>WDYDT-10-搞到系统签名和remoteView的坑 - 觉晓</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
-
-
-  
-  
-  
-  
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
-    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
   
 
-  
 
-  
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
-  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
 
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
 
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="周生明, ericcode, android, 代码, 编程" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="由于miui的一个广播的权限是SignatureOrSystem，所以我想拿到这个广播就要系统签名，所以我从网上找到了一个根据系统签名文件生成keystore的方法。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="WDYDT-10-搞到系统签名和remoteView的坑">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2018/08/01/WDYDT-10-搞到系统签名和remoteView的坑/index.html">
-<meta property="og:site_name" content="觉晓">
-<meta property="og:description" content="由于miui的一个广播的权限是SignatureOrSystem，所以我想拿到这个广播就要系统签名，所以我从网上找到了一个根据系统签名文件生成keystore的方法。">
-<meta property="og:updated_time" content="2018-08-01T07:56:20.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WDYDT-10-搞到系统签名和remoteView的坑">
-<meta name="twitter:description" content="由于miui的一个广播的权限是SignatureOrSystem，所以我想拿到这个广播就要系统签名，所以我从网上找到了一个根据系统签名文件生成keystore的方法。">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/08/01/WDYDT-10-搞到系统签名和remoteView的坑/"/>
-
-
-
-
-
-  <title>WDYDT-10-搞到系统签名和remoteView的坑 | 觉晓</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script  src="/js/utils.js" ></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
-  
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">觉晓</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <h1 class="site-subtitle" itemprop="description">coding..</h1>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            博客
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-algorithm">
-          <a href="/algorithm" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
-            
-            算法
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-codes">
-          <a href="/codes" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
-            
-            代码片段
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-interview">
-          <a href="/interview" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-smile-o"></i> <br />
-            
-            面试题集
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
 </nav>
 
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2018/08/01/WDYDT-10-搞到系统签名和remoteView的坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="周生明">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/QQ20200702-171655@2x.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="觉晓">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">WDYDT-10-搞到系统签名和remoteView的坑</h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fade-in-up">
+            <span class="h2" id="subtitle">
               
-                <span class="post-meta-item-text">发表于</span>
+            </span>
+
+            
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T15:27:25+08:00">
-                2018-08-01
-              </time>
-            
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-08-01 15:27">
+      August 1, 2018 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      823 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
-
-            
-          </span>
+          </div>
 
           
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/01/WDYDT-10-搞到系统签名和remoteView的坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/01/WDYDT-10-搞到系统签名和remoteView的坑/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
+      </div>
+    </div>
+  </header>
+
+  <main>
     
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
-      
-        <!-- abstract area -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <!-- abstract area -->
 <p>由于miui的一个广播的权限是SignatureOrSystem，所以我想拿到这个广播就要系统签名，所以我从网上找到了一个根据系统签名文件生成keystore的方法。</p>
 <a id="more"></a>
 <h3 id="系统签名APP"><a href="#系统签名APP" class="headerlink" title="系统签名APP"></a>系统签名APP</h3><p>首先你要找的系统的签名存放地址：<br>/build/target/product/security/</p>
-<p>如果直接用这个签名给APP签名可以用一下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar signapk.jar platform.x509.pem platform.pk8 XXX.apk XXXNew.apk</div></pre></td></tr></table></figure></p>
-<p>如果想生成keystore，需要一下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># </div><div class="line">openssl pkcs8 -inform DER -nocrypt -in platform.pk8 -out platform.pem</div><div class="line"></div><div class="line"># 设置的密码是android name是androiddebugkey</div><div class="line">openssl pkcs12 -export -in platform.x509.pem -out platform.p12 -inkey platform.pem -password pass:android -name androiddebugkey</div><div class="line"></div><div class="line">#生成platform.keystore</div><div class="line">keytool -importkeystore -deststorepass android -destkeystore ./platform.keystore -srckeystore platform.p12 -srcstoretype PKCS12 -srcstorepass android</div></pre></td></tr></table></figure></p>
+<p>如果直接用这个签名给APP签名可以用一下命令：<br><figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">java -jar signapk<span class="selector-class">.jar</span> platform<span class="selector-class">.x509</span><span class="selector-class">.pem</span> platform<span class="selector-class">.pk8</span> XXX<span class="selector-class">.apk</span> XXXNew.apk</div></pre></td></tr></table></figure></p>
+<p>如果想生成keystore，需要一下命令<br><figure class="highlight delphi"><table><tr><td class="code"><pre><div class="line"># </div><div class="line">openssl pkcs8 -inform DER -nocrypt -<span class="keyword">in</span> <span class="keyword">platform</span>.pk8 -<span class="keyword">out</span> <span class="keyword">platform</span>.pem</div><div class="line"></div><div class="line"># 设置的密码是android <span class="keyword">name</span>是androiddebugkey</div><div class="line">openssl pkcs12 -<span class="keyword">export</span> -<span class="keyword">in</span> <span class="keyword">platform</span>.x509.pem -<span class="keyword">out</span> <span class="keyword">platform</span>.p12 -inkey <span class="keyword">platform</span>.pem -password pass:android -<span class="keyword">name</span> androiddebugkey</div><div class="line"></div><div class="line">#生成<span class="keyword">platform</span>.keystore</div><div class="line">keytool -importkeystore -deststorepass android -destkeystore ./<span class="keyword">platform</span>.keystore -srckeystore <span class="keyword">platform</span>.p12 -srcstoretype PKCS12 -srcstorepass android</div></pre></td></tr></table></figure></p>
 <p>参考：</p>
 <blockquote>
 <p><a href="https://blog.csdn.net/QQxiaoqiang1573/article/details/52252843" target="_blank" rel="external">https://blog.csdn.net/QQxiaoqiang1573/article/details/52252843</a><br><a href="http://www.cnblogs.com/blairsProgrammer/p/4220904.html" target="_blank" rel="external">http://www.cnblogs.com/blairsProgrammer/p/4220904.html</a><br>权限相关 <a href="https://blog.csdn.net/jltxgcy/article/details/48288467" target="_blank" rel="external">https://blog.csdn.net/jltxgcy/article/details/48288467</a> </p>
 </blockquote>
-<p>然后你就可以配置gradle实现自动签名了，配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    signingConfigs &#123;</div><div class="line">        androiddebugkey &#123;</div><div class="line">            keyAlias &apos;you key name&apos;</div><div class="line">            keyPassword &apos;you password&apos;</div><div class="line">            storeFile file(&apos;../testkey-signer/platform.keystore&apos;)</div><div class="line">            storePassword &apos;you password&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">            minifyEnabled false</div><div class="line">            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;</div><div class="line">            signingConfig signingConfigs.androiddebugkey</div><div class="line">        &#125;</div><div class="line">        debug &#123;</div><div class="line">            signingConfig signingConfigs.androiddebugkey</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>然后你就可以配置gradle实现自动签名了，配置如下：<br><figure class="highlight nginx"><table><tr><td class="code"><pre><div class="line"><span class="section">android</span> &#123;</div><div class="line">    <span class="section">signingConfigs</span> &#123;</div><div class="line">        <span class="section">androiddebugkey</span> &#123;</div><div class="line">            <span class="attribute">keyAlias</span> <span class="string">'you key name'</span></div><div class="line">            keyPassword <span class="string">'you password'</span></div><div class="line">            storeFile file(<span class="string">'../testkey-signer/platform.keystore'</span>)</div><div class="line">            storePassword <span class="string">'you password'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    buildTypes &#123;</div><div class="line">        <span class="section">release</span> &#123;</div><div class="line">            <span class="attribute">minifyEnabled</span> <span class="literal">false</span></div><div class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></div><div class="line">            signingConfig signingConfigs.androiddebugkey</div><div class="line">        &#125;</div><div class="line">        <span class="literal">debug</span> &#123;</div><div class="line">            <span class="attribute">signingConfig</span> signingConfigs.androiddebugkey</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p>注意 signingConfigs 必须放到buildTypes前面，不然会报错，原因和声明顺序有关。</p>
 <h3 id="RemoteView的一个坑"><a href="#RemoteView的一个坑" class="headerlink" title="RemoteView的一个坑"></a>RemoteView的一个坑</h3><p>RemoteView被使用在notification和widget中，可以设置点击事件，一般有两种setOnClickPendingIntent和setOnClickFillInIntent。<br>其中setOnClickPendingIntent是传入PendingIntent，setOnClickFillInIntent传入Intent。<br>但是！！！<br>setOnClickPendingIntent是不支持LisetView的。<br>如果在listview的情况在使用setOnClickFillInIntent，传入的intent只会被AppWidgetProvider(其实这是个BroadcastReceiver)接收。</p>
-<p>一下是SDK中的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">package android.widget;</div><div class="line">public class RemoteViews implements Parcelable, Filter &#123;</div><div class="line"></div><div class="line">     /**</div><div class="line">     * Equivalent to calling</div><div class="line">     * &#123;@link android.view.View#setOnClickListener(android.view.View.OnClickListener)&#125;</div><div class="line">     * to launch the provided &#123;@link PendingIntent&#125;.</div><div class="line">     *</div><div class="line">     * When setting the on-click action of items within collections (eg. &#123;@link ListView&#125;,</div><div class="line">     * &#123;@link StackView&#125; etc.), this method will not work. Instead, use &#123;@link</div><div class="line">     * RemoteViews#setPendingIntentTemplate(int, PendingIntent)&#125; in conjunction with</div><div class="line">     * &#123;@link RemoteViews#setOnClickFillInIntent(int, Intent)&#125;.</div><div class="line">     *</div><div class="line">     * @param viewId The id of the view that will trigger the &#123;@link PendingIntent&#125; when clicked</div><div class="line">     * @param pendingIntent The &#123;@link PendingIntent&#125; to send when user clicks</div><div class="line">     */</div><div class="line">    public void setOnClickPendingIntent(int viewId, PendingIntent pendingIntent) &#123;</div><div class="line">        addAction(new SetOnClickPendingIntent(viewId, pendingIntent));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * When using collections (eg. &#123;@link ListView&#125;, &#123;@link StackView&#125; etc.) in widgets, it is very</div><div class="line">     * costly to set PendingIntents on the individual items, and is hence not permitted. Instead</div><div class="line">     * this method should be used to set a single PendingIntent template on the collection, and</div><div class="line">     * individual items can differentiate their on-click behavior using</div><div class="line">     * &#123;@link RemoteViews#setOnClickFillInIntent(int, Intent)&#125;.</div><div class="line">     *</div><div class="line">     * @param viewId The id of the collection who&apos;s children will use this PendingIntent template</div><div class="line">     *          when clicked</div><div class="line">     * @param pendingIntentTemplate The &#123;@link PendingIntent&#125; to be combined with extras specified</div><div class="line">     *          by a child of viewId and executed when that child is clicked</div><div class="line">     */</div><div class="line">    public void setPendingIntentTemplate(int viewId, PendingIntent pendingIntentTemplate) &#123;</div><div class="line">        addAction(new SetPendingIntentTemplate(viewId, pendingIntentTemplate));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * When using collections (eg. &#123;@link ListView&#125;, &#123;@link StackView&#125; etc.) in widgets, it is very</div><div class="line">     * costly to set PendingIntents on the individual items, and is hence not permitted. Instead</div><div class="line">     * a single PendingIntent template can be set on the collection, see &#123;@link</div><div class="line">     * RemoteViews#setPendingIntentTemplate(int, PendingIntent)&#125;, and the individual on-click</div><div class="line">     * action of a given item can be distinguished by setting a fillInIntent on that item. The</div><div class="line">     * fillInIntent is then combined with the PendingIntent template in order to determine the final</div><div class="line">     * intent which will be executed when the item is clicked. This works as follows: any fields</div><div class="line">     * which are left blank in the PendingIntent template, but are provided by the fillInIntent</div><div class="line">     * will be overwritten, and the resulting PendingIntent will be used. The rest</div><div class="line">     * of the PendingIntent template will then be filled in with the associated fields that are</div><div class="line">     * set in fillInIntent. See &#123;@link Intent#fillIn(Intent, int)&#125; for more details.</div><div class="line">     *</div><div class="line">     * @param viewId The id of the view on which to set the fillInIntent</div><div class="line">     * @param fillInIntent The intent which will be combined with the parent&apos;s PendingIntent</div><div class="line">     *        in order to determine the on-click behavior of the view specified by viewId</div><div class="line">     */</div><div class="line">    public void setOnClickFillInIntent(int viewId, Intent fillInIntent) &#123;</div><div class="line">        addAction(new SetOnClickFillInIntent(viewId, fillInIntent));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一下是SDK中的代码:<br><figure class="highlight applescript"><table><tr><td class="code"><pre><div class="line">package android.widget;</div><div class="line">public <span class="built_in">class</span> RemoteViews implements Parcelable, Filter &#123;</div><div class="line"></div><div class="line">     /**</div><div class="line">     * Equivalent <span class="keyword">to</span> calling</div><div class="line">     * &#123;@link android.view.View<span class="comment">#setOnClickListener(android.view.View.OnClickListener)&#125;</span></div><div class="line">     * <span class="keyword">to</span> <span class="built_in">launch</span> <span class="keyword">the</span> provided &#123;@link PendingIntent&#125;.</div><div class="line">     *</div><div class="line">     * When setting <span class="keyword">the</span> <span class="keyword">on</span>-click action <span class="keyword">of</span> items within collections (eg. &#123;@link ListView&#125;,</div><div class="line">     * &#123;@link StackView&#125; etc.), this method will <span class="keyword">not</span> work. Instead, use &#123;@link</div><div class="line">     * RemoteViews<span class="comment">#setPendingIntentTemplate(int, PendingIntent)&#125; in conjunction with</span></div><div class="line">     * &#123;@link RemoteViews<span class="comment">#setOnClickFillInIntent(int, Intent)&#125;.</span></div><div class="line">     *</div><div class="line">     * @param viewId The <span class="built_in">id</span> <span class="keyword">of</span> <span class="keyword">the</span> view <span class="keyword">that</span> will trigger <span class="keyword">the</span> &#123;@link PendingIntent&#125; when clicked</div><div class="line">     * @param pendingIntent The &#123;@link PendingIntent&#125; <span class="keyword">to</span> send when user clicks</div><div class="line">     */</div><div class="line">    public void setOnClickPendingIntent(int viewId, PendingIntent pendingIntent) &#123;</div><div class="line">        addAction(new SetOnClickPendingIntent(viewId, pendingIntent));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * When using collections (eg. &#123;@link ListView&#125;, &#123;@link StackView&#125; etc.) <span class="keyword">in</span> widgets, <span class="keyword">it</span> <span class="keyword">is</span> very</div><div class="line">     * costly <span class="keyword">to</span> <span class="keyword">set</span> PendingIntents <span class="keyword">on</span> <span class="keyword">the</span> individual items, <span class="keyword">and</span> <span class="keyword">is</span> hence <span class="keyword">not</span> permitted. Instead</div><div class="line">     * this method should be used <span class="keyword">to</span> <span class="keyword">set</span> a single PendingIntent template <span class="keyword">on</span> <span class="keyword">the</span> collection, <span class="keyword">and</span></div><div class="line">     * individual items can differentiate their <span class="keyword">on</span>-click behavior using</div><div class="line">     * &#123;@link RemoteViews<span class="comment">#setOnClickFillInIntent(int, Intent)&#125;.</span></div><div class="line">     *</div><div class="line">     * @param viewId The <span class="built_in">id</span> <span class="keyword">of</span> <span class="keyword">the</span> collection who's children will use this PendingIntent template</div><div class="line">     *          when clicked</div><div class="line">     * @param pendingIntentTemplate The &#123;@link PendingIntent&#125; <span class="keyword">to</span> be combined <span class="keyword">with</span> extras specified</div><div class="line">     *          <span class="keyword">by</span> a child <span class="keyword">of</span> viewId <span class="keyword">and</span> executed when <span class="keyword">that</span> child <span class="keyword">is</span> clicked</div><div class="line">     */</div><div class="line">    public void setPendingIntentTemplate(int viewId, PendingIntent pendingIntentTemplate) &#123;</div><div class="line">        addAction(new SetPendingIntentTemplate(viewId, pendingIntentTemplate));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * When using collections (eg. &#123;@link ListView&#125;, &#123;@link StackView&#125; etc.) <span class="keyword">in</span> widgets, <span class="keyword">it</span> <span class="keyword">is</span> very</div><div class="line">     * costly <span class="keyword">to</span> <span class="keyword">set</span> PendingIntents <span class="keyword">on</span> <span class="keyword">the</span> individual items, <span class="keyword">and</span> <span class="keyword">is</span> hence <span class="keyword">not</span> permitted. Instead</div><div class="line">     * a single PendingIntent template can be <span class="keyword">set</span> <span class="keyword">on</span> <span class="keyword">the</span> collection, see &#123;@link</div><div class="line">     * RemoteViews<span class="comment">#setPendingIntentTemplate(int, PendingIntent)&#125;, and the individual on-click</span></div><div class="line">     * action <span class="keyword">of</span> a <span class="keyword">given</span> <span class="built_in">item</span> can be distinguished <span class="keyword">by</span> setting a fillInIntent <span class="keyword">on</span> <span class="keyword">that</span> <span class="built_in">item</span>. The</div><div class="line">     * fillInIntent <span class="keyword">is</span> <span class="keyword">then</span> combined <span class="keyword">with</span> <span class="keyword">the</span> PendingIntent template <span class="keyword">in</span> order <span class="keyword">to</span> determine <span class="keyword">the</span> final</div><div class="line">     * intent which will be executed when <span class="keyword">the</span> <span class="built_in">item</span> <span class="keyword">is</span> clicked. This works <span class="keyword">as</span> follows: any fields</div><div class="line">     * which are left blank <span class="keyword">in</span> <span class="keyword">the</span> PendingIntent template, <span class="keyword">but</span> are provided <span class="keyword">by</span> <span class="keyword">the</span> fillInIntent</div><div class="line">     * will be overwritten, <span class="keyword">and</span> <span class="keyword">the</span> resulting PendingIntent will be used. The <span class="built_in">rest</span></div><div class="line">     * <span class="keyword">of</span> <span class="keyword">the</span> PendingIntent template will <span class="keyword">then</span> be filled <span class="keyword">in</span> <span class="keyword">with</span> <span class="keyword">the</span> associated fields <span class="keyword">that</span> are</div><div class="line">     * <span class="keyword">set</span> <span class="keyword">in</span> fillInIntent. See &#123;@link Intent<span class="comment">#fillIn(Intent, int)&#125; for more details.</span></div><div class="line">     *</div><div class="line">     * @param viewId The <span class="built_in">id</span> <span class="keyword">of</span> <span class="keyword">the</span> view <span class="keyword">on</span> which <span class="keyword">to</span> <span class="keyword">set</span> <span class="keyword">the</span> fillInIntent</div><div class="line">     * @param fillInIntent The intent which will be combined <span class="keyword">with</span> <span class="keyword">the</span> parent's PendingIntent</div><div class="line">     *        <span class="keyword">in</span> order <span class="keyword">to</span> determine <span class="keyword">the</span> <span class="keyword">on</span>-click behavior <span class="keyword">of</span> <span class="keyword">the</span> view specified <span class="keyword">by</span> viewId</div><div class="line">     */</div><div class="line">    public void setOnClickFillInIntent(int viewId, Intent fillInIntent) &#123;</div><div class="line">        addAction(new SetOnClickFillInIntent(viewId, fillInIntent));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/07/24/WDYDT-9-Java性能优化权威指南/" rel="next" title="WDYDT-9-Java性能优化权威指南">
-                <i class="fa fa-chevron-left"></i> WDYDT-9-Java性能优化权威指南
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/02/WDYDT-11-Android-Signature-Version-V1-V2/" rel="prev" title="WDYDT-11-Android Signature Version V1 V2">
-                WDYDT-11-Android Signature Version V1 V2 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2018/08/01/WDYDT-10-搞到系统签名和remoteView的坑/"
-           data-title="WDYDT-10-搞到系统签名和remoteView的坑" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2018/08/01/WDYDT-10-搞到系统签名和remoteView的坑/">
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/img/QQ20200702-171655@2x.png"
-               alt="周生明" />
-          <p class="site-author-name" itemprop="name">周生明</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-           
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">71</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://blog.csdn.net/u010954948" target="_blank" title="CSDN">
-                  
-                    <i class="fa fa-fw fa-tree"></i>
-                  
-                  CSDN
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
               
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统签名APP"><span class="nav-number">1.</span> <span class="nav-text">系统签名APP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RemoteView的一个坑"><span class="nav-number">2.</span> <span class="nav-text">RemoteView的一个坑</span></a></li></ol></div>
-            
-            <!--by xiaoming-->
-            <div >
-              <img src="/img/333CDC0C0E16121D97E740B0D234CB20.jpg" alt="..." width="200">
-              <img src="/img/D201873535E8B182D738FEA8B9C30EF6.jpg" alt="..." width="200">
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/08/02/WDYDT-11-Android-Signature-Version-V1-V2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">WDYDT-11-Android Signature Version V1 V2</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2018/07/24/WDYDT-9-Java性能优化权威指南/">
+                        <span class="hidden-mobile">WDYDT-9-Java性能优化权威指南</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
+
+            
           </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
+        </div>
+      </div>
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2015 - 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">周生明</span>
-</div>
-
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-          <span id="scrollpercent"><span>0</span>%</span>
-        
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
       </div>
     
-
   </div>
+</div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<!-- Custom -->
 
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-  
     
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"zhoushengming"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
-  
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "WDYDT-10-搞到系统签名和remoteView的坑&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 
@@ -745,23 +454,9 @@
 
 
 
-  
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

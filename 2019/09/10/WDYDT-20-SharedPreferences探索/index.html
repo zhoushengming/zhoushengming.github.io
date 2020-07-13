@@ -1,752 +1,461 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="zh-Hans">
 
 
 
-  
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/git_logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="read the fucking source code">
+  <meta name="author" content="周生明">
+  <meta name="keywords" content="undefined">
+  <title>WDYDT-20-SharedPreferences探索 - 觉晓</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
-
-
-  
-  
-  
-  
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
-    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
   
 
   
 
-  
 
-  
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
-  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
 
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
 
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Android," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/git_logo.png?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="前几天遇到了一个使用SharedPreferences(以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp#getInt()的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。 (源码基于android-28)">
-<meta name="keywords" content="Android">
-<meta property="og:type" content="article">
-<meta property="og:title" content="WDYDT-20-SharedPreferences探索">
-<meta property="og:url" content="https://github.com/zhoushengming/zhoushengming.github.io/2019/09/10/WDYDT-20-SharedPreferences探索/index.html">
-<meta property="og:site_name" content="觉晓">
-<meta property="og:description" content="前几天遇到了一个使用SharedPreferences(以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp#getInt()的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。 (源码基于android-28)">
-<meta property="og:updated_time" content="2019-09-10T07:11:20.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WDYDT-20-SharedPreferences探索">
-<meta name="twitter:description" content="前几天遇到了一个使用SharedPreferences(以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp#getInt()的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。 (源码基于android-28)">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://github.com/zhoushengming/zhoushengming.github.io/2019/09/10/WDYDT-20-SharedPreferences探索/"/>
-
-
-
-
-
-  <title>WDYDT-20-SharedPreferences探索 | 觉晓</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script  src="/js/utils.js" ></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
-  
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">觉晓</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <h1 class="site-subtitle" itemprop="description">coding..</h1>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            博客
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-algorithm">
-          <a href="/algorithm" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
-            
-            算法
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-codes">
-          <a href="/codes" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
-            
-            代码片段
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-interview">
-          <a href="/interview" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-smile-o"></i> <br />
-            
-            面试题集
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
 </nav>
 
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/zhoushengming/zhoushengming.github.io/2019/09/10/WDYDT-20-SharedPreferences探索/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="周生明">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/QQ20200702-171655@2x.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="觉晓">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">WDYDT-20-SharedPreferences探索</h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fade-in-up">
+            <span class="h2" id="subtitle">
               
-                <span class="post-meta-item-text">发表于</span>
+            </span>
+
+            
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-10T13:20:52+08:00">
-                2019-09-10
-              </time>
-            
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-09-10 13:20">
+      September 10, 2019 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
-
-            
-          </span>
+          </div>
 
           
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/10/WDYDT-20-SharedPreferences探索/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/09/10/WDYDT-20-SharedPreferences探索/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
+      </div>
+    </div>
+  </header>
+
+  <main>
     
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
-      
-        <!-- abstract area -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <!-- abstract area -->
 <p>前几天遇到了一个使用SharedPreferences(以下简写成sp)导致严格模式报警的问题，我打点计算了一下sp#getInt()的时间，发现sp还是挺慢的，大约30ms。今天有点空闲，我们来研究一下sp的原理。</p>
 <p>(源码基于android-28)</p>
 <a id="more"></a>
 <p>我接下来会顺着我们使用sp的步骤，一步一步的来分析。<br>主要包含：sp的创建、sp的数据读取、sp的写入。</p>
 <h3 id="sp的创建"><a href="#sp的创建" class="headerlink" title="sp的创建"></a>sp的创建</h3><p>通话context#getSharedPreferences可以获取到sp实例。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">android.content.Context#getSharedPreferences(java.io.File, int)</div><div class="line"></div><div class="line">public abstract SharedPreferences getSharedPreferences(File file, @PreferencesMode int mode);</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">android.content.Context#getSharedPreferences(java.io.File, int)</div><div class="line"></div><div class="line">public abstract SharedPreferences getSharedPreferences(File file, @PreferencesMode int mode);</div></pre></td></tr></table></figure>
 <p>通过源码可以看出，这里的具体实现应该是在ContextImpl.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(String name, <span class="keyword">int</span> mode)</span> </span>&#123;</div><div class="line">    <span class="comment">// At least one application in the world actually passes in a null</span></div><div class="line">    <span class="comment">// name.  This happened to work because when we generated the file name</span></div><div class="line">    <span class="comment">// we would stringify it to "null.xml".  Nice.</span></div><div class="line">    <span class="keyword">if</span> (mPackageInfo.getApplicationInfo().targetSdkVersion &lt;</div><div class="line">            Build.VERSION_CODES.KITKAT) &#123;</div><div class="line">        <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</div><div class="line">            name = <span class="string">"null"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    File file;</div><div class="line">    <span class="keyword">synchronized</span> (ContextImpl.class) &#123;  <span class="comment">//字节码 同步锁</span></div><div class="line">        <span class="keyword">if</span> (mSharedPrefsPaths == <span class="keyword">null</span>) &#123;</div><div class="line">            mSharedPrefsPaths = <span class="keyword">new</span> ArrayMap&lt;&gt;();  <span class="comment">// sp path的内存缓存</span></div><div class="line">        &#125;</div><div class="line">        file = mSharedPrefsPaths.get(name);</div><div class="line">        <span class="keyword">if</span> (file == <span class="keyword">null</span>) &#123;</div><div class="line">            file = getSharedPreferencesPath(name);  <span class="comment">// 见下边的方法</span></div><div class="line">            mSharedPrefsPaths.put(name, file);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> getSharedPreferences(file, mode);  <span class="comment">// 见下边的方法</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> File <span class="title">getSharedPreferencesPath</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> makeFilename(getPreferencesDir(), name + <span class="string">".xml"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(File file, <span class="keyword">int</span> mode)</span> </span>&#123;</div><div class="line">    SharedPreferencesImpl sp;  <span class="comment">//SharedPreferencesImpl 真正的实现类</span></div><div class="line">    <span class="keyword">synchronized</span> (ContextImpl.class) &#123;</div><div class="line">        <span class="keyword">final</span> ArrayMap&lt;File, SharedPreferencesImpl&gt; cache = getSharedPreferencesCacheLocked();  <span class="comment">// 缓存</span></div><div class="line">        sp = cache.get(file);  <span class="comment">// 从缓存中拿到sp impl</span></div><div class="line">        <span class="keyword">if</span> (sp == <span class="keyword">null</span>) &#123;</div><div class="line">            checkMode(mode);</div><div class="line">            <span class="keyword">if</span> (getApplicationInfo().targetSdkVersion &gt;= android.os.Build.VERSION_CODES.O) &#123;</div><div class="line">                <span class="keyword">if</span> (isCredentialProtectedStorage()</div><div class="line">                        &amp;&amp; !getSystemService(UserManager.class)</div><div class="line">                                .isUserUnlockingOrUnlocked(UserHandle.myUserId())) &#123;</div><div class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"SharedPreferences in credential encrypted "</span></div><div class="line">                            + <span class="string">"storage are not available until after user is unlocked"</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            sp = <span class="keyword">new</span> SharedPreferencesImpl(file, mode);  <span class="comment">// 创建 sp impl</span></div><div class="line">            cache.put(file, sp);</div><div class="line">            <span class="keyword">return</span> sp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> ((mode &amp; Context.MODE_MULTI_PROCESS) != <span class="number">0</span> ||</div><div class="line">        getApplicationInfo().targetSdkVersion &lt; android.os.Build.VERSION_CODES.HONEYCOMB) &#123;</div><div class="line">        <span class="comment">// If somebody else (some other process) changed the prefs</span></div><div class="line">        <span class="comment">// file behind our back, we reload it.  This has been the</span></div><div class="line">        <span class="comment">// historical (if undocumented) behavior.</span></div><div class="line">        sp.startReloadIfChangedUnexpectedly();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@GuardedBy</span>(<span class="string">"ContextImpl.class"</span>)</div><div class="line"><span class="function"><span class="keyword">private</span> ArrayMap&lt;File, SharedPreferencesImpl&gt; <span class="title">getSharedPreferencesCacheLocked</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (sSharedPrefsCache == <span class="keyword">null</span>) &#123;</div><div class="line">        sSharedPrefsCache = <span class="keyword">new</span> ArrayMap&lt;&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> String packageName = getPackageName();</div><div class="line">    ArrayMap&lt;File, SharedPreferencesImpl&gt; packagePrefs = sSharedPrefsCache.get(packageName);</div><div class="line">    <span class="keyword">if</span> (packagePrefs == <span class="keyword">null</span>) &#123;</div><div class="line">        packagePrefs = <span class="keyword">new</span> ArrayMap&lt;&gt;();</div><div class="line">        sSharedPrefsCache.put(packageName, packagePrefs);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> packagePrefs;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(String name, <span class="keyword">int</span> mode)</span> </span>&#123;</div><div class="line">    <span class="comment">// At least one application in the world actually passes in a null</span></div><div class="line">    <span class="comment">// name.  This happened to work because when we generated the file name</span></div><div class="line">    <span class="comment">// we would stringify it to "null.xml".  Nice.</span></div><div class="line">    <span class="keyword">if</span> (mPackageInfo.getApplicationInfo().targetSdkVersion &lt;</div><div class="line">            Build.VERSION_CODES.KITKAT) &#123;</div><div class="line">        <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</div><div class="line">            name = <span class="string">"null"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    File file;</div><div class="line">    <span class="keyword">synchronized</span> (ContextImpl.class) &#123;  <span class="comment">//字节码 同步锁</span></div><div class="line">        <span class="keyword">if</span> (mSharedPrefsPaths == <span class="keyword">null</span>) &#123;</div><div class="line">            mSharedPrefsPaths = <span class="keyword">new</span> ArrayMap&lt;&gt;();  <span class="comment">// sp path的内存缓存</span></div><div class="line">        &#125;</div><div class="line">        file = mSharedPrefsPaths.get(name);</div><div class="line">        <span class="keyword">if</span> (file == <span class="keyword">null</span>) &#123;</div><div class="line">            file = getSharedPreferencesPath(name);  <span class="comment">// 见下边的方法</span></div><div class="line">            mSharedPrefsPaths.put(name, file);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> getSharedPreferences(file, mode);  <span class="comment">// 见下边的方法</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> File <span class="title">getSharedPreferencesPath</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> makeFilename(getPreferencesDir(), name + <span class="string">".xml"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(File file, <span class="keyword">int</span> mode)</span> </span>&#123;</div><div class="line">    SharedPreferencesImpl sp;  <span class="comment">//SharedPreferencesImpl 真正的实现类</span></div><div class="line">    <span class="keyword">synchronized</span> (ContextImpl.class) &#123;</div><div class="line">        <span class="keyword">final</span> ArrayMap&lt;File, SharedPreferencesImpl&gt; cache = getSharedPreferencesCacheLocked();  <span class="comment">// 缓存</span></div><div class="line">        sp = cache.get(file);  <span class="comment">// 从缓存中拿到sp impl</span></div><div class="line">        <span class="keyword">if</span> (sp == <span class="keyword">null</span>) &#123;</div><div class="line">            checkMode(mode);</div><div class="line">            <span class="keyword">if</span> (getApplicationInfo().targetSdkVersion &gt;= android.os.Build.VERSION_CODES.O) &#123;</div><div class="line">                <span class="keyword">if</span> (isCredentialProtectedStorage()</div><div class="line">                        &amp;&amp; !getSystemService(UserManager.class)</div><div class="line">                                .isUserUnlockingOrUnlocked(UserHandle.myUserId())) &#123;</div><div class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"SharedPreferences in credential encrypted "</span></div><div class="line">                            + <span class="string">"storage are not available until after user is unlocked"</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            sp = <span class="keyword">new</span> SharedPreferencesImpl(file, mode);  <span class="comment">// 创建 sp impl</span></div><div class="line">            cache.put(file, sp);</div><div class="line">            <span class="keyword">return</span> sp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> ((mode &amp; Context.MODE_MULTI_PROCESS) != <span class="number">0</span> ||</div><div class="line">        getApplicationInfo().targetSdkVersion &lt; android.os.Build.VERSION_CODES.HONEYCOMB) &#123;</div><div class="line">        <span class="comment">// If somebody else (some other process) changed the prefs</span></div><div class="line">        <span class="comment">// file behind our back, we reload it.  This has been the</span></div><div class="line">        <span class="comment">// historical (if undocumented) behavior.</span></div><div class="line">        sp.startReloadIfChangedUnexpectedly();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@GuardedBy</span>(<span class="string">"ContextImpl.class"</span>)</div><div class="line"><span class="function"><span class="keyword">private</span> ArrayMap&lt;File, SharedPreferencesImpl&gt; <span class="title">getSharedPreferencesCacheLocked</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (sSharedPrefsCache == <span class="keyword">null</span>) &#123;</div><div class="line">        sSharedPrefsCache = <span class="keyword">new</span> ArrayMap&lt;&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> String packageName = getPackageName();</div><div class="line">    ArrayMap&lt;File, SharedPreferencesImpl&gt; packagePrefs = sSharedPrefsCache.get(packageName);</div><div class="line">    <span class="keyword">if</span> (packagePrefs == <span class="keyword">null</span>) &#123;</div><div class="line">        packagePrefs = <span class="keyword">new</span> ArrayMap&lt;&gt;();</div><div class="line">        sSharedPrefsCache.put(packageName, packagePrefs);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> packagePrefs;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>所以sharedPreferences的真正实现在SharedPreferencesImpl。</p>
-<p>再来看一下SharedPreferencesImpl的初始化过程<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">SharedPreferencesImpl(File file, <span class="keyword">int</span> mode) &#123;</div><div class="line">    mFile = file;</div><div class="line">    mBackupFile = makeBackupFile(file);  <span class="comment">// 获取备份文件</span></div><div class="line">    mMode = mode;</div><div class="line">    mLoaded = <span class="keyword">false</span>;</div><div class="line">    mMap = <span class="keyword">null</span>;</div><div class="line">    mThrowable = <span class="keyword">null</span>;</div><div class="line">    startLoadFromDisk();  <span class="comment">// 初始化数据</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startLoadFromDisk</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">        mLoaded = <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">new</span> Thread(<span class="string">"SharedPreferencesImpl-load"</span>) &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            loadFromDisk();  <span class="comment">// 异步从磁盘读取数据</span></div><div class="line">        &#125;</div><div class="line">    &#125;.start();</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">loadFromDisk</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">        <span class="keyword">if</span> (mLoaded) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mBackupFile.exists()) &#123;</div><div class="line">            mFile.delete();</div><div class="line">            mBackupFile.renameTo(mFile);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    .... <span class="comment">// 加载数据到map里边</span></div><div class="line"></div><div class="line">    <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">        mLoaded = <span class="keyword">true</span>;   <span class="comment">// 标记数据加载完成</span></div><div class="line">        mThrowable = thrown;</div><div class="line">        ....</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            .... <span class="comment">// 初始化mMap，正常情况下会 mMap = map</span></div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">            mThrowable = t;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            mLock.notifyAll(); <span class="comment">// 释放锁</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再来看一下SharedPreferencesImpl的初始化过程<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">SharedPreferencesImpl(File file, <span class="keyword">int</span> mode) &#123;</div><div class="line">    mFile = file;</div><div class="line">    mBackupFile = makeBackupFile(file);  <span class="comment">// 获取备份文件</span></div><div class="line">    mMode = mode;</div><div class="line">    mLoaded = <span class="keyword">false</span>;</div><div class="line">    mMap = <span class="keyword">null</span>;</div><div class="line">    mThrowable = <span class="keyword">null</span>;</div><div class="line">    startLoadFromDisk();  <span class="comment">// 初始化数据</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startLoadFromDisk</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">        mLoaded = <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">new</span> Thread(<span class="string">"SharedPreferencesImpl-load"</span>) &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            loadFromDisk();  <span class="comment">// 异步从磁盘读取数据</span></div><div class="line">        &#125;</div><div class="line">    &#125;.start();</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">loadFromDisk</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">        <span class="keyword">if</span> (mLoaded) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mBackupFile.exists()) &#123;</div><div class="line">            mFile.delete();</div><div class="line">            mBackupFile.renameTo(mFile);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    .... <span class="comment">// 加载数据到map里边</span></div><div class="line"></div><div class="line">    <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">        mLoaded = <span class="keyword">true</span>;   <span class="comment">// 标记数据加载完成</span></div><div class="line">        mThrowable = thrown;</div><div class="line">        ....</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            .... <span class="comment">// 初始化mMap，正常情况下会 mMap = map</span></div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">            mThrowable = t;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            mLock.notifyAll(); <span class="comment">// 释放锁</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>从上面的代码我们可以发现，sp的创建过程虽然复杂，但是耗时操作已经放到了子线程，所以我们在获取sp实例的时候不需要担心阻塞的问题。</p>
 <p>同时，我们注意到有两个变量比较重要：mLoaded和mLock，这两个变量是为了保证必须在数据从disk上加载完毕后，我们才能对sp进行读写操作。</p>
-<h3 id="sp的数据读取"><a href="#sp的数据读取" class="headerlink" title="sp的数据读取"></a>sp的数据读取</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sharedPreferences.getInt() <span class="comment">// 这是一种常用的获取sp数据的方式</span></div></pre></td></tr></table></figure>
+<h3 id="sp的数据读取"><a href="#sp的数据读取" class="headerlink" title="sp的数据读取"></a>sp的数据读取</h3><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">sharedPreferences.getInt() <span class="comment">// 这是一种常用的获取sp数据的方式</span></div></pre></td></tr></table></figure>
 <p>来看一下具体的实现：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">android.app.SharedPreferencesImpl#getInt</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getInt(String key, int defValue) &#123;</div><div class="line">        synchronized (mLock) &#123;  // 这里用了mLock，保证上边的初始化和现在的读取互斥</div><div class="line">            awaitLoadedLocked(); // 检查或等待数据加载完成</div><div class="line">            Integer v = (Integer)mMap.get(key);</div><div class="line">            return v != null ? v : defValue;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @GuardedBy("mLock")</div><div class="line">    private void awaitLoadedLocked() &#123;</div><div class="line">        if (!mLoaded) &#123;</div><div class="line">            // Raise an explicit StrictMode onReadFromDisk for this</div><div class="line">            // thread, since the real read will be in a different</div><div class="line">            // thread and otherwise ignored by StrictMode.</div><div class="line">            BlockGuard.getThreadPolicy().onReadFromDisk();</div><div class="line">        &#125;</div><div class="line">        while (!mLoaded) &#123; // 如果没有加载完成，</div><div class="line">            try &#123;</div><div class="line">                mLock.wait(); // 等待加载完成，这里会阻塞线程</div><div class="line">            &#125; catch (InterruptedException unused) &#123;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        if (mThrowable != null) &#123;</div><div class="line">            throw new IllegalStateException(mThrowable);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line"></div><div class="line">android.app.SharedPreferencesImpl#getInt</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getInt(String key, int defValue) &#123;</div><div class="line">        synchronized (mLock) &#123;  // 这里用了mLock，保证上边的初始化和现在的读取互斥</div><div class="line">            awaitLoadedLocked(); // 检查或等待数据加载完成</div><div class="line">            Integer v = (Integer)mMap.get(key);</div><div class="line">            return v != null ? v : defValue;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @GuardedBy("mLock")</div><div class="line">    private void awaitLoadedLocked() &#123;</div><div class="line">        if (!mLoaded) &#123;</div><div class="line">            // Raise an explicit StrictMode onReadFromDisk for this</div><div class="line">            // thread, since the real read will be in a different</div><div class="line">            // thread and otherwise ignored by StrictMode.</div><div class="line">            BlockGuard.getThreadPolicy().onReadFromDisk();</div><div class="line">        &#125;</div><div class="line">        while (!mLoaded) &#123; // 如果没有加载完成，</div><div class="line">            try &#123;</div><div class="line">                mLock.wait(); // 等待加载完成，这里会阻塞线程</div><div class="line">            &#125; catch (InterruptedException unused) &#123;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        if (mThrowable != null) &#123;</div><div class="line">            throw new IllegalStateException(mThrowable);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>所以，因为awaitLoadedLocked的存在，我们在getInt的时候，可能会有一定的耗时。只要你不是刚初始化sp，就立刻去get数据，一般也不会阻塞。</p>
-<h3 id="sp的写入"><a href="#sp的写入" class="headerlink" title="sp的写入"></a>sp的写入</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sharedPreferences.edit().putInt().apply();</div><div class="line">sharedPreferences.edit().putInt().commit();</div></pre></td></tr></table></figure>
+<h3 id="sp的写入"><a href="#sp的写入" class="headerlink" title="sp的写入"></a>sp的写入</h3><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">sharedPreferences.edit().putInt().apply();</div><div class="line">sharedPreferences.edit().putInt().commit();</div></pre></td></tr></table></figure>
 <p>sp的写入有两种方式，apply和commit。</p>
 <p>这里有个新的类：Editor，他的实现在android.app.SharedPreferencesImpl.EditorImpl，我们重点关注apply和commit方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div></pre></td><td class="code"><pre><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">apply</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">final</span> <span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line"></div><div class="line">          <span class="keyword">final</span> MemoryCommitResult mcr = commitToMemory();  <span class="comment">// 提交到内存</span></div><div class="line">          <span class="keyword">final</span> Runnable awaitCommit = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                  <span class="meta">@Override</span></div><div class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                      <span class="keyword">try</span> &#123;</div><div class="line">                          mcr.writtenToDiskLatch.await();</div><div class="line">                      &#125; <span class="keyword">catch</span> (InterruptedException ignored) &#123;</div><div class="line">                      &#125;</div><div class="line"></div><div class="line">                      <span class="keyword">if</span> (DEBUG &amp;&amp; mcr.wasWritten) &#123;</div><div class="line">                          Log.d(TAG, mFile.getName() + <span class="string">":"</span> + mcr.memoryStateGeneration</div><div class="line">                                  + <span class="string">" applied after "</span> + (System.currentTimeMillis() - startTime)</div><div class="line">                                  + <span class="string">" ms"</span>);</div><div class="line">                      &#125;</div><div class="line">                  &#125;</div><div class="line">              &#125;;</div><div class="line"></div><div class="line">          QueuedWork.addFinisher(awaitCommit);  <span class="comment">//这是个内部工具类，用于跟踪那些未完成的或尚未结束的全局任务，新任务通过方法 queue 加入。添加 finisher 的runnables，由 waitToFinish 方法保证执行，用于保证任务已被处理完成。</span></div><div class="line"></div><div class="line">          Runnable postWriteRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                  <span class="meta">@Override</span></div><div class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                      awaitCommit.run();</div><div class="line">                      QueuedWork.removeFinisher(awaitCommit);</div><div class="line">                  &#125;</div><div class="line">              &#125;;</div><div class="line"></div><div class="line">          SharedPreferencesImpl.<span class="keyword">this</span>.enqueueDiskWrite(mcr, postWriteRunnable); <span class="comment">// 真正的异步写入disk</span></div><div class="line"></div><div class="line">          <span class="comment">// Okay to notify the listeners before it's hit disk</span></div><div class="line">          <span class="comment">// because the listeners should always get the same</span></div><div class="line">          <span class="comment">// SharedPreferences instance back, which has the</span></div><div class="line">          <span class="comment">// changes reflected in memory.</span></div><div class="line">          notifyListeners(mcr); <span class="comment">// 通知观察者</span></div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="comment">// Returns true if any changes were made</span></div><div class="line">      <span class="function"><span class="keyword">private</span> MemoryCommitResult <span class="title">commitToMemory</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">long</span> memoryStateGeneration;</div><div class="line">          List&lt;String&gt; keysModified = <span class="keyword">null</span>;</div><div class="line">          Set&lt;OnSharedPreferenceChangeListener&gt; listeners = <span class="keyword">null</span>;</div><div class="line">          Map&lt;String, Object&gt; mapToWriteToDisk;</div><div class="line"></div><div class="line">          <span class="keyword">synchronized</span> (SharedPreferencesImpl.<span class="keyword">this</span>.mLock) &#123; <span class="comment">// 使用sp中的那个数据访问锁，保证线程安全</span></div><div class="line">              <span class="comment">// We optimistically don't make a deep copy until</span></div><div class="line">              <span class="comment">// a memory commit comes in when we're already</span></div><div class="line">              <span class="comment">// writing to disk.</span></div><div class="line">              <span class="keyword">if</span> (mDiskWritesInFlight &gt; <span class="number">0</span>) &#123;</div><div class="line">                  <span class="comment">// We can't modify our mMap as a currently</span></div><div class="line">                  <span class="comment">// in-flight write owns it.  Clone it before</span></div><div class="line">                  <span class="comment">// modifying it.</span></div><div class="line">                  <span class="comment">// noinspection unchecked</span></div><div class="line">                  mMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(mMap);</div><div class="line">              &#125;</div><div class="line">              mapToWriteToDisk = mMap; <span class="comment">// 拿到sp中的map</span></div><div class="line">              mDiskWritesInFlight++;</div><div class="line"></div><div class="line">              <span class="keyword">boolean</span> hasListeners = mListeners.size() &gt; <span class="number">0</span>;</div><div class="line">              <span class="keyword">if</span> (hasListeners) &#123;</div><div class="line">                  keysModified = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">                  listeners = <span class="keyword">new</span> HashSet&lt;OnSharedPreferenceChangeListener&gt;(mListeners.keySet());</div><div class="line">              &#125;</div><div class="line"></div><div class="line">              <span class="keyword">synchronized</span> (mEditorLock) &#123;</div><div class="line">                  <span class="keyword">boolean</span> changesMade = <span class="keyword">false</span>;</div><div class="line"></div><div class="line">                  <span class="keyword">if</span> (mClear) &#123;</div><div class="line">                      <span class="keyword">if</span> (!mapToWriteToDisk.isEmpty()) &#123;</div><div class="line">                          changesMade = <span class="keyword">true</span>;</div><div class="line">                          mapToWriteToDisk.clear();</div><div class="line">                      &#125;</div><div class="line">                      mClear = <span class="keyword">false</span>;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  <span class="keyword">for</span> (Map.Entry&lt;String, Object&gt; e : mModified.entrySet()) &#123;</div><div class="line">                      String k = e.getKey();</div><div class="line">                      Object v = e.getValue();</div><div class="line">                      <span class="comment">// "this" is the magic value for a removal mutation. In addition,</span></div><div class="line">                      <span class="comment">// setting a value to "null" for a given key is specified to be</span></div><div class="line">                      <span class="comment">// equivalent to calling remove on that key.</span></div><div class="line">                      <span class="keyword">if</span> (v == <span class="keyword">this</span> || v == <span class="keyword">null</span>) &#123;</div><div class="line">                          <span class="keyword">if</span> (!mapToWriteToDisk.containsKey(k)) &#123;</div><div class="line">                              <span class="keyword">continue</span>;</div><div class="line">                          &#125;</div><div class="line">                          mapToWriteToDisk.remove(k);  <span class="comment">//写入数据到map中，即内存中</span></div><div class="line">                      &#125; <span class="keyword">else</span> &#123;</div><div class="line">                          <span class="keyword">if</span> (mapToWriteToDisk.containsKey(k)) &#123;</div><div class="line">                              Object existingValue = mapToWriteToDisk.get(k);</div><div class="line">                              <span class="keyword">if</span> (existingValue != <span class="keyword">null</span> &amp;&amp; existingValue.equals(v)) &#123;</div><div class="line">                                  <span class="keyword">continue</span>;</div><div class="line">                              &#125;</div><div class="line">                          &#125;</div><div class="line">                          mapToWriteToDisk.put(k, v); <span class="comment">//写入数据到map中，即内存中 </span></div><div class="line">                      &#125;</div><div class="line"></div><div class="line">                      changesMade = <span class="keyword">true</span>;</div><div class="line">                      <span class="keyword">if</span> (hasListeners) &#123;</div><div class="line">                          keysModified.add(k);</div><div class="line">                      &#125;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  mModified.clear();</div><div class="line"></div><div class="line">                  <span class="keyword">if</span> (changesMade) &#123;</div><div class="line">                      mCurrentMemoryStateGeneration++;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  memoryStateGeneration = mCurrentMemoryStateGeneration;</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">new</span> MemoryCommitResult(memoryStateGeneration, keysModified, listeners,</div><div class="line">                  mapToWriteToDisk);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">commit</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">long</span> startTime = <span class="number">0</span>;</div><div class="line"></div><div class="line">          <span class="keyword">if</span> (DEBUG) &#123;</div><div class="line">              startTime = System.currentTimeMillis();</div><div class="line">          &#125;</div><div class="line"></div><div class="line">          MemoryCommitResult mcr = commitToMemory();</div><div class="line"></div><div class="line">          SharedPreferencesImpl.<span class="keyword">this</span>.enqueueDiskWrite(</div><div class="line">              mcr, <span class="keyword">null</span> <span class="comment">/* sync write on this thread okay */</span>); <span class="comment">//这里的写入是异步的</span></div><div class="line">          <span class="keyword">try</span> &#123;</div><div class="line">              mcr.writtenToDiskLatch.await();  <span class="comment">// 但是这里会阻塞等待写入完成</span></div><div class="line">          &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">              <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">          &#125; <span class="keyword">finally</span> &#123;</div><div class="line">              <span class="keyword">if</span> (DEBUG) &#123;</div><div class="line">                  Log.d(TAG, mFile.getName() + <span class="string">":"</span> + mcr.memoryStateGeneration</div><div class="line">                          + <span class="string">" committed after "</span> + (System.currentTimeMillis() - startTime)</div><div class="line">                          + <span class="string">" ms"</span>);</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">          notifyListeners(mcr);</div><div class="line">          <span class="keyword">return</span> mcr.writeToDiskResult;</div><div class="line">      &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">enqueueDiskWrite</span><span class="params">(<span class="keyword">final</span> MemoryCommitResult mcr,</span></span></div><div class="line">                                <span class="keyword">final</span> Runnable postWriteRunnable) &#123;</div><div class="line">      <span class="keyword">final</span> <span class="keyword">boolean</span> isFromSyncCommit = (postWriteRunnable == <span class="keyword">null</span>);</div><div class="line"></div><div class="line">      <span class="keyword">final</span> Runnable writeToDiskRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">              <span class="meta">@Override</span></div><div class="line">              <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                  <span class="keyword">synchronized</span> (mWritingToDiskLock) &#123;</div><div class="line">                      writeToFile(mcr, isFromSyncCommit); <span class="comment">// 异步写入文件</span></div><div class="line">                  &#125;</div><div class="line">                  <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">                      mDiskWritesInFlight--;</div><div class="line">                  &#125;</div><div class="line">                  <span class="keyword">if</span> (postWriteRunnable != <span class="keyword">null</span>) &#123;</div><div class="line">                      postWriteRunnable.run();</div><div class="line">                  &#125;</div><div class="line">              &#125;</div><div class="line">          &#125;;</div><div class="line"></div><div class="line">      <span class="comment">// Typical #commit() path with fewer allocations, doing a write on</span></div><div class="line">      <span class="comment">// the current thread.</span></div><div class="line">      <span class="keyword">if</span> (isFromSyncCommit) &#123;</div><div class="line">          <span class="keyword">boolean</span> wasEmpty = <span class="keyword">false</span>;</div><div class="line">          <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">              wasEmpty = mDiskWritesInFlight == <span class="number">1</span>;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">if</span> (wasEmpty) &#123;</div><div class="line">              writeToDiskRunnable.run();</div><div class="line">              <span class="keyword">return</span>;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      QueuedWork.queue(writeToDiskRunnable, !isFromSyncCommit);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@GuardedBy</span>(<span class="string">"mWritingToDiskLock"</span>)</div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeToFile</span><span class="params">(MemoryCommitResult mcr, <span class="keyword">boolean</span> isFromSyncCommit)</span> </span>&#123;</div><div class="line">      .... <span class="comment">//写入相关的</span></div><div class="line"></div><div class="line">          <span class="keyword">if</span> (!backupFileExists) &#123;</div><div class="line">              <span class="keyword">if</span> (!mFile.renameTo(mBackupFile)) &#123;</div><div class="line">                  Log.e(TAG, <span class="string">"Couldn't rename file "</span> + mFile</div><div class="line">                        + <span class="string">" to backup file "</span> + mBackupFile);</div><div class="line">                  mcr.setDiskWriteResult(<span class="keyword">false</span>, <span class="keyword">false</span>); <span class="comment">// 对CountDownLatch进行countDown，释放阻塞</span></div><div class="line">                  <span class="keyword">return</span>;</div><div class="line">              &#125;</div><div class="line">          &#125; <span class="keyword">else</span> &#123;</div><div class="line">              mFile.delete();</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">apply</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">final</span> <span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line"></div><div class="line">          <span class="keyword">final</span> MemoryCommitResult mcr = commitToMemory();  <span class="comment">// 提交到内存</span></div><div class="line">          <span class="keyword">final</span> Runnable awaitCommit = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                  <span class="meta">@Override</span></div><div class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                      <span class="keyword">try</span> &#123;</div><div class="line">                          mcr.writtenToDiskLatch.await();</div><div class="line">                      &#125; <span class="keyword">catch</span> (InterruptedException ignored) &#123;</div><div class="line">                      &#125;</div><div class="line"></div><div class="line">                      <span class="keyword">if</span> (DEBUG &amp;&amp; mcr.wasWritten) &#123;</div><div class="line">                          Log.d(TAG, mFile.getName() + <span class="string">":"</span> + mcr.memoryStateGeneration</div><div class="line">                                  + <span class="string">" applied after "</span> + (System.currentTimeMillis() - startTime)</div><div class="line">                                  + <span class="string">" ms"</span>);</div><div class="line">                      &#125;</div><div class="line">                  &#125;</div><div class="line">              &#125;;</div><div class="line"></div><div class="line">          QueuedWork.addFinisher(awaitCommit);  <span class="comment">//这是个内部工具类，用于跟踪那些未完成的或尚未结束的全局任务，新任务通过方法 queue 加入。添加 finisher 的runnables，由 waitToFinish 方法保证执行，用于保证任务已被处理完成。</span></div><div class="line"></div><div class="line">          Runnable postWriteRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                  <span class="meta">@Override</span></div><div class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                      awaitCommit.run();</div><div class="line">                      QueuedWork.removeFinisher(awaitCommit);</div><div class="line">                  &#125;</div><div class="line">              &#125;;</div><div class="line"></div><div class="line">          SharedPreferencesImpl.<span class="keyword">this</span>.enqueueDiskWrite(mcr, postWriteRunnable); <span class="comment">// 真正的异步写入disk</span></div><div class="line"></div><div class="line">          <span class="comment">// Okay to notify the listeners before it's hit disk</span></div><div class="line">          <span class="comment">// because the listeners should always get the same</span></div><div class="line">          <span class="comment">// SharedPreferences instance back, which has the</span></div><div class="line">          <span class="comment">// changes reflected in memory.</span></div><div class="line">          notifyListeners(mcr); <span class="comment">// 通知观察者</span></div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="comment">// Returns true if any changes were made</span></div><div class="line">      <span class="function"><span class="keyword">private</span> MemoryCommitResult <span class="title">commitToMemory</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">long</span> memoryStateGeneration;</div><div class="line">          List&lt;String&gt; keysModified = <span class="keyword">null</span>;</div><div class="line">          Set&lt;OnSharedPreferenceChangeListener&gt; listeners = <span class="keyword">null</span>;</div><div class="line">          Map&lt;String, Object&gt; mapToWriteToDisk;</div><div class="line"></div><div class="line">          <span class="keyword">synchronized</span> (SharedPreferencesImpl.<span class="keyword">this</span>.mLock) &#123; <span class="comment">// 使用sp中的那个数据访问锁，保证线程安全</span></div><div class="line">              <span class="comment">// We optimistically don't make a deep copy until</span></div><div class="line">              <span class="comment">// a memory commit comes in when we're already</span></div><div class="line">              <span class="comment">// writing to disk.</span></div><div class="line">              <span class="keyword">if</span> (mDiskWritesInFlight &gt; <span class="number">0</span>) &#123;</div><div class="line">                  <span class="comment">// We can't modify our mMap as a currently</span></div><div class="line">                  <span class="comment">// in-flight write owns it.  Clone it before</span></div><div class="line">                  <span class="comment">// modifying it.</span></div><div class="line">                  <span class="comment">// noinspection unchecked</span></div><div class="line">                  mMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(mMap);</div><div class="line">              &#125;</div><div class="line">              mapToWriteToDisk = mMap; <span class="comment">// 拿到sp中的map</span></div><div class="line">              mDiskWritesInFlight++;</div><div class="line"></div><div class="line">              <span class="keyword">boolean</span> hasListeners = mListeners.size() &gt; <span class="number">0</span>;</div><div class="line">              <span class="keyword">if</span> (hasListeners) &#123;</div><div class="line">                  keysModified = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">                  listeners = <span class="keyword">new</span> HashSet&lt;OnSharedPreferenceChangeListener&gt;(mListeners.keySet());</div><div class="line">              &#125;</div><div class="line"></div><div class="line">              <span class="keyword">synchronized</span> (mEditorLock) &#123;</div><div class="line">                  <span class="keyword">boolean</span> changesMade = <span class="keyword">false</span>;</div><div class="line"></div><div class="line">                  <span class="keyword">if</span> (mClear) &#123;</div><div class="line">                      <span class="keyword">if</span> (!mapToWriteToDisk.isEmpty()) &#123;</div><div class="line">                          changesMade = <span class="keyword">true</span>;</div><div class="line">                          mapToWriteToDisk.clear();</div><div class="line">                      &#125;</div><div class="line">                      mClear = <span class="keyword">false</span>;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  <span class="keyword">for</span> (Map.Entry&lt;String, Object&gt; e : mModified.entrySet()) &#123;</div><div class="line">                      String k = e.getKey();</div><div class="line">                      Object v = e.getValue();</div><div class="line">                      <span class="comment">// "this" is the magic value for a removal mutation. In addition,</span></div><div class="line">                      <span class="comment">// setting a value to "null" for a given key is specified to be</span></div><div class="line">                      <span class="comment">// equivalent to calling remove on that key.</span></div><div class="line">                      <span class="keyword">if</span> (v == <span class="keyword">this</span> || v == <span class="keyword">null</span>) &#123;</div><div class="line">                          <span class="keyword">if</span> (!mapToWriteToDisk.containsKey(k)) &#123;</div><div class="line">                              <span class="keyword">continue</span>;</div><div class="line">                          &#125;</div><div class="line">                          mapToWriteToDisk.remove(k);  <span class="comment">//写入数据到map中，即内存中</span></div><div class="line">                      &#125; <span class="keyword">else</span> &#123;</div><div class="line">                          <span class="keyword">if</span> (mapToWriteToDisk.containsKey(k)) &#123;</div><div class="line">                              Object existingValue = mapToWriteToDisk.get(k);</div><div class="line">                              <span class="keyword">if</span> (existingValue != <span class="keyword">null</span> &amp;&amp; existingValue.equals(v)) &#123;</div><div class="line">                                  <span class="keyword">continue</span>;</div><div class="line">                              &#125;</div><div class="line">                          &#125;</div><div class="line">                          mapToWriteToDisk.put(k, v); <span class="comment">//写入数据到map中，即内存中 </span></div><div class="line">                      &#125;</div><div class="line"></div><div class="line">                      changesMade = <span class="keyword">true</span>;</div><div class="line">                      <span class="keyword">if</span> (hasListeners) &#123;</div><div class="line">                          keysModified.add(k);</div><div class="line">                      &#125;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  mModified.clear();</div><div class="line"></div><div class="line">                  <span class="keyword">if</span> (changesMade) &#123;</div><div class="line">                      mCurrentMemoryStateGeneration++;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  memoryStateGeneration = mCurrentMemoryStateGeneration;</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">new</span> MemoryCommitResult(memoryStateGeneration, keysModified, listeners,</div><div class="line">                  mapToWriteToDisk);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">commit</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">long</span> startTime = <span class="number">0</span>;</div><div class="line"></div><div class="line">          <span class="keyword">if</span> (DEBUG) &#123;</div><div class="line">              startTime = System.currentTimeMillis();</div><div class="line">          &#125;</div><div class="line"></div><div class="line">          MemoryCommitResult mcr = commitToMemory();</div><div class="line"></div><div class="line">          SharedPreferencesImpl.<span class="keyword">this</span>.enqueueDiskWrite(</div><div class="line">              mcr, <span class="keyword">null</span> <span class="comment">/* sync write on this thread okay */</span>); <span class="comment">//这里的写入是异步的</span></div><div class="line">          <span class="keyword">try</span> &#123;</div><div class="line">              mcr.writtenToDiskLatch.await();  <span class="comment">// 但是这里会阻塞等待写入完成</span></div><div class="line">          &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">              <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">          &#125; <span class="keyword">finally</span> &#123;</div><div class="line">              <span class="keyword">if</span> (DEBUG) &#123;</div><div class="line">                  Log.d(TAG, mFile.getName() + <span class="string">":"</span> + mcr.memoryStateGeneration</div><div class="line">                          + <span class="string">" committed after "</span> + (System.currentTimeMillis() - startTime)</div><div class="line">                          + <span class="string">" ms"</span>);</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">          notifyListeners(mcr);</div><div class="line">          <span class="keyword">return</span> mcr.writeToDiskResult;</div><div class="line">      &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">enqueueDiskWrite</span><span class="params">(<span class="keyword">final</span> MemoryCommitResult mcr,</span></span></div><div class="line">                                <span class="keyword">final</span> Runnable postWriteRunnable) &#123;</div><div class="line">      <span class="keyword">final</span> <span class="keyword">boolean</span> isFromSyncCommit = (postWriteRunnable == <span class="keyword">null</span>);</div><div class="line"></div><div class="line">      <span class="keyword">final</span> Runnable writeToDiskRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">              <span class="meta">@Override</span></div><div class="line">              <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                  <span class="keyword">synchronized</span> (mWritingToDiskLock) &#123;</div><div class="line">                      writeToFile(mcr, isFromSyncCommit); <span class="comment">// 异步写入文件</span></div><div class="line">                  &#125;</div><div class="line">                  <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">                      mDiskWritesInFlight--;</div><div class="line">                  &#125;</div><div class="line">                  <span class="keyword">if</span> (postWriteRunnable != <span class="keyword">null</span>) &#123;</div><div class="line">                      postWriteRunnable.run();</div><div class="line">                  &#125;</div><div class="line">              &#125;</div><div class="line">          &#125;;</div><div class="line"></div><div class="line">      <span class="comment">// Typical #commit() path with fewer allocations, doing a write on</span></div><div class="line">      <span class="comment">// the current thread.</span></div><div class="line">      <span class="keyword">if</span> (isFromSyncCommit) &#123;</div><div class="line">          <span class="keyword">boolean</span> wasEmpty = <span class="keyword">false</span>;</div><div class="line">          <span class="keyword">synchronized</span> (mLock) &#123;</div><div class="line">              wasEmpty = mDiskWritesInFlight == <span class="number">1</span>;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">if</span> (wasEmpty) &#123;</div><div class="line">              writeToDiskRunnable.run();</div><div class="line">              <span class="keyword">return</span>;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      QueuedWork.queue(writeToDiskRunnable, !isFromSyncCommit);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@GuardedBy</span>(<span class="string">"mWritingToDiskLock"</span>)</div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeToFile</span><span class="params">(MemoryCommitResult mcr, <span class="keyword">boolean</span> isFromSyncCommit)</span> </span>&#123;</div><div class="line">      .... <span class="comment">//写入相关的</span></div><div class="line"></div><div class="line">          <span class="keyword">if</span> (!backupFileExists) &#123;</div><div class="line">              <span class="keyword">if</span> (!mFile.renameTo(mBackupFile)) &#123;</div><div class="line">                  Log.e(TAG, <span class="string">"Couldn't rename file "</span> + mFile</div><div class="line">                        + <span class="string">" to backup file "</span> + mBackupFile);</div><div class="line">                  mcr.setDiskWriteResult(<span class="keyword">false</span>, <span class="keyword">false</span>); <span class="comment">// 对CountDownLatch进行countDown，释放阻塞</span></div><div class="line">                  <span class="keyword">return</span>;</div><div class="line">              &#125;</div><div class="line">          &#125; <span class="keyword">else</span> &#123;</div><div class="line">              mFile.delete();</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <p>所以apply是先提交到内存，异步存储到disk。而commit是先提交到内存后，然后阻塞线程到存储disk完成。</p>
 <h3 id="QueuedWork"><a href="#QueuedWork" class="headerlink" title="QueuedWork"></a>QueuedWork</h3><p>这里需要补充一下QueuedWork，这个类我们用不到，因为是@hide，我们需要知道的是这个queue是异步的，是通过Handler实现的，线程名称是queued-work-looper。感觉这个代码比较关键：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Lazily create a handler on a separate thread.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@return</span> the handler</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Handler <span class="title">getHandler</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (sLock) &#123;</div><div class="line">        <span class="keyword">if</span> (sHandler == <span class="keyword">null</span>) &#123;</div><div class="line">            HandlerThread handlerThread = <span class="keyword">new</span> HandlerThread(<span class="string">"queued-work-looper"</span>,</div><div class="line">                    Process.THREAD_PRIORITY_FOREGROUND);</div><div class="line">            handlerThread.start();</div><div class="line"></div><div class="line">            sHandler = <span class="keyword">new</span> QueuedWorkHandler(handlerThread.getLooper());</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sHandler;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Lazily create a handler on a separate thread.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@return</span> the handler</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Handler <span class="title">getHandler</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (sLock) &#123;</div><div class="line">        <span class="keyword">if</span> (sHandler == <span class="keyword">null</span>) &#123;</div><div class="line">            HandlerThread handlerThread = <span class="keyword">new</span> HandlerThread(<span class="string">"queued-work-looper"</span>,</div><div class="line">                    Process.THREAD_PRIORITY_FOREGROUND);</div><div class="line">            handlerThread.start();</div><div class="line"></div><div class="line">            sHandler = <span class="keyword">new</span> QueuedWorkHandler(handlerThread.getLooper());</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sHandler;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以上是所有内容，The End.</p>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/09/01/WDYDT-19-使用systrace查找掉帧问题/" rel="next" title="WDYDT-19-使用systrace查找掉帧问题">
-                <i class="fa fa-chevron-left"></i> WDYDT-19-使用systrace查找掉帧问题
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/12/OkHttp源码阅读/" rel="prev" title="OkHttp源码阅读">
-                OkHttp源码阅读 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2019/09/10/WDYDT-20-SharedPreferences探索/"
-           data-title="WDYDT-20-SharedPreferences探索" data-url="https://github.com/zhoushengming/zhoushengming.github.io/2019/09/10/WDYDT-20-SharedPreferences探索/">
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/img/QQ20200702-171655@2x.png"
-               alt="周生明" />
-          <p class="site-author-name" itemprop="name">周生明</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-           
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">71</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/zhoushengming" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://blog.csdn.net/u010954948" target="_blank" title="CSDN">
-                  
-                    <i class="fa fa-fw fa-tree"></i>
-                  
-                  CSDN
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Android/">Android</a>
+                    
+                  </div>
+                
+              </div>
               
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#sp的创建"><span class="nav-number">1.</span> <span class="nav-text">sp的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sp的数据读取"><span class="nav-number">2.</span> <span class="nav-text">sp的数据读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sp的写入"><span class="nav-number">3.</span> <span class="nav-text">sp的写入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QueuedWork"><span class="nav-number">4.</span> <span class="nav-text">QueuedWork</span></a></li></ol></div>
-            
-            <!--by xiaoming-->
-            <div >
-              <img src="/img/333CDC0C0E16121D97E740B0D234CB20.jpg" alt="..." width="200">
-              <img src="/img/D201873535E8B182D738FEA8B9C30EF6.jpg" alt="..." width="200">
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/12/OkHttp源码阅读/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OkHttp源码阅读</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2019/09/01/WDYDT-19-使用systrace查找掉帧问题/">
+                        <span class="hidden-mobile">WDYDT-19-使用systrace查找掉帧问题</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
+
+            
           </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
+        </div>
+      </div>
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2015 - 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">周生明</span>
-</div>
-
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-          <span id="scrollpercent"><span>0</span>%</span>
-        
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
       </div>
     
-
   </div>
+</div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<!-- Custom -->
 
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-  
     
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"zhoushengming"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
-  
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "WDYDT-20-SharedPreferences探索&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 
@@ -763,23 +472,9 @@
 
 
 
-  
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>
