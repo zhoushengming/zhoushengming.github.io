@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>面向对象思想中的抽象类和接口</title>
+    <link href="/2020/07/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/"/>
+    <url>/2020/07/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>参考：<a href="https://www.cnblogs.com/dolphin0520/p/3811437.html" target="_blank" rel="noopener">https://www.cnblogs.com/dolphin0520/p/3811437.html</a></p></blockquote><a id="more"></a><p>首先看一下抽象类和接口的共同点和区别</p><p>都不能被实例化</p><p>一个是类，一个是接口</p><p>一个可以被继承，一个被实现</p><p>一个只能单继承，一个可以被实现多个接口</p><p>一个可以有自己的实现，一个不可以</p><p>抽象类是对一种事物的抽象，即对类抽象，而接口是对行为的抽象</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>面向对象</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Android源码阅读导图</title>
     <link href="/2020/07/20/Android%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E5%AF%BC%E5%9B%BE/"/>
     <url>/2020/07/20/Android%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E5%AF%BC%E5%9B%BE/</url>
