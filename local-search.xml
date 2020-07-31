@@ -4,6 +4,57 @@
   
   
   <entry>
+    <title>Android动画原理 </title>
+    <link href="/2020/07/28/Android%E5%8A%A8%E7%94%BB%E5%8E%9F%E7%90%86/"/>
+    <url>/2020/07/28/Android%E5%8A%A8%E7%94%BB%E5%8E%9F%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<p>动画很炫酷，小小的脑袋，大大的疑惑。<br>– 到底为什么属性动画后， View在新位置还能响应事件</p><a id="more"></a><p>TODO</p><blockquote><p>参考：<a href="https://juejin.im/post/5d137218e51d4555fd20a36d" target="_blank" rel="noopener">https://juejin.im/post/5d137218e51d4555fd20a36d</a></p></blockquote>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Android</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>HashMap实现原理</title>
+    <link href="/2020/07/28/HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
+    <url>/2020/07/28/HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<p>TODO</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Android View中Listener的不同写法</title>
+    <link href="/2020/07/22/Android-Listener%E7%9A%84%E4%B8%8D%E5%90%8C%E5%86%99%E6%B3%95/"/>
+    <url>/2020/07/22/Android-Listener%E7%9A%84%E4%B8%8D%E5%90%8C%E5%86%99%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<p>TODO</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Android</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CopyOnWriteArrayList的优点及原理</title>
     <link href="/2020/07/21/CopyOnWriteArrayList%E7%9A%84%E4%BC%98%E7%82%B9%E5%8F%8A%E5%8E%9F%E7%90%86/"/>
     <url>/2020/07/21/CopyOnWriteArrayList%E7%9A%84%E4%BC%98%E7%82%B9%E5%8F%8A%E5%8E%9F%E7%90%86/</url>
@@ -14,9 +65,9 @@
     
     <tags>
       
-      <tag>性能优化</tag>
-      
       <tag>java</tag>
+      
+      <tag>性能优化</tag>
       
     </tags>
     
