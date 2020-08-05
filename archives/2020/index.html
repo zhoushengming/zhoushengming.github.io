@@ -172,12 +172,18 @@
                 
 
 <div class="list-group">
-  <p class="h4">共计 77 篇文章</p>
+  <p class="h4">共计 78 篇文章</p>
   <hr>
   
     
       
       <p class="h5">2020</p>
+    
+    <a href="/2020/07/31/Android-view%E7%9A%84%E6%B5%8B%E9%87%8F/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">Android view的测量</span>
+      <span style="float: right;">07-31</span>
+    </a>
+  
     
     <a href="/2020/07/28/Android%E5%8A%A8%E7%94%BB%E5%8E%9F%E7%90%86/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">Android动画原理 </span>
@@ -232,13 +238,19 @@
       <span style="float: right;">06-12</span>
     </a>
   
-    
-    <a href="/2020/03/12/OkHttp%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">OkHttp源码阅读</span>
-      <span style="float: right;">03-12</span>
-    </a>
-  
 </div>
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
