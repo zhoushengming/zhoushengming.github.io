@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>Android View的绘制</title>
+    <link href="/2020/08/08/Android-View%E7%9A%84%E7%BB%98%E5%88%B6/"/>
+    <url>/2020/08/08/Android-View%E7%9A%84%E7%BB%98%E5%88%B6/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Android View的测量</title>
     <link href="/2020/07/31/Android-view%E7%9A%84%E6%B5%8B%E9%87%8F/"/>
     <url>/2020/07/31/Android-view%E7%9A%84%E6%B5%8B%E9%87%8F/</url>
@@ -21,7 +34,7 @@
     <link href="/2020/07/28/Android%E5%8A%A8%E7%94%BB%E5%8E%9F%E7%90%86/"/>
     <url>/2020/07/28/Android%E5%8A%A8%E7%94%BB%E5%8E%9F%E7%90%86/</url>
     
-    <content type="html"><![CDATA[<p>动画很炫酷，小小的脑袋，大大的疑惑。<br>– 到底为什么属性动画后， View在新位置还能响应事件</p><a id="more"></a><p>TODO</p><blockquote><p>参考：<a href="https://juejin.im/post/5d137218e51d4555fd20a36d" target="_blank" rel="noopener">https://juejin.im/post/5d137218e51d4555fd20a36d</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<p>动画很炫酷，小小的脑袋，大大的疑惑。<br>– 到底为什么属性动画后， View在新位置还能响应事件</p><a id="more"></a><h1 id="View-Animation"><a href="#View-Animation" class="headerlink" title="View Animation"></a>View Animation</h1><h1 id="Property-Animation"><a href="#Property-Animation" class="headerlink" title="Property Animation"></a>Property Animation</h1><blockquote><p>参考：<a href="https://juejin.im/post/5d137218e51d4555fd20a36d" target="_blank" rel="noopener">https://juejin.im/post/5d137218e51d4555fd20a36d</a><br>参考：<a href="https://juejin.im/entry/6844903465211133959" target="_blank" rel="noopener">https://juejin.im/entry/6844903465211133959</a></p></blockquote>]]></content>
     
     
     
@@ -84,9 +97,9 @@
     
     <tags>
       
-      <tag>性能优化</tag>
-      
       <tag>java</tag>
+      
+      <tag>性能优化</tag>
       
     </tags>
     
