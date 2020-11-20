@@ -17,7 +17,7 @@
   <meta name="description" content="周生明的博客">
   <meta name="author" content="zhoushengming">
   <meta name="keywords" content="周生明，android">
-  <title>Android动画原理 - 觉晓</title>
+  <title>做技术预研的一些想法 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-28 16:09">
-      2020年7月28日 下午
+    <time datetime="2020-11-20 22:46">
+      2020年11月20日 晚上
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      67 字
+      754 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      7
        分钟
     </span>
   
@@ -216,13 +216,21 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>动画很炫酷，小小的脑袋，大大的疑惑。<br>– 到底为什么属性动画后， View在新位置还能响应事件</p>
+              <blockquote>
+<p>技术预研（Technical Pre-Research, TPR）是指在立项之后到开发工作完成之前的时间内，对项目将采用的关键技术提前学习和研究，以便尽可能早地发现并解决开发过程中将会遇到的技术障碍。</p>
+</blockquote>
 <a id="more"></a>
 
-<h1 id="View-Animation"><a href="#View-Animation" class="headerlink" title="View Animation"></a>View Animation</h1><p>View 动画也就是补间动画</p>
-<h1 id="Property-Animation"><a href="#Property-Animation" class="headerlink" title="Property Animation"></a>Property Animation</h1><p>属性动画</p>
+
+<h3 id="了解需求"><a href="#了解需求" class="headerlink" title="了解需求"></a>了解需求</h3><p>这块是预研的第一步，我们需要向需求方了解要实现什么功能？实现什么效果？给用户带来什么好处？能不能真正的解决问题？会不会产生什么不良的影响？这个需求的难点是什么？为这个需求要付出多大的代价（开发成本、沟通成本、机器、钱）？这个需求的性价比如何？可能在这一步中，我们就可以把一些价值不大的需求扼杀在摇篮里。</p>
+<h3 id="充分理解需求"><a href="#充分理解需求" class="headerlink" title="充分理解需求"></a>充分理解需求</h3><p>一切技术都是为了产品服务的，没有产品技术一文不值。我们要真正地从产品角度去思考，去理解产品经理到底要做什么；我们还要从用户的角度出发，去思考用户需要什么样的功能。这两点都可以帮助我们充分地理解需求。</p>
+<h3 id="需求的分解"><a href="#需求的分解" class="headerlink" title="需求的分解"></a>需求的分解</h3><p>在充分了解技术背景后，和产品沟通，了解可能的产品形态。需要尽量多的列举出不同的产品形态，然后将需求进行小粒度的分解。</p>
+<h3 id="预研的顺序"><a href="#预研的顺序" class="headerlink" title="预研的顺序"></a>预研的顺序</h3><p>对需求分解成一个个小的技术点，并对每个技术点的相互依赖关系进行排序，预研应该先研究被依赖的技术点，而不是最难的技术点。当然，工程师可以凭借自己的经验来判断某技术点是否需要预研。所以说经验越多的工程师，预研的速度越快。</p>
+<h3 id="对于依赖方的验证"><a href="#对于依赖方的验证" class="headerlink" title="对于依赖方的验证"></a>对于依赖方的验证</h3><p>我们对自己的技术能有一个整体的把握，能有一定的信心。但是对</p>
+<h3 id="多种技术方案的比较"><a href="#多种技术方案的比较" class="headerlink" title="多种技术方案的比较"></a>多种技术方案的比较</h3><p>对于一个功能，可能存在着多种实现方式，所以说我们需要将不同方案的优缺点弄清楚，并形成文档，并从工程师的角度给出自己推荐的方式，并说明自己的理由。对于不同方案的优缺点，一定要保持一种客观的态度，尽量通过多个维度去比较各种方案，比如：实现的难易程度、对性能的影响、对三方的依赖、资金成本、兼容性问题、是否存在体验上的偏差、稳定性。</p>
+<h3 id="技术方案的验证"><a href="#技术方案的验证" class="headerlink" title="技术方案的验证"></a>技术方案的验证</h3><p>我们要尽早暴露技术方案的问题，一些致命的问题可能会导致整个方案失败。<br>我们可以从以下方面去找到问题：</p>
 <blockquote>
-<p>参考：<a href="https://juejin.im/post/5d137218e51d4555fd20a36d" target="_blank" rel="noopener">https://juejin.im/post/5d137218e51d4555fd20a36d</a><br>参考：<a href="https://juejin.im/entry/6844903465211133959" target="_blank" rel="noopener">https://juejin.im/entry/6844903465211133959</a></p>
+<p>基本功能的坑<br>稳定性问题<br>性能的坑<br>不同机型/平台/硬件的坑<br>兼容性问题<br>依赖方/耦合程度问题</p>
 </blockquote>
 
             </article>
@@ -234,7 +242,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Android/">Android</a>
+                      <a class="hover-with-bg" href="/tags/%E6%8A%80%E6%9C%AF%E9%A2%84%E7%A0%94/">技术预研</a>
                     
                   </div>
                 
@@ -247,18 +255,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/31/Android-view%E7%9A%84%E6%B5%8B%E9%87%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Android View的测量</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/28/HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
-                        <span class="hidden-mobile">HashMap实现原理</span>
+                      <a href="/2020/10/24/Android%E7%9B%91%E6%8E%A7Java%E5%B1%82%E7%9A%84%E7%BD%91%E7%BB%9C%E6%89%93%E5%8D%B0/">
+                        <span class="hidden-mobile">Android监控Java层的网络打印</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -395,7 +397,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Android动画原理&nbsp;",
+        "做技术预研的一些想法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
