@@ -182,6 +182,9 @@
 
 <div class="page-content">
   <hr>
+<div class="hljs"><pre><code class="hljs shell">
+// cpu占用
+adb shell top -b -n 1 -H -s 6 -o pid,tid,user,pr,ni,%cpu,s,virt,res,pcy,cmd,name</code></pre></div>
 <div class="hljs"><pre><code class="hljs java"># Android recyclerView滑动到底部，适用于短信、微信聊天内容界面
 # When stack from bottom is set to true, the list fills its content starting from the bottom of the view.
 LayoutManager#setStackFromEnd(true);</code></pre></div>
