@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>应用启动流程</title>
+    <link href="/2020/12/16/interview/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
+    <url>/2020/12/16/interview/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<!-- abstract area --><p>进程启动和startActivity流程。</p><a id="more"></a><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote><p><a href="http://gityuan.com/2016/03/12/start-activity/" target="_blank" rel="noopener">startActivity启动过程分析</a><br><a href="http://gityuan.com/2016/03/26/app-process-create/" target="_blank" rel="noopener">理解Android进程创建流程</a></p></blockquote>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>面试</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Handler解析</title>
     <link href="/2020/12/14/interview/Handler%E8%A7%A3%E6%9E%90/"/>
     <url>/2020/12/14/interview/Handler%E8%A7%A3%E6%9E%90/</url>
@@ -234,25 +253,6 @@
   
   
   <entry>
-    <title>interview/应用启动流程</title>
-    <link href="/2020/12/12/interview/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
-    <url>/2020/12/12/interview/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</url>
-    
-    <content type="html"><![CDATA[<!-- abstract area --><a id="more"></a>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>面试</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>做技术预研的一些想法</title>
     <link href="/2020/11/20/%E5%81%9A%E6%8A%80%E6%9C%AF%E9%A2%84%E7%A0%94%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/"/>
     <url>/2020/11/20/%E5%81%9A%E6%8A%80%E6%9C%AF%E9%A2%84%E7%A0%94%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/</url>
@@ -272,7 +272,7 @@
   
   
   <entry>
-    <title>Android监控Java层的网络打印</title>
+    <title>Android监控Java层联网动作</title>
     <link href="/2020/10/24/Android%E7%9B%91%E6%8E%A7Java%E5%B1%82%E7%9A%84%E7%BD%91%E7%BB%9C%E6%89%93%E5%8D%B0/"/>
     <url>/2020/10/24/Android%E7%9B%91%E6%8E%A7Java%E5%B1%82%E7%9A%84%E7%BD%91%E7%BB%9C%E6%89%93%E5%8D%B0/</url>
     
@@ -386,9 +386,9 @@
     
     <tags>
       
-      <tag>性能优化</tag>
-      
       <tag>java</tag>
+      
+      <tag>性能优化</tag>
       
     </tags>
     
