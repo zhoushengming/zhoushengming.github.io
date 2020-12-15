@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2.7k 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      37
+      41
        分钟
     </span>
   
@@ -549,7 +549,31 @@
         pokeDrawLockIfNeeded();
     &#125;
 &#125;</code></pre></div>
-
+<h2 id="sendMessageAtFrontOfQueue可以比同步屏障更先执行"><a href="#sendMessageAtFrontOfQueue可以比同步屏障更先执行" class="headerlink" title="sendMessageAtFrontOfQueue可以比同步屏障更先执行"></a>sendMessageAtFrontOfQueue可以比同步屏障更先执行</h2><p>从MessageQueue的next方法可以看出，是否存在同步屏障是通过判断当前要执行的message是否为同步屏障消息（即message.target为nul）来实现的。而sendMessageAtFrontOfQueue可以直接把message插入到MessageQueue的头部，所以直接就将当前要执行的Message替换成了自己。这样执行next的时候肯定会将当前的Front Message返回，这样就打破了同步屏障。</p>
+<div class="hljs"><pre><code class="hljs java">    HandlerThread test = <span class="hljs-keyword">new</span> HandlerThread(<span class="hljs-string">"test"</span>);
+    test.start();
+    Handler handler = <span class="hljs-keyword">new</span> Handler(test.getLooper(), <span class="hljs-keyword">new</span> Handler.Callback() &#123;
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">handleMessage</span><span class="hljs-params">(@NonNull Message msg)</span> </span>&#123;
+            Logger.i(<span class="hljs-string">"handleMessage() what"</span> + msg.what);
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        &#125;
+    &#125;);
+    <span class="hljs-keyword">int</span> token= handler.getLooper().getQueue().postSyncBarrier(); <span class="hljs-comment">// 设置同步屏障</span>
+    handler.sendEmptyMessageDelayed(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);   <span class="hljs-comment">//发送同步Message</span>
+    handler.sendEmptyMessageDelayed(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>);  <span class="hljs-comment">//发送同步Message</span>
+    Message msg = handler.obtainMessage(<span class="hljs-number">4</span>);
+    msg.setAsynchronous(<span class="hljs-keyword">true</span>);
+    handler.sendMessageDelayed(msg, <span class="hljs-number">0</span>);  <span class="hljs-comment">//发送异步Message</span>
+    handler.sendMessageAtFrontOfQueue(handler.obtainMessage(<span class="hljs-number">3</span>)); <span class="hljs-comment">//发送同步Front Message</span>
+<span class="hljs-comment">//    handler.getLooper().getQueue().removeSyncBarrier(token);</span></code></pre></div>
+<p>以上代码输出结果为：</p>
+<div class="hljs"><pre><code class="hljs shell">handleMessage() what3
+handleMessage() what4</code></pre></div>
+<ol>
+<li>因为同步屏障，同步消息1和2没有被执行。</li>
+<li>因为sendMessageAtFrontOfQueue执行时间小于同步屏障消息，所有会被执行</li>
+</ol>
 <h2 id="IdleHandler"><a href="#IdleHandler" class="headerlink" title="IdleHandler"></a>IdleHandler</h2><p>Handler空闲时回调，可以延时执行一个任务，比如获取view高度，显示dialog等</p>
 <h2 id="View-postDelayed"><a href="#View-postDelayed" class="headerlink" title="View.postDelayed()"></a>View.postDelayed()</h2><div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">postDelayed</span><span class="hljs-params">(Runnable action, <span class="hljs-keyword">long</span> delayMillis)</span> </span>&#123;
     <span class="hljs-keyword">final</span> AttachInfo attachInfo = mAttachInfo;
