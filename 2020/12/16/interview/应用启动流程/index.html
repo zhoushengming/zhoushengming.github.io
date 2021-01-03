@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      25 字
+      882 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      11
        分钟
     </span>
   
@@ -220,10 +220,59 @@
 
 <p>进程启动和startActivity流程。</p>
 <a id="more"></a>
+<h2 id="init-ServiceManager-Zygote-SystemServer"><a href="#init-ServiceManager-Zygote-SystemServer" class="headerlink" title="init ServiceManager Zygote SystemServer"></a>init ServiceManager Zygote SystemServer</h2><p>init进程：init是所有linux程序的起点，是Zygote的父进程。解析init.rc孵化出Zygote进程。</p>
+<p>Zygote进程：Zygote是所有Java进程的父进程，所有的App进程都是由Zygote进程fork生成的。</p>
+<p>SystemServer进程：System Server是Zygote孵化的第一个进程。SystemServer负责启动和管理整个Java framework，包含AMS，PMS等服务。</p>
+<p>Launcher：Zygote进程孵化的第一个App进程是Launcher。</p>
+<h3 id="1-init进程是什么？"><a href="#1-init进程是什么？" class="headerlink" title="1.init进程是什么？"></a>1.init进程是什么？</h3><p>Android是基于linux系统的，手机开机之后，linux内核进行加载。加载完成之后会启动init进程。</p>
+<p>init进程会启动ServiceManager，孵化一些守护进程，并解析init.rc孵化Zygote进程。</p>
+<h3 id="2-Zygote进程是什么？"><a href="#2-Zygote进程是什么？" class="headerlink" title="2.Zygote进程是什么？"></a>2.Zygote进程是什么？</h3><p>所有的App进程都是由Zygote进程fork生成的，包括SystemServer进程。Zygote初始化后，会注册一个等待接受消息的socket，OS层会采用socket进行IPC通信。</p>
+<h3 id="3-为什么是Zygote来孵化进程，而不是新建进程呢？"><a href="#3-为什么是Zygote来孵化进程，而不是新建进程呢？" class="headerlink" title="3.为什么是Zygote来孵化进程，而不是新建进程呢？"></a>3.为什么是Zygote来孵化进程，而不是新建进程呢？</h3><p>每个应用程序都是运行在各自的Dalvik虚拟机中，应用程序每次运行都要重新初始化和启动虚拟机，这个过程会耗费很长时间。Zygote会把已经运行的虚拟机的代码和内存信息共享，起到一个预加载资源和类的作用，从而缩短启动时间。</p>
+<p>Zygote为什么不使用binder通信<br>因为fork。 在多线程程序里,在”自身以外的线程存在的状态”下一使用fork的话,就可能引起各种各样的问题.比较典型的例子就是,fork出来的子进程可能会死锁.请不要,在不能把握问题的原委的情况下就在多线程程序里fork子进程.</p>
+<p>总结起来就是怕父进程binder线程有锁，然后子进程的主线程一直在等其子线程(从父进程拷贝过来的子进程)的资源，但是其实父进程的子进程并没有被拷贝过来，造成死锁，所以fork不允许存在多线程。而非常巧的是Binder通讯偏偏就是多线程，所以干脆父进程（Zgote）这个时候就不使用binder线程</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_39037047/article/details/88066589" target="_blank" rel="noopener">为什么SystemServer进程与Zygote进程通讯采用Socket而不是Binder</a></p>
+</blockquote>
+<h2 id="Activity-startActivity"><a href="#Activity-startActivity" class="headerlink" title="Activity.startActivity"></a>Activity.startActivity</h2><p>当用户几点应用图标时，系统桌面launcher会调用Activity.startActivity方法启动相应的activity，经过在launcher中层层调用startActivityForResult、Instrumentation.execStartActivity最终会调用ActivityManagerProxy.startActivity()。这里即将进行binder通信，进入ActivityManagerNative。</p>
+<p>[-&gt; ApplicationThreadProxy.java]</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">scheduleLaunchActivity</span><span class="hljs-params">(Intent intent, IBinder token, <span class="hljs-keyword">int</span> ident, ActivityInfo info, Configuration curConfig, Configuration overrideConfig, CompatibilityInfo compatInfo, String referrer, IVoiceInteractor voiceInteractor, <span class="hljs-keyword">int</span> procState, Bundle state, PersistableBundle persistentState, List&lt;ResultInfo&gt; pendingResults, List&lt;ReferrerIntent&gt; pendingNewIntents, <span class="hljs-keyword">boolean</span> notResumed, <span class="hljs-keyword">boolean</span> isForward, ProfilerInfo profilerInfo)</span> <span class="hljs-keyword">throws</span> RemoteException </span>&#123;
+     Parcel data = Parcel.obtain();
+     data.writeInterfaceToken(IApplicationThread.descriptor);
+     intent.writeToParcel(data, <span class="hljs-number">0</span>);
+     data.writeStrongBinder(token);
+     data.writeInt(ident);
+     info.writeToParcel(data, <span class="hljs-number">0</span>);
+     curConfig.writeToParcel(data, <span class="hljs-number">0</span>);
+     <span class="hljs-keyword">if</span> (overrideConfig != <span class="hljs-keyword">null</span>) &#123;
+         data.writeInt(<span class="hljs-number">1</span>);
+         overrideConfig.writeToParcel(data, <span class="hljs-number">0</span>);
+     &#125; <span class="hljs-keyword">else</span> &#123;
+         data.writeInt(<span class="hljs-number">0</span>);
+     &#125;
+     compatInfo.writeToParcel(data, <span class="hljs-number">0</span>);
+     data.writeString(referrer);
+     data.writeStrongBinder(voiceInteractor != <span class="hljs-keyword">null</span> ? voiceInteractor.asBinder() : <span class="hljs-keyword">null</span>);
+     data.writeInt(procState);
+     data.writeBundle(state);
+     data.writePersistableBundle(persistentState);
+     data.writeTypedList(pendingResults);
+     data.writeTypedList(pendingNewIntents);
+     data.writeInt(notResumed ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>);
+     data.writeInt(isForward ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>);
+     <span class="hljs-keyword">if</span> (profilerInfo != <span class="hljs-keyword">null</span>) &#123;
+         data.writeInt(<span class="hljs-number">1</span>);
+         profilerInfo.writeToParcel(data, Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+     &#125; <span class="hljs-keyword">else</span> &#123;
+         data.writeInt(<span class="hljs-number">0</span>);
+     &#125;
+     <span class="hljs-comment">//【见流程2.19】</span>
+     mRemote.transact(SCHEDULE_LAUNCH_ACTIVITY_TRANSACTION, data, <span class="hljs-keyword">null</span>,
+             IBinder.FLAG_ONEWAY);
+     data.recycle();
+ &#125;</code></pre></div>
 
-
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<h2 id="AMP和AMN、AMS"><a href="#AMP和AMN、AMS" class="headerlink" title="AMP和AMN、AMS"></a>AMP和AMN、AMS</h2><p>ActivityManagerProxy即为AMP，ActivityManagerNative为AMN，ActivityMangerService为AMS，AMS为AMN的子类，AMP、AMN、AMS均为IActivityManager的子类，IActivityManager是一个接口、是AIDL。AMP可以理解为ActivityManager在应用进程的一个代理对象。通过AMP应用进程就可以和system_server中的ActivityManagerNative进行通信。</p>
+<h2 id="进入AMS的世界"><a href="#进入AMS的世界" class="headerlink" title="进入AMS的世界"></a>进入AMS的世界</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
 <p><a href="http://gityuan.com/2016/03/12/start-activity/" target="_blank" rel="noopener">startActivity启动过程分析</a><br><a href="http://gityuan.com/2016/03/26/app-process-create/" target="_blank" rel="noopener">理解Android进程创建流程</a></p>
 </blockquote>
 
