@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      2.3k 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      30
+      34
        分钟
     </span>
   
@@ -457,6 +457,18 @@ final Node&lt;K,V&gt; getNode(<span class="hljs-type">int</span> hash, Object <s
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
 <p><a href="https://www.bilibili.com/video/BV1Pp411d7kB" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1Pp411d7kB</a><br><a href="https://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">https://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/</a><br><a href="https://zhuanlan.zhihu.com/p/31610616" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/31610616</a></p>
 </blockquote>
+<h2 id="HashMap在多线程下的问题"><a href="#HashMap在多线程下的问题" class="headerlink" title="HashMap在多线程下的问题"></a>HashMap在多线程下的问题</h2><ol>
+<li><p>使用HashMap真的发生线程安全问题，会造成什么后果？</p>
+<blockquote>
+<ol>
+<li>可能造成死循环，多线程同时对线程进行put时，如果正好触发了扩容机制，这时可能会在扩容时产生一个环形链表，这时在get时会造成无限循环。</li>
+<li>多线程进行put，如果正好发生了Hash碰撞，可能导致元素覆盖丢失的情况。</li>
+</ol>
+</blockquote>
+</li>
+<li><p>替换方案<br>使用HashTable或者ConcurrentHashMap进行替换。HashTable的安全的原理是对读写方法加了Synchronized关键字，保证只有一个线程可以对HashTable进行读写操作，从而实现了线程安全。这种方式效率较低，是不推荐使用的。ConcurrentHashMap是通过Synchronized代码块实现的线程安全，Synchronized锁的对象为HashMap中的Hash数组的Key值，也就是说对于Hash碰撞这种情况下，会通过锁将这个链表或者红黑树锁住，防止多线程同时读写该结构，但是在Hash没有发生碰撞的情况下，多个线程对不同的链表或者红黑树读写是不会受锁的限制，这样既保证了一定的效率，又保证了线程安全。</p>
+</li>
+</ol>
 
             </article>
             <hr>
@@ -480,9 +492,9 @@ final Node&lt;K,V&gt; getNode(<span class="hljs-type">int</span> hash, Object <s
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/28/Android%E5%8A%A8%E7%94%BB%E5%8E%9F%E7%90%86/">
+                      <a href="/2020/10/24/Android%E7%9B%91%E6%8E%A7Java%E5%B1%82%E7%9A%84%E7%BD%91%E7%BB%9C%E6%89%93%E5%8D%B0/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Android动画原理</span>
+                        <span class="hidden-mobile">Android监控Java层联网动作</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -490,8 +502,8 @@ final Node&lt;K,V&gt; getNode(<span class="hljs-type">int</span> hash, Object <s
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/22/Android-Listener%E7%9A%84%E4%B8%8D%E5%90%8C%E5%86%99%E6%B3%95/">
-                        <span class="hidden-mobile">Android View中Listener的不同写法</span>
+                      <a href="/2020/07/21/CopyOnWriteArrayList%E7%9A%84%E4%BC%98%E7%82%B9%E5%8F%8A%E5%8E%9F%E7%90%86/">
+                        <span class="hidden-mobile">CopyOnWriteArrayList的优点及原理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -529,7 +529,7 @@
 <h3 id="消息池"><a href="#消息池" class="headerlink" title="消息池"></a>消息池</h3><p>会将用过的消息进行缓存</p>
 <h3 id="同步消息、异步消息、同步屏障消息"><a href="#同步消息、异步消息、同步屏障消息" class="headerlink" title="同步消息、异步消息、同步屏障消息"></a>同步消息、异步消息、同步屏障消息</h3><p>一般同步消息和异步消息没区别，但是同步屏障存在时，异步消息会先执行</p>
 <h2 id="同步屏障的作用"><a href="#同步屏障的作用" class="headerlink" title="同步屏障的作用"></a>同步屏障的作用</h2><p>当设置了同步屏障之后，next函数将会忽略所有的同步消息，返回异步消息。换句话说就是，设置了同步屏障之后，Handler只会处理异步消息。再换句话说，同步屏障为Handler消息机制增加了一种简单的优先级机制，异步消息的优先级要高于同步消息。</p>
-<p>通常我们使用Handler发消息时，这些消息都是同步消息，如果我们想发送异步消息，那么在创建Handler时使用以下构造函数中的其中一种(async传true)</p>
+<p>通常我们使用Handler发消息时，这些消息都是同步消息，如果我们想发送异步消息，那么在创建Handler时使用以下构造函数中的其中一种(async传true)，这样发送的所有消息都为异步消息。（此种方式较为罕见）</p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Handler</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> async)</span></span>;
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Handler</span><span class="hljs-params">(Callback callback, <span class="hljs-keyword">boolean</span> async)</span></span>;
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Handler</span><span class="hljs-params">(Looper looper, Callback callback, <span class="hljs-keyword">boolean</span> async)</span></span>;</code></pre></div>
@@ -630,9 +630,9 @@ handleMessage() what4</code></pre></div>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/16/interview/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
+                      <a href="/2021/01/26/%E4%B8%AA%E4%BA%BA%E7%89%B9%E8%B4%A8/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">应用启动流程</span>
+                        <span class="hidden-mobile">个人特质</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -640,8 +640,8 @@ handleMessage() what4</code></pre></div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/12/12/interview/RecyclerView%E5%A4%8D%E7%94%A8/">
-                        <span class="hidden-mobile">interview/RecyclerView复用</span>
+                      <a href="/2020/11/20/%E5%81%9A%E6%8A%80%E6%9C%AF%E9%A2%84%E7%A0%94%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">
+                        <span class="hidden-mobile">做技术预研的一些想法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
