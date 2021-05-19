@@ -17,10 +17,19 @@
   <meta name="description" content="周生明的博客">
   <meta name="author" content="zhoushengming">
   <meta name="keywords" content="周生明，android">
-  <title>归档 - 觉晓</title>
+  <title>记一次版本研发delay复盘 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
+  
+
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -142,7 +151,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/vdysjx.png') no-repeat center center;
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -150,6 +159,40 @@
             <span class="h2" id="subtitle">
               
             </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-05-19 16:03">
+      2021年5月19日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      280 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      2
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -162,55 +205,102 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 80 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2018</p>
-    
-    <a href="/2018/02/24/2018%E7%9A%84%E4%B8%8A%E5%8D%8A%E5%B9%B4/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">2018的上半年</span>
-      <span style="float: right;">02-24</span>
-    </a>
-  
-    
-    <a href="/2018/02/11/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%AC%E4%BA%8C%E5%8F%91/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Android面试题第二发</span>
-      <span style="float: right;">02-11</span>
-    </a>
-  
-    
-    <a href="/2018/02/11/2018%E9%B8%BF%E6%B4%8B%E5%8D%9A%E5%AE%A2%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">2018鸿洋博客总结</span>
-      <span style="float: right;">02-11</span>
-    </a>
-  
-    
-    <a href="/2018/02/09/%E7%A0%81%E4%B8%AA%E8%9B%8B2017%E5%B9%B4%E7%B2%BE%E9%80%89%E6%96%87%E7%AB%A0%E9%9B%86%E5%90%88/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">码个蛋2017年精选文章集合</span>
-      <span style="float: right;">02-09</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>RT.</p>
+<a id="more"></a>
 
+<h3 id="项目delay原因复盘："><a href="#项目delay原因复盘：" class="headerlink" title="项目delay原因复盘："></a>项目delay原因复盘：</h3><ol>
+<li><p>产品细节没定义清楚; 开发过程中，产品改需求</p>
+</li>
+<li><p>需求理解不够<br>研发同学做其他开发，没时间看需求</p>
+</li>
+<li><p>测试没时间测，导致开发无法正常投入</p>
+</li>
+<li><p>UI改一些文案，不告知</p>
+</li>
+</ol>
+<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><ol>
+<li><p>需求评审阶段，认真阅读需求描述，有问题及时提出</p>
+</li>
+<li><p>增加需求讨论会，讨论技术细节、产品漏洞、评估工作量，并输出部分测试case</p>
+<p>工作量评估，需要投入乘以系数，以应对特殊情况</p>
+<p>特殊测试case：rtl、深色、大字体</p>
+<p>极限测试：快速点击、输入法、来回切、弹窗、清缓存、杀进程、前后台切换</p>
+<p>工作量：开发+自测+测试打回修复</p>
+</li>
+<li><p>需要研发组长在需求分解时，充分考虑各个任务的依赖关系、优先级，并合理安排任务分配；跟进研发剩余时间和封包时间的差距，及时发现测试阻塞的问题。</p>
+</li>
+<li><p>测试同学同步搞一个case讨论，提前输出case</p>
+</li>
+</ol>
 
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A4%8D%E7%9B%98/">复盘</a>
+                    
+                  </div>
+                
               </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/26/%E4%B8%AA%E4%BA%BA%E7%89%B9%E8%B4%A8/">
+                        <span class="hidden-mobile">个人特质</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
+
+            
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -286,6 +376,31 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -293,7 +408,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "记一次版本研发delay复盘&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -308,6 +423,21 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
 
 
   <script  src="/js/local-search.js" ></script>
@@ -321,6 +451,20 @@
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 

@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>记一次版本研发delay复盘</title>
+    <link href="/2021/05/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%89%88%E6%9C%AC%E7%A0%94%E5%8F%91delay%E5%A4%8D%E7%9B%98/"/>
+    <url>/2021/05/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%89%88%E6%9C%AC%E7%A0%94%E5%8F%91delay%E5%A4%8D%E7%9B%98/</url>
+    
+    <content type="html"><![CDATA[<p>RT.</p><a id="more"></a><h3 id="项目delay原因复盘："><a href="#项目delay原因复盘：" class="headerlink" title="项目delay原因复盘："></a>项目delay原因复盘：</h3><ol><li><p>产品细节没定义清楚; 开发过程中，产品改需求</p></li><li><p>需求理解不够<br>研发同学做其他开发，没时间看需求</p></li><li><p>测试没时间测，导致开发无法正常投入</p></li><li><p>UI改一些文案，不告知</p></li></ol><h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><ol><li><p>需求评审阶段，认真阅读需求描述，有问题及时提出</p></li><li><p>增加需求讨论会，讨论技术细节、产品漏洞、评估工作量，并输出部分测试case</p><p>工作量评估，需要投入乘以系数，以应对特殊情况</p><p>特殊测试case：rtl、深色、大字体</p><p>极限测试：快速点击、输入法、来回切、弹窗、清缓存、杀进程、前后台切换</p><p>工作量：开发+自测+测试打回修复</p></li><li><p>需要研发组长在需求分解时，充分考虑各个任务的依赖关系、优先级，并合理安排任务分配；跟进研发剩余时间和封包时间的差距，及时发现测试阻塞的问题。</p></li><li><p>测试同学同步搞一个case讨论，提前输出case</p></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>复盘</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>个人特质</title>
     <link href="/2021/01/26/%E4%B8%AA%E4%BA%BA%E7%89%B9%E8%B4%A8/"/>
     <url>/2021/01/26/%E4%B8%AA%E4%BA%BA%E7%89%B9%E8%B4%A8/</url>
