@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
+  <link rel="icon" type="image/png" href="/git_logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
+  <title>我的敏捷开发 - 觉晓</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/algorithm/">
+                <i class="iconfont icon-bug"></i>
+                算法
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/codes/">
+                <i class="iconfont icon-code"></i>
+                代码片段
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-08-09 23:53">
+      2021年8月9日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>敏捷开发的管理方式，我们也用了一段时间了，感觉就是一直跟着流程走，但是还没有真正的总结过整个过程。今天就来总结一下。</p>
+<a id="more"></a>
+
+
+<p>我们使用的工作流程更像是SCRUM框架。</p>
+<p>敏捷项目管理有很多方法，其中SCRUM是最初起源于软件开发领域，通过将项目划分成更小的单元来帮助计算机科学家实现敏捷的开发过程。</p>
+<p>学习SCRUM需要了解一下内容：3个角色，3个工件，5个事件，5个价值。</p>
+<p>3个角色：</p>
+<ol>
+<li>产品负责人PO（Project Owner）</li>
+<li>Scrum Master</li>
+<li>开发团队（包括开发和测试）</li>
+</ol>
+<p>3个工件：</p>
+<ol>
+<li>产品BackLog（产品待办事项列表）</li>
+<li>SprintBacklog（本次Sprint待办事项列表）</li>
+<li>产品增量（Increment）（理解成下一步的产品计划或需求）</li>
+</ol>
+<p>5个事件</p>
+<ol>
+<li>Sprint（Sprint本身是一个事件，包括了如下4个事件）</li>
+<li>Sprint计划会议（Sprint Planning Meeting）需求的review和拆解，工作量的评估、任务分配</li>
+<li>每日站会（Daily Scrum Meeting）汇报：昨日工作进度，今日计划，是否需要求助</li>
+<li>Sprint评审会议（Sprint Review Meeting）评审任务完成的质量</li>
+<li>Sprint回顾会议（Sprint Retrospective Meeting）复盘</li>
+</ol>
+<p>5个价值</p>
+<ol>
+<li>承诺 – 愿意对目标做出承诺</li>
+<li>专注 – 把你的心思和能力都用到你承诺的工作上去</li>
+<li>开放 – Scrum 把项目中的一切开放给每个人看</li>
+<li>尊重 – 每个人都有他独特的背景和经验</li>
+<li>勇气 – 有勇气做出承诺，履行承诺，接受别人的尊重</li>
+</ol>
+<p>一些概念：</p>
+<ul>
+<li>Sprint：冲刺周期，通俗的讲就是实现一个“小目标”的周期。一般需要 2-6 周时间。</li>
+<li>User Story：用户的外在业务需求。用户场景。</li>
+<li>Task：由 User Story 拆分成的具体开发任务。</li>
+<li>Backlog：需求列表，可以看成是小目标的清单。分为 Sprint Backlog 和 Product Backlog。</li>
+<li>Daily meeting：每天的站会，用于监控项目进度。有些公司直接称其为 Scrum。</li>
+<li>Sprint Review meeting: 冲刺评审会议，让团队成员们演示成果。</li>
+<li>Sprint burn down：冲刺燃尽图，说白了就是记录当前周期的需求完成情况。</li>
+<li>Release：开发周期完成，项目发布新的可用版本。</li>
+</ul>
+<p>然后就是把这些内容串起来:</p>
+<p><img src="/img/20190531104631317.jpeg" srcset="/img/loading.gif" alt=""></p>
+<p>我们使用的是jira工具，下面介绍一下我们团队的流程：</p>
+<ol>
+<li><p>产品经理会将需求提出来，写明白需求文档，然后提交我开发团队做review</p>
+</li>
+<li><p>开发团队会去理解需求，分析需求是否可行，结合技术后是否有更好的产品方案，并协同产品经理进行修改。</p>
+</li>
+<li><p>需求确认没有问题时，我们会开会进行整体需求的讨论，讨论技术方案，对大的需求进行拆分，并评估工作量。评估工作量使用的扑克牌工具，里边的数值类似斐波那契数列，如果大家评估的工时差距较大时，需要给出自己的理由，然后重新评估一次，一直到评估结果大家都认同。</p>
+</li>
+<li><p>同时UI也开始进行设计。一般来说，UI和产品需求需要同时给出，但是时间比较紧的情况下，我们开发允许UI在开发后期给出，开发前期的这段时间，我们先写一部分不依赖UI的逻辑。</p>
+</li>
+<li><p>然后就是每天的立会，每人需要一两分钟时间，说一下昨天的任务完成情况，今天的计划，还有有没有困难需要求助。</p>
+</li>
+<li><p>有人完成任务后，需要找UI进行走查</p>
+</li>
+<li><p>UI走查完需要找产品经理进行show case，演示功能实现情况（此过程容易被改需求，小的改动可以接受（几小时），大的改动直接找PO商讨，开发原则上不直接接受产品需求）</p>
+</li>
+<li><p>进行提测，针对功能进行测试</p>
+</li>
+<li><p>此版本进行封包，完整性功能测试。</p>
+</li>
+<li><p>发版release</p>
+</li>
+<li><p>观察用户反馈，用户事件统计，app错误上报</p>
+</li>
+<li><p>复盘（很少有，除非出现大事故，比如项目严重delay）</p>
+</li>
+</ol>
+<blockquote>
+<p><a href="https://www.scrumcn.com/agile/scrum-knowledge-library/scrum.html" target="_blank" rel="noopener">https://www.scrumcn.com/agile/scrum-knowledge-library/scrum.html</a></p>
+</blockquote>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%A1%E7%90%86/">管理</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/">敏捷开发</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%89%88%E6%9C%AC%E7%A0%94%E5%8F%91delay%E5%A4%8D%E7%9B%98/">
+                        <span class="hidden-mobile">记一次版本研发delay复盘</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      Copyright © zhoushengming 2020 | Powered by 
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "我的敏捷开发&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
