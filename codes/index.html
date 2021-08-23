@@ -197,6 +197,9 @@ adb <span class="hljs-keyword">shell</span><span class="bash"> pm list packages<
 <span class="hljs-comment"># 查看service情况</span>
 adb <span class="hljs-keyword">shell</span><span class="bash"> dumpsys activity services -p com.xiaomi.aiasst.service</span>
 
+<span class="hljs-comment"># 查看activity情况 任务栈（ActivityStackSupervisor）</span>
+adb <span class="hljs-keyword">shell</span><span class="bash"> dumpsys activity activities</span>
+
 查看内存情况 内存泄漏
 adb <span class="hljs-keyword">shell</span><span class="bash"> dumpsys meminfo  -p com.xiaomi.aiasst.service</span></code></pre></div>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">// 透明状态栏和虚拟导航键</span>
