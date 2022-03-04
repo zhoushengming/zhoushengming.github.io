@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/git_logo.png">
+  <link rel="icon" type="image/png" href="/git_logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="周生明的博客">
+  <meta name="author" content="zhoushengming">
+  <meta name="keywords" content="周生明，android">
+  <title>page.title - 觉晓</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>觉晓</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/algorithm/">
+                <i class="iconfont icon-bug"></i>
+                算法
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/codes/">
+                <i class="iconfont icon-code"></i>
+                代码片段
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/vdysjx.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <h3 id="记录bugreport的一些分析方法。"><a href="#记录bugreport的一些分析方法。" class="headerlink" title="记录bugreport的一些分析方法。"></a>记录bugreport的一些分析方法。</h3><h5 id="查找app的信息"><a href="#查找app的信息" class="headerlink" title="查找app的信息"></a>查找app的信息</h5><div class="hljs"><pre><code class="hljs routeros">  Package [com.xiaomi.aiasst.service] (7adc2af):
+    <span class="hljs-attribute">userId</span>=1000
+    <span class="hljs-attribute">sharedUser</span>=SharedUserSetting&#123;6aa6229 android.uid.system/1000&#125;
+    <span class="hljs-attribute">pkg</span>=Package&#123;c2ccdda com.xiaomi.aiasst.service&#125;
+    <span class="hljs-attribute">codePath</span>=/product/app/mi_aiasst_service
+    <span class="hljs-attribute">resourcePath</span>=/product/app/mi_aiasst_service
+    <span class="hljs-attribute">legacyNativeLibraryDir</span>=/product/app/mi_aiasst_service/lib
+    <span class="hljs-attribute">extractNativeLibs</span>=<span class="hljs-literal">true</span>
+    <span class="hljs-attribute">primaryCpuAbi</span>=arm64-v8a
+    <span class="hljs-attribute">secondaryCpuAbi</span>=<span class="hljs-literal">null</span>
+    <span class="hljs-attribute">cpuAbiOverride</span>=<span class="hljs-literal">null</span>
+    <span class="hljs-attribute">versionCode</span>=1207 <span class="hljs-attribute">minSdk</span>=23 <span class="hljs-attribute">targetSdk</span>=31
+    minExtensionVersions=[]
+    <span class="hljs-attribute">versionName</span>=3.3.126
+    <span class="hljs-attribute">usesNonSdkApi</span>=<span class="hljs-literal">false</span>
+    splits=[base]
+    <span class="hljs-attribute">apkSigningVersion</span>=3
+    <span class="hljs-attribute">applicationInfo</span>=PackageImpl&#123;c2ccdda com.xiaomi.aiasst.service&#125;
+    flags=[<span class="hljs-built_in"> SYSTEM </span>HAS_CODE ALLOW_CLEAR_USER_DATA ]
+    privateFlags=[ PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_UNRESIZEABLE ALLOW_AUDIO_PLAYBACK_CAPTURE PRODUCT PRIVATE_FLAG_ALLOW_NATIVE_HEAP_POINTER_TAGGING ]
+    <span class="hljs-attribute">forceQueryable</span>=<span class="hljs-literal">false</span>
+    queriesPackages=[]
+    <span class="hljs-attribute">dataDir</span>=/data/user/0/com.xiaomi.aiasst.service
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    usesOptionalLibraries:
+      com.miui.system
+      org.apache.http.legacy
+    usesLibraryFiles:
+      /system/app/miuisystem/miuisystem.apk
+      /system/framework/org.apache.http.legacy.jar
+    <span class="hljs-attribute">timeStamp</span>=2009-01-01 08:00:00
+    <span class="hljs-attribute">firstInstallTime</span>=2009-01-01 08:00:00
+    <span class="hljs-attribute">lastUpdateTime</span>=2009-01-01 08:00:00
+    <span class="hljs-attribute">signatures</span>=PackageSignatures&#123;668420b version:3, signatures:[6c02dd51], past signatures:[]&#125;
+    <span class="hljs-attribute">installPermissionsFixed</span>=<span class="hljs-literal">false</span>
+    pkgFlags=[<span class="hljs-built_in"> SYSTEM </span>HAS_CODE ALLOW_CLEAR_USER_DATA ]
+    declared permissions:
+      com.xiaomi.aiasst.service.permission.LAUNCH_CALLSCREEN: <span class="hljs-attribute">prot</span>=normal, INSTALLED
+      com.xiaomi.aiasst.service.permission.debug: <span class="hljs-attribute">prot</span>=signature|privileged, INSTALLED
+      com.xiaomi.aiasst.service.READ: <span class="hljs-attribute">prot</span>=normal, INSTALLED
+      com.xiaomi.aiasst.service.permission.INCALL_RING: <span class="hljs-attribute">prot</span>=signature|privileged, INSTALLED
+      com.xiaomi.aiasst.service.permission.USE_AI_CALL: <span class="hljs-attribute">prot</span>=signature|privileged, INSTALLED
+   <span class="hljs-built_in"> User </span>0: <span class="hljs-attribute">ceDataInode</span>=8262 <span class="hljs-attribute">installed</span>=<span class="hljs-literal">true</span> <span class="hljs-attribute">hidden</span>=<span class="hljs-literal">false</span> <span class="hljs-attribute">suspended</span>=<span class="hljs-literal">false</span> <span class="hljs-attribute">distractionFlags</span>=0 <span class="hljs-attribute">stopped</span>=<span class="hljs-literal">false</span> <span class="hljs-attribute">notLaunched</span>=<span class="hljs-literal">false</span> <span class="hljs-attribute">enabled</span>=0 <span class="hljs-attribute">instant</span>=<span class="hljs-literal">false</span> <span class="hljs-attribute">virtual</span>=<span class="hljs-literal">false</span>
+      overlay paths:
+        /data/resource-cache/com.android.systemui-neutral-VnfM.frro
+        /data/resource-cache/com.android.systemui-accent-Xxtw.frro
+      
+com.miui.system overlay paths:
+          /data/resource-cache/com.android.systemui-neutral-VnfM.frro
+          /data/resource-cache/com.android.systemui-accent-Xxtw.frro</code></pre></div>
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      Copyright © zhoushengming 2020 | Powered by 
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "page.title&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
