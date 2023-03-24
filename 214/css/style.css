@@ -1,0 +1,104 @@
+
+/*
+通用属性
+*/
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background-color: #eeeeee;
+}
+
+
+.container{
+	width: 960px;
+	height: 450px;
+	margin: 0px auto;
+	position: relative;
+}
+
+.pic{
+	width: 180px;
+}
+
+.container img{
+	padding: 10px 10px 15px;
+	border: 1px solid #ddd;
+	background: white;
+	box-shadow: 2px 2px 3px rgba(50,50,50,0.4);
+	z-index: 1;
+	-webkit-transition:all 0.5s ease-in;
+	position: absolute;
+}
+
+.container img:hover{
+	z-index: 2;
+	box-shadow: 15px 15px 20px rgba(50,50,50,0.4);
+	transform: rotate(0deg) scale(1.20);
+	-webkit-transform:rotate(0deg) scale(1.20);
+}
+
+.pic1{
+	left: 400px;
+	top: 0;
+	transform: rotate(-5deg);
+	-webkit-transform:rotate(-5deg);
+}
+
+.pic2{
+	left: 800px;
+	top: 0;
+	transform: rotate(-20deg);
+	-webkit-transform:rotate(-20deg);
+}
+
+.pic3{
+	bottom: 0;
+	right: 0;
+	transform: rotate(5deg);
+	-webkit-transform:rotate(5deg);
+}
+
+.pic4{
+	bottom: 0;
+	left: 300px;
+	transform: rotate(-10deg);
+	-webkit-transform:rotate(-10deg);
+}
+
+.pic5{
+	left: 0;
+	bottom: 0;
+	transform: rotate(30deg);
+	-webkit-transform:rotate(30deg);
+}
+
+.pic6{
+	left: 200px;
+	top: 0;
+	transform: rotate(10deg);
+	-webkit-transform:rotate(10deg);
+}
+
+.pic7{
+	left: 850px;
+	top: 0;
+	transform: rotate(20deg);
+	-webkit-transform:rotate(20deg);
+}
+
+.pic8{
+	bottom: -20px;
+	top: 0;
+	transform: rotate(-5deg);
+	-webkit-transform:rotate(-5deg);
+}
+
+.pic9{
+	left: 500px;
+	top: 0;
+	transform: rotate(15deg);
+	-webkit-transform:rotate(15deg);
+}
