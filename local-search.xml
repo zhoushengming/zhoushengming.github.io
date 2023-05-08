@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>面试提纲</title>
+    <link href="/2023/05/08/%E9%9D%A2%E8%AF%95%E6%8F%90%E7%BA%B2/"/>
+    <url>/2023/05/08/%E9%9D%A2%E8%AF%95%E6%8F%90%E7%BA%B2/</url>
+    
+    <content type="html"><![CDATA[<h2 id="考察的维度"><a href="#考察的维度" class="headerlink" title="考察的维度"></a>考察的维度</h2><ul><li><p>学历</p></li><li><p>基础能力</p></li><li><p>Java和android能力</p></li><li><p>项目经验</p><ul><li>项目经历中做过哪些工作、工作内容是什么，提现出来的能力是什么</li></ul></li><li><p>个人特质</p><ul><li>自信</li></ul></li></ul><a id="more"></a><h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><ul><li><p>了解Android框架和组件原理</p></li><li><p>熟练掌握各种Android性能优化技术</p></li><li><p>熟练解决各种常见系统问题</p></li><li><p>对Android系统应用管理、进程管理、内存管理机制有深入理解</p></li><li><p>如何优化bitmap内存占用</p><ul><li>复用bitmap</li><li>设计一个bitmap缓存框架</li></ul></li><li><p>给定一个无序数组，找出其中两个元素的和为特定值的所有组合。</p></li><li><p>实现一个 LRU 缓存淘汰算法。</p></li><li><p>给定一个链表，判断是否存在环。</p></li><li><p>实现快速排序算法。</p></li><li><p>给定一个二叉树，求其中最大深度和最小深度。</p></li><li><p>实现一个二分查找算法。</p></li><li><p>实现一个堆排序算法。</p></li><li><p>实现一个并查集数据结构。</p></li><li><p>给定一个整数数组，找到其中的最长连续子序列。</p></li><li><p>实现一个红黑树数据结构。</p></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>面试</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>WDYDT-2-2023新年复工随笔</title>
     <link href="/2023/02/14/WDYDT-2-2023%E6%96%B0%E5%B9%B4%E5%A4%8D%E5%B7%A5%E9%9A%8F%E7%AC%94/"/>
     <url>/2023/02/14/WDYDT-2-2023%E6%96%B0%E5%B9%B4%E5%A4%8D%E5%B7%A5%E9%9A%8F%E7%AC%94/</url>
