@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>WDYDT-3-ResultReceiver使用</title>
+    <link href="/2023/09/06/WDYDT-3-ResultReceiver%E4%BD%BF%E7%94%A8/"/>
+    <url>/2023/09/06/WDYDT-3-ResultReceiver%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<p>技术债</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>面试提纲</title>
     <link href="/2023/05/08/%E9%9D%A2%E8%AF%95%E6%8F%90%E7%BA%B2/"/>
     <url>/2023/05/08/%E9%9D%A2%E8%AF%95%E6%8F%90%E7%BA%B2/</url>
@@ -259,9 +272,9 @@
     
     <tags>
       
-      <tag>性能优化</tag>
-      
       <tag>java</tag>
+      
+      <tag>性能优化</tag>
       
     </tags>
     
