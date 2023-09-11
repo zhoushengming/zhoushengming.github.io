@@ -17,7 +17,7 @@
   <meta name="description" content="周生明的博客">
   <meta name="author" content="zhoushengming">
   <meta name="keywords" content="周生明，android">
-  <title>WDYDT-3-ResultReceiver使用 - 觉晓</title>
+  <title>WDYDT-22-ResultReceiver使用 - 觉晓</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3 字
+      187 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分钟
     </span>
   
@@ -216,7 +216,35 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>技术债</p>
+              <p>ResultReceiver可以简单实现不同组件之间的消息分发。</p>
+<a id="more"></a>
+
+<h2 id="使用场景：用于service接收activity的回调"><a href="#使用场景：用于service接收activity的回调" class="headerlink" title="使用场景：用于service接收activity的回调"></a>使用场景：用于service接收activity的回调</h2><p>比如activity需要返回结果给启动它的service，可以这么实现：<br>service.java</p>
+<div class="hljs"><pre><code class="hljs reasonml">public ResultReceiver resultReceiver = <span class="hljs-keyword">new</span> <span class="hljs-constructor">ResultReceiver(<span class="hljs-params">handler</span>)</span> &#123;
+    @Override
+    protected void on<span class="hljs-constructor">ReceiveResult(<span class="hljs-params">int</span> <span class="hljs-params">resultCode</span>, Bundle <span class="hljs-params">resultData</span>)</span> &#123;
+        super.on<span class="hljs-constructor">ReceiveResult(<span class="hljs-params">resultCode</span>, <span class="hljs-params">resultData</span>)</span>;
+        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Log</span>.</span></span>i(TAG, <span class="hljs-string">"onReceiveResult, resultCode:"</span> + resultCode + <span class="hljs-string">", resultData:"</span> + resultData.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>);
+    &#125;
+&#125;;
+
+<span class="hljs-comment">// 启动activity，传入resultReceiver</span>
+Intent intent1 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Intent(<span class="hljs-params">getBaseContext</span>()</span>, <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">MyActivity1</span>.</span></span><span class="hljs-keyword">class</span>);
+intent1.add<span class="hljs-constructor">Flags(Intent.FLAG_ACTIVITY_NEW_TASK)</span>;
+intent1.put<span class="hljs-constructor">Extra(<span class="hljs-string">"result_callback"</span>, <span class="hljs-params">resultReceiver</span>)</span>;
+start<span class="hljs-constructor">Activity(<span class="hljs-params">intent1</span>)</span>;</code></pre></div>
+
+<p>activity.java</p>
+<div class="hljs"><pre><code class="hljs reasonml">public void on<span class="hljs-constructor">Click(View <span class="hljs-params">view</span>)</span> &#123;
+    ResultReceiver resultReceiver = get<span class="hljs-constructor">Intent()</span>.get<span class="hljs-constructor">ParcelableExtra(<span class="hljs-string">"result_callback"</span>)</span>;
+    Bundle resultData = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Bundle()</span>;
+    resultData.put<span class="hljs-constructor">String(<span class="hljs-string">"msg"</span>, <span class="hljs-string">"这是来之activity的调用"</span>)</span>;
+    resultReceiver.send(<span class="hljs-number">0</span>, resultData);
+&#125;</code></pre></div>
+
+<p>触发onClick，会看到打印：</p>
+<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-number">2023</span><span class="hljs-number">-09</span><span class="hljs-number">-11</span> <span class="hljs-number">16</span>:<span class="hljs-number">58</span>:<span class="hljs-number">40.449</span>  <span class="hljs-number">5303</span><span class="hljs-number">-5303</span>  MyService1                          com.ericcode.codetest                I  onReceiveResult, resultCode:<span class="hljs-number">0</span>, resultData:Bundle[&#123;msg=这是来之activity的调用&#125;]</code></pre></div>
+<p>证明service收到了来自activity的消息。</p>
 
             </article>
             <hr>
@@ -232,6 +260,12 @@
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
+                    
+                      <a href="/2023/09/07/WDYDT-23-Messenger%E4%BD%BF%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">WDYDT-23-Messenger使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </div>
                   <div class="post-next col-6">
@@ -375,7 +409,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "WDYDT-3-ResultReceiver使用&nbsp;",
+        "WDYDT-22-ResultReceiver使用&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

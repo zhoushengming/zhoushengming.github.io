@@ -4,11 +4,37 @@
   
   
   <entry>
-    <title>WDYDT-3-ResultReceiver使用</title>
-    <link href="/2023/09/06/WDYDT-3-ResultReceiver%E4%BD%BF%E7%94%A8/"/>
-    <url>/2023/09/06/WDYDT-3-ResultReceiver%E4%BD%BF%E7%94%A8/</url>
+    <title>WDYDT-24-CompletableFuture用法</title>
+    <link href="/2023/09/07/WDYDT-24-CompletableFuture%E7%94%A8%E6%B3%95/"/>
+    <url>/2023/09/07/WDYDT-24-CompletableFuture%E7%94%A8%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>WDYDT-23-Messenger使用</title>
+    <link href="/2023/09/07/WDYDT-23-Messenger%E4%BD%BF%E7%94%A8/"/>
+    <url>/2023/09/07/WDYDT-23-Messenger%E4%BD%BF%E7%94%A8/</url>
     
     <content type="html"><![CDATA[<p>技术债</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>WDYDT-22-ResultReceiver使用</title>
+    <link href="/2023/09/06/WDYDT-22-ResultReceiver%E4%BD%BF%E7%94%A8/"/>
+    <url>/2023/09/06/WDYDT-22-ResultReceiver%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<p>ResultReceiver可以简单实现不同组件之间的消息分发。</p><a id="more"></a><h2 id="使用场景：用于service接收activity的回调"><a href="#使用场景：用于service接收activity的回调" class="headerlink" title="使用场景：用于service接收activity的回调"></a>使用场景：用于service接收activity的回调</h2><p>比如activity需要返回结果给启动它的service，可以这么实现：<br>service.java</p><div class="hljs"><pre><code class="hljs reasonml">public ResultReceiver resultReceiver = <span class="hljs-keyword">new</span> <span class="hljs-constructor">ResultReceiver(<span class="hljs-params">handler</span>)</span> &#123;    @Override    protected void on<span class="hljs-constructor">ReceiveResult(<span class="hljs-params">int</span> <span class="hljs-params">resultCode</span>, Bundle <span class="hljs-params">resultData</span>)</span> &#123;        super.on<span class="hljs-constructor">ReceiveResult(<span class="hljs-params">resultCode</span>, <span class="hljs-params">resultData</span>)</span>;        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Log</span>.</span></span>i(TAG, <span class="hljs-string">"onReceiveResult, resultCode:"</span> + resultCode + <span class="hljs-string">", resultData:"</span> + resultData.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>);    &#125;&#125;;<span class="hljs-comment">// 启动activity，传入resultReceiver</span>Intent intent1 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Intent(<span class="hljs-params">getBaseContext</span>()</span>, <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">MyActivity1</span>.</span></span><span class="hljs-keyword">class</span>);intent1.add<span class="hljs-constructor">Flags(Intent.FLAG_ACTIVITY_NEW_TASK)</span>;intent1.put<span class="hljs-constructor">Extra(<span class="hljs-string">"result_callback"</span>, <span class="hljs-params">resultReceiver</span>)</span>;start<span class="hljs-constructor">Activity(<span class="hljs-params">intent1</span>)</span>;</code></pre></div><p>activity.java</p><div class="hljs"><pre><code class="hljs reasonml">public void on<span class="hljs-constructor">Click(View <span class="hljs-params">view</span>)</span> &#123;    ResultReceiver resultReceiver = get<span class="hljs-constructor">Intent()</span>.get<span class="hljs-constructor">ParcelableExtra(<span class="hljs-string">"result_callback"</span>)</span>;    Bundle resultData = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Bundle()</span>;    resultData.put<span class="hljs-constructor">String(<span class="hljs-string">"msg"</span>, <span class="hljs-string">"这是来之activity的调用"</span>)</span>;    resultReceiver.send(<span class="hljs-number">0</span>, resultData);&#125;</code></pre></div><p>触发onClick，会看到打印：</p><div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-number">2023</span><span class="hljs-number">-09</span><span class="hljs-number">-11</span> <span class="hljs-number">16</span>:<span class="hljs-number">58</span>:<span class="hljs-number">40.449</span>  <span class="hljs-number">5303</span><span class="hljs-number">-5303</span>  MyService1                          com.ericcode.codetest                I  onReceiveResult, resultCode:<span class="hljs-number">0</span>, resultData:Bundle[&#123;msg=这是来之activity的调用&#125;]</code></pre></div><p>证明service收到了来自activity的消息。</p>]]></content>
     
     
     
@@ -36,9 +62,9 @@
   
   
   <entry>
-    <title>WDYDT-2-2023新年复工随笔</title>
-    <link href="/2023/02/14/WDYDT-2-2023%E6%96%B0%E5%B9%B4%E5%A4%8D%E5%B7%A5%E9%9A%8F%E7%AC%94/"/>
-    <url>/2023/02/14/WDYDT-2-2023%E6%96%B0%E5%B9%B4%E5%A4%8D%E5%B7%A5%E9%9A%8F%E7%AC%94/</url>
+    <title>WDYDT-21-2023新年复工随笔</title>
+    <link href="/2023/02/14/WDYDT-21-2023%E6%96%B0%E5%B9%B4%E5%A4%8D%E5%B7%A5%E9%9A%8F%E7%AC%94/"/>
+    <url>/2023/02/14/WDYDT-21-2023%E6%96%B0%E5%B9%B4%E5%A4%8D%E5%B7%A5%E9%9A%8F%E7%AC%94/</url>
     
     <content type="html"><![CDATA[<p>2023年的复工是比较晚的，今天是复工后的第2周了，已经来到了2月中旬。</p><p>今天来到公司，坐下，给老婆发了个情人节红包，老婆应该是怀孕了。</p><p>感觉在接下来老婆怀孕的八九个月中，也是我人生身份转变的一个间隙。</p><p>今天是总结过去和计划未来。</p><a id="more"></a><p>回顾这一年，主要是订婚、结婚、度蜜月，我和老婆一起操办。对于付出的努力来说，感觉她占60%，我占40%。</p><p>接下来，需要计划的事情有：<br>换一个两居室的房子<br>学习新技术<br>建档<br>去医院产检</p><!-- flag of hidden posts -->]]></content>
     
@@ -720,7 +746,7 @@
     <link href="/2018/06/14/WDYDT-1-%E7%AC%AC%E4%B8%80%E7%AF%87/"/>
     <url>/2018/06/14/WDYDT-1-%E7%AC%AC%E4%B8%80%E7%AF%87/</url>
     
-    <content type="html"><![CDATA[<h1 id="WDYDT"><a href="#WDYDT" class="headerlink" title="WDYDT"></a>WDYDT</h1><p>WDYDT 就是 What did you do today? 今天你做了什么？</p><a id="more"></a><p>对于一个拖延症和自制力很差的人，我只能以这种方式来激励和监督自己完成自己定制的计划。</p><p>我的计划就是看Android源代码</p><p>Android源代码是一个很深的东西，覆盖面很广。</p><p>我打算先看C++的知识，以为我没有学过C++。</p><p>然后再看Linux内核的相关知识。</p><p>再看Linux在嵌入式设备上的应用。</p><p>然后开始读Android的源码，结合老罗的书、博客，和GitYuan的博客去读代码。</p><p>希望我能成功。</p><p>期限大约是7个月，大约是210天。</p><p>以后的每天都会有一些碎碎记。</p><p>今天我是学了C++的一些基本知识，发现有些修饰符和java还是有区别的，比如那个static，重新在函数里赋值竟然不会起作用，还是会记住以前的值。<br>还有一个thread_local，这个和Android的挺像，但是我还没用。还有一些运算符优先级的问题。</p><p>还学习了一些刷机的原理知识，有BootLoader和recovery，BootLoader就是fastboot，这个是在主板上的一段程序，类似于BIOS。</p><p>还看了一些repo的原理，还没看完，明天继续看。还要看Android编译的一些原理。</p><p>这些文字用了14分钟写完。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="WDYDT"><a href="#WDYDT" class="headerlink" title="WDYDT"></a>WDYDT</h1><p>WDYDT 就是 What did you do today? 今天你做了什么？</p><a id="more"></a><p>对于一个拖延症和自制力很差的人，我只能以这种方式来激励和监督自己完成自己定制的计划。</p><p>我的计划就是看Android源代码</p><p>Android源代码是一个很深的东西，覆盖面很广。</p><p>我打算先看C++的知识，以为我没有学过C++。</p><p>然后再看Linux内核的相关知识。</p><p>再看Linux在嵌入式设备上的应用。</p><p>然后开始读Android的源码，结合老罗的书、博客，和GitYuan的博客去读代码。</p><p>希望我能成功。</p><p>期限大约是7个月，大约是210天。</p><p>以后的每天都会有一些碎碎记。</p><p>今天我是学了C++的一些基本知识，发现有些修饰符和java还是有区别的，比如那个static，重新在函数里赋值竟然不会起作用，还是会记住以前的值。<br>还有一个thread_local，这个和Android的挺像，但是我还没用。还有一些运算符优先级的问题。</p><p>还学习了一些刷机的原理知识，有BootLoader和recovery，BootLoader就是fastboot，这个是在主板上的一段程序，类似于BIOS。</p><p>还看了一些repo的原理，还没看完，明天继续看。还要看Android编译的一些原理。</p><p>这些文字用了14分钟写完。</p><hr><p>这种办法好像并不奏效。<br>2023.09.11</p>]]></content>
     
     
     
