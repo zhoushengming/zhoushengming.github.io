@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Android多模块依赖解析</title>
+    <link href="/2024/02/27/Android%E5%A4%9A%E6%A8%A1%E5%9D%97%E4%BE%9D%E8%B5%96%E8%A7%A3%E6%9E%90/"/>
+    <url>/2024/02/27/Android%E5%A4%9A%E6%A8%A1%E5%9D%97%E4%BE%9D%E8%B5%96%E8%A7%A3%E6%9E%90/</url>
+    
+    <content type="html"><![CDATA[<p>记录在处理复杂的依赖关系时，学到的知识。</p><a id="more"></a><h3 id="依赖关系的记录"><a href="#依赖关系的记录" class="headerlink" title="依赖关系的记录"></a>依赖关系的记录</h3><p>场景：</p><div class="hljs"><pre><code class="hljs armasm">A依赖<span class="hljs-keyword">B， </span><span class="hljs-keyword">B依赖C，依赖方式为implementation</span><span class="hljs-keyword">其中A为app，B、C为library</span></code></pre></div><p>首先他们都是通过gradle进行编译，并发布到maven。<br>有如下特征：<br>1、B编译成的aar中并无C的代码<br>2、A打印依赖树时可以知道B依赖C</p><p>那么这个依赖关系是如何记录的呢，反正在aar文件中是没有的。</p><p>最后发现，是因为maven中的POM文件，其中说明了该项目的依赖方。</p><h3 id="依赖版本不一致的处理"><a href="#依赖版本不一致的处理" class="headerlink" title="依赖版本不一致的处理"></a>依赖版本不一致的处理</h3><p>场景：</p><div class="hljs"><pre><code class="hljs armasm">依赖方式为implementationA依赖<span class="hljs-keyword">B， </span><span class="hljs-keyword">B依赖C，其中C的版本为V1</span><span class="hljs-keyword">A依赖D， </span>D依赖C，其中C的版本为<span class="hljs-built_in">V2</span>其中A为app，<span class="hljs-keyword">B、C、D为library</span></code></pre></div><p>那么最后编译A，A中的C版本为V2。<br>这是因为gradle检测到不一致的两个版本时，会自动对低版本库进行升级。</p><blockquote><p>参考 <a href="https://blog.csdn.net/xiaozeiqwe/article/details/119041121" target="_blank" rel="noopener">https://blog.csdn.net/xiaozeiqwe/article/details/119041121</a></p></blockquote>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Android</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>2024开工大吉</title>
     <link href="/2024/02/18/2024%E5%BC%80%E5%B7%A5%E5%A4%A7%E5%90%89/"/>
     <url>/2024/02/18/2024%E5%BC%80%E5%B7%A5%E5%A4%A7%E5%90%89/</url>
